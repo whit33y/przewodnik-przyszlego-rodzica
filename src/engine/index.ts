@@ -8,6 +8,7 @@
  * `defaultPlan` (the claimant's maximum entitlement) and evaluates it.
  */
 import { addTrace, TYPE_ORDER, type Ctx } from "./context";
+import { floorTimes } from "./money";
 import { selectParameterSet } from "./params";
 import * as allocation from "./stages/allocation";
 import * as alerts from "./stages/alerts";
@@ -91,6 +92,7 @@ export function evaluate(facts: Facts, plan: Plan | null, params: ParameterSet[]
   const periods: Period[] = segs.map((s) => ({
     blockId: s.block.id, parent: s.parent, type: s.type, from: s.from, to: s.to, days: s.days, status: s.status,
     reasonCode: s.reasonCode, base: s.base, rateBps: s.rateBps, workReductionBps: s.workReductionBps,
+    extensionDays: s.type === "parental" && s.block.workFraction ? floorTimes(s.days, s.block.workFraction) : undefined,
     daily: s.daily, gross: s.gross, months: s.months, paidBy: s.paidBy,
   }));
   const counted = periods.filter((p) => p.status !== "refused");

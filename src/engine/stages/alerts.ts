@@ -33,13 +33,17 @@ export function run(ctx: Ctx): Ctx {
   for (const [i, t] of person.titles.entries()) {
     if (t.kind !== "employment" && t.kind !== "mandate") continue;
     const signals: string[] = [];
-    if (due && diffDays(t.from, due) >= 0 && t.from > addMonths(due, -p.titleRisk.newTitleMonthsBeforeDue)) signals.push("newTitle");
     const firstSick = [...person.sickNotes.filter((n) => n.titleId === t.id).map((n) => n.from), ...person.paidBenefits.filter((b) => (b.type === "sickPay" || b.type === "sickness") && (!b.titleId || b.titleId === t.id)).map((b) => b.from)].sort()[0];
+    // New title: started within N months before the due date (due date unknown: before the first incapacity).
+    const riskAnchor = due ?? firstSick;
+    if (riskAnchor && diffDays(t.from, riskAnchor) >= 0 && t.from > addMonths(riskAnchor, -p.titleRisk.newTitleMonthsBeforeDue)) signals.push("newTitle");
     if (firstSick && firstSick >= t.from && diffDays(t.from, firstSick) < p.titleRisk.sickWithinDaysOfStart) signals.push("earlySickLeave");
     const f = t.workTime?.length ? [...t.workTime].sort((a, b) => (a.from < b.from ? -1 : 1)).at(-1)!.fraction : undefined;
-    if (f && compareFractions(f, p.titleRisk.smallFraction) <= 0) signals.push("smallFraction");
     const lastBase = [...t.months].sort((a, b) => (a.month < b.month ? -1 : 1)).at(-1)?.contributionBase;
-    if (f && lastBase && f.num < f.den && lastBase * f.den > 2 * paramsAt(ctx, due ?? facts.asOf).wage.minimumWage * f.num) signals.push("payOutOfProportion");
+    const minWage = paramsAt(ctx, due ?? facts.asOf).wage.minimumWage;
+    // Small working time — or, with the working time unknown, pay at most twice the small fraction of the minimum wage.
+    if (f ? compareFractions(f, p.titleRisk.smallFraction) <= 0 : t.kind === "employment" && !!lastBase && lastBase * p.titleRisk.smallFraction.den <= 2 * minWage * p.titleRisk.smallFraction.num) signals.push("smallFraction");
+    if (f && lastBase && f.num < f.den && lastBase * f.den > 2 * minWage * f.num) signals.push("payOutOfProportion");
     if (t.registeredOn && diffDays(t.from, t.registeredOn) > p.titleRisk.lateRegistrationDays) signals.push("lateRegistration");
     if (t.payer.relatedToClaimant) signals.push("familyFirm");
     if (t.payer.sameFirmPriorContract) signals.push("sameFirmPriorContract");
@@ -88,8 +92,9 @@ export function run(ctx: Ctx): Ctx {
     // Suspension (or planned suspension) of the business near the due date.
     if (due && isDeclaredBaseTitle(t)) {
       const w = p.titleRisk.dueDateWindowDays;
+      // Only a suspension that reaches the due date matters: once the right has arisen, a later closure does not (B3-08).
       const winFrom = addDays(due, -w);
-      const winTo = addDays(due, w);
+      const winTo = due;
       const sus = (t.suspensions ?? []).find((s) => s.from <= winTo && (!s.to || s.to >= winFrom));
       const planned = t.plannedEnd && (t.plannedEnd.reason === "businessSuspended" || t.plannedEnd.reason === "businessClosed") && t.plannedEnd.date <= winTo;
       const ended = t.to && t.endReason && (t.endReason === "businessSuspended" || t.endReason === "businessClosed") && within(t.to, winFrom, winTo);
@@ -154,7 +159,8 @@ export function run(ctx: Ctx): Ctx {
 
   // 6. 21-day rate deadline.
   const ref = ev.date ?? ev.refDate;
-  if (motherLike && ref && matSegs.length && ev.loss !== "total" && (!ctx.inputPlan || !ctx.plan.applicationDate)) {
+  const alreadyFiled = person.paidBenefits.some((b) => (b.type === "maternity" || b.type === "maternityOnAdoption") && ev.refDate && b.from >= addDays(ev.refDate, -42));
+  if (motherLike && ref && matSegs.length && ev.loss !== "total" && !alreadyFiled && (!ctx.inputPlan || !ctx.plan.applicationDate)) {
     const avg = averagedEligible(ctx);
     const deadline = avg.deadline ?? addDays(ref, p.averagedOption.deadlineDaysAfterEvent);
     add({ code: "RATE_DEADLINE_21_DAYS", severity: "warning", onDate: deadline, deadline, fix: { action: "FILE_WITHIN_21_DAYS", byDate: deadline }, values: { daysLeft: diffDays(facts.asOf, deadline) }, citations: C.rate815, factPaths: ["plan.applicationDate", "facts.event"] });

@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-15",
+  "title": "Pracownica: kontynuacja zasiłku chorobowego w ciąży do dnia przed porodem, potem 52 tygodnie zasiłku macierzyńskiego",
+  "scenario": "1.1",
+  "tags": [
+    "employee",
+    "mother",
+    "single-child",
+    "sickness-in-pregnancy",
+    "averaged-81.5",
+    "corrected-z3"
+  ],
+  "source": {
+    "pdfSha256": [
+      "6867299bf06474a1baa29653726e89d421e1f07f559270d6be055d4c02968611"
+    ],
+    "fileNameSha256": [
+      "53467dba0b9cbeb47ab8483be085fcaec1ac0431414cd21fbc8fa77a27ed2de9"
+    ],
+    "pages": 30
+  },
+  "facts": {
+    "asOf": "2024-03-01",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t0",
+          "kind": "unemployed",
+          "zusCode": "0911",
+          "from": "2019-09-10",
+          "to": "2020-05-24",
+          "sickness": {
+            "mode": "none",
+            "periods": []
+          },
+          "payer": {
+            "ref": "payer-2",
+            "kind": "employer"
+          },
+          "months": []
+        },
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2020-05-25",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2020-05-25"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2022-05-25",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [
+        {
+          "titleId": "t1",
+          "from": "2024-01-19",
+          "to": "2024-02-03",
+          "code": "B"
+        }
+      ],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2024-02-04",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2024-02-20",
+    "blocks": [
+      {
+        "id": "b0",
+        "parent": "claimant",
+        "type": "sickness",
+        "titleId": "t1",
+        "from": "2024-01-19",
+        "days": 16
+      },
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2024-02-04",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2024-06-23",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "claimant-statement",
+      "page": 17,
+      "evidence": "handwritten"
+    },
+    "facts.claimant.titles[0]": {
+      "doc": "zus-titles-screen",
+      "page": 21,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].from": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].workTime": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "facts.claimant.sickNotes[0]": {
+      "doc": "Z-3",
+      "page": 23,
+      "evidence": "printed"
+    },
+    "facts.claimant.sickNotes[0].code": {
+      "doc": "doctor-certificate",
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "zus-titles-screen",
+      "page": 21,
+      "evidence": "inferred"
+    },
+    "plan.rateOption": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "inferred"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "Z-3",
+      "page": 23,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "Z-3",
+      "page": 16,
+      "evidence": "printed"
+    },
+    "plan.blocks[2]": {
+      "doc": "Z-3",
+      "page": 16,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Full-time employee (title from 2020-05-25, full time from 2022-05-25; registered unemployed without benefit before that). Continuation claim for sickness benefit in pregnancy 2024-01-19..2024-02-03 (an earlier sick period was paid before; not in the file), then maternity + parental leave for 52 weeks from 2024-02-04. Two maternity Z-3s: the first (application date 2024-02-20) gives the maternity part only, the corrected one covers 2024-02-04..2025-02-01 with the remark maternity 2024-02-04..2024-06-22 and parental 2024-06-23..2025-02-01 (ZUS benefit codes 311/319). Application within 21 days of the birth, so 81.5% inferred. ZUS register: title 1240 2024-02-04..2025-02-01 and monthly 319 payments up to 2025-02-01; typed note: sickness in pregnancy and maternity benefit established and paid. Birth date redacted on the extract; taken as the first maternity day. Salary tables are blank (already supplied earlier), so no months. Sick-note code not legible; pregnancy code B inferred. Employer reported up to 20 insured (ZUS pays). Father's statement attached by the claimant (its dates not legible)."
+}

@@ -13,8 +13,12 @@
     "rate-100"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "cba3ea2cebb8407458c5c5356d561ad01fa394f49daf6396ee3f0bdb188d52fb"
+    ],
+    "fileNameSha256": [
+      "532abca648156cf29783e074df04048088fb02e713c4b5ed51ed50a3247f83a5"
+    ],
     "pages": 22
   },
   "facts": {

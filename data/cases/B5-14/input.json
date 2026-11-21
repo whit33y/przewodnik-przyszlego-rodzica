@@ -14,8 +14,12 @@
     "event-date-unknown"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "36bf2089dfc35b34ad664a57d5ae5ea38fd1b2c1f7f6ae7bdc244bce3a733acd"
+    ],
+    "fileNameSha256": [
+      "fb4a71b1911fd8b6fc793ab224e05ca02b4a8569b7542ca1faa16d413a4cdf4d"
+    ],
     "pages": 14
   },
   "facts": {

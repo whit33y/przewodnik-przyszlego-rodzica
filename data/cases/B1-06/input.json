@@ -10,8 +10,12 @@
     "minimum-wage"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "6f0ee0e7cb8e37a6b7f14a5f84fb8995c5510459ca65f621a1fb014a456fb6c6"
+    ],
+    "fileNameSha256": [
+      "69abb46f18d8aa80472f34ee10cbf4962b75539235d9c85c0da685e456479cb9"
+    ],
     "pages": 12
   },
   "facts": {

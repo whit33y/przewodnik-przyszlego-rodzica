@@ -35,45 +35,77 @@ function firstInsuredDate(ctx: Ctx, from: ISODate, until: ISODate | undefined): 
   return sorted.find((d) => insuredOnTitles(person, d, undefined, true).insured) ?? from;
 }
 
-/** The plan used when `plan === null`: the claimant's maximum entitlement, every block dated. */
+/**
+ * The plan used when `plan === null`: the claimant's maximum entitlement, every block dated. Block ids are
+ * deterministic: `${type}-${parent}-${n}`. When the other parent is present and insured, their lane is included
+ * (father: paternity 14 days + his 9 reserved weeks; mother: maternity + her parental share) and the claimant
+ * takes the rest.
+ */
 export function buildDefaultPlan(ctx: Ctx): Plan {
   const { ev, lengths, facts } = ctx;
   const person = facts.claimant;
   const blocks: PlanBlock[] = [];
+  const counters = new Map<string, number>();
+  const push = (b: Omit<PlanBlock, "id">) => {
+    const k = `${b.type}-${b.parent}`;
+    const n = (counters.get(k) ?? 0) + 1;
+    counters.set(k, n);
+    blocks.push({ id: `${k}-${n}`, ...b });
+  };
   const ref = ev.refDate;
   const isFather = ev.kind === "birth" && (person.role === "father" || (person.role !== "mother" && person.sex === "M"));
+  const op = facts.otherParent;
+  const otherLane = !!op && (op.insured === "yes" || !!op.person) && ev.loss !== "total";
   if (ref) {
     if (ev.kind === "birth" && !isFather && person.role === "mother") {
       const at = afterTitleQualifying(ctx, ref, true);
       const titleEndDate = at ? titleEnd(at.title, true).to : undefined;
       if (at?.preBirth && titleEndDate && addDays(titleEndDate, 1) < ref) {
-        blocks.push({ id: "art30", parent: "claimant", type: "art30PreBirth", titleId: at.title.id, from: addDays(titleEndDate, 1), days: diffDays(titleEndDate, ref) - 1 });
+        push({ parent: "claimant", type: "art30PreBirth", titleId: at.title.id, from: addDays(titleEndDate, 1), days: diffDays(titleEndDate, ref) - 1 });
       }
       const titleId = at?.title.id ?? primaryTitleId(ctx, ref);
       let cursor = ref;
-      blocks.push({ id: "maternity", parent: "claimant", type: "maternity", titleId, from: cursor, days: lengths.maternityDays });
+      push({ parent: "claimant", type: "maternity", titleId, from: cursor, days: lengths.maternityDays });
       cursor = addDays(cursor, lengths.maternityDays);
       if (lengths.supplementaryWeeks > 0) {
-        blocks.push({ id: "supplementary", parent: "claimant", type: "supplementary", titleId, from: cursor, days: lengths.supplementaryWeeks * 7 });
+        push({ parent: "claimant", type: "supplementary", titleId, from: cursor, days: lengths.supplementaryWeeks * 7 });
         cursor = addDays(cursor, lengths.supplementaryWeeks * 7);
       }
-      if (lengths.parentalMaxClaimant > 0) blocks.push({ id: "parental", parent: "claimant", type: "parental", titleId, from: cursor, days: lengths.parentalMaxClaimant, pool: "shared" });
+      if (lengths.parentalMaxClaimant > 0) {
+        push({ parent: "claimant", type: "parental", titleId, from: cursor, days: lengths.parentalMaxClaimant, pool: "shared" });
+        cursor = addDays(cursor, lengths.parentalMaxClaimant);
+      }
+      if (otherLane && op!.role === "father") {
+        push({ parent: "other", type: "paternity", from: ref, days: lengths.paternityDays });
+        if (lengths.parentalTotal > lengths.parentalMaxClaimant) push({ parent: "other", type: "parental", from: cursor, days: lengths.parentalTotal - lengths.parentalMaxClaimant, pool: "ownNineWeeks" });
+      }
     } else if (isFather) {
       const start = firstInsuredDate(ctx, ref, lengths.paternityExpiresOn ? addDays(lengths.paternityExpiresOn, -(lengths.paternityDays - 1)) : undefined);
       const titleId = primaryTitleId(ctx, start);
       if (ev.loss !== "total") {
-        blocks.push({ id: "paternity", parent: "claimant", type: "paternity", titleId, from: start, days: lengths.paternityDays });
-        if (lengths.parentalTotal > 0) {
-          blocks.push({ id: "parental", parent: "claimant", type: "parental", titleId, from: addDays(start, lengths.paternityDays), days: lengths.reservedPerParent, pool: "ownNineWeeks" });
+        push({ parent: "claimant", type: "paternity", titleId, from: start, days: lengths.paternityDays });
+        if (otherLane && op!.role === "mother") {
+          // Mother's lane: maternity, then her parental share; the father takes his 9 weeks after it.
+          const motherParental = lengths.parentalMaxOther;
+          push({ parent: "other", type: "maternity", from: ref, days: lengths.maternityDays });
+          if (motherParental > 0) push({ parent: "other", type: "parental", from: addDays(ref, lengths.maternityDays), days: motherParental, pool: "shared" });
+          const after = addDays(ref, lengths.maternityDays + motherParental);
+          if (lengths.parentalTotal > motherParental) push({ parent: "claimant", type: "parental", titleId, from: maxDate(after, addDays(start, lengths.paternityDays)), days: lengths.parentalTotal - motherParental, pool: "ownNineWeeks" });
+        } else if (lengths.parentalTotal > 0) {
+          push({ parent: "claimant", type: "parental", titleId, from: addDays(start, lengths.paternityDays), days: lengths.reservedPerParent, pool: "ownNineWeeks" });
         }
       }
     } else if (ev.kind !== "birth" && !ev.careRefusal) {
       const titleId = primaryTitleId(ctx, ref);
-      blocks.push({ id: "maternity", parent: "claimant", type: "maternityOnAdoption", titleId, from: ref, days: lengths.maternityDays });
-      if (lengths.parentalMaxClaimant > 0) blocks.push({ id: "parental", parent: "claimant", type: "parental", titleId, from: addDays(ref, lengths.maternityDays), days: lengths.parentalMaxClaimant, pool: "shared" });
+      push({ parent: "claimant", type: "maternityOnAdoption", titleId, from: ref, days: lengths.maternityDays });
+      const parentalFrom = addDays(ref, lengths.maternityDays);
+      if (lengths.parentalMaxClaimant > 0) push({ parent: "claimant", type: "parental", titleId, from: parentalFrom, days: lengths.parentalMaxClaimant, pool: "shared" });
+      if (otherLane && lengths.parentalTotal > lengths.parentalMaxClaimant) {
+        push({ parent: "other", type: "parental", from: addDays(parentalFrom, lengths.parentalMaxClaimant), days: lengths.parentalTotal - lengths.parentalMaxClaimant, pool: "ownNineWeeks" });
+      }
     }
   }
-  blocks.push(...sicknessBlocksFromNotes(ctx));
+  for (const b of sicknessBlocksFromNotes(ctx)) push({ ...b });
   const insuredTitles = person.titles.filter((t) => ref && insuredOnTitles(person, ref, t.id, true).insured).length;
   return { rateOption: "averaged81_5", singleTitleStatement: insuredTitles <= 1, blocks };
 }
@@ -125,28 +157,7 @@ const refuseAll = (pieces: Piece[], reason: ReasonCode): Piece[] => pieces.map((
 const payableDays = (pieces: Piece[]) => pieces.filter((p) => p.status === "payable").reduce((a, p) => a + p.days, 0);
 
 function benefitDaysOf(list: PaidBenefit[], types: string[], since?: ISODate): number {
-  return list.filter((b) => types.includes(b.type) && (!since || b.to >= since)).reduce((a, b) => a + daysInclusive(b.from, b.to), 0);
-}
-
-/**
- * Parental leave combined with work at fraction f is extended by ⌊days × f⌋ days, attached right after the combined
- * part (KP 182¹f §2, §4–5; B1-05: 224 days at 3/8 → 308). Added unless the plan already continues the leave there
- * (then the user planned the extension explicitly, e.g. combined with work too, §7).
- */
-export function withWorkExtensions(plan: Plan): { b: PlanBlock; i: number }[] {
-  const sorted = sortBlocks(plan);
-  const extra: { b: PlanBlock; i: number }[] = [];
-  for (const { b, i } of sorted) {
-    if (b.type !== "parental" || !b.workFraction) continue;
-    const ext = floorTimes(b.days, b.workFraction);
-    const next = addDays(b.from, b.days);
-    if (ext <= 0 || plan.blocks.some((x) => x.parent === b.parent && x.type === "parental" && x.from === next)) continue;
-    extra.push({ b: { id: `${b.id}+ext`, parent: b.parent, type: "parental", titleId: b.titleId, from: next, days: ext, pool: b.pool }, i });
-  }
-  if (!extra.length) return sorted;
-  return sortBlocks({ ...plan, blocks: [...sorted.map((x) => x.b), ...extra.map((x) => x.b)] }).map(({ b }) => ({
-    b, i: sorted.find((x) => x.b === b)?.i ?? extra.find((x) => x.b === b)!.i,
-  }));
+  return list.filter((b) => types.includes(b.type) && (!since || b.from >= since)).reduce((a, b) => a + daysInclusive(b.from, b.to), 0);
 }
 
 export function sortBlocks(plan: Plan): { b: PlanBlock; i: number }[] {
@@ -164,7 +175,9 @@ export function run(ctx: Ctx): Ctx {
   const person = facts.claimant;
   const op = facts.otherParent;
   const isFatherClaimant = person.role === "father" || (person.role !== "mother" && person.sex === "M" && ev.kind === "birth");
-  const since = ev.refDate ? addDays(ev.refDate, -lengths.preBirthMaxDays - 365) : undefined;
+  // Benefits already paid for this child: those starting no earlier than the earliest pre-birth start (an earlier
+  // child's maternity in the same file must not count, B3-07).
+  const since = ev.refDate ? addDays(ev.refDate, -lengths.preBirthMaxDays) : undefined;
 
   // Already used (benefits paid before this plan, for this child). A paid benefit overlapping a planned block of the
   // same kind is that block already being paid (B1-10: day 1 paid by the employer) and is not counted twice.
@@ -174,6 +187,7 @@ export function run(ctx: Ctx): Ctx {
   const paidOwn = person.paidBenefits.filter(notInPlan("claimant"));
   const otherUsed = (op?.used ?? []).filter(notInPlan("other"));
   const motherUsed = facts.event.kind === "birth" ? facts.event.mother?.maternityUsed : undefined;
+  let maternityUsedByOther = benefitDaysOf(otherUsed, ["maternity", "maternityOnAdoption"]);
   let maternityUsed = benefitDaysOf(paidOwn, ["maternity", "maternityOnAdoption"], since) + benefitDaysOf(otherUsed, ["maternity", "maternityOnAdoption"]) + (motherUsed && !otherUsed.some((u) => u.type === "maternity") ? daysInclusive(motherUsed.from, motherUsed.to) : 0);
   const motherMaternityDays = isFatherClaimant ? maternityUsed : 0;
   let supplementaryUsed = benefitDaysOf(paidOwn, ["supplementary"], since) + benefitDaysOf(otherUsed, ["supplementary"]);
@@ -186,7 +200,7 @@ export function run(ctx: Ctx): Ctx {
   // Parts already used: every separate period of parental benefit counts, for both parents together (B4-12).
   const partStarts: { parent: "claimant" | "other"; from: ISODate; to: ISODate }[] = [];
   const addParts = (list: PaidBenefit[], parent: "claimant" | "other") => {
-    const sorted = list.filter((b) => b.type === "parental" && (!since || b.to >= since)).sort((a, b) => (a.from < b.from ? -1 : 1));
+    const sorted = list.filter((b) => b.type === "parental" && (!since || b.from >= since)).sort((a, b) => (a.from < b.from ? -1 : 1));
     for (const b of sorted) {
       const prev = partStarts.filter((x) => x.parent === parent).at(-1);
       if (prev && addDays(prev.to, 1) === b.from) prev.to = b.to;
@@ -195,17 +209,17 @@ export function run(ctx: Ctx): Ctx {
   };
   addParts(paidOwn, "claimant");
   addParts(otherUsed, "other");
-  const paidPaternity = paidOwn.filter((b) => b.type === "paternity" && (!since || b.to >= since));
+  const paidPaternity = paidOwn.filter((b) => b.type === "paternity" && (!since || b.from >= since));
   let paternityUsed = paidPaternity.reduce((a, b) => a + daysInclusive(b.from, b.to), 0);
   let paternityParts = paidPaternity.length;
   const lastMaternityEnd: Record<"claimant" | "other", ISODate | undefined> = {
-    claimant: paidOwn.filter((b) => b.type === "maternity").map((b) => b.to).sort().at(-1),
+    claimant: paidOwn.filter((b) => b.type === "maternity" && (!since || b.from >= since)).map((b) => b.to).sort().at(-1),
     other: otherUsed.filter((b) => b.type === "maternity").map((b) => b.to).sort().at(-1),
   };
   const lastParental: Record<"claimant" | "other", { to: ISODate } | undefined> = { claimant: undefined, other: undefined };
 
   const segments: Segment[] = [];
-  for (const { b, i } of withWorkExtensions(ctx.plan)) {
+  for (const { b, i } of sortBlocks(ctx.plan)) {
     const to = periodEnd(b.from, b.days);
     let pieces: Piece[] = [{ from: b.from, to, days: b.days, status: "payable" }];
     const parent = b.parent;
@@ -223,7 +237,9 @@ export function run(ctx: Ctx): Ctx {
         const fatherTakeover = parent === "claimant" ? isFatherClaimant : !isFatherClaimant;
         if (ev.loss === "total" && ev.date) {
           // 8 weeks after the birth, not shorter than 7 days from the death (KP 180¹ §1).
+          const before = payableDays(pieces);
           pieces = cutAfter(pieces, periodEnd(ev.date, lengths.maternityDays), "EXCESS_DAYS");
+          if (payableDays(pieces) < before) viol("EXCESS_DAYS", { allowedDays: payableDays(pieces), latestEnd: periodEnd(ev.date, lengths.maternityDays) }, C.loss);
           citations = C.loss;
         }
         if (fatherTakeover) {
@@ -235,17 +251,19 @@ export function run(ctx: Ctx): Ctx {
           const uninsuredOk = b.takeover === "motherDeath" || b.takeover === "motherAbandonment" || b.takeover === "motherIncapacity" || (facts.event.kind === "birth" && !!facts.event.mother?.employedHalfTimeFrom);
           if ((motherUninsured && !uninsuredOk) || (!motherUninsured && motherAfterBirth < minimum)) {
             pieces = refuseAll(pieces, "MOTHER_MINIMUM_WEEKS");
-            viol("MOTHER_MINIMUM_WEEKS", { motherDays: motherAfterBirth, minimum }, C.motherMinimum);
+            viol("MOTHER_MINIMUM_WEEKS", { requiredDays: minimum, motherDays: motherAfterBirth }, C.motherMinimum);
           }
           citations = b.takeover && b.takeover !== "afterResignation" ? C.motherSpecial : C.motherMinimum;
         } else if (ev.dueDate) {
           // At most 6 weeks before the expected date of birth (KP 180 §2).
+          // (Only leave that starts before the actual birth is pre-birth leave: a preterm birth comes before the window.)
           const earliest = addDays(ev.dueDate, -lengths.preBirthMaxDays);
-          if (b.from < earliest) { pieces = cutBefore(pieces, earliest, "EXCESS_DAYS"); viol("EXCESS_DAYS", { earliest }, C.preBirth); }
+          if (b.from < earliest && (!ev.date || b.from < ev.date)) { pieces = cutBefore(pieces, earliest, "EXCESS_DAYS"); viol("EXCESS_DAYS", { allowedDays: payableDays(pieces), earliest }, C.preBirth); }
         }
         const avail = lengths.maternityDays - maternityUsed;
-        if (payableDays(pieces) > avail) { pieces = cut(pieces, avail, "EXCESS_DAYS"); viol("EXCESS_DAYS", { available: Math.max(0, avail) }, C.maternityLength); }
+        if (payableDays(pieces) > avail) { pieces = cut(pieces, avail, "EXCESS_DAYS"); viol("EXCESS_DAYS", { allowedDays: payableDays(pieces) }, C.maternityLength); }
         maternityUsed += payableDays(pieces);
+        if (parent === "other") maternityUsedByOther += payableDays(pieces);
         lastMaternityEnd[parent] = to;
         break;
       }
@@ -253,10 +271,11 @@ export function run(ctx: Ctx): Ctx {
         rule = "KP-183";
         citations = C.adoption;
         if (ev.careRefusal) { pieces = refuseAll(pieces, ev.careRefusal); viol(ev.careRefusal, {}, C.adoption); break; }
-        if (ev.date && b.from < ev.date) pieces = cutBefore(pieces, ev.date, "EXCESS_DAYS");
+        if (ev.date && b.from < ev.date) { pieces = cutBefore(pieces, ev.date, "EXCESS_DAYS"); viol("EXCESS_DAYS", { allowedDays: payableDays(pieces), earliest: ev.date }, C.adoption); }
         const avail = lengths.maternityDays - maternityUsed;
-        if (payableDays(pieces) > avail) { pieces = cut(pieces, avail, "EXCESS_DAYS"); viol("EXCESS_DAYS", { available: Math.max(0, avail) }, C.adoption); }
+        if (payableDays(pieces) > avail) { pieces = cut(pieces, avail, "EXCESS_DAYS"); viol("EXCESS_DAYS", { allowedDays: payableDays(pieces) }, C.adoption); }
         maternityUsed += payableDays(pieces);
+        if (parent === "other") maternityUsedByOther += payableDays(pieces);
         lastMaternityEnd[parent] = to;
         break;
       }
@@ -266,17 +285,17 @@ export function run(ctx: Ctx): Ctx {
         if (lengths.supplementaryWeeks === 0) {
           const reason = lengths.supplementaryRefusal ?? "EXCESS_DAYS";
           pieces = refuseAll(pieces, reason);
-          viol(reason, { weeks: 0 }, C.supplementary);
+          viol(reason, { weeks: 0, allowedDays: 0 }, C.supplementary);
           break;
         }
         const matEnd = lastMaternityEnd.claimant ?? lastMaternityEnd.other;
         if (matEnd && addDays(matEnd, 1) !== b.from) {
           pieces = refuseAll(pieces, "NOT_CONTIGUOUS");
-          viol("NOT_CONTIGUOUS", { expectedFrom: addDays(matEnd, 1) }, C.supplementary);
+          viol("NOT_CONTIGUOUS", { requiredFrom: addDays(matEnd, 1) }, C.supplementary);
           break;
         }
         const avail = lengths.supplementaryWeeks * 7 - supplementaryUsed;
-        if (payableDays(pieces) > avail) { pieces = cut(pieces, avail, "EXCESS_DAYS"); viol("EXCESS_DAYS", { available: Math.max(0, avail) }, C.supplementary); }
+        if (payableDays(pieces) > avail) { pieces = cut(pieces, avail, "EXCESS_DAYS"); viol("EXCESS_DAYS", { allowedDays: payableDays(pieces) }, C.supplementary); }
         supplementaryUsed += payableDays(pieces);
         lastMaternityEnd[parent] = to;
         break;
@@ -287,7 +306,7 @@ export function run(ctx: Ctx): Ctx {
         const f = b.workFraction;
         if (f && compareFractions(f, p.parental.workMaxFraction) > 0) {
           pieces = refuseAll(pieces, "WORK_FRACTION_TOO_HIGH");
-          viol("WORK_FRACTION_TOO_HIGH", { fractionBps: fractionToBps(f) }, C.parentalWork);
+          viol("WORK_FRACTION_TOO_HIGH", { maxNum: p.parental.workMaxFraction.num, maxDen: p.parental.workMaxFraction.den, fractionBps: fractionToBps(f) }, C.parentalWork);
           break;
         }
         // Parts: a block contiguous with the same parent's previous parental block in one application is one part.
@@ -305,7 +324,7 @@ export function run(ctx: Ctx): Ctx {
         lastParental[parent] = { to };
         if (lengths.parentalDeadline && to > lengths.parentalDeadline) {
           pieces = cutAfter(pieces, lengths.parentalDeadline, "DEADLINE_PASSED");
-          viol("DEADLINE_PASSED", { deadline: lengths.parentalDeadline }, C.parentalParts);
+          viol("DEADLINE_PASSED", { latestEnd: lengths.parentalDeadline, deadline: lengths.parentalDeadline }, C.parentalParts);
         }
         // Pool: each parent ≤ total − the other parent's 9 weeks; both together ≤ total.
         // Combining with work at fraction f consumes days − ⌊days × f⌋ pool days (extension, KP 182¹f §2).
@@ -317,12 +336,14 @@ export function run(ctx: Ctx): Ctx {
         let keep = payableDays(pieces);
         while (keep > 0 && consumption(keep) > avail) keep--;
         if (keep < payableDays(pieces)) {
-          const reason: ReasonCode = availParent <= availTotal ? "EXCESS_DAYS" : "POOL_EXCEEDED";
+          const reason: ReasonCode = lengths.zaZyciemCertMissing ? "CERTIFICATE_MISSING" : availParent <= availTotal ? "EXCESS_DAYS" : "POOL_EXCEEDED";
           pieces = cut(pieces, keep, reason);
-          viol(reason, { available: avail, requested: b.days }, C.parental);
+          viol(reason, { allowedDays: payableDays(pieces), available: avail, requested: b.days }, C.parental);
+          // The surplus comes from the other parent's non-transferable 9 weeks (KP 182¹a §4).
+          if (availParent < availTotal && lengths.reservedPerParent > 0) viol("RESERVED_WEEKS", { reservedDays: lengths.reservedPerParent, allowedDays: payableDays(pieces) }, C.parental);
         }
         const calendarAvail = lengths.parentalCalendarCap - parentalCalendar;
-        if (payableDays(pieces) > calendarAvail) { pieces = cut(pieces, calendarAvail, "EXCESS_DAYS"); viol("EXCESS_DAYS", { calendarCap: lengths.parentalCalendarCap }, C.parentalWork); }
+        if (payableDays(pieces) > calendarAvail) { pieces = cut(pieces, calendarAvail, "EXCESS_DAYS"); viol("EXCESS_DAYS", { allowedDays: payableDays(pieces), calendarCap: lengths.parentalCalendarCap }, C.parentalWork); }
         parentalUsed[parent] += consumption(payableDays(pieces));
         parentalCalendar += payableDays(pieces);
         citations = f ? C.parentalWork : C.parental;
@@ -340,10 +361,10 @@ export function run(ctx: Ctx): Ctx {
         paternityParts++;
         if (lengths.paternityExpiresOn && to > lengths.paternityExpiresOn) {
           pieces = cutAfter(pieces, lengths.paternityExpiresOn, "DEADLINE_PASSED");
-          viol("DEADLINE_PASSED", { deadline: lengths.paternityExpiresOn }, C.paternity);
+          viol("DEADLINE_PASSED", { latestEnd: lengths.paternityExpiresOn, allowedDays: payableDays(pieces) }, C.paternity);
         }
         const avail = lengths.paternityDays - paternityUsed;
-        if (payableDays(pieces) > avail) { pieces = cut(pieces, avail, "EXCESS_DAYS"); viol("EXCESS_DAYS", { available: Math.max(0, avail) }, C.paternity); }
+        if (payableDays(pieces) > avail) { pieces = cut(pieces, avail, "EXCESS_DAYS"); viol("EXCESS_DAYS", { allowedDays: payableDays(pieces) }, C.paternity); }
         paternityUsed += payableDays(pieces);
         break;
       }
@@ -357,10 +378,12 @@ export function run(ctx: Ctx): Ctx {
           break;
         }
         const end = titleEnd(at.title, true).to!;
+        const requested = payableDays(pieces);
         pieces = cutBefore(pieces, addDays(end, 1), "EXCESS_DAYS");
         // Paid until the day before the birth (UZ art. 30 ust. 3).
         const birth = ev.date ?? ev.dueDate;
         if (birth) pieces = cutAfter(pieces, addDays(birth, -1), "EXCESS_DAYS");
+        if (payableDays(pieces) < requested) viol("EXCESS_DAYS", { allowedDays: payableDays(pieces), requiredFrom: addDays(end, 1) }, C.art30PreBirth);
         break;
       }
       default:
@@ -395,8 +418,8 @@ export function run(ctx: Ctx): Ctx {
   splitAtTitleEnd(ctx);
 
   ctx.pools = {
-    maternityDays: { total: lengths.maternityDays, used: maternityUsed, motherMandatory: lengths.motherMandatoryDays },
-    supplementaryDays: { total: lengths.supplementaryWeeks * 7, capWeeks: lengths.supplementaryCap },
+    maternityDays: { total: lengths.maternityDays, used: maternityUsed, usedByOther: maternityUsedByOther, motherMandatory: lengths.motherMandatoryDays },
+    supplementaryDays: { total: lengths.supplementaryWeeks * 7, used: supplementaryUsed, capWeeks: lengths.supplementaryCap },
     parentalDays: {
       total: lengths.parentalTotal, used: parentalUsed.claimant + parentalUsed.other, reservedPerParent: lengths.reservedPerParent,
       usedByClaimant: parentalUsed.claimant, usedByOther: parentalUsed.other,
@@ -472,8 +495,14 @@ function checkChainInsurance(ctx: Ctx): void {
       for (const s of segs) { s.afterTitle = true; s.titleId = s.titleId ?? at?.title.id; }
       continue;
     }
-    const titleId = first.block.titleId && findTitle(ctx, first.block.titleId) ? first.block.titleId : undefined;
-    const check = insuredOnTitles(person, date, titleId, prospective);
+    let titleId = first.block.titleId && findTitle(ctx, first.block.titleId) ? first.block.titleId : undefined;
+    let check = insuredOnTitles(person, date, titleId, prospective);
+    if (!check.insured && titleId) {
+      // The same payer's title re-registered under a new entry (a business resumed, a new contract) still counts.
+      const ref = findTitle(ctx, titleId)!.payer.ref;
+      const alt = person.titles.find((t) => t.id !== titleId && t.payer.ref === ref && insuredOnTitles(person, date, t.id, prospective).insured);
+      if (alt) { titleId = alt.id; check = insuredOnTitles(person, date, alt.id, prospective); }
+    }
     let ok = check.insured || check.childcare === true;
     let afterTitle = false;
     let usedTitle = check.titleId;

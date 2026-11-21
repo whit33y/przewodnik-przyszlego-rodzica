@@ -13,8 +13,12 @@
     "months-relabelled"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "3e771a9a8ac7404b89212cb954ad717cb8e04feb16a446ca0c7c3ff83ea542fe"
+    ],
+    "fileNameSha256": [
+      "b1307227b9c4a2a8f58b666f71d67f11b14b377e64818f84c8d898e2cd55b235"
+    ],
     "pages": 16
   },
   "facts": {

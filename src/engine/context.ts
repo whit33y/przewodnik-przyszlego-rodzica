@@ -55,6 +55,8 @@ export interface Lengths {
   paternityExpiresOn?: ISODate;
   parentalDeadline?: ISODate;
   reducedAdoptionCase: boolean;
+  /** Adjudication: a Za życiem extension claimed but the certificate is not among the event documents (B1-3). */
+  zaZyciemCertMissing: boolean;
 }
 
 /** A plan block after allocation; a block may be split into several segments (payable + refused surplus). */

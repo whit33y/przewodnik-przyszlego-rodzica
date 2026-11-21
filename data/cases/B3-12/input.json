@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-12",
+  "title": "Umowa o pracę zawarta ok. 10 tygodni przed porodem uznana za pozorną: decyzja o niepodleganiu ubezpieczeniom i odmowa zasiłku macierzyńskiego",
+  "scenario": "1.17",
+  "tags": [
+    "employee",
+    "mother",
+    "refusal",
+    "title-invalidated",
+    "sham-employment",
+    "new-job-before-birth",
+    "low-pay",
+    "averaged-81.5"
+  ],
+  "source": {
+    "pdfSha256": [
+      "eb88fc5acd518dfe67f1822cc8c3b77d7a0a481f957615a50c08869ae0f777c0"
+    ],
+    "fileNameSha256": [
+      "b8eb04c1c6406434e6d4680917025bc1bdb26b1a959c4025eb739c0c5b706663"
+    ],
+    "pages": 14
+  },
+  "facts": {
+    "asOf": "2026-02-09",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2025-11-03",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2025-11-03"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-11",
+              "contributionBase": 127349,
+              "daysWorked": 18,
+              "daysDue": 18,
+              "fixedPay": 127349,
+              "fullMonthInsured": false
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 127349,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 127349
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": [
+        {
+          "titleId": "t1",
+          "kind": "nonCoverage",
+          "from": "2025-11-03"
+        }
+      ]
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2026-06-02",
+        "to": "2027-01-11"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-01-13",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2026-01-20",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-01-13",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-06-02",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "decision",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.insuranceDecisions[0]": {
+      "doc": "decision",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "other-parent-statement",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "plan.rateOption": {
+      "doc": "leave-application",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "leave-application",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "leave-application",
+      "page": 12,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Employee hired by a limited company on 2025-11-03, about ten weeks before the birth on 2026-01-13; monthly pay 1273.49; the Z-3 working-time entry is ambiguous (possibly one eighth of full time) and is omitted. No sick leave before the birth. Claim: maternity 2026-01-13..2026-06-01 and parental 2026-06-02..2027-01-11 at 81.5% (explicit leave request, father's statement of non-use), application date on the Z-3 2026-01-20. ZUS opened insurance proceedings on 2026-02-09 and decided that she was not compulsorily insured as the payer's employee from 2025-11-03 (sham contract: USUS art. 83, 68, 6, 11, 12, 13 with KC art. 83 and KP art. 300); only the first page of that decision is in the file. The file opens with the cover of the decision refusing maternity benefit; its text and period are not in the file, so the refused periods are the claim. asOf = date the proceedings were opened (decisions undated in the scan). Variant: without the non-coverage decision the title stands and the claim is granted; the risk alert must fire either way (new title shortly before the birth, low pay, small company)."
+}

@@ -37,6 +37,11 @@ export function run(ctx: Ctx): Ctx {
   const parentalSegs = ctx.segments.filter((s) => s.type === "parental" && s.parent === "claimant" && s.status !== "refused");
   const noParentalInFirstYear = avg.eligible && !!firstYearEnd && parentalSegs.length > 0 && parentalSegs.every((s) => s.from > firstYearEnd);
 
+  // 81,5% chosen but filed after the 21-day deadline: reported (the rates fall back to 100% / 70%).
+  if (ctx.plan.rateOption === "averaged81_5" && !avg.eligible && !avg.assumed && avg.deadline) {
+    const first = ctx.segments.find((s) => s.parent === "claimant" && (s.type === "maternity" || s.type === "maternityOnAdoption" || s.type === "parental"));
+    ctx.violations.push({ code: "DEADLINE_PASSED", blockId: first?.block.id, values: { deadline: avg.deadline, applicationDate: ctx.plan.applicationDate ?? "" }, citations: C.rate815 });
+  }
   for (const s of ctx.segments) {
     let rate: Bps;
     let rule: string;

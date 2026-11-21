@@ -37,7 +37,7 @@ const eslintConfig = defineConfig([
       "no-restricted-imports": ["error", { patterns: [{ group: ["@/integrations/*", "@/server/*"], message: "The design system must not import integrations or server code." }] }],
     },
   },
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", ".work/**", "docs/**", "playwright-report/**", "test-results/**", "coverage/**"]),
+  globalIgnores([".claude/**", ".next/**", "out/**", "build/**", "next-env.d.ts", ".work/**", "docs/**", "playwright-report/**", "test-results/**", "coverage/**"]),
 ]);
 
 export default eslintConfig;

@@ -13,8 +13,12 @@
     "no-base-cap"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "668c6fb1ab18fcc9afc269505eb244d8a18d2324b398ea1fe480db359117272c"
+    ],
+    "fileNameSha256": [
+      "2d69f23d23128853b3b9146547325410cad063f054e5cc140bbcc446dae8e2a6"
+    ],
     "pages": 16
   },
   "facts": {

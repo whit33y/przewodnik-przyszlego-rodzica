@@ -14,8 +14,12 @@
     "rate-box-unticked"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "1b7699888c19497c380ee5347e6f2de4bb6abec8ec38cfb838f8dc5fd57d8e29"
+    ],
+    "fileNameSha256": [
+      "f8f5abbb98b96c25f2691d7dc79ea1ca57f1242c385e2fc699f1d6d59d0b08d4"
+    ],
     "pages": 52
   },
   "facts": {

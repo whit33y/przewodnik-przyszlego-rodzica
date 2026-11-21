@@ -13,8 +13,12 @@
     "hospital-certificate-old-template"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "03b393788ee74110920719e1dd8d5ff0267f04e565e355f29e93e9516a3fdece"
+    ],
+    "fileNameSha256": [
+      "7a0cc2460c67cd694c3ca5a8cd47dc91d3a1c2d04ff0217b3daef1668d000811"
+    ],
     "pages": 22
   },
   "facts": {

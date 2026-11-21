@@ -14,8 +14,12 @@
     "concurrent-parental"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "224731f3e3a6d88ed7d62aeffc171069a58df2a1b54c998955a639ba5ed06cd7"
+    ],
+    "fileNameSha256": [
+      "896b3bee471b56ca42bb980e84e760567754eea76d22fef7c6d00666cf2be5a3"
+    ],
     "pages": 12
   },
   "facts": {

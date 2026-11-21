@@ -12,7 +12,11 @@ export function splitFacts(facts: Facts, plan?: Plan): { systems: Partial<System
     mobywatel: { displayName: "", sex: c.sex, birthYear: c.birthYear },
     "zus-konto": {
       role: c.role,
-      titles: c.titles.map(({ suspensions: _s, ...t }) => t),
+      titles: c.titles.map((t) => {
+        const copy = { ...t };
+        delete copy.suspensions;
+        return copy;
+      }),
       ...(c.flags ? { flags: c.flags } : {}),
     },
     "zus-saldo": { arrears: c.arrears },

@@ -148,7 +148,12 @@ export function computeBase(title: InsuranceTitle, rightArisesOn: ISODate, ctx: 
     if (!ok) used.push({ month: rec.month, income: 0, adjusted: "excluded", reason: "notFullMonth" });
     return ok;
   });
-  const capFor = (rec: MonthRecord) => Math.min(rec.contributionBase, voluntaryCap(setFor(ctx, p, monthStart(rec.month))));
+  let monthCapped = false;
+  const capFor = (rec: MonthRecord) => {
+    const cap = voluntaryCap(setFor(ctx, p, monthStart(rec.month)));
+    if (rec.contributionBase > cap) monthCapped = true;
+    return Math.min(rec.contributionBase, cap);
+  };
   let base: Grosze;
   let method: BaseCalculation["method"];
   let dataMissing = false;
@@ -200,7 +205,7 @@ export function computeBase(title: InsuranceTitle, rightArisesOn: ISODate, ctx: 
     } else { base = 0; dataMissing = true; }
   }
   const cap = netOfDeduction(voluntaryCap(p), p.deductions.employeeSocialBps);
-  let capApplied = false;
+  let capApplied = monthCapped;
   if (base > cap) { base = cap; capApplied = true; }
   used.sort((a, b) => (a.month < b.month ? -1 : 1));
   return { titleId: title.id, method, base, monthsUsed: used, capApplied: capApplied || undefined, dataMissing: dataMissing || undefined };

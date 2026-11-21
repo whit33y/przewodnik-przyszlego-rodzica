@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-08",
+  "title": "Przysposobienie 5-letniego dziecka z zaświadczeniem „Za życiem”: 20 tygodni + 56 tygodni urlopu rodzicielskiego, krótkie dobrowolne chorobowe na preferencyjnym ZUS",
+  "scenario": "1.12",
+  "tags": [
+    "self-employed",
+    "adoptive",
+    "adoption",
+    "za-zyciem",
+    "parental-65-weeks",
+    "preferential-zus",
+    "short-insurance",
+    "title-ended-during-benefit"
+  ],
+  "source": {
+    "pdfSha256": [
+      "d8dae410639700e57e71e063f05e49c4929e489c8129b5a4cd9bc58bec0a39a4"
+    ],
+    "fileNameSha256": [
+      "0c38e9d3215079dccf5b5a6f567dcf236f971ebf1c6e6ee4a8e890b454b466e0"
+    ],
+    "pages": 16
+  },
+  "facts": {
+    "asOf": "2025-01-03",
+    "claimant": {
+      "sex": "F",
+      "role": "adoptive",
+      "titles": [
+        {
+          "id": "t0",
+          "kind": "selfEmployed",
+          "zusCode": "0540",
+          "from": "2023-04-17",
+          "to": "2023-10-31",
+          "scheme": "ulgaNaStart",
+          "sickness": {
+            "mode": "none",
+            "periods": []
+          },
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        },
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2023-11-01",
+          "to": "2024-01-23",
+          "endReason": "businessClosed",
+          "scheme": "preferential",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2023-11-21",
+                "to": "2024-01-23"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2023-11",
+              "contributionBase": 108000
+            },
+            {
+              "month": "2023-12",
+              "contributionBase": 108000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2024-01-05",
+          "aboveThreshold": false
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "adoption",
+      "takenIntoCareOn": "2024-01-05",
+      "children": [
+        {
+          "ref": "child-1",
+          "birthDate": "2018-12-02",
+          "zaZyciem": true
+        }
+      ],
+      "documents": [
+        "courtOrder",
+        "birthAct",
+        "zaZyciemCert"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternityOnAdoption",
+        "titleId": "t1",
+        "from": "2024-01-05",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2024-05-24",
+        "days": 224,
+        "pool": "shared"
+      },
+      {
+        "id": "b3",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2025-01-03",
+        "days": 168,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-titles-screen",
+      "page": 15,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0]": {
+      "doc": "zus-titles-screen",
+      "page": 15,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].from": {
+      "doc": "zus-insurance-memo",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].to": {
+      "doc": "zus-insurance-memo",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].endReason": {
+      "doc": "zus-insurance-memo",
+      "page": 12,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[1].sickness.periods[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].scheme": {
+      "doc": "zus-insurance-memo",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[1].months": {
+      "doc": "zus-insurance-memo",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.arrears[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.event.takenIntoCareOn": {
+      "doc": "ZAM",
+      "page": 2,
+      "evidence": "handwritten"
+    },
+    "facts.event.children[0].birthDate": {
+      "doc": "ZAM",
+      "page": 2,
+      "evidence": "handwritten"
+    },
+    "facts.event.children[0].zaZyciem": {
+      "doc": "za-zyciem-certificate",
+      "page": 14,
+      "evidence": "printed"
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "page": 2,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "page": 2,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[1]": {
+      "doc": "ZUR",
+      "page": 6,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[2]": {
+      "doc": "zus-note",
+      "page": 15,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Adoptive mother, self-employed on preferential contributions (base 1080.00 in 2023-11 and 2023-12) with voluntary sickness insurance from 2023-11-21, about 45 days before taking a 5-year-old child into care on 2024-01-05 with an adoption petition; before that a health-only start-up relief title. The title and the sickness insurance ended on 2024-01-23 (deregistration, title ceased); the benefit continued because the right arose during insurance. ZUS insurance memo: study date 2024-01-05, no arrears, base below 60% of the forecast wage, last document received 2024-01-15. Claims: ZAM for maternity-type leave 2024-01-05..2024-05-23 plus 32 weeks of parental leave (81.5% box unticked; joint claim, so 81.5% inferred), then ZUR for parental leave 2024-05-24..2025-01-02; the child holds a Za zyciem certificate, which extends parental leave to 65 weeks (56 weeks for one parent). Typed ZUS note: benefit paid 2024-01-05..2025-06-19 (532 days = 20 + 56 weeks). Only the overall period is printed; the split and the third block 2025-01-03..2025-06-19 (the extension) are reconstructed from the claims. Full adoption later ordered by the court (date redacted). asOf is not dated in the file; set to the start of the extension block."
+}

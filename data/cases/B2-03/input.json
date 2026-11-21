@@ -14,8 +14,12 @@
     "contribution-holiday"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "95befcf305df2f5b98125492c9c5cb2d6476e45647b5c2131125d98e043baa6a"
+    ],
+    "fileNameSha256": [
+      "3f467eeee9c61d8e96b2c70b98e98889050a7d539d3c275fe1c90db3c46206d1"
+    ],
     "pages": 14
   },
   "facts": {

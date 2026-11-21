@@ -11,8 +11,12 @@
     "averaged-81.5"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "6a290e861e97d2b8463e16ee98bb856c961a21deffbf5fb6807a39f897295616"
+    ],
+    "fileNameSha256": [
+      "a9a7be401b7ba33c26754e13797bda42722483d4e258a9bac330a037b2184263"
+    ],
     "pages": 18
   },
   "facts": {
