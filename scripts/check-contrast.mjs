@@ -56,8 +56,10 @@ const pairs = [
   ["on-primary", "tl-parental", TEXT, "timeline label"],
   ["on-primary", "tl-paternity", TEXT, "timeline label"],
   ["on-primary", "tl-loss", TEXT, "timeline label"],
-  ["#cfe6d8", "primary-strong", TEXT, "hero eyebrow on dark band"],
-  ["#e8f3ec", "primary-strong", TEXT, "hero lead on dark band"],
+  ["on-dark-muted", "primary-strong", TEXT, "eyebrow / notes on dark band"],
+  ["on-dark-soft", "primary-strong", TEXT, "lead text on dark band"],
+  ["on-dark-accent", "primary-strong", UI, "icons on dark band"],
+  ["primary-strong", "on-primary", TEXT, "on-dark filled button label"],
 ];
 
 const hex = (v) => (v.startsWith("#") ? v : tokens[v]);
@@ -83,6 +85,17 @@ const rows = pairs.map(([fg, bg, target, use]) => {
   if (!ok) failed++;
   return `${ok ? "✓" : "✗"} ${r.toFixed(2).padStart(5)} ≥ ${target}  ${fg} on ${bg}  (${use})`;
 });
+// Raw hex colours outside tokens.css bypass the gate.
+const srcRoot = path.join(process.cwd(), "src");
+const offenders = fs
+  .readdirSync(srcRoot, { recursive: true })
+  .map(String)
+  .filter((f) => /\.(css|tsx)$/.test(f) && !f.endsWith("tokens.css"))
+  .filter((f) => /#[0-9a-fA-F]{6}\b/.test(fs.readFileSync(path.join(srcRoot, f), "utf8").replace(/url\("data:[^"]+"\)/g, "").replace(/themeColor:\s*"#[0-9a-fA-F]{6}"/g, "")));
+for (const f of offenders) {
+  failed++;
+  rows.push(`✗ raw hex colour in src/${f} — use a token`);
+}
 if (process.argv.includes("--verbose") || failed) console.log(rows.join("\n"));
 if (failed) {
   console.error(`\n${failed} contrast pair(s) below WCAG 2.1 AA target.`);

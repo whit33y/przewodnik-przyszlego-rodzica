@@ -1,0 +1,138 @@
+{
+  "id": "hanna",
+  "label": "Hanna, 32 lata",
+  "oneLiner": "Jestem w ciąży, a moją firmę postawiono w stan likwidacji i we wrześniu straciłam pracę.",
+  "journey": "pregnant",
+  "asOf": "2026-11-21",
+  "systems": {
+    "mobywatel": {
+      "displayName": "Hanna Z.",
+      "sex": "F",
+      "birthYear": 1994
+    },
+    "zus-konto": {
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2019-03-01",
+          "to": "2026-09-30",
+          "endReason": "employerLiquidation",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2019-03-01",
+                "to": "2026-09-30"
+              }
+            ]
+          },
+          "registeredOn": "2019-03-04",
+          "workTime": [
+            {
+              "from": "2019-03-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer"
+          },
+          "months": [
+            {
+              "month": "2025-10",
+              "contributionBase": 700000
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 700000
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 700000
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 720000
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 720000
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 720000
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 720000
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 720000
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 720000
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 720000
+            },
+            {
+              "month": "2026-08",
+              "contributionBase": 720000
+            },
+            {
+              "month": "2026-09",
+              "contributionBase": 720000
+            }
+          ]
+        }
+      ]
+    },
+    "zus-platnik": {
+      "payers": [
+        {
+          "ref": "payer-1",
+          "insuredOn30NovPrevYear": 64,
+          "over20Insured": true
+        }
+      ]
+    },
+    "zus-saldo": {
+      "arrears": []
+    },
+    "zus-ezla": {
+      "sickNotes": []
+    },
+    "zus-swiadczenia": {
+      "paidBenefits": []
+    },
+    "zus-postepowania": {
+      "insuranceDecisions": []
+    },
+    "ceidg": {
+      "suspensions": []
+    },
+    "krs": {
+      "payerStatus": [
+        {
+          "ref": "payer-1",
+          "status": "liquidation"
+        }
+      ]
+    },
+    "rsc": {
+      "otherParentKnown": false
+    },
+    "ezdrowie": {
+      "expectedDate": "2027-01-08"
+    }
+  }
+}

@@ -27,6 +27,11 @@
   --focus: #003b22;
   --focus-on-dark: #ffffff;
 
+  /* text and accents on dark green bands (hero, summary headers) */
+  --on-dark-muted: #cfe6d8;
+  --on-dark-soft: #e8f3ec;
+  --on-dark-accent: #9fd3b3;
+
   /* status: never solid, never colour-only */
   --positive: #3d6b00;
   --positive-bg: #eef5dc;

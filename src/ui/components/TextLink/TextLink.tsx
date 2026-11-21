@@ -13,9 +13,9 @@ export interface TextLinkProps {
 export function TextLink({ href, external, children, className }: TextLinkProps) {
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={className} style={{ display: "inline-flex", alignItems: "baseline", gap: 4 }}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
         {children}
-        <Icon name="external" size={16} style={{ alignSelf: "center" }} />
+        <Icon name="external" size={16} style={{ display: "inline", verticalAlign: "-2px", marginLeft: 4 }} />
         <span className="visually-hidden"> (otwiera się w nowej karcie)</span>
       </a>
     );

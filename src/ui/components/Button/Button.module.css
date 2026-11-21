@@ -32,3 +32,7 @@
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 2.4s; } }
 .keepCase { text-transform: none; letter-spacing: 0; }
+.onDark { background: var(--on-primary); color: var(--primary-strong); border-color: var(--on-primary); }
+.onDark:hover { background: var(--primary-soft); border-color: var(--primary-soft); color: var(--primary-strong); }
+.onDarkOutline { background: transparent; color: var(--on-primary); border-color: var(--on-primary); font-weight: 600; letter-spacing: 0; }
+.onDarkOutline:hover { background: rgba(255, 255, 255, 0.12); color: var(--on-primary); }

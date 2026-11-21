@@ -1,7 +1,8 @@
 import { getMutableSession } from "@/server/session";
 
-export async function POST(request: Request) {
+export async function POST() {
   const session = await getMutableSession();
   session.destroy();
-  return Response.redirect(new URL("/", request.url), 303);
+  // Relative Location: behind Railway's proxy request.url may carry the internal host.
+  return new Response(null, { status: 303, headers: { Location: "/" } });
 }

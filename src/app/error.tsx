@@ -9,7 +9,7 @@ export default function ErrorPage({ reset }: { error: Error & { digest?: string 
     <>
       <PageHeader title="Coś poszło nie tak" />
       <Notice tone="caution" title="To nie jest informacja o Twoich uprawnieniach" role="alert">
-        <p>Wystąpił błąd techniczny po naszej stronie. Twoje dane nie zostały utracone. Spróbuj ponownie za chwilę.</p>
+        <p>Wystąpił błąd techniczny po naszej stronie. Spróbuj ponownie za chwilę.</p>
       </Notice>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         <Button onClick={reset} icon="refresh">

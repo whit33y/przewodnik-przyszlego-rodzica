@@ -29,5 +29,5 @@ export async function UserSlot() {
 }
 
 export function UserSlotSkeleton() {
-  return <span style={{ display: "inline-block", width: 120, height: 40 }} aria-hidden="true" />;
+  return <span style={{ display: "inline-block", width: 132, height: 40 }} aria-hidden="true" />;
 }

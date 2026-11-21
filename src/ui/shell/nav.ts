@@ -26,12 +26,21 @@ export const secondaryNav: NavItem[] = [
 
 export const tabNav: NavItem[] = [
   { href: "/", label: "Start", icon: "home" },
-  { href: "/uprawnienia", label: "Uprawnienia", icon: "shield" },
+  { href: "/uprawnienia", label: "Uprawnienia", short: "Prawa", icon: "shield" },
   { href: "/plan", label: "Plan", icon: "timeline" },
   { href: "/kroki", label: "Kroki", icon: "steps" },
 ];
 
+export const desktopSecondaryNav: NavItem[] = [
+  { href: "/planuje-dziecko", label: "Planuję dziecko", icon: "heart" },
+  { href: "/trudna-sytuacja", label: "Trudna sytuacja", icon: "help" },
+  { href: "/wsparcie", label: "Wsparcie", icon: "users" },
+];
+
 export const footerLinks = [
+  { href: "/planuje-dziecko", label: "Planuję dziecko" },
+  { href: "/trudna-sytuacja", label: "Trudna sytuacja" },
+  { href: "/wsparcie", label: "Wsparcie i organizacje" },
   { href: "/o-serwisie", label: "O serwisie" },
   { href: "/dostepnosc", label: "Deklaracja dostępności" },
   { href: "/sprawy", label: "Przykładowe sprawy (dla jury)" },

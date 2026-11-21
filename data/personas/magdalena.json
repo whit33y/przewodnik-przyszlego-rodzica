@@ -1,0 +1,145 @@
+{
+  "id": "magdalena",
+  "label": "Magdalena, 31 lat",
+  "oneLiner": "Jestem w ciąży, pracuję na etacie i od początku listopada jestem na zwolnieniu lekarskim.",
+  "journey": "pregnant",
+  "asOf": "2026-11-21",
+  "systems": {
+    "mobywatel": {
+      "displayName": "Magdalena K.",
+      "sex": "F",
+      "birthYear": 1995
+    },
+    "zus-konto": {
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2021-03-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2021-03-01"
+              }
+            ]
+          },
+          "registeredOn": "2021-03-03",
+          "workTime": [
+            {
+              "from": "2021-03-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer"
+          },
+          "months": [
+            {
+              "month": "2025-11",
+              "contributionBase": 760000
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 760000
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-08",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-09",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-10",
+              "contributionBase": 800000
+            }
+          ]
+        }
+      ]
+    },
+    "zus-platnik": {
+      "payers": [
+        {
+          "ref": "payer-1",
+          "insuredOn30NovPrevYear": 48,
+          "over20Insured": true
+        }
+      ]
+    },
+    "zus-saldo": {
+      "arrears": []
+    },
+    "zus-ezla": {
+      "sickNotes": [
+        {
+          "titleId": "t1",
+          "from": "2026-11-03",
+          "to": "2026-12-01",
+          "code": "B"
+        }
+      ]
+    },
+    "zus-swiadczenia": {
+      "paidBenefits": []
+    },
+    "zus-postepowania": {
+      "insuranceDecisions": []
+    },
+    "ceidg": {
+      "suspensions": []
+    },
+    "krs": {
+      "payerStatus": [
+        {
+          "ref": "payer-1",
+          "status": "active"
+        }
+      ]
+    },
+    "rsc": {
+      "otherParentKnown": false
+    },
+    "ezdrowie": {
+      "expectedDate": "2027-03-12"
+    }
+  },
+  "unavailable": [
+    "ezdrowie"
+  ]
+}

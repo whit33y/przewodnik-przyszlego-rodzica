@@ -37,3 +37,17 @@ export const submissions = sqliteTable("submissions", {
   payload: text("payload").notNull(),
   createdAt: text("created_at").notNull(),
 });
+
+/** Per-session working state for the simulated flow (the cookie only carries sid + persona). */
+export const sessionState = sqliteTable("session_state", {
+  sid: text("sid").primaryKey(),
+  personaId: text("persona_id").notNull(),
+  mode: text("mode").notNull(),
+  consents: text("consents").notNull().default("[]"),
+  fetchStartedAt: text("fetch_started_at"),
+  retries: text("retries").notNull().default("{}"),
+  answers: text("answers").notNull().default("{}"),
+  overrides: text("overrides").notNull().default("[]"),
+  plan: text("plan"),
+  updatedAt: text("updated_at").notNull(),
+});

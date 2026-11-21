@@ -1,0 +1,156 @@
+{
+  "id": "aleksandra",
+  "label": "Aleksandra, 36 lat",
+  "oneLiner": "Od 2 listopada opiekuję się trzyletnim dzieckiem, które adoptujemy — sprawa jest w sądzie.",
+  "journey": "adoption",
+  "asOf": "2026-11-21",
+  "systems": {
+    "mobywatel": {
+      "displayName": "Aleksandra J.",
+      "sex": "F",
+      "birthYear": 1990
+    },
+    "zus-konto": {
+      "role": "adoptive",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2020-05-04",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2020-05-04"
+              }
+            ]
+          },
+          "registeredOn": "2020-05-06",
+          "workTime": [
+            {
+              "from": "2020-05-04",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer"
+          },
+          "months": [
+            {
+              "month": "2025-11",
+              "contributionBase": 780000
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 780000
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-08",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-09",
+              "contributionBase": 800000
+            },
+            {
+              "month": "2026-10",
+              "contributionBase": 800000
+            }
+          ]
+        }
+      ]
+    },
+    "zus-platnik": {
+      "payers": [
+        {
+          "ref": "payer-1",
+          "insuredOn30NovPrevYear": 112,
+          "over20Insured": true
+        }
+      ]
+    },
+    "zus-saldo": {
+      "arrears": []
+    },
+    "zus-ezla": {
+      "sickNotes": []
+    },
+    "zus-swiadczenia": {
+      "paidBenefits": []
+    },
+    "zus-postepowania": {
+      "insuranceDecisions": []
+    },
+    "ceidg": {
+      "suspensions": []
+    },
+    "krs": {
+      "payerStatus": [
+        {
+          "ref": "payer-1",
+          "status": "active"
+        }
+      ]
+    },
+    "rsc": {
+      "event": {
+        "kind": "adoption",
+        "takenIntoCareOn": "2026-11-02",
+        "interimOrderOn": "2026-10-29",
+        "children": [
+          {
+            "ref": "child-1",
+            "birthDate": "2023-05-14"
+          }
+        ]
+      },
+      "otherParentKnown": false
+    },
+    "ezdrowie": {}
+  },
+  "presetAnswers": {
+    "eventKind": "adoption",
+    "care": {
+      "petitionFiledOn": "2026-09-15"
+    }
+  },
+  "otherParent": {
+    "consented": false,
+    "insured": "yes",
+    "role": "adoptive",
+    "systems": {}
+  }
+}

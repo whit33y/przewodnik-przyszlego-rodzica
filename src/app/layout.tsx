@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Open_Sans } from "next/font/google";
 import { Suspense } from "react";
 import { AppShell } from "@/ui/shell/AppShell";
-import { UserSlot, UserSlotSkeleton } from "@/ui/shell/UserSlot";
+import { UserSlot, UserSlotSkeleton } from "./_shell/UserSlot";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description:
     "Sprawdź, jakie zasiłki z ZUS przysługują Ci w ciąży i po urodzeniu dziecka, zaplanuj urlopy obojga rodziców i dowiedz się, jakie dokumenty i kiedy złożyć.",
   applicationName: "Przewodnik Rodzica",
+  robots: { index: false, follow: false },
 };
 
 export const viewport: Viewport = {

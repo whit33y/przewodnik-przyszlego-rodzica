@@ -2,7 +2,7 @@
 
 Entry for **HackNation 2026**, ZUS challenge *„Zasiłkowy Przewodnik Przyszłego Rodzica”*.
 
-> **Your ZUS decision, before the baby is born.** The parent logs in through mObywatel (simulated). We pull what ZUS, CEIDG and the civil registry already know and ask only about plans. The service returns three things:
+> **Know what ZUS will grant you, before the baby is born.** The parent logs in through mObywatel (simulated). We pull what ZUS, CEIDG and the civil registry already know and ask only about plans. The service returns three things:
 > - a **verdict**: will you be entitled on your due date, and why;
 > - a **plan**: both parents' leave on one timeline, with the amount in złoty;
 > - a **route**: which document, to whom, and by which date.

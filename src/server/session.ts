@@ -3,6 +3,8 @@ import { cookies } from "next/headers";
 import { getIronSession, unsealData, type SessionOptions } from "iron-session";
 
 export interface SessionData {
+  /** Server-side session_state row id. */
+  sid?: string;
   /** Persona (demo profile or sample case) whose simulated registry data is shown. */
   personaId?: string;
   mode?: "mobywatel" | "manual" | "case";
@@ -11,6 +13,11 @@ export interface SessionData {
 }
 
 export const SESSION_COOKIE = "pr_session";
+
+export function sessionConfigured(): boolean {
+  const p = process.env.SESSION_PASSWORD;
+  return Boolean(p && p.length >= 32) || process.env.NODE_ENV !== "production";
+}
 
 function password(): string {
   const p = process.env.SESSION_PASSWORD;
@@ -34,10 +41,11 @@ export function sessionOptions(): SessionOptions {
 /** Read-only session access for Server Components. Callers must sit under <Suspense>. */
 export async function getSession(): Promise<SessionData> {
   "use cache: private";
+  const pw = password(); // throws loudly when misconfigured in production
   const raw = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!raw) return {};
   try {
-    return await unsealData<SessionData>(raw, { password: password(), ttl: 60 * 60 * 8 });
+    return await unsealData<SessionData>(raw, { password: pw, ttl: 60 * 60 * 8 });
   } catch {
     return {};
   }

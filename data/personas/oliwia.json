@@ -1,0 +1,120 @@
+{
+  "id": "oliwia",
+  "label": "Oliwia, 28 lat",
+  "oneLiner": "Pracuję na umowie zlecenia i planujemy dziecko — chcę wiedzieć, czy dostanę zasiłek.",
+  "journey": "planning",
+  "asOf": "2026-11-21",
+  "systems": {
+    "mobywatel": {
+      "displayName": "Oliwia D.",
+      "sex": "F",
+      "birthYear": 1998
+    },
+    "zus-konto": {
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "mandate",
+          "zusCode": "0411",
+          "from": "2025-03-01",
+          "sickness": {
+            "mode": "none",
+            "periods": []
+          },
+          "registeredOn": "2025-03-05",
+          "payer": {
+            "ref": "payer-1",
+            "kind": "client"
+          },
+          "months": [
+            {
+              "month": "2025-11",
+              "contributionBase": 342000
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 389000
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 315000
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 360000
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 402500
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 337800
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 371200
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 355000
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 398600
+            },
+            {
+              "month": "2026-08",
+              "contributionBase": 341000
+            },
+            {
+              "month": "2026-09",
+              "contributionBase": 365400
+            },
+            {
+              "month": "2026-10",
+              "contributionBase": 380000
+            }
+          ]
+        }
+      ]
+    },
+    "zus-platnik": {
+      "payers": [
+        {
+          "ref": "payer-1",
+          "insuredOn30NovPrevYear": 35,
+          "over20Insured": true
+        }
+      ]
+    },
+    "zus-saldo": {
+      "arrears": []
+    },
+    "zus-ezla": {
+      "sickNotes": []
+    },
+    "zus-swiadczenia": {
+      "paidBenefits": []
+    },
+    "zus-postepowania": {
+      "insuranceDecisions": []
+    },
+    "ceidg": {
+      "suspensions": []
+    },
+    "krs": {
+      "payerStatus": [
+        {
+          "ref": "payer-1",
+          "status": "active"
+        }
+      ]
+    },
+    "rsc": {
+      "otherParentKnown": false
+    },
+    "ezdrowie": {}
+  }
+}

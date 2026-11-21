@@ -10,7 +10,11 @@ describe("engine import boundary", () => {
   for (const f of files) {
     it(`${f} uses only relative imports`, () => {
       const src = fs.readFileSync(path.join(root, f), "utf8");
-      const specifiers = [...src.matchAll(/(?:import|export)[^'"]*?from\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
+      const specifiers = [
+        ...[...src.matchAll(/(?:import|export)[^'"]*?from\s*['"]([^'"]+)['"]/g)].map((m) => m[1]),
+        ...[...src.matchAll(/^\s*import\s+['"]([^'"]+)['"]/gm)].map((m) => m[1]),
+        ...[...src.matchAll(/(?:require|import)\(\s*['"]([^'"]+)['"]\s*\)/g)].map((m) => m[1]),
+      ];
       for (const spec of specifiers) expect(spec.startsWith("./") || spec.startsWith("../"), `${f} imports "${spec}"`).toBe(true);
       expect(src).not.toMatch(/Date\.now\(|Math\.random\(|new Date\(\)/);
     });

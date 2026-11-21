@@ -1,0 +1,140 @@
+{
+  "id": "lucja",
+  "label": "Łucja, 29 lat",
+  "oneLiner": "Prowadzę firmę na preferencyjnym ZUS i od marca zawieszam działalność, a poród mam w kwietniu.",
+  "journey": "selfEmployed",
+  "asOf": "2026-11-21",
+  "systems": {
+    "mobywatel": {
+      "displayName": "Łucja P.",
+      "sex": "F",
+      "birthYear": 1997
+    },
+    "zus-konto": {
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2025-03-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2025-03-04"
+              }
+            ]
+          },
+          "registeredOn": "2025-03-04",
+          "scheme": "preferential",
+          "payer": {
+            "ref": "payer-1",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2025-11",
+              "contributionBase": 139980,
+              "minimumBase": 139980
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 139980,
+              "minimumBase": 139980
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 144180,
+              "minimumBase": 144180
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 144180,
+              "minimumBase": 144180
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 144180,
+              "minimumBase": 144180
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 144180,
+              "minimumBase": 144180
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 144180,
+              "minimumBase": 144180
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 144180,
+              "minimumBase": 144180
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 144180,
+              "minimumBase": 144180
+            },
+            {
+              "month": "2026-08",
+              "contributionBase": 144180,
+              "minimumBase": 144180
+            },
+            {
+              "month": "2026-09",
+              "contributionBase": 144180,
+              "minimumBase": 144180
+            },
+            {
+              "month": "2026-10",
+              "contributionBase": 144180,
+              "minimumBase": 144180
+            }
+          ]
+        }
+      ]
+    },
+    "zus-platnik": {
+      "payers": []
+    },
+    "zus-saldo": {
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2026-11-15",
+          "amount": 0
+        }
+      ]
+    },
+    "zus-ezla": {
+      "sickNotes": []
+    },
+    "zus-swiadczenia": {
+      "paidBenefits": []
+    },
+    "zus-postepowania": {
+      "insuranceDecisions": []
+    },
+    "ceidg": {
+      "suspensions": [
+        {
+          "titleId": "t1",
+          "from": "2027-03-01",
+          "to": "2027-05-31"
+        }
+      ]
+    },
+    "krs": {
+      "payerStatus": []
+    },
+    "rsc": {
+      "otherParentKnown": false
+    },
+    "ezdrowie": {
+      "expectedDate": "2027-04-10"
+    }
+  }
+}

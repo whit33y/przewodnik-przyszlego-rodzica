@@ -27,7 +27,7 @@ const entries: { href: string; icon: IconName; title: string; body: string }[] =
     href: "/trudna-sytuacja",
     icon: "help",
     title: "Trudna sytuacja",
-    body: "Poronienie, urodzenie martwego dziecka, wcześniak w szpitalu, choroba. Spokojnie, krok po kroku.",
+    body: "Poronienie, urodzenie martwego dziecka, wcześniak w szpitalu, choroba. Powiemy, co Ci przysługuje i co trzeba zrobić — bez pośpiechu.",
   },
 ];
 
@@ -38,17 +38,17 @@ export default function Home() {
         <div className={s.heroText}>
           <p className={s.eyebrow}>Zasiłki z ZUS w ciąży i po porodzie</p>
           <h1 id="hero-title" className={s.title}>
-            Poznaj swoją decyzję z ZUS, zanim urodzi się dziecko
+            Sprawdź, co Ci przysługuje z ZUS, zanim urodzi się dziecko
           </h1>
           <p className={s.lead}>
             Zaloguj się przez mObywatela. Pobierzemy Twoje dane z ZUS i rejestrów państwowych, sprawdzimy prawo do zasiłku, policzymy jego wysokość i podpowiemy, co, komu i do
             kiedy złożyć.
           </p>
           <div className={s.heroActions}>
-            <Button href="/logowanie" size="lg" icon="lock" uppercase={false}>
+            <Button href="/logowanie" size="lg" icon="lock" variant="onDark" uppercase={false}>
               Zaloguj się przez mObywatel
             </Button>
-            <Button href="/plan?tryb=reczny" variant="secondary" size="lg">
+            <Button href="/bez-logowania" variant="onDarkOutline" size="lg">
               Policz bez logowania
             </Button>
           </div>
@@ -71,7 +71,7 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <p style={{ color: "#e8f3ec" }}>Zapytamy tylko o plany: termin porodu, podział urlopu i to, czy chcesz łączyć urlop z pracą.</p>
+          <p className={s.panelNote}>Zapytamy tylko o plany: termin porodu, podział urlopu i to, czy chcesz łączyć urlop z pracą.</p>
         </div>
       </section>
 

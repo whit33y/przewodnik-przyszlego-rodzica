@@ -32,6 +32,7 @@ export function Field({ label, hint, error, optional, children, className }: Fie
       {error ? (
         <span id={errId} className={s.error}>
           <Icon name="x-circle" size={18} />
+          <span className="visually-hidden">Błąd: </span>
           {error}
         </span>
       ) : null}
@@ -92,6 +93,7 @@ export function ChoiceGroup<V extends string>({ legend, hint, name, type = "radi
       {error ? (
         <span id={`${id}-e`} className={s.error}>
           <Icon name="x-circle" size={18} />
+          <span className="visually-hidden">Błąd: </span>
           {error}
         </span>
       ) : null}
@@ -155,10 +157,11 @@ export function DateInput({ legend, hint, error, name, value, onChange }: DateIn
       {error ? (
         <span id={`${id}-e`} className={s.error}>
           <Icon name="x-circle" size={18} />
+          <span className="visually-hidden">Błąd: </span>
           {error}
         </span>
       ) : null}
-      <div className={s.date}>
+      <div className={s.date} key={value ?? "empty"}>
         {(
           [
             ["d", "Dzień", d, s.dd, 2],
@@ -176,6 +179,7 @@ export function DateInput({ legend, hint, error, name, value, onChange }: DateIn
               data-part={part}
               defaultValue={val}
               aria-invalid={error ? true : undefined}
+              aria-describedby={part === "d" ? [hint ? `${id}-h` : "", error ? `${id}-e` : ""].join(" ").trim() || undefined : undefined}
               autoComplete="off"
               onChange={(e) => emit(part, e.currentTarget.value, e.currentTarget.closest("fieldset"))}
             />
