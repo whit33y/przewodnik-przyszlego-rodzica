@@ -9,7 +9,7 @@ if (!existsSync(`${out}/server.js`)) {
   process.exit(1);
 }
 cpSync(".next/static", `${out}/.next/static`, { recursive: true });
-cpSync("public", `${out}/public`, { recursive: true });
+if (existsSync("public")) cpSync("public", `${out}/public`, { recursive: true });
 for (const d of ["data/params", "data/cases", "data/personas", "data/content", "drizzle"]) if (existsSync(d)) cpSync(d, `${out}/${d}`, { recursive: true });
 const port = process.argv[2] ?? process.env.PORT ?? "3000";
 const child = spawn(process.execPath, ["server.js"], { cwd: out, stdio: "inherit", env: { ...process.env, PORT: port, HOSTNAME: "127.0.0.1", DATABASE_PATH: process.env.DATABASE_PATH ? new URL(process.env.DATABASE_PATH, `file://${process.cwd()}/`).pathname : undefined } });

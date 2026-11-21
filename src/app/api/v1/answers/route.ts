@@ -30,7 +30,7 @@ function answersSchema(asOf: ISODate) {
   const grosze = z.number().int().nonnegative().max(100_000_000);
   return z
     .object({
-      expectedDate: date(-1, 1).optional(),
+      expectedDate: date(-1, 2).optional(),
       childrenCount: z.number().int().min(1).max(6).optional(),
       zaZyciem: z.boolean().optional(),
       eventKind: z.enum(["birth", "adoption", "foster"]).optional(),
