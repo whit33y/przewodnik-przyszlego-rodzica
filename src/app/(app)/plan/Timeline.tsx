@@ -33,8 +33,12 @@ export function Timeline({ plan, result, lanes, anchor, anchorLabel, today, sele
   const months: string[] = [];
   for (let d = first; d <= end; d = addDays(`${d.slice(0, 7)}-01`, 32).slice(0, 7) + "-01") months.push(d);
   const quarterOnly = months.length > 14;
+  const rateDeadline = result.deadlines.find((d) => d.code === "RATE_OPTION_21_DAYS")?.date;
+  const paternityEnd = result.pools.paternityDays.total ? result.pools.paternityDays.expiresOn : undefined;
   const markers = [
     { at: anchor, label: anchorLabel },
+    ...(rateDeadline && rateDeadline <= end ? [{ at: rateDeadline, label: "21 dni na wniosek" }] : []),
+    ...(paternityEnd && paternityEnd <= end ? [{ at: paternityEnd, label: "Koniec ojcowskiego" }] : []),
     ...(today >= first && today <= end ? [{ at: today, label: "Dziś (symulacja)" }] : []),
   ];
   const violating = new Set(result.violations.map((v) => v.blockId));
@@ -47,7 +51,7 @@ export function Timeline({ plan, result, lanes, anchor, anchorLabel, today, sele
   return (
     <div className={s.timeline}>
       <p className="visually-hidden">Oś czasu urlopów. {summary}.</p>
-      <div className={s.tlScroll}>
+      <div className={`${s.tlScroll} ${s.tlDesktop}`}>
         <div className={s.tlInner}>
           <div className={s.axis} aria-hidden="true">
             {months.map((m, i) => {
@@ -98,6 +102,33 @@ export function Timeline({ plan, result, lanes, anchor, anchorLabel, today, sele
             </span>
           ))}
         </div>
+      </div>
+      <div className={s.tlMobile}>
+        {lanes.map((l) => (
+          <div key={l.parent} className={s.tlMobileLane}>
+            <p className={s.laneLabel}>{l.title}</p>
+            <ol className={s.tlMobileList}>
+              {spans
+                .filter((x) => x.b.parent === l.parent)
+                .map(({ b, from, to }) => (
+                  <li key={b.id}>
+                    <button type="button" className={s.tlMobileItem} aria-current={selected === b.id ? "true" : undefined} onClick={() => onSelect(b.id)}>
+                      <span className={s.swatch} data-type={b.type} aria-hidden="true" />
+                      <span className={s.tlMobileText}>
+                        <strong>{leaveShort[b.type]}</strong>
+                        <span className={s.muted}>
+                          {formatDateShort(from)} – {formatDateShort(to)} · {formatDuration(daysBetween(from, to) + 1)}
+                        </span>
+                        <span className={s.miniTrack} aria-hidden="true">
+                          <i data-type={b.type} style={{ left: pos(from), width: width(from, to) }} />
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                ))}
+            </ol>
+          </div>
+        ))}
       </div>
       <ul className={s.legend} aria-label="Legenda">
         {(["maternity", "supplementary", "parental", "paternity"] as const)

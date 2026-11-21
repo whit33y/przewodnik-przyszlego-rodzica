@@ -49,8 +49,24 @@ export async function PlanContent() {
   }
   const anchor = ev.kind === "birth" ? (ev.date ?? ev.expectedDate!) : ev.takenIntoCareOn;
   const op = facts.otherParent;
+  const a = ctx.answers;
+  const reg = ctx.persona?.systems;
+  const whatIf = {
+    eventKind: ev.kind,
+    childrenCount: ev.kind === "birth" ? ev.children.length : 1,
+    zaZyciem: ev.kind === "birth" && ev.children.some((c) => c.zaZyciem),
+    hospital: a.whatIf?.hospital ?? { category: "none" as const, days: 0 },
+    known: {
+      eventKind: ctx.state.mode === "case" || Boolean(reg?.rsc?.event),
+      children: ctx.state.mode === "case" || Boolean(reg?.rsc?.event) || Boolean(reg?.ezdrowie?.children?.length),
+      zaZyciem: ctx.state.mode === "case" || Boolean(reg?.ezdrowie?.children?.some((c) => c.zaZyciem !== undefined)),
+      hospital: ctx.state.mode === "case" || Boolean(reg?.ezdrowie?.children?.some((c) => c.hospitalStays?.length || c.gestationalWeek)),
+    },
+  };
   return (
     <Planner
+      key={`${anchor}|${JSON.stringify(whatIf)}|${JSON.stringify(op ?? null)}`}
+      whatIf={whatIf}
       initial={{ plan: init.plan, origin: init.origin, result: out.result, alt: out.alt }}
       claimantRole={facts.claimant.role}
       otherRole={op && op.insured !== "no" ? op.role : null}

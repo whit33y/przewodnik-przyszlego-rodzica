@@ -10,9 +10,10 @@ import { ChoiceGroup, DateInput, Field, Select } from "@/ui/components/Form/Form
 import { Notice } from "@/ui/components/Notice/Notice";
 import { Stepper } from "@/ui/components/Stepper/Stepper";
 import { Icon } from "@/ui/icons/Icon";
-import { addDays, buildPreset, endOf, isLeave, laneOf, newId, presetLabel, reflow, type PresetId } from "./plan-utils";
+import { addDays, buildPreset, endOf, initChain, isLeave, laneOf, newId, presetLabel, reflow, type Chain, type PresetId } from "./plan-utils";
 import { Summary } from "./Summary";
 import { Timeline } from "./Timeline";
+import { WhatIfBar, type WhatIfState } from "./WhatIfBar";
 import s from "./Plan.module.css";
 
 export interface PlannerProps {
@@ -25,12 +26,13 @@ export interface PlannerProps {
   adoption: boolean;
   caseMode: boolean;
   today: string;
+  whatIf: WhatIfState;
 }
 
 interface State {
   plan: Plan;
   origin: PlannerProps["initial"]["origin"];
-  linked: Record<string, boolean>;
+  chain: Chain;
   result: Result;
   alt: AltSummary | null;
   status: "idle" | "calculating" | "error";
@@ -38,14 +40,15 @@ interface State {
   undo: Plan | null;
   selected: string | null;
   dirty: boolean;
+  savedAt: string | null;
 }
 
 type Action =
-  | { t: "edit"; plan: Plan; keepUndo?: boolean }
+  | { t: "edit"; plan: Plan; chain?: Chain }
   | { t: "replace"; plan: Plan; origin?: State["origin"] }
   | { t: "link"; id: string; linked: boolean }
   | { t: "calc"; seq: number }
-  | { t: "result"; seq: number; result: Result; alt: AltSummary | null }
+  | { t: "result"; seq: number; result: Result; alt: AltSummary | null; savedAt: string }
   | { t: "reset"; plan: Plan; result: Result; alt: AltSummary | null; origin: State["origin"] }
   | { t: "error"; seq: number }
   | { t: "select"; id: string | null }
@@ -53,36 +56,33 @@ type Action =
 
 function reducer(st: State, a: Action): State {
   switch (a.t) {
-    case "edit":
-      return { ...st, plan: reflow(a.plan, st.linked), dirty: true, undo: a.keepUndo ? st.undo : st.undo };
-    case "replace":
-      return { ...st, undo: st.plan, plan: a.plan, linked: {}, dirty: true, origin: a.origin ?? st.origin };
+    case "edit": {
+      const chain = a.chain ?? st.chain;
+      return { ...st, chain, plan: reflow(a.plan, chain), dirty: true };
+    }
+    case "replace": {
+      const chain = initChain(a.plan);
+      return { ...st, undo: st.plan, plan: a.plan, chain, dirty: true, origin: a.origin ?? st.origin };
+    }
     case "link": {
-      const linked = { ...st.linked, [a.id]: a.linked };
-      return { ...st, linked, plan: reflow(st.plan, linked) };
+      const chain = { ...st.chain, linked: { ...st.chain.linked, [a.id]: a.linked } };
+      return { ...st, chain, plan: reflow(st.plan, chain), dirty: true };
     }
     case "calc":
       return { ...st, status: "calculating", seq: a.seq };
     case "result":
       if (a.seq !== st.seq) return st;
-      return { ...st, status: "idle", result: a.result, alt: a.alt };
+      return { ...st, status: "idle", result: a.result, alt: a.alt, savedAt: a.savedAt };
     case "reset":
-      return { ...st, plan: a.plan, result: a.result, alt: a.alt, origin: a.origin, linked: {}, undo: st.plan, dirty: false, status: "idle" };
+      return { ...st, plan: a.plan, chain: initChain(a.plan), result: a.result, alt: a.alt, origin: a.origin, undo: st.plan, dirty: false, status: "idle" };
     case "error":
       return a.seq === st.seq ? { ...st, status: "error" } : st;
     case "select":
       return { ...st, selected: a.id };
     case "undo":
-      return st.undo ? { ...st, plan: st.undo, undo: null, dirty: true } : st;
+      return st.undo ? { ...st, plan: st.undo, chain: initChain(st.undo), undo: null, dirty: true } : st;
   }
 }
-
-const typeOptions = (adoption: boolean, isFather: boolean): { value: LeaveType; label: string }[] => [
-  { value: adoption ? "maternityOnAdoption" : "maternity", label: adoption ? "Urlop na warunkach macierzyńskiego" : "Urlop macierzyński" },
-  ...(adoption ? [] : [{ value: "supplementary" as const, label: "Urlop uzupełniający" }]),
-  { value: "parental", label: "Urlop rodzicielski" },
-  ...(isFather && !adoption ? [{ value: "paternity" as const, label: "Urlop ojcowski" }] : []),
-];
 
 const fractionValue = (b: PlanBlock) => (b.workFraction && b.workFraction.num > 0 ? `${b.workFraction.num}/${b.workFraction.den}` : "0");
 
@@ -91,7 +91,7 @@ export function Planner(props: PlannerProps) {
   const [st, dispatch] = useReducer(reducer, {
     plan: initial.plan,
     origin: initial.origin,
-    linked: {},
+    chain: initChain(initial.plan),
     result: initial.result,
     alt: initial.alt,
     status: "idle",
@@ -99,25 +99,28 @@ export function Planner(props: PlannerProps) {
     undo: null,
     selected: null,
     dirty: false,
+    savedAt: null,
   });
   const [announce, setAnnounce] = useState("");
   const abort = useRef<AbortController | null>(null);
   const seqRef = useRef(0);
-  const first = useRef(true);
+  const pending = useRef<Plan | null>(null);
 
   const roleOf = (parent: PlanBlock["parent"]): Role | null => (parent === "claimant" ? claimantRole : otherRole);
-  const isFather = (parent: PlanBlock["parent"]) => roleOf(parent) === "father";
-  const laneTitle = (parent: PlanBlock["parent"]) => (parent === "claimant" ? `Ty — ${roleLabel[claimantRole].toLowerCase()}` : `Drugi rodzic — ${otherRole ? roleLabel[otherRole].toLowerCase() : "rodzic"}`);
+  const laneTitle = useCallback(
+    (parent: PlanBlock["parent"]) => (parent === "claimant" ? `Ty — ${roleLabel[claimantRole].toLowerCase()}` : `Drugi rodzic — ${otherRole ? roleLabel[otherRole].toLowerCase() : "rodzic"}`),
+    [claimantRole, otherRole],
+  );
   const motherSide: "claimant" | "other" | null = claimantRole === "mother" || claimantRole === "adoptive" || claimantRole === "foster" ? "claimant" : otherRole === "mother" ? "other" : null;
-  const fatherSide: "claimant" | "other" | null = claimantRole === "father" ? "claimant" : otherRole === "father" ? "other" : otherRole ? "other" : null;
+  const fatherSide: "claimant" | "other" | null = claimantRole === "father" ? "claimant" : otherRole ? "other" : null;
+  const pools = st.result.pools;
+  const reservedWeeks = Math.round(pools.parentalDays.reservedPerParent / 7);
+  const sharedWeeks = Math.max(0, Math.round((pools.parentalDays.total - (otherRole ? 2 : 1) * pools.parentalDays.reservedPerParent) / 7));
 
   // Debounced save + evaluate (one request per change; stale responses dropped by seq).
   useEffect(() => {
-    if (first.current) {
-      first.current = false;
-      return;
-    }
     if (!st.dirty) return;
+    pending.current = st.plan;
     const t = setTimeout(async () => {
       abort.current?.abort();
       const ctrl = new AbortController();
@@ -127,8 +130,9 @@ export function Planner(props: PlannerProps) {
       try {
         const res = await fetch("/api/v1/plan", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ plan: st.plan }), signal: ctrl.signal });
         if (!res.ok) throw new Error(String(res.status));
-        const data = (await res.json()) as { result: Result; alt: AltSummary | null };
-        dispatch({ t: "result", seq, result: data.result, alt: data.alt });
+        const data = (await res.json()) as { result: Result; alt: AltSummary | null; savedAt: string };
+        pending.current = null;
+        dispatch({ t: "result", seq, result: data.result, alt: data.alt, savedAt: data.savedAt });
       } catch (e) {
         if ((e as Error).name !== "AbortError") dispatch({ t: "error", seq });
       }
@@ -136,38 +140,84 @@ export function Planner(props: PlannerProps) {
     return () => clearTimeout(t);
   }, [st.plan, st.dirty]);
 
-  // One polite announcement after each recalculation.
+  // Do not lose the last edit when the user navigates away within the debounce window.
+  useEffect(() => {
+    const flush = () => {
+      if (!pending.current) return;
+      void fetch("/api/v1/plan", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ plan: pending.current }), keepalive: true });
+      pending.current = null;
+    };
+    window.addEventListener("pagehide", flush);
+    return () => {
+      window.removeEventListener("pagehide", flush);
+      flush();
+    };
+  }, []);
+
+  // One polite announcement after each recalculation, naming the first problem.
   useEffect(() => {
     if (st.status !== "idle" || !st.dirty) return;
     const t = setTimeout(() => {
-      const v = st.result.violations.length;
-      setAnnounce(`Przeliczono. Razem ${formatDuration(st.result.totals.days)}, ${formatMoney(st.result.totals.gross)} brutto.${v ? ` Do poprawy: ${v}.` : ""}`);
+      const v = st.result.violations;
+      setAnnounce(`Przeliczono. Razem ${formatDuration(st.result.totals.days)}, ${formatMoney(st.result.totals.gross)} brutto.${v.length ? ` Do poprawy: ${v.length}. ${reasonText[v[0].code] ?? ""}` : ""}`);
     }, 800);
     return () => clearTimeout(t);
   }, [st.result, st.status, st.dirty]);
 
   const setBlock = useCallback((id: string, patch: Partial<PlanBlock>) => dispatch({ t: "edit", plan: { ...st.plan, blocks: st.plan.blocks.map((b) => (b.id === id ? { ...b, ...patch } : b)) } }), [st.plan]);
-  const removeBlock = (id: string) => dispatch({ t: "edit", plan: { ...st.plan, blocks: st.plan.blocks.filter((b) => b.id !== id) } });
-  const addBlock = (parent: PlanBlock["parent"], type: LeaveType) => {
-    const lane = laneOf(st.plan, parent).filter((b) => b.type !== "paternity");
-    const last = lane[lane.length - 1];
-    const lastAny = laneOf(st.plan, motherSide ?? "claimant").filter((b) => b.type !== "paternity").pop();
-    const from = type === "paternity" ? anchor : last ? addDays(last.from, last.days) : lastAny ? addDays(lastAny.from, lastAny.days) : anchor;
-    const days = type === "paternity" ? 14 - st.result.pools.paternityDays.used || 7 : type === "parental" ? Math.max(7, Math.min(63, st.result.pools.parentalDays.total - st.result.pools.parentalDays.used)) : 7;
-    const block: PlanBlock = { id: newId(st.plan, type, parent), parent, type, from, days, ...(type === "parental" ? { pool: parent === "claimant" ? "shared" : "ownNineWeeks" } : {}) };
-    dispatch({ t: "edit", plan: { ...st.plan, blocks: [...st.plan.blocks, block] } });
+  const removeBlock = (id: string) => dispatch({ t: "edit", plan: { ...st.plan, blocks: st.plan.blocks.filter((b) => b.id !== id) }, chain: { ...st.chain, order: st.chain.order.filter((x) => x !== id) } });
+  const addBlock = (parent: PlanBlock["parent"], type: LeaveType, days?: number) => {
+    const seq = st.chain.order.map((id) => st.plan.blocks.find((b) => b.id === id)).filter(Boolean) as PlanBlock[];
+    const last = seq[seq.length - 1];
+    const from = type === "paternity" ? anchor : last ? addDays(last.from, last.days) : anchor;
+    const left = Math.max(7, pools.parentalDays.total - pools.parentalDays.used);
+    const len = days ?? (type === "paternity" ? Math.max(7, pools.paternityDays.total - pools.paternityDays.used) : type === "parental" ? Math.min(pools.parentalDays.reservedPerParent || 63, left) : 7);
+    const block: PlanBlock = { id: newId(st.plan, type, parent), parent, type, from, days: len, ...(type === "parental" ? { pool: parent === motherSide ? "shared" : "ownNineWeeks" } : {}) };
+    const chain = type === "paternity" ? st.chain : { order: [...st.chain.order, block.id], linked: { ...st.chain.linked, [block.id]: true } };
+    dispatch({ t: "edit", plan: { ...st.plan, blocks: [...st.plan.blocks, block] }, chain });
   };
   const applyPreset = (id: PresetId) => {
-    const p = buildPreset(id, { anchor, motherSide, fatherSide: otherRole ? fatherSide : claimantRole === "father" ? "claimant" : null, pools: st.result.pools, adoption, rateOption: st.plan.rateOption, titleId: st.plan.blocks.find((b) => b.parent === "claimant")?.titleId });
-    if (p) dispatch({ t: "replace", plan: { ...p, blocks: [...st.plan.blocks.filter((b) => !isLeave(b)), ...p.blocks] } });
+    const p = buildPreset(id, { anchor, motherSide, fatherSide, pools, adoption, rateOption: st.plan.rateOption, titleId: st.plan.blocks.find((b) => b.parent === "claimant")?.titleId });
+    if (p) {
+      dispatch({ t: "replace", plan: { ...p, singleTitleStatement: st.plan.singleTitleStatement, blocks: [...st.plan.blocks.filter((b) => !isLeave(b)), ...p.blocks] } });
+      setAnnounce(`Zastosowano scenariusz: ${presetLabel[id].title}.`);
+    }
   };
-  const reset = async () => {
+  const reset = useCallback(async () => {
     const res = await fetch("/api/v1/plan", { method: "DELETE" });
     if (res.ok) {
       const d = (await res.json()) as { plan: Plan; result: Result; alt: AltSummary | null; origin: State["origin"] };
       dispatch({ t: "reset", plan: d.plan, result: d.result, alt: d.alt, origin: d.origin });
       setAnnounce("Przywrócono plan.");
     }
+  }, []);
+
+  /** Two block-crossing fixes need the whole plan, not just a patch of one row. */
+  const fixPlan = (v: Violation, b: PlanBlock): { label: string; run: () => void } | null => {
+    const name = `${leaveShort[b.type].toLowerCase()} (${b.parent === "claimant" ? "Ty" : "drugi rodzic"})`;
+    if (v.code === "PARTS_LIMIT") {
+      const prev = laneOf(st.plan, b.parent).filter((x) => x.type === b.type && x.from < b.from).pop();
+      if (!prev) return null;
+      return {
+        label: `Połącz: ${name} z poprzednią częścią`,
+        run: () => dispatch({ t: "edit", plan: { ...st.plan, blocks: st.plan.blocks.filter((x) => x.id !== b.id).map((x) => (x.id === prev.id ? { ...x, days: x.days + b.days } : x)) }, chain: { ...st.chain, order: st.chain.order.filter((x) => x !== b.id) } }),
+      };
+    }
+    if (v.code === "RESERVED_WEEKS" && typeof v.values?.allowedDays === "number") {
+      const other: PlanBlock["parent"] = b.parent === "claimant" ? "other" : "claimant";
+      const reserved = Number(v.values.reservedDays ?? pools.parentalDays.reservedPerParent);
+      const canMove = otherRole && !st.plan.blocks.some((x) => x.parent === other && x.type === "parental" && x.pool === "ownNineWeeks");
+      return {
+        label: canMove ? `Przenieś ${formatDuration(reserved)} do drugiego rodzica` : `Skróć: ${name} do ${v.values.allowedDays} dni`,
+        run: () => {
+          const shortened = { ...st.plan, blocks: st.plan.blocks.map((x) => (x.id === b.id ? { ...x, days: Number(v.values.allowedDays) } : x)) };
+          if (!canMove) return dispatch({ t: "edit", plan: shortened });
+          const nb: PlanBlock = { id: newId(shortened, "parental", other), parent: other, type: "parental", from: addDays(b.from, Number(v.values.allowedDays)), days: reserved, pool: "ownNineWeeks" };
+          dispatch({ t: "edit", plan: { ...shortened, blocks: [...shortened.blocks, nb] }, chain: { order: [...st.chain.order, nb.id], linked: { ...st.chain.linked, [nb.id]: true } } });
+        },
+      };
+    }
+    return null;
   };
 
   const violationsFor = (id: string) => st.result.violations.filter((v) => v.blockId === id);
@@ -177,6 +227,14 @@ export function Planner(props: PlannerProps) {
   const pregnancy = st.result.periods.filter((p) => !isLeave(p));
   const rateDeadline = st.result.deadlines.find((d) => d.code === "RATE_OPTION_21_DAYS")?.date ?? st.alt?.deadline;
   const presets: PresetId[] = useMemo(() => (otherRole ? ["allMother", "equal", "fatherNine", "partTime"] : ["allMother", "partTime"]), [otherRole]);
+  const motherMandatoryId = motherSide ? laneOf(st.plan, motherSide).find((b) => b.type === "maternity" || b.type === "maternityOnAdoption")?.id : undefined;
+
+  const typeOptions = (parent: PlanBlock["parent"]): { value: LeaveType; label: string }[] => [
+    { value: adoption ? "maternityOnAdoption" : "maternity", label: adoption ? "Urlop na warunkach macierzyńskiego" : "Urlop macierzyński" },
+    ...(!adoption && pools.supplementaryDays.total > 0 ? [{ value: "supplementary" as const, label: "Urlop uzupełniający" }] : []),
+    { value: "parental", label: "Urlop rodzicielski" },
+    ...(roleOf(parent) === "father" && !adoption ? [{ value: "paternity" as const, label: "Urlop ojcowski" }] : []),
+  ];
 
   return (
     <div className={s.planner}>
@@ -189,6 +247,8 @@ export function Planner(props: PlannerProps) {
         </Notice>
       ) : null}
 
+      <WhatIfBar state={props.whatIf} dirty={st.dirty} onApplied={reset} />
+
       <section className={s.toolbar} aria-labelledby="presets-title">
         <h2 id="presets-title" className={s.h3}>
           Gotowe scenariusze
@@ -197,7 +257,7 @@ export function Planner(props: PlannerProps) {
           {presets.map((p) => (
             <button key={p} type="button" className={s.preset} onClick={() => applyPreset(p)}>
               <strong>{presetLabel[p].title}</strong>
-              <span>{presetLabel[p].hint}</span>
+              <span>{p === "fatherNine" ? `Jego ${reservedWeeks} tygodni rodzicielskiego, których nie można przekazać` : presetLabel[p].hint}</span>
             </button>
           ))}
         </div>
@@ -215,6 +275,9 @@ export function Planner(props: PlannerProps) {
           <Button variant="text" size="sm" icon="printer" onClick={() => window.print()}>
             Drukuj plan
           </Button>
+          <span className={s.muted} aria-hidden="true">
+            {st.status === "calculating" ? "Przeliczamy…" : st.savedAt ? "Zapisano" : ""}
+          </span>
         </div>
       </section>
 
@@ -233,7 +296,7 @@ export function Planner(props: PlannerProps) {
                 {
                   value: "averaged81_5",
                   label: "81,5% przez cały okres",
-                  hint: `Wniosek o urlop macierzyński i rodzicielski razem${rateDeadline ? ` — najpóźniej ${formatDateLong(rateDeadline)}` : " — najpóźniej 21 dni po porodzie"}.`,
+                  hint: `Wniosek o urlop macierzyński i rodzicielski razem${rateDeadline ? ` — najpóźniej ${formatDateLong(rateDeadline)}` : " — w terminie po porodzie"}.`,
                   disabled: st.plan.rateOption !== "averaged81_5" && st.alt?.rateOption === "averaged81_5" && !st.alt.available,
                 },
                 { value: "split100_70", label: "100% za urlop macierzyński, potem 70%", hint: "Wyższy zasiłek na początku, niższy w czasie urlopu rodzicielskiego." },
@@ -268,15 +331,14 @@ export function Planner(props: PlannerProps) {
 
           {lanes.map((parent) => {
             const lane = laneOf(st.plan, parent);
-            const father = isFather(parent);
-            const available = typeOptions(adoption, father).filter((o) => o.value !== "supplementary" || st.result.pools.supplementaryDays.total > 0);
+            const options = typeOptions(parent);
             return (
               <section key={parent} className={s.card} aria-labelledby={`lane-${parent}`}>
                 <div className={s.laneHead}>
                   <h2 id={`lane-${parent}`} className={s.h3}>
                     {laneTitle(parent)}
                   </h2>
-                  <span className={s.muted}>{lane.length ? `${lane.length} ${lane.length === 1 ? "okres" : "okresy"}` : "brak urlopów"}</span>
+                  <span className={s.muted}>{lane.length ? `${lane.length} ${lane.length === 1 ? "okres" : lane.length < 5 ? "okresy" : "okresów"}` : "brak urlopów"}</span>
                 </div>
                 {parent === "other" && !props.otherHasData ? (
                   <p className={s.muted}>
@@ -284,25 +346,32 @@ export function Planner(props: PlannerProps) {
                   </p>
                 ) : null}
                 <ol className={s.blocks}>
-                  {lane.map((b) => (
-                    <BlockRow
-                      key={b.id}
-                      b={b}
-                      selected={st.selected === b.id}
-                      linked={st.linked[b.id] !== false && b.type !== "paternity" && lane.filter((x) => x.type !== "paternity")[0]?.id !== b.id}
-                      canUnlink={b.type !== "paternity" && lane.filter((x) => x.type !== "paternity")[0]?.id !== b.id}
-                      options={available}
-                      period={periodFor(b.id)}
-                      violations={violationsFor(b.id)}
-                      showMoney={parent === "claimant" || props.otherHasData}
-                      onChange={(patch) => setBlock(b.id, patch)}
-                      onLink={(l) => dispatch({ t: "link", id: b.id, linked: l })}
-                      onRemove={() => removeBlock(b.id)}
-                      onFocus={() => dispatch({ t: "select", id: b.id })}
-                    />
-                  ))}
+                  {lane.map((b) => {
+                    const first = st.chain.order[0] === b.id;
+                    const inChain = st.chain.order.includes(b.id);
+                    return (
+                      <BlockRow
+                        key={b.id}
+                        b={b}
+                        selected={st.selected === b.id}
+                        linked={inChain && !first && st.chain.linked[b.id] !== false}
+                        canUnlink={inChain && !first}
+                        removable={b.id !== motherMandatoryId}
+                        options={options}
+                        period={periodFor(b.id)}
+                        violations={violationsFor(b.id)}
+                        showMoney={parent === "claimant" || props.otherHasData}
+                        pools={{ sharedWeeks, reservedWeeks, paternityMax: pools.paternityDays.total || 14, maxWeeks: Math.max(1, Math.ceil(Math.max(pools.parentalDays.total, pools.maternityDays.total + pools.supplementaryDays.total) / 7) * 2) }}
+                        onChange={(patch) => setBlock(b.id, patch)}
+                        onLink={(l) => dispatch({ t: "link", id: b.id, linked: l })}
+                        onRemove={() => removeBlock(b.id)}
+                        onFocus={() => dispatch({ t: "select", id: b.id })}
+                        fixPlan={(v) => fixPlan(v, b)}
+                      />
+                    );
+                  })}
                 </ol>
-                <AddBlock options={available} onAdd={(type) => addBlock(parent, type)} />
+                <AddBlock options={options} onAdd={(type) => addBlock(parent, type)} />
               </section>
             );
           })}
@@ -339,11 +408,13 @@ export function Planner(props: PlannerProps) {
   );
 }
 
-function ViolationNotice({ v, onFix, fixLabel }: { v: Violation; onFix?: () => void; fixLabel?: string }) {
+function ViolationNotice({ v, onFix, fixLabel, id }: { v: Violation; onFix?: () => void; fixLabel?: string; id?: string }) {
   return (
-    <Notice tone="negative" title={reasonText[v.code] ?? v.code} hideToneWord actions={onFix && fixLabel ? <Button size="sm" variant="secondary" onClick={onFix}>{fixLabel}</Button> : null}>
-      {v.citations?.length ? <p className={s.cite}>{v.citations.map(citationText).join("; ")}</p> : null}
-    </Notice>
+    <div id={id} role="alert">
+      <Notice tone="negative" title={reasonText[v.code] ?? v.code} hideToneWord actions={onFix && fixLabel ? <Button size="sm" variant="secondary" onClick={onFix}>{fixLabel}</Button> : null}>
+        {v.citations?.length ? <p className={s.cite}>{v.citations.map(citationText).join("; ")}</p> : null}
+      </Notice>
+    </div>
   );
 }
 
@@ -352,57 +423,62 @@ interface RowProps {
   selected: boolean;
   linked: boolean;
   canUnlink: boolean;
+  removable: boolean;
   options: { value: LeaveType; label: string }[];
   period?: Result["periods"][number];
   violations: Violation[];
   showMoney: boolean;
+  pools: { sharedWeeks: number; reservedWeeks: number; paternityMax: number; maxWeeks: number };
   onChange: (p: Partial<PlanBlock>) => void;
   onLink: (l: boolean) => void;
   onRemove: () => void;
   onFocus: () => void;
+  fixPlan: (v: Violation) => { label: string; run: () => void } | null;
 }
 
 function fixFor(v: Violation, b: PlanBlock): { label: string; patch: Partial<PlanBlock> } | null {
   const val = v.values ?? {};
-  const name = leaveShort[b.type].toLowerCase();
+  const name = `${leaveShort[b.type].toLowerCase()} (${b.parent === "claimant" ? "Ty" : "drugi rodzic"})`;
   switch (v.code) {
     case "EXCESS_DAYS":
     case "POOL_EXCEEDED":
-      return typeof val.allowedDays === "number" && val.allowedDays > 0 ? { label: `Skróć ${name} do ${val.allowedDays} dni`, patch: { days: val.allowedDays } } : null;
+      return typeof val.allowedDays === "number" && val.allowedDays > 0 ? { label: `Skróć: ${name} do ${val.allowedDays} dni`, patch: { days: val.allowedDays } } : null;
     case "MOTHER_MINIMUM_WEEKS":
-      return { label: "Ustaw 14 tygodni", patch: { days: typeof val.requiredDays === "number" ? val.requiredDays : 98 } };
+      return typeof val.requiredDays === "number" ? { label: `Ustaw ${formatDuration(val.requiredDays)}: ${name}`, patch: { days: val.requiredDays } } : null;
     case "NOT_CONTIGUOUS":
-      return typeof val.requiredFrom === "string" ? { label: `Zacznij ${formatDateShort(val.requiredFrom)}`, patch: { from: val.requiredFrom } } : null;
+      return typeof val.requiredFrom === "string" ? { label: `Zacznij ${name} ${formatDateShort(val.requiredFrom)}`, patch: { from: val.requiredFrom } } : null;
     case "WORK_FRACTION_TOO_HIGH":
-      return { label: "Ustaw pół etatu", patch: { workFraction: { num: 1, den: 2 } } };
+      return { label: `Ustaw pół etatu: ${name}`, patch: { workFraction: { num: Number(val.maxNum ?? 1), den: Number(val.maxDen ?? 2) } } };
     case "DEADLINE_PASSED":
-      return typeof val.latestEnd === "string" ? { label: `Przesuń przed ${formatDateShort(val.latestEnd)}`, patch: { from: addDays(val.latestEnd, -(b.days - 1)) } } : null;
+      return typeof val.latestEnd === "string" ? { label: `Przesuń ${name} przed ${formatDateShort(val.latestEnd)}`, patch: { from: addDays(val.latestEnd, -(b.days - 1)) } } : null;
     default:
       return null;
   }
 }
 
-function BlockRow({ b, selected, linked, canUnlink, options, period, violations, showMoney, onChange, onLink, onRemove, onFocus }: RowProps) {
+function BlockRow({ b, selected, linked, canUnlink, removable, options, period, violations, showMoney, pools, onChange, onLink, onRemove, onFocus, fixPlan }: RowProps) {
   const weeks = Math.floor(b.days / 7);
   const rest = b.days % 7;
   const errId = violations.length ? `row-${b.id}-err` : undefined;
   return (
-    <li id={`row-${b.id}`} className={s.row} data-selected={selected || undefined} data-type={b.type} data-invalid={violations.length ? true : undefined} onFocusCapture={onFocus} aria-describedby={errId}>
+    <li id={`row-${b.id}`} className={s.row} data-selected={selected || undefined} data-type={b.type} data-invalid={violations.length ? true : undefined} onFocusCapture={onFocus}>
       <div className={s.rowHead}>
         <h3 id={`row-${b.id}-title`} tabIndex={-1} className={s.rowTitle}>
           <span className={s.swatch} data-type={b.type} aria-hidden="true" />
           {leaveShort[b.type]}
-          {b.pool === "ownNineWeeks" ? <span className={s.tag}>9 tygodni tylko dla tego rodzica</span> : null}
+          {b.pool === "ownNineWeeks" ? <span className={s.tag}>{pools.reservedWeeks} tygodni tylko dla tego rodzica</span> : null}
           {b.takeover ? <span className={s.tag}>przejęty od matki</span> : null}
         </h3>
-        <Button variant="text" size="sm" icon="close" onClick={onRemove}>
-          Usuń<span className="visually-hidden"> — {leaveShort[b.type]}</span>
-        </Button>
+        {removable ? (
+          <Button variant="text" size="sm" icon="close" onClick={onRemove}>
+            Usuń<span className="visually-hidden"> — {leaveShort[b.type]}</span>
+          </Button>
+        ) : null}
       </div>
       <div className={s.rowGrid}>
         <Field label="Rodzaj urlopu">
           {({ id }) => (
-            <Select id={id} value={b.type} onChange={(e) => onChange({ type: e.currentTarget.value as LeaveType, ...(e.currentTarget.value !== "parental" ? { workFraction: undefined, pool: undefined } : { pool: b.pool ?? "shared" }) })}>
+            <Select id={id} aria-describedby={errId} value={b.type} onChange={(e) => onChange({ type: e.currentTarget.value as LeaveType, ...(e.currentTarget.value !== "parental" ? { workFraction: undefined, pool: undefined } : { pool: b.pool ?? "shared" }) })}>
               {options.map((o) => (
                 <option key={o.value} value={o.value}>
                   {o.label}
@@ -412,9 +488,9 @@ function BlockRow({ b, selected, linked, canUnlink, options, period, violations,
           )}
         </Field>
         {b.type === "paternity" ? (
-          <Stepper label="Długość" unit="dni" value={b.days} min={1} max={14} onChange={(d) => onChange({ days: d })} />
+          <Stepper label="Długość" unit="dni" value={b.days} min={1} max={pools.paternityMax} step={1} describedBy={errId} hint="Jednorazowo albo w 2 częściach po co najmniej 7 dni." onChange={(d) => onChange({ days: d })} />
         ) : (
-          <Stepper label="Długość" unit="tyg." value={weeks} min={1} max={130} onChange={(w) => onChange({ days: w * 7 + rest })} hint={rest ? `oraz ${rest} dni` : undefined} />
+          <Stepper label="Długość" unit="tyg." value={weeks} min={1} max={pools.maxWeeks} describedBy={errId} onChange={(w) => onChange({ days: w * 7 + rest })} hint={rest ? `oraz ${rest} dni` : undefined} />
         )}
         <div className={s.dates}>
           {linked ? (
@@ -430,7 +506,7 @@ function BlockRow({ b, selected, linked, canUnlink, options, period, violations,
             <span className={s.label}>Do</span>
             <span className={s.value}>{formatDateLong(period?.to ?? endOf(b))}</span>
             <span className={s.muted}>
-              {period?.days ?? b.days} dni{period?.workReductionBps ? " · wydłużony przez pracę" : ""}
+              {period?.days ?? b.days} dni{period?.extensionDays ? ` · w tym ${formatDuration(period.extensionDays)} wydłużenia przez pracę` : ""}
             </span>
           </p>
           {canUnlink ? (
@@ -446,7 +522,7 @@ function BlockRow({ b, selected, linked, canUnlink, options, period, violations,
               {({ id, describedBy }) => (
                 <Select
                   id={id}
-                  aria-describedby={describedBy}
+                  aria-describedby={[describedBy, errId].filter(Boolean).join(" ") || undefined}
                   value={fractionValue(b)}
                   onChange={(e) => {
                     const v = e.currentTarget.value;
@@ -463,8 +539,8 @@ function BlockRow({ b, selected, linked, canUnlink, options, period, violations,
             <Field label="Z której puli">
               {({ id }) => (
                 <Select id={id} value={b.pool ?? "shared"} onChange={(e) => onChange({ pool: e.currentTarget.value as PlanBlock["pool"] })}>
-                  <option value="shared">Wspólna (32 tygodnie)</option>
-                  <option value="ownNineWeeks">Moje 9 tygodni</option>
+                  <option value="shared">{pools.sharedWeeks ? `Wspólna (${pools.sharedWeeks} tygodni do podziału)` : "Wspólna"}</option>
+                  <option value="ownNineWeeks">{`Moje ${pools.reservedWeeks} tygodni`}</option>
                 </Select>
               )}
             </Field>
@@ -476,16 +552,23 @@ function BlockRow({ b, selected, linked, canUnlink, options, period, violations,
           <Icon name="coins" size={20} />
           <span>
             <strong>{formatMoney(period.daily * 30)}</strong> miesięcznie brutto ({ratePct(period.rateBps)}
-            {period.workReductionBps ? `, pomniejszone o pracę` : ""}) · razem <strong>{formatMoney(period.gross)}</strong> · wypłaci {period.paidBy === "payer" ? "pracodawca" : "ZUS"}
+            {period.workReductionBps ? ", pomniejszone o pracę" : ""}) · razem <strong>{formatMoney(period.gross)}</strong> · wypłaci {period.paidBy === "payer" ? "pracodawca" : "ZUS"}
           </span>
         </p>
       ) : null}
       {violations.length ? (
         <div id={errId} className={s.violations}>
-          {violations.map((v, i) => {
-            const fix = fixFor(v, b);
-            return <ViolationNotice key={i} v={v} onFix={fix ? () => onChange(fix.patch) : undefined} fixLabel={fix?.label} />;
-          })}
+          {(() => {
+            const seen = new Set<string>();
+            return violations.map((v, i) => {
+              const fix = fixFor(v, b);
+              const planFix = fix ? null : fixPlan(v);
+              const label = fix?.label ?? planFix?.label;
+              const dup = label ? seen.has(label) : false;
+              if (label) seen.add(label);
+              return <ViolationNotice key={i} v={v} onFix={dup ? undefined : fix ? () => onChange(fix.patch) : planFix?.run} fixLabel={dup ? undefined : label} />;
+            });
+          })()}
         </div>
       ) : null}
     </li>
