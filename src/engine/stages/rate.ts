@@ -23,9 +23,12 @@ export function averagedEligible(ctx: Ctx): { eligible: boolean; deadline?: stri
   return { eligible: plan.applicationDate <= deadline, deadline, assumed: false };
 }
 
+/** e-ZLA code of the incapacity: the note covering the segment, else the latest earlier note (a continuation). */
 function sickCode(ctx: Ctx, s: Segment): string | undefined {
-  const note = ctx.facts.claimant.sickNotes.find((n) => n.from <= s.from && n.to >= s.from && (!s.titleId || n.titleId === s.titleId))
-    ?? ctx.facts.claimant.sickNotes.find((n) => n.from <= s.from && n.to >= s.from);
+  const notes = ctx.facts.claimant.sickNotes;
+  const note = notes.find((n) => n.from <= s.from && n.to >= s.from && (!s.titleId || n.titleId === s.titleId))
+    ?? notes.find((n) => n.from <= s.from && n.to >= s.from)
+    ?? [...notes].filter((n) => n.from <= s.from && (!s.titleId || n.titleId === s.titleId)).sort((a, b) => (a.from < b.from ? -1 : 1)).at(-1);
   return note?.code;
 }
 
@@ -35,7 +38,8 @@ export function run(ctx: Ctx): Ctx {
   const firstYearEnd = ctx.ev.childBirthDate && ctx.ev.kind === "birth" ? addDays(addMonths(ctx.ev.childBirthDate, 12), -1) : ctx.ev.date ? addDays(addMonths(ctx.ev.date, 12), -1) : undefined;
   // UZ 31 ust. 3g: under the averaged option, at least one parental day must fall in the child's first year.
   const parentalSegs = ctx.segments.filter((s) => s.type === "parental" && s.parent === "claimant" && s.status !== "refused");
-  const noParentalInFirstYear = avg.eligible && !!firstYearEnd && parentalSegs.length > 0 && parentalSegs.every((s) => s.from > firstYearEnd);
+  const paidParentalInFirstYear = !!firstYearEnd && ctx.facts.claimant.paidBenefits.some((b) => b.type === "parental" && b.from <= firstYearEnd && (!ctx.ev.childBirthDate || b.to >= ctx.ev.childBirthDate));
+  const noParentalInFirstYear = avg.eligible && !!firstYearEnd && parentalSegs.length > 0 && !paidParentalInFirstYear && parentalSegs.every((s) => s.from > firstYearEnd);
 
   // 81,5% chosen but filed after the 21-day deadline: reported (the rates fall back to 100% / 70%).
   if (ctx.plan.rateOption === "averaged81_5" && !avg.eligible && !avg.assumed && avg.deadline) {
