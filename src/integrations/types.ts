@@ -71,6 +71,8 @@ export type Answers = {
   care?: Partial<Pick<CareEvent, "takenIntoCareOn" | "fosterType" | "petitionFiledOn">> & { childBirthDate?: ISODate; schoolDeferred?: boolean };
   plannedEnd?: { titleId: string; date: ISODate; reason: TitleEndReason } | null;
   otherParent?: { mode: "consent" | "estimate" | "none"; insured?: OtherParent["insured"]; estimatedBase?: Grosze; role?: Role };
+  /** Planner what-if: hospital stay after birth, applied only while no registry knows the child's details. */
+  whatIf?: { hospital?: { category: "none" | "preterm" | "extreme" | "term"; days: number } };
   /** Manual mode only: facts a logged-out user types in. */
   manual?: ManualFacts;
   /** The claim as filed (case mode) or the user's saved plan. */

@@ -55,7 +55,8 @@ export async function evaluatePlan(facts: Facts, plan: Plan): Promise<{ result: 
   const alt: AltSummary | null = other.result
     ? {
         rateOption: otherOption,
-        available: !other.result.violations.some((v) => v.code === "DEADLINE_PASSED" && !v.blockId),
+        // Only the late-81.5% violation (it carries `deadline` + `applicationDate`) makes the option unavailable.
+        available: !other.result.violations.some((v) => v.code === "DEADLINE_PASSED" && "applicationDate" in (v.values ?? {})),
         deadline: other.result.deadlines.find((d) => d.code === "RATE_OPTION_21_DAYS")?.date,
         totals: other.result.totals,
         months: monthsOf(other.result),
@@ -64,9 +65,32 @@ export async function evaluatePlan(facts: Facts, plan: Plan): Promise<{ result: 
   return { result: main.result, alt };
 }
 
-/** Initial plan: saved → claim from the case file → engine's default (maximum entitlement). */
-export async function initialPlan(facts: Facts, saved: Plan | null, fromAnswers?: Plan): Promise<{ plan: Plan | null; origin: "saved" | "case" | "default"; result: Result | null; error?: string }> {
-  if (saved) return { plan: saved, origin: "saved", result: null };
+export function planAnchor(facts: Facts): string {
+  const ev = facts.event;
+  return ev.kind === "birth" ? (ev.date ?? ev.expectedDate ?? facts.asOf) : ev.takenIntoCareOn;
+}
+
+/** A plan as stored: the plan plus the event date it was laid out against. */
+export type StoredPlan = Plan & { anchor?: string };
+
+function shiftDays(iso: string, n: number) {
+  const [y, m, d] = iso.split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d + n)).toISOString().slice(0, 10);
+}
+
+/** When the due date moved after the plan was saved, move the leave blocks with it. */
+export function rebase(saved: StoredPlan, anchor: string): Plan {
+  const { anchor: was, ...plan } = saved;
+  if (!was || was === anchor) return plan;
+  const [a, b] = [was, anchor].map((x) => Date.UTC(+x.slice(0, 4), +x.slice(5, 7) - 1, +x.slice(8, 10)));
+  const delta = Math.round((b - a) / 86_400_000);
+  const leave = new Set(["maternity", "maternityOnAdoption", "supplementary", "parental", "paternity"]);
+  return { ...plan, blocks: plan.blocks.map((x) => (leave.has(x.type) ? { ...x, from: shiftDays(x.from, delta) } : x)) };
+}
+
+/** Initial plan: saved (rebased to the current event date) → claim from the case file → engine's default. */
+export async function initialPlan(facts: Facts, saved: StoredPlan | null, fromAnswers?: Plan): Promise<{ plan: Plan | null; origin: "saved" | "case" | "default"; result: Result | null; error?: string }> {
+  if (saved) return { plan: rebase(saved, planAnchor(facts)), origin: "saved", result: null };
   if (fromAnswers) return { plan: fromAnswers, origin: "case", result: null };
   const { result, error } = await evaluateFacts(facts, null);
   return { plan: result?.defaultPlan ?? null, origin: "default", result, error };

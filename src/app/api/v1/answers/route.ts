@@ -16,6 +16,7 @@ const answersSchema = z
     care: z.object({ takenIntoCareOn: isoDate.optional(), fosterType: z.enum(["nonProfessional", "professional"]).optional(), petitionFiledOn: isoDate.optional(), childBirthDate: isoDate.optional(), schoolDeferred: z.boolean().optional() }).optional(),
     plannedEnd: z.object({ titleId: z.string(), date: isoDate, reason: z.string() }).nullable().optional(),
     otherParent: z.object({ mode: z.enum(["consent", "estimate", "none"]), insured: z.enum(["yes", "no", "krus", "abroad", "unknown"]).optional(), estimatedBase: z.number().int().nonnegative().optional(), role: roles.optional() }).optional(),
+    whatIf: z.object({ hospital: z.object({ category: z.enum(["none", "preterm", "extreme", "term"]), days: z.number().int().min(0).max(400) }).optional() }).optional(),
     manual: z
       .object({
         role: roles,

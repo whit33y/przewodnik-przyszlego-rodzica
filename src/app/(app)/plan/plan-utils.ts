@@ -25,17 +25,35 @@ export function laneOf(plan: Plan, parent: PlanBlock["parent"]) {
   return plan.blocks.filter((b) => b.parent === parent && isLeave(b)).sort((a, b) => a.from.localeCompare(b.from) || (order[a.type] ?? 9) - (order[b.type] ?? 9));
 }
 
+export interface Chain {
+  order: string[];
+  linked: Record<string, boolean>;
+}
+
 /**
- * Linked chain: a linked block starts the day after the previous block of the same parent.
- * Cosmetic and immediate; the engine's periods remain authoritative after each response.
+ * The family sequence: leave blocks of both parents (paternity excluded — it runs alongside),
+ * in date order. A block is linked when it starts the day after its predecessor; linked blocks
+ * move when an earlier block changes length. Presets and defaultPlan produce fully linked chains;
+ * blocks used at the same time as another (or after a gap) start unlinked.
  */
-export function reflow(plan: Plan, linked: Record<string, boolean>): Plan {
-  const blocks = plan.blocks.map((b) => ({ ...b }));
-  for (const parent of ["claimant", "other"] as const) {
-    const lane = blocks.filter((b) => b.parent === parent && isLeave(b) && b.type !== "paternity").sort((a, b) => a.from.localeCompare(b.from) || (order[a.type] ?? 9) - (order[b.type] ?? 9));
-    for (let i = 1; i < lane.length; i++) if (linked[lane[i].id] !== false) lane[i].from = addDays(lane[i - 1].from, lane[i - 1].days);
+export function initChain(plan: Plan): Chain {
+  const seq = plan.blocks.filter((b) => isLeave(b) && b.type !== "paternity").sort((a, b) => a.from.localeCompare(b.from) || (order[a.type] ?? 9) - (order[b.type] ?? 9));
+  const linked: Record<string, boolean> = {};
+  seq.forEach((b, i) => {
+    if (i > 0) linked[b.id] = b.from === addDays(seq[i - 1].from, seq[i - 1].days);
+  });
+  return { order: seq.map((b) => b.id), linked };
+}
+
+export function reflow(plan: Plan, chain: Chain): Plan {
+  const byId = new Map(plan.blocks.map((b) => [b.id, { ...b }]));
+  const ids = chain.order.filter((id) => byId.has(id));
+  for (let i = 1; i < ids.length; i++) {
+    if (chain.linked[ids[i]] === false) continue;
+    const prev = byId.get(ids[i - 1])!;
+    byId.get(ids[i])!.from = addDays(prev.from, prev.days);
   }
-  return { ...plan, blocks };
+  return { ...plan, blocks: plan.blocks.map((b) => byId.get(b.id)!) };
 }
 
 export function newId(plan: Plan, type: LeaveType, parent: PlanBlock["parent"]) {
@@ -94,7 +112,8 @@ export function buildPreset(id: PresetId, c: PresetContext): Plan | null {
   } else {
     push({ parent: mom, type: matType, days: mat });
     if (sup) push({ parent: mom, type: "supplementary", days: sup });
-    const momPar = dad ? par - reserved : par;
+    // The other parent's reserved weeks never pass to the mother (KP art. 182¹a §3), with or without a second lane.
+    const momPar = par - reserved;
     // Combined with half-time work a block lasts twice as long in calendar days but uses the same pool days.
     push({ parent: mom, type: "parental", days: id === "partTime" ? momPar * 2 : momPar, pool: "shared", ...(id === "partTime" ? { workFraction: { num: 1, den: 2 } } : {}) });
     if (dad && id === "fatherNine") push({ parent: dad, type: "parental", days: reserved, pool: "ownNineWeeks" });

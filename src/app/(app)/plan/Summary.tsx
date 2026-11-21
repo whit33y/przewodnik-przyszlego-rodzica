@@ -36,6 +36,14 @@ export function Summary({ result, alt, plan, status, onPickRate, showOther, othe
   const reservedOtherUnused = showOther ? Math.max(0, p.parentalDays.reservedPerParent - p.parentalDays.usedByOther) : 0;
   const cur = { option: plan.rateOption, gross: result.totals.gross, net: result.totals.netEstimate };
   const diff = alt ? alt.totals.gross - cur.gross : 0;
+  // Monthly view of the current option (gross incl. top-up), same shape as alt.months.
+  const curMonths = rows.map((r) => ({ month: r.month, gross: r.claimant.gross + r.claimant.topUp + r.other.gross + r.other.topUp, net: 0 }));
+  /** n-th full month of leave (skips the partial first month), gross. */
+  const fullMonth = (m: { gross: number }[], n: number) => {
+    const full = m.slice(1);
+    return full[n] ? formatMoney(full[n].gross, { whole: true }) : "—";
+  };
+  const hasPregnancy = result.periods.some((x) => ["sickPay", "sickness", "art30PreBirth", "rehabilitation"].includes(x.type));
   return (
     <aside className={s.summary} aria-labelledby="sum-title" aria-busy={status === "calculating" || undefined}>
       <div className={`${s.sumCard} ${s.sticky}`}>
@@ -48,7 +56,7 @@ export function Summary({ result, alt, plan, status, onPickRate, showOther, othe
         <p className={s.total}>
           <span className={s.big}>{formatMoney(result.totals.gross)}</span>
           <span className={s.muted}>
-            brutto razem · ok. {formatMoney(result.totals.netEstimate)} na rękę · {formatDuration(result.totals.days)}
+            brutto razem{hasPregnancy ? " (z zasiłkiem chorobowym w ciąży)" : ""} · ok. {formatMoney(result.totals.netEstimate)} na rękę · {formatDuration(result.totals.days)}
           </span>
         </p>
         {showOther ? (
@@ -92,21 +100,25 @@ export function Summary({ result, alt, plan, status, onPickRate, showOther, othe
             <thead>
               <tr>
                 <th scope="col">Wariant</th>
+                <th scope="col">1. pełny miesiąc</th>
+                <th scope="col">7. miesiąc</th>
                 <th scope="col">Razem brutto</th>
               </tr>
             </thead>
             <tbody>
               {[
-                { o: cur.option, g: cur.gross, now: true },
-                { o: alt.rateOption, g: alt.totals.gross, now: false },
+                { o: cur.option, g: cur.gross, m: curMonths, now: true },
+                { o: alt.rateOption, g: alt.totals.gross, m: alt.months, now: false },
               ]
-                .sort((a) => (a.o === "averaged81_5" ? -1 : 1))
+                .sort((a, b) => (a.o === "averaged81_5" ? 0 : 1) - (b.o === "averaged81_5" ? 0 : 1))
                 .map((r) => (
                   <tr key={r.o} data-current={r.now || undefined}>
                     <th scope="row">
                       {r.o === "averaged81_5" ? "81,5% cały czas" : "100%, potem 70%"}
                       {r.now ? <span className={s.tag}>wybrany</span> : null}
                     </th>
+                    <td className="tabular">{fullMonth(r.m, 0)}</td>
+                    <td className="tabular">{fullMonth(r.m, 6)}</td>
                     <td className="tabular">{formatMoney(r.g)}</td>
                   </tr>
                 ))}
@@ -120,7 +132,7 @@ export function Summary({ result, alt, plan, status, onPickRate, showOther, othe
               Wybierz {alt.rateOption === "averaged81_5" ? "81,5%" : "100% i 70%"}
             </Button>
           ) : (
-            <p className={s.muted}>Wariantu 81,5% nie można już wybrać — minęło 21 dni od porodu.</p>
+            <p className={s.muted}>Wariantu 81,5% nie można już wybrać{alt.deadline ? ` — termin minął ${formatDateLong(alt.deadline)}` : ""}.</p>
           )}
         </div>
       ) : null}
@@ -192,6 +204,7 @@ export function Summary({ result, alt, plan, status, onPickRate, showOther, othe
                   <tr key={r.month}>
                     <th scope="row">{monthLabel(r.month)}</th>
                     <td className="tabular">
+                      {/* engine: months[].net excludes the top-up; it is added once here */}
                       {formatMoney(net)}
                       {r.claimant.topUp + r.other.topUp ? <span className={s.muted}> (w tym wyrównanie {formatMoney(r.claimant.topUp + r.other.topUp)})</span> : null}
                     </td>

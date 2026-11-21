@@ -13,11 +13,13 @@ export interface StepperProps {
   /** Unit word, e.g. "tygodni". Part of the accessible description and of the live announcement. */
   unit: string;
   hint?: string;
+  /** Extra ids (e.g. an error message) to describe the input. */
+  describedBy?: string;
   onChange: (value: number) => void;
 }
 
 /** Number input with −/+ buttons. Typing is free; the value is clamped on blur or Enter. */
-export function Stepper({ label, value, min, max, step = 1, unit, hint, onChange }: StepperProps) {
+export function Stepper({ label, value, min, max, step = 1, unit, hint, describedBy, onChange }: StepperProps) {
   const id = useId();
   const [draft, setDraft] = useState(String(value));
   const [synced, setSynced] = useState(value);
@@ -50,7 +52,7 @@ export function Stepper({ label, value, min, max, step = 1, unit, hint, onChange
             inputMode="numeric"
             pattern="[0-9]*"
             value={draft}
-            aria-describedby={`${id}-u${hint ? ` ${id}-h` : ""}`}
+            aria-describedby={`${id}-u${hint ? ` ${id}-h` : ""}${describedBy ? ` ${describedBy}` : ""}`}
             onChange={(e) => setDraft(e.currentTarget.value.replace(/[^\d]/g, ""))}
             onBlur={() => commit(Number(draft || min))}
             onKeyDown={(e) => {

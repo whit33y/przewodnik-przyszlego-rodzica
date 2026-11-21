@@ -1,5 +1,5 @@
 import { apiError, json, parseJson, requireContext } from "@/server/api";
-import { evaluatePlan, initialPlan, planSchema } from "@/server/plan-service";
+import { evaluatePlan, initialPlan, planAnchor, planSchema } from "@/server/plan-service";
 import { updateState } from "@/server/session-state";
 import { z } from "zod";
 
@@ -19,9 +19,10 @@ export async function PUT(req: Request) {
   if (ctx instanceof Response) return ctx;
   const data = await parseJson(req, z.object({ plan: planSchema }));
   if (data instanceof Response) return data;
-  updateState(ctx.state.sid, { plan: data.plan });
   const out = await evaluatePlan(ctx.assembled.facts, data.plan);
   if (!out.result) return apiError(503, "ENGINE", "Nie udało się przeliczyć planu. Spróbuj ponownie.");
+  // Saved only after a successful evaluation, with the event date it was laid out against.
+  updateState(ctx.state.sid, { plan: { ...data.plan, anchor: planAnchor(ctx.assembled.facts) } as typeof data.plan });
   return json({ ...out, savedAt: new Date().toISOString() });
 }
 

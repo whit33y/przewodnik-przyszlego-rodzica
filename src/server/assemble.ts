@@ -141,7 +141,8 @@ export function assemble(input: AssembleInput): Assembled {
       const ref = rsc?.children[i]?.ref ?? ez?.children?.[i]?.ref ?? `child-${i + 1}`;
       const fromRsc = rsc?.children.find((c) => c.ref === ref) ?? {};
       const fromEz = ez?.children?.find((c) => c.ref === ref) ?? {};
-      return stripUndef({ ref, ...fromEz, ...fromRsc, ...(answers.zaZyciem !== undefined ? { zaZyciem: answers.zaZyciem } : {}) }) as Child;
+      const known = "gestationalWeek" in fromEz || "hospitalStays" in fromEz;
+      return stripUndef({ ref, ...(known ? {} : whatIfChild(answers, rsc?.date ?? answers.expectedDate ?? ez?.expectedDate)), ...fromEz, ...fromRsc, ...(answers.zaZyciem !== undefined ? { zaZyciem: answers.zaZyciem } : {}) }) as Child;
     });
     event = stripUndef({
       kind: "birth",
@@ -217,6 +218,17 @@ function questions(facts: Facts, answers: Answers, input: AssembleInput): Questi
   if (ongoing && answers.plannedEnd === undefined && !(ev.kind === "birth" && ev.date)) q.push({ id: "plannedEnd", group: "insurance", required: false });
   if (!facts.otherParent && answers.otherParent === undefined) q.push({ id: "otherParent", group: "otherParent", required: false });
   return q;
+}
+
+/** Maps the planner's hospital category to the statutory cases (no weight/week inputs needed). */
+function whatIfChild(answers: Answers, birth?: ISODate): Partial<Child> {
+  const h = answers.whatIf?.hospital;
+  if (!h || h.category === "none" || !birth || h.days <= 0) return {};
+  const shape = { preterm: { gestationalWeek: 32, birthWeightG: 1800 }, extreme: { gestationalWeek: 26, birthWeightG: 900 }, term: { gestationalWeek: 39, birthWeightG: 3300 } }[h.category];
+  const [y, m, d] = birth.split("-").map(Number);
+  const iso = (n: number) => new Date(Date.UTC(y, m - 1, d + n)).toISOString().slice(0, 10);
+  const startOffset = h.category === "term" ? 4 : 0; // term babies: stay counted from day 5 of life
+  return { ...shape, hospitalStays: [{ from: iso(startOffset), to: iso(startOffset + h.days - 1) }] };
 }
 
 function manualTitles(m: NonNullable<Answers["manual"]>): InsuranceTitle[] {
