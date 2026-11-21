@@ -1,25 +1,6 @@
-import { z } from "zod";
-import { factsSchema, planSchema } from "@/integrations/case-schema";
 import { apiError, json, requireContext } from "@/server/api";
 import { evaluateFacts } from "@/server/engine-facade";
-
-/** Size caps for the unauthenticated stateless variant (a real file has a handful of titles and ≤ 60 months each). */
-const LIMITS = { bodyBytes: 256_000, titles: 12, monthsPerTitle: 120, blocks: 40, children: 8, listItems: 200 };
-
-const body = z
-  .object({
-    facts: factsSchema
-      .refine((f) => f.claimant.titles.length <= LIMITS.titles, `Najwyżej ${LIMITS.titles} tytułów ubezpieczenia.`)
-      .refine((f) => f.claimant.titles.every((t) => t.months.length <= LIMITS.monthsPerTitle), `Najwyżej ${LIMITS.monthsPerTitle} miesięcy na tytuł.`)
-      .refine((f) => f.event.children.length <= LIMITS.children, `Najwyżej ${LIMITS.children} dzieci.`)
-      .refine(
-        (f) => [f.claimant.sickNotes, f.claimant.paidBenefits, f.claimant.arrears, f.claimant.insuranceDecisions].every((l) => l.length <= LIMITS.listItems),
-        "Zbyt długa lista.",
-      )
-      .optional(),
-    plan: planSchema.refine((p) => p.blocks.length <= LIMITS.blocks, `Najwyżej ${LIMITS.blocks} okresów w planie.`).nullable().optional(),
-  })
-  .strict();
+import { STATELESS_LIMITS as LIMITS, statelessBody as body } from "@/server/evaluate-input";
 
 /** Evaluate the session's facts (default) or a stateless { facts, plan } body. */
 export async function POST(req: Request) {
