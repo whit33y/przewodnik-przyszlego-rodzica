@@ -11,6 +11,11 @@ html {
   text-size-adjust: 100%;
   scroll-padding-top: calc(var(--appbar-h) + var(--space-4));
 }
+@media (min-width: 960px) {
+  html {
+    scroll-padding-top: calc(var(--appbar-h) + 48px + var(--space-4));
+  }
+}
 
 body {
   margin: 0;
@@ -127,7 +132,7 @@ a:hover {
 }
 
 /* Visually hide on narrow phones, keep for screen readers. */
-@media (max-width: 419px) {
+@media (max-width: 359px) {
   .hide-narrow {
     position: absolute !important;
     width: 1px;

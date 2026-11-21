@@ -10,13 +10,19 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function DesktopNav({ items }: { items: NavItem[] }) {
+export function DesktopNav({ items, secondary = [] }: { items: NavItem[]; secondary?: NavItem[] }) {
   const pathname = usePathname();
   return (
     <nav className={s.nav} aria-label="Główna nawigacja">
       <div className={s.navInner}>
         {items.map((it) => (
           <Link key={it.href} href={it.href} className={s.navLink} aria-current={isActive(pathname, it.href) ? "page" : undefined}>
+            {it.label}
+          </Link>
+        ))}
+        <span className={s.navSpacer} />
+        {secondary.map((it) => (
+          <Link key={it.href} href={it.href} className={`${s.navLink} ${s.navLinkSecondary}`} aria-current={isActive(pathname, it.href) ? "page" : undefined}>
             {it.label}
           </Link>
         ))}

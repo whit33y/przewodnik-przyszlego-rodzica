@@ -34,7 +34,7 @@ const eslintConfig = defineConfig([
   {
     files: ["src/ui/**/*.{ts,tsx}"],
     rules: {
-      "no-restricted-imports": ["error", { patterns: [{ group: ["@/integrations/*"], message: "UI must not import integrations directly." }] }],
+      "no-restricted-imports": ["error", { patterns: [{ group: ["@/integrations/*", "@/server/*"], message: "The design system must not import integrations or server code." }] }],
     },
   },
   globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", ".work/**", "docs/**", "playwright-report/**", "test-results/**", "coverage/**"]),

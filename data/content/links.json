@@ -1,0 +1,90 @@
+[
+  {
+    "id": "zus-zasilek-macierzynski",
+    "title": "Komu przysługuje zasiłek macierzyński",
+    "publisher": "ZUS",
+    "url": "https://www.zus.pl/swiadczenia/zasilki/zasilek-macierzynski/komu-przysluguje",
+    "topic": "maternity",
+    "description": "Oficjalne informacje ZUS o tym, kto może dostać zasiłek macierzyński, ile on wynosi i jak o niego wystąpić."
+  },
+  {
+    "id": "mrpips-urlop-macierzynski",
+    "title": "Urlop macierzyński",
+    "publisher": "MRPiPS",
+    "url": "https://www.gov.pl/web/rodzina/urlop-macierzynski",
+    "topic": "maternity",
+    "description": "Zasady urlopu macierzyńskiego: ile trwa, kiedy się zaczyna i jakie prawa ma rodzic."
+  },
+  {
+    "id": "mrpips-urlop-rodzicielski",
+    "title": "Urlop rodzicielski",
+    "publisher": "MRPiPS",
+    "url": "https://www.gov.pl/web/rodzina/urlop-rodzicielski",
+    "topic": "parental",
+    "description": "Ile trwa urlop rodzicielski, jak mogą go podzielić rodzice i jak złożyć wniosek."
+  },
+  {
+    "id": "pip-rodzicielstwo",
+    "title": "Rodzicielstwo – porady prawne",
+    "publisher": "PIP",
+    "url": "https://www.pip.gov.pl/dla-pracodawcow/porady-prawne/rodzicielstwo",
+    "topic": "leave-rights",
+    "description": "Porady Państwowej Inspekcji Pracy o uprawnieniach pracujących rodziców: urlopach, ochronie przed zwolnieniem i obowiązkach pracodawcy."
+  },
+  {
+    "id": "gov-odpis-aktu-stanu-cywilnego",
+    "title": "Uzyskaj odpis aktu stanu cywilnego (urodzenia, małżeństwa, zgonu)",
+    "publisher": "gov.pl",
+    "url": "https://www.gov.pl/web/gov/uzyskaj-odpis-aktu-stanu-cywilnego-urodzenia-malzenstwa-zgonu",
+    "topic": "birth-certificate",
+    "description": "Usługa online, w której zamówisz odpis aktu urodzenia dziecka. Potrzebny jest profil zaufany lub e-dowód."
+  },
+  {
+    "id": "mc-rejestr-stanu-cywilnego",
+    "title": "Rejestr Stanu Cywilnego",
+    "publisher": "Ministerstwo Cyfryzacji",
+    "url": "https://www.gov.pl/web/cyfryzacja/rejestr-stanu-cywilnego",
+    "topic": "birth-certificate",
+    "description": "Informacje Ministerstwa Cyfryzacji o elektronicznym rejestrze aktów stanu cywilnego, w którym zapisuje się akt urodzenia dziecka."
+  },
+  {
+    "id": "gov-swiadczenie-rodzicielskie",
+    "title": "Uzyskaj świadczenie rodzicielskie",
+    "publisher": "gov.pl",
+    "url": "https://www.gov.pl/web/gov/uzyskaj-swiadczenie-rodzicielskie",
+    "topic": "parental-benefit",
+    "description": "Świadczenie 1000 zł miesięcznie dla rodziców, którzy nie dostają zasiłku macierzyńskiego, np. bezrobotnych, studentów albo osób na umowie o dzieło. Wniosek złożysz online lub w gminie."
+  },
+  {
+    "id": "mrpips-za-zyciem",
+    "title": "Jednorazowe świadczenie w wysokości 4000 zł „Za życiem”",
+    "publisher": "MRPiPS",
+    "url": "https://www.gov.pl/web/rodzina/program-za-zyciem",
+    "topic": "za-zyciem",
+    "description": "Jednorazowe 4000 zł z tytułu urodzenia żywego dziecka z ciężkim i nieodwracalnym upośledzeniem albo nieuleczalną chorobą zagrażającą życiu."
+  },
+  {
+    "id": "nfz-zaswiadczenie-za-zyciem",
+    "title": "Jak prawidłowo wystawić zaświadczenie lekarskie osobom uprawnionym zgodnie z ustawą „Za życiem”",
+    "publisher": "NFZ",
+    "url": "https://www.nfz.gov.pl/dla-pacjenta/programy-profilaktyczne/informator-za-zyciem/jak-prawidlowo-wystawic-zaswiadczenie-lekarskie-osobom-uprawnionym-zgodnie-z-ustawa-za-zyciem/",
+    "topic": "za-zyciem",
+    "description": "Kto i na jakich zasadach wystawia zaświadczenie „Za życiem”, które daje prawo do świadczenia i do pomocy w ochronie zdrowia."
+  },
+  {
+    "id": "mz-informator-za-zyciem",
+    "title": "Informator „Za Życiem”",
+    "publisher": "Ministerstwo Zdrowia",
+    "url": "https://www.gov.pl/web/zdrowie/informator-za-zyciem-",
+    "topic": "za-zyciem",
+    "description": "Przegląd wsparcia z programu „Za życiem” dla kobiet w ciąży i rodzin dzieci z ciężką chorobą lub niepełnosprawnością."
+  },
+  {
+    "id": "zus-zasilek-pogrzebowy",
+    "title": "Zasiłek pogrzebowy",
+    "publisher": "ZUS",
+    "url": "https://www.zus.pl/swiadczenia/zasilki/zasilek-pogrzebowy",
+    "topic": "funeral-grant",
+    "description": "Kto i na jakich warunkach dostanie z ZUS zasiłek pogrzebowy, także po śmierci dziecka, i jak złożyć wniosek."
+  }
+]

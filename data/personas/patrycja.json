@@ -1,0 +1,160 @@
+{
+  "id": "patrycja",
+  "label": "Patrycja, 30 lat",
+  "oneLiner": "Urodzenie martwego dziecka w 26. tygodniu ciąży. Chcę spokojnie sprawdzić, co mi przysługuje.",
+  "journey": "loss",
+  "asOf": "2026-11-21",
+  "systems": {
+    "mobywatel": {
+      "displayName": "Patrycja L.",
+      "sex": "F",
+      "birthYear": 1996
+    },
+    "zus-konto": {
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2022-01-10",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2022-01-10"
+              }
+            ]
+          },
+          "registeredOn": "2022-01-12",
+          "workTime": [
+            {
+              "from": "2022-01-10",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer"
+          },
+          "months": [
+            {
+              "month": "2025-10",
+              "contributionBase": 560000
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 560000
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 560000
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 580000
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 580000
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 580000
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 580000
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 580000
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 580000
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 580000
+            },
+            {
+              "month": "2026-08",
+              "contributionBase": 580000
+            },
+            {
+              "month": "2026-09",
+              "contributionBase": 580000
+            }
+          ]
+        }
+      ]
+    },
+    "zus-platnik": {
+      "payers": [
+        {
+          "ref": "payer-1",
+          "insuredOn30NovPrevYear": 27,
+          "over20Insured": true
+        }
+      ]
+    },
+    "zus-saldo": {
+      "arrears": []
+    },
+    "zus-ezla": {
+      "sickNotes": [
+        {
+          "titleId": "t1",
+          "from": "2026-10-12",
+          "to": "2026-11-09",
+          "code": "B"
+        }
+      ]
+    },
+    "zus-swiadczenia": {
+      "paidBenefits": []
+    },
+    "zus-postepowania": {
+      "insuranceDecisions": []
+    },
+    "ceidg": {
+      "suspensions": []
+    },
+    "krs": {
+      "payerStatus": [
+        {
+          "ref": "payer-1",
+          "status": "active"
+        }
+      ]
+    },
+    "rsc": {
+      "event": {
+        "kind": "birth",
+        "date": "2026-11-10",
+        "occurred": true,
+        "children": [
+          {
+            "ref": "child-1",
+            "bornAlive": false
+          }
+        ]
+      },
+      "otherParentKnown": false
+    },
+    "ezdrowie": {
+      "expectedDate": "2027-02-16",
+      "children": [
+        {
+          "ref": "child-1",
+          "gestationalWeek": 26,
+          "birthWeightG": 820
+        }
+      ]
+    }
+  }
+}

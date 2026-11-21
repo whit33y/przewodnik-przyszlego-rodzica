@@ -1,0 +1,139 @@
+{
+  "id": "weronika",
+  "label": "Weronika, 33 lata",
+  "oneLiner": "Prowadzę firmę, w lutym urodzę dziecko, a w ZUS widzę niedopłatę składek.",
+  "journey": "selfEmployed",
+  "asOf": "2026-11-21",
+  "systems": {
+    "mobywatel": {
+      "displayName": "Weronika M.",
+      "sex": "F",
+      "birthYear": 1993
+    },
+    "zus-konto": {
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0510",
+          "from": "2023-05-04",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-03-01"
+              }
+            ]
+          },
+          "registeredOn": "2023-05-08",
+          "scheme": "standard",
+          "payer": {
+            "ref": "payer-1",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2025-11",
+              "contributionBase": 469440,
+              "minimumBase": 469440
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 469440,
+              "minimumBase": 469440
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 565200,
+              "minimumBase": 565200
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 565200,
+              "minimumBase": 565200
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 565200,
+              "minimumBase": 565200
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 565200,
+              "minimumBase": 565200
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 565200,
+              "minimumBase": 565200
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 565200,
+              "minimumBase": 565200
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 900000,
+              "minimumBase": 565200
+            },
+            {
+              "month": "2026-08",
+              "contributionBase": 900000,
+              "minimumBase": 565200
+            },
+            {
+              "month": "2026-09",
+              "contributionBase": 900000,
+              "minimumBase": 565200
+            },
+            {
+              "month": "2026-10",
+              "contributionBase": 900000,
+              "minimumBase": 565200
+            }
+          ]
+        }
+      ]
+    },
+    "zus-platnik": {
+      "payers": []
+    },
+    "zus-saldo": {
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2026-10-15",
+          "amount": 0
+        },
+        {
+          "account": "own",
+          "onDate": "2026-11-15",
+          "amount": 31240
+        }
+      ]
+    },
+    "zus-ezla": {
+      "sickNotes": []
+    },
+    "zus-swiadczenia": {
+      "paidBenefits": []
+    },
+    "zus-postepowania": {
+      "insuranceDecisions": []
+    },
+    "ceidg": {
+      "suspensions": []
+    },
+    "krs": {
+      "payerStatus": []
+    },
+    "rsc": {
+      "otherParentKnown": false
+    },
+    "ezdrowie": {
+      "expectedDate": "2027-02-05"
+    }
+  }
+}

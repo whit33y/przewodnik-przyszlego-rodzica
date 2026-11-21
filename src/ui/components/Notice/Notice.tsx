@@ -31,15 +31,20 @@ export interface NoticeProps {
   icon?: IconName;
   className?: string;
   headingLevel?: 2 | 3 | 4 | "p";
+  /** Set when the title already says the status in words. */
+  hideToneWord?: boolean;
 }
 
-export function Notice({ tone = "info", title, children, actions, role, icon, className, headingLevel = "p" }: NoticeProps) {
+export function Notice({ tone = "info", title, children, actions, role, icon, className, headingLevel = "p", hideToneWord }: NoticeProps) {
   const T = headingLevel === "p" ? "p" : (`h${headingLevel}` as const);
   return (
     <div className={cx(s.notice, s[tone], className)} role={role}>
       <Icon name={icon ?? toneIcon[tone]} className={s.icon} />
       <div className={s.body}>
-        <T className={s.title}>{title}</T>
+        <T className={s.title}>
+          {hideToneWord ? null : <span className="visually-hidden">{toneWord[tone]}: </span>}
+          {title}
+        </T>
         {children ? <div className={s.content}>{children}</div> : null}
         {actions ? <div className={s.actions}>{actions}</div> : null}
       </div>

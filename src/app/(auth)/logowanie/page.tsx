@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Stub } from "@/ui/components/Stub/Stub";
+import { getPersonaList } from "@/server/personas-list";
+import { LoginFlow } from "./LoginFlow";
 
-export const metadata: Metadata = { title: "Logowanie" };
+export const metadata: Metadata = { title: "Logowanie (symulacja)" };
 
-export default function Page() {
-  return <Stub title="Logowanie" lead="Zaloguj się przez login.gov.pl (symulacja)." />;
+export default async function Page() {
+  const personas = await getPersonaList();
+  return <LoginFlow personas={personas} />;
 }

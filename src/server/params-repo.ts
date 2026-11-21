@@ -1,4 +1,5 @@
 import "server-only";
+import { createHash } from "node:crypto";
 import { cacheLife, cacheTag } from "next/cache";
 import { eq } from "drizzle-orm";
 import { getDb, isBuildPhase } from "./db/client";
@@ -28,5 +29,6 @@ export async function getPublishedParams(): Promise<PublishedParams> {
   cacheTag("params");
   cacheLife("max");
   const sets = loadPublished();
-  return { version: sets.map((s) => s.id).join("+"), sets };
+  const hash = createHash("sha256").update(JSON.stringify(sets)).digest("hex").slice(0, 8);
+  return { version: `${sets.map((s) => s.id).join("+")}#${hash}`, sets };
 }

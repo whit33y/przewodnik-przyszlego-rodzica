@@ -23,10 +23,7 @@ ENV NODE_ENV=production \
 COPY --from=build /app/.next/standalone ./
 COPY --from=build /app/.next/static ./.next/static
 COPY --from=build /app/public ./public
-COPY --from=build /app/data/params ./data/params
-COPY --from=build /app/data/cases ./data/cases
-COPY --from=build /app/data/personas ./data/personas
-COPY --from=build /app/data/content ./data/content
+COPY --from=build /app/data ./data
 COPY --from=build /app/drizzle ./drizzle
 # better-sqlite3 is a server external package; make sure its native binding is present.
 COPY --from=build /app/node_modules/better-sqlite3 ./node_modules/better-sqlite3

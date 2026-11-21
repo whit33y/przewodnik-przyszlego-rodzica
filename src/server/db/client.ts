@@ -37,12 +37,14 @@ function seed(db: Db) {
   const [{ n }] = db.select({ n: count() }).from(schema.parameterSets).all();
   if (n > 0) return;
   const now = new Date().toISOString();
+  db.transaction((tx) => {
   for (const set of readParameterFiles()) {
-    db.insert(schema.parameterSets)
+    tx.insert(schema.parameterSets)
       .values({ id: set.id, validFrom: set.validFrom, status: "published", label: set.label, payload: JSON.stringify(set), createdAt: now, publishedAt: now, author: "seed" })
       .run();
   }
-  db.insert(schema.auditLog).values({ at: now, actor: "system", action: "seed", entity: "parameter_sets", entityId: "*", diff: null }).run();
+  tx.insert(schema.auditLog).values({ at: now, actor: "system", action: "seed", entity: "parameter_sets", entityId: "*", diff: null }).run();
+  });
 }
 
 export function pingDb(): boolean {

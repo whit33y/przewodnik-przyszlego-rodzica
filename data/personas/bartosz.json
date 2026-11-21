@@ -1,0 +1,300 @@
+{
+  "id": "bartosz",
+  "label": "Bartosz, 34 lata",
+  "oneLiner": "W styczniu zostanę tatą — chcę wziąć urlop ojcowski i moje 9 tygodni rodzicielskiego.",
+  "journey": "father",
+  "asOf": "2026-11-21",
+  "systems": {
+    "mobywatel": {
+      "displayName": "Bartosz W.",
+      "sex": "M",
+      "birthYear": 1992
+    },
+    "zus-konto": {
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2022-02-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2022-02-01"
+              }
+            ]
+          },
+          "registeredOn": "2022-02-04",
+          "workTime": [
+            {
+              "from": "2022-02-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer"
+          },
+          "months": [
+            {
+              "month": "2025-11",
+              "contributionBase": 540000
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 540000
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 560000
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 560000
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 560000
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 560000
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 560000
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 560000
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 560000
+            },
+            {
+              "month": "2026-08",
+              "contributionBase": 560000
+            },
+            {
+              "month": "2026-09",
+              "contributionBase": 560000
+            },
+            {
+              "month": "2026-10",
+              "contributionBase": 560000
+            }
+          ]
+        }
+      ]
+    },
+    "zus-platnik": {
+      "payers": [
+        {
+          "ref": "payer-1",
+          "insuredOn30NovPrevYear": 12,
+          "over20Insured": false
+        }
+      ]
+    },
+    "zus-saldo": {
+      "arrears": []
+    },
+    "zus-ezla": {
+      "sickNotes": []
+    },
+    "zus-swiadczenia": {
+      "paidBenefits": []
+    },
+    "zus-postepowania": {
+      "insuranceDecisions": []
+    },
+    "ceidg": {
+      "suspensions": []
+    },
+    "krs": {
+      "payerStatus": [
+        {
+          "ref": "payer-1",
+          "status": "active"
+        }
+      ]
+    },
+    "rsc": {
+      "otherParentKnown": false
+    },
+    "ezdrowie": {}
+  },
+  "presetAnswers": {
+    "expectedDate": "2027-01-20",
+    "otherParent": {
+      "mode": "consent",
+      "insured": "yes",
+      "role": "mother"
+    },
+    "plan": {
+      "rateOption": "split100_70",
+      "blocks": [
+        {
+          "id": "b1",
+          "parent": "other",
+          "type": "maternity",
+          "titleId": "t1",
+          "from": "2027-01-20",
+          "days": 140
+        },
+        {
+          "id": "b2",
+          "parent": "claimant",
+          "type": "paternity",
+          "titleId": "t1",
+          "from": "2027-01-23",
+          "days": 14
+        },
+        {
+          "id": "b3",
+          "parent": "other",
+          "type": "parental",
+          "titleId": "t1",
+          "from": "2027-06-09",
+          "days": 224,
+          "pool": "shared"
+        },
+        {
+          "id": "b4",
+          "parent": "claimant",
+          "type": "parental",
+          "titleId": "t1",
+          "from": "2028-01-19",
+          "days": 63,
+          "pool": "ownNineWeeks"
+        }
+      ]
+    }
+  },
+  "otherParent": {
+    "consented": true,
+    "insured": "yes",
+    "role": "mother",
+    "systems": {
+      "mobywatel": {
+        "displayName": "Karolina W.",
+        "sex": "F",
+        "birthYear": 1994
+      },
+      "zus-konto": {
+        "role": "mother",
+        "titles": [
+          {
+            "id": "t1",
+            "kind": "employment",
+            "zusCode": "0110",
+            "from": "2019-06-03",
+            "sickness": {
+              "mode": "mandatory",
+              "periods": [
+                {
+                  "from": "2019-06-03"
+                }
+              ]
+            },
+            "registeredOn": "2019-06-05",
+            "workTime": [
+              {
+                "from": "2019-06-03",
+                "fraction": {
+                  "num": 1,
+                  "den": 1
+                }
+              }
+            ],
+            "payer": {
+              "ref": "payer-1",
+              "kind": "employer"
+            },
+            "months": [
+              {
+                "month": "2025-11",
+                "contributionBase": 720000
+              },
+              {
+                "month": "2025-12",
+                "contributionBase": 720000
+              },
+              {
+                "month": "2026-01",
+                "contributionBase": 720000
+              },
+              {
+                "month": "2026-02",
+                "contributionBase": 720000
+              },
+              {
+                "month": "2026-03",
+                "contributionBase": 720000
+              },
+              {
+                "month": "2026-04",
+                "contributionBase": 720000
+              },
+              {
+                "month": "2026-05",
+                "contributionBase": 720000
+              },
+              {
+                "month": "2026-06",
+                "contributionBase": 720000
+              },
+              {
+                "month": "2026-07",
+                "contributionBase": 720000
+              },
+              {
+                "month": "2026-08",
+                "contributionBase": 720000
+              },
+              {
+                "month": "2026-09",
+                "contributionBase": 720000
+              },
+              {
+                "month": "2026-10",
+                "contributionBase": 720000
+              }
+            ]
+          }
+        ]
+      },
+      "zus-platnik": {
+        "payers": [
+          {
+            "ref": "payer-1",
+            "insuredOn30NovPrevYear": 140,
+            "over20Insured": true
+          }
+        ]
+      },
+      "zus-ezla": {
+        "sickNotes": [
+          {
+            "titleId": "t1",
+            "from": "2026-11-09",
+            "to": "2026-12-08",
+            "code": "B"
+          }
+        ]
+      },
+      "zus-swiadczenia": {
+        "paidBenefits": []
+      },
+      "ezdrowie": {
+        "expectedDate": "2027-01-20"
+      }
+    }
+  }
+}

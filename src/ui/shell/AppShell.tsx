@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { appNav, footerLinks } from "./nav";
+import { appNav, desktopSecondaryNav, footerLinks } from "./nav";
 import { DesktopNav } from "./NavLinks";
 import { MenuButton, MobileNavProvider, TabBar } from "./MobileNav";
 import s from "./Shell.module.css";
@@ -35,7 +35,7 @@ export function AppShell({ children, userSlot }: { children: ReactNode; userSlot
           <span className={s.spacer} />
           <div className={s.user}>{userSlot}</div>
         </div>
-        <DesktopNav items={appNav} />
+        <DesktopNav items={appNav} secondary={desktopSecondaryNav} />
       </header>
       <main id="tresc" className={s.main} tabIndex={-1}>
         {children}

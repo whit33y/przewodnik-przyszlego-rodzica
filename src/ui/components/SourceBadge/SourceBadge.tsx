@@ -8,12 +8,14 @@ export type SourceId =
   | "zus-saldo"
   | "zus-ezla"
   | "zus-swiadczenia"
+  | "zus-postepowania"
   | "ceidg"
   | "krs"
   | "rsc"
   | "ezdrowie"
   | "mobywatel"
-  | "user";
+  | "user"
+  | "sprawa";
 
 export const sourceLabel: Record<SourceId, string> = {
   "zus-konto": "z ZUS",
@@ -21,12 +23,14 @@ export const sourceLabel: Record<SourceId, string> = {
   "zus-saldo": "z ZUS (rozliczenia składek)",
   "zus-ezla": "z e-ZLA",
   "zus-swiadczenia": "z ZUS (świadczenia)",
+  "zus-postepowania": "z ZUS (postępowania)",
   ceidg: "z CEIDG",
   krs: "z KRS",
   rsc: "z rejestru stanu cywilnego",
   ezdrowie: "z e-zdrowia (P1)",
   mobywatel: "z mObywatela",
   user: "podane przez Ciebie",
+  sprawa: "z akt sprawy",
 };
 
 export interface SourceBadgeProps {

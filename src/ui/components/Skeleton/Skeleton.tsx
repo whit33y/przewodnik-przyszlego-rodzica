@@ -2,7 +2,7 @@ import s from "./Skeleton.module.css";
 
 export function Skeleton({ lines = 3, height, label = "Wczytywanie…" }: { lines?: number; height?: number; label?: string }) {
   return (
-    <div className={s.wrap} aria-busy="true" aria-live="polite">
+    <div className={s.wrap} aria-busy="true" role="status">
       <span className="visually-hidden">{label}</span>
       {height ? (
         <div className={`${s.line} ${s.block}`} style={{ height }} aria-hidden="true" />
@@ -15,7 +15,7 @@ export function Skeleton({ lines = 3, height, label = "Wczytywanie…" }: { line
 
 export function CardSkeleton({ count = 1, lines = 3 }: { count?: number; lines?: number }) {
   return (
-    <div className={s.wrap} aria-busy="true">
+    <div className={s.wrap} aria-busy="true" role="status">
       <span className="visually-hidden">Wczytywanie…</span>
       {Array.from({ length: count }, (_, i) => (
         <div key={i} className={s.card} aria-hidden="true">

@@ -1,5 +1,5 @@
 .overlay { position: fixed; inset: 0; background: rgba(27, 27, 27, 0.5); z-index: 50; animation: fade var(--dur) var(--ease); }
-.content { position: fixed; z-index: 51; background: var(--surface-raised, #fff); display: flex; flex-direction: column; max-height: 90dvh; box-shadow: var(--shadow-sheet); left: 0; right: 0; bottom: 0; border-radius: var(--radius-lg) var(--radius-lg) 0 0; animation: up var(--dur) var(--ease); }
+.content { position: fixed; z-index: 51; background: var(--surface); display: flex; flex-direction: column; max-height: 90dvh; box-shadow: var(--shadow-sheet); left: 0; right: 0; bottom: 0; border-radius: var(--radius-lg) var(--radius-lg) 0 0; animation: up var(--dur) var(--ease); }
 .head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-3); padding: var(--space-5) var(--space-5) var(--space-3); border-bottom: 1px solid var(--line-soft); }
 .title { font-size: var(--fs-h2); line-height: var(--lh-h2); font-weight: 700; }
 .desc { color: var(--ink-muted); margin-top: var(--space-1); }

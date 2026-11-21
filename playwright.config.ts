@@ -16,6 +16,6 @@ export default defineConfig({
     url: `http://localhost:${PORT}/api/health`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
-    env: { SESSION_PASSWORD: "e2e-session-password-at-least-32-characters", ADMIN_PASSWORD: "e2e-admin", DATABASE_PATH: "./data/runtime/e2e.db" },
+    env: { SIM_LATENCY: "0", SESSION_PASSWORD: "e2e-session-password-at-least-32-characters", ADMIN_PASSWORD: "e2e-admin", DATABASE_PATH: "./data/runtime/e2e.db" },
   },
 });

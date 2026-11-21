@@ -21,11 +21,11 @@ export function Dialog({ title, description, open, onOpenChange, trigger, childr
       {trigger ? <D.Trigger asChild>{trigger}</D.Trigger> : null}
       <D.Portal>
         <D.Overlay className={s.overlay} />
-        <D.Content className={s.content} aria-describedby={description ? undefined : undefined}>
+        <D.Content className={s.content} {...(description ? {} : { "aria-describedby": undefined })}>
           <div className={s.head}>
             <div>
               <D.Title className={s.title}>{title}</D.Title>
-              {description ? <D.Description className={s.desc}>{description}</D.Description> : <D.Description className="visually-hidden">{title}</D.Description>}
+              {description ? <D.Description className={s.desc}>{description}</D.Description> : null}
             </div>
             <D.Close className={s.close} aria-label="Zamknij">
               <Icon name="close" />

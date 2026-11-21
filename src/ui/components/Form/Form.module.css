@@ -34,3 +34,7 @@ textarea.input { min-height: 120px; resize: vertical; }
 .choiceHint { font-size: var(--fs-small); line-height: var(--lh-small); color: var(--ink-muted); }
 .plain { border: 0; padding: var(--space-2) 0; min-height: auto; background: transparent; }
 .plain:has(input:checked) { border: 0; background: transparent; padding: var(--space-2) 0; }
+@media (forced-colors: active) {
+  .choice input { appearance: auto; }
+  .choice:has(input:checked) { border-color: Highlight; }
+}
