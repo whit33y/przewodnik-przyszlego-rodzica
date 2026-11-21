@@ -18,11 +18,24 @@ export function FetchStatus({ initial }: { initial: SourceStatus[] }) {
 
   useEffect(() => {
     if (done) return;
+    let inFlight = false;
+    let cancelled = false;
     const t = setInterval(async () => {
-      const res = await fetch("/api/v1/integrations/status", { cache: "no-store" });
-      if (res.ok) setSources(((await res.json()) as { sources: SourceStatus[] }).sources);
+      if (inFlight) return; // skip a tick while the previous request is pending
+      inFlight = true;
+      try {
+        const res = await fetch("/api/v1/integrations/status", { cache: "no-store" });
+        if (res.ok && !cancelled) setSources(((await res.json()) as { sources: SourceStatus[] }).sources);
+      } catch {
+        // transient network error: the next tick retries
+      } finally {
+        inFlight = false;
+      }
     }, 500);
-    return () => clearInterval(t);
+    return () => {
+      cancelled = true;
+      clearInterval(t);
+    };
   }, [done]);
 
   async function retry(source: string) {
