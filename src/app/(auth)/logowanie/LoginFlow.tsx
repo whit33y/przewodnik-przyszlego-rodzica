@@ -32,8 +32,12 @@ export function LoginFlow({ personas }: { personas: PersonaListItem[] }) {
   const [now, setNow] = useState(0);
   const [persona, setPersona] = useState(personas[0]?.id ?? "");
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const shownStep = useRef(step);
 
+  // Move focus to the step heading on step changes only — never on first load (it would skip the page and the skip link).
   useEffect(() => {
+    if (shownStep.current === step) return;
+    shownStep.current = step;
     headingRef.current?.focus();
   }, [step]);
 
@@ -75,7 +79,8 @@ export function LoginFlow({ personas }: { personas: PersonaListItem[] }) {
             <ul className={s.providers}>
               {providers.map((p) => (
                 <li key={p.id}>
-                  <button type="button" className={s.provider} disabled={!p.enabled} onClick={p.enabled ? startChallenge : undefined} aria-describedby={`hint-${p.id}`}>
+                  {/* aria-disabled (not disabled): the button stays focusable, so its hint is reachable by keyboard. */}
+                  <button type="button" className={s.provider} aria-disabled={!p.enabled || undefined} onClick={p.enabled ? startChallenge : undefined} aria-describedby={`hint-${p.id}`}>
                     <span className={s.providerIcon}>
                       <Icon name={p.icon} />
                     </span>
@@ -102,6 +107,10 @@ export function LoginFlow({ personas }: { personas: PersonaListItem[] }) {
                   </p>
                   <p className={s.muted} aria-live="off">
                     {expired ? "Kod wygasł." : `Kod ważny jeszcze ${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`}
+                  </p>
+                  {/* The ticking countdown stays silent; its expiry is announced once. */}
+                  <p role="status" className="visually-hidden">
+                    {expired ? "Kod wygasł. Wygeneruj nowy kod, żeby się zalogować." : ""}
                   </p>
                 </div>
               </div>

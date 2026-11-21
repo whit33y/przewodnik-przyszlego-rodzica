@@ -6,11 +6,11 @@
 .progress { font: 600 var(--fs-small) / var(--lh-small) var(--font-sans); color: var(--ink-muted); }
 .providers { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); list-style: none; }
 .provider { width: 100%; display: flex; align-items: center; gap: var(--space-3); min-height: 72px; padding: var(--space-4); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--surface); text-align: left; cursor: pointer; font-weight: 700; color: var(--ink); }
-.provider:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-soft); }
-.provider:disabled { cursor: not-allowed; color: var(--ink-muted); background: var(--surface-alt); border-color: var(--line); font-weight: 600; }
+.provider:hover:not([aria-disabled="true"]) { border-color: var(--primary); background: var(--primary-soft); }
+.provider[aria-disabled="true"] { cursor: not-allowed; color: var(--ink-muted); background: var(--surface-alt); border-color: var(--line); font-weight: 600; }
 .provider small { display: block; font-weight: 400; font-size: var(--fs-small); color: var(--ink-muted); }
 .providerIcon { width: 40px; height: 40px; border-radius: var(--radius-sm); display: grid; place-items: center; background: var(--primary-soft); color: var(--primary); flex: none; }
-.provider:disabled .providerIcon { background: var(--line-soft); color: var(--ink-muted); }
+.provider[aria-disabled="true"] .providerIcon { background: var(--line-soft); color: var(--ink-muted); }
 .confirm { display: grid; gap: var(--space-5); grid-template-columns: 1fr; align-items: center; }
 .qr { width: 168px; height: 168px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); display: grid; place-items: center; text-align: center; font-size: var(--fs-small); color: var(--ink-muted); background: repeating-linear-gradient(45deg, var(--surface-alt) 0 8px, var(--surface) 8px 16px); justify-self: center; }
 .qr span { background: var(--surface); padding: 4px 8px; border-radius: var(--radius-xs); }
