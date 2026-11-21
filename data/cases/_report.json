@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
   "totals": {
-    "cases": 78,
-    "matching": 75,
+    "cases": 86,
+    "matching": 86,
     "outcomeTier": {
-      "asserted": 78,
-      "match": 75
+      "asserted": 86,
+      "match": 86
     },
     "durationFields": {
-      "match": 365,
-      "mismatch": 2
+      "match": 424,
+      "mismatch": 0
     },
     "amountFields": {
-      "match": 237,
+      "match": 267,
       "mismatch": 0
     },
     "reported": 14,
     "knownDivergences": 5,
     "alertRecallRefusals": {
-      "refusals": 11,
-      "recalled": 10
+      "refusals": 12,
+      "recalled": 12
     }
   },
   "cases": [
@@ -116,13 +116,13 @@
       },
       "counts": {
         "outcome": {
-          "match": 2,
-          "mismatch": 3,
+          "match": 5,
+          "mismatch": 0,
           "reported": 0,
           "knownDivergence": 0
         },
         "duration": {
-          "match": 3,
+          "match": 6,
           "mismatch": 0,
           "reported": 0,
           "knownDivergence": 0
@@ -134,31 +134,13 @@
           "knownDivergence": 0
         }
       },
-      "status": "mismatch",
+      "status": "match",
       "divergences": [
         {
           "path": "benefits[0].rateBps",
           "status": "reported",
           "expected": 8150,
           "actual": 7000
-        },
-        {
-          "path": "outcome.value",
-          "status": "mismatch",
-          "expected": "refused",
-          "actual": "granted"
-        },
-        {
-          "path": "outcome.reasonCodes[0]",
-          "status": "mismatch",
-          "expected": "CERTIFICATE_MISSING",
-          "actual": []
-        },
-        {
-          "path": "benefits[0].status",
-          "status": "mismatch",
-          "expected": "refused",
-          "actual": "payable"
         }
       ],
       "alerts": [
@@ -171,7 +153,7 @@
       "variants": [
         {
           "name": "without-za-zyciem-certificate (decision of 2025-11-05)",
-          "status": "mismatch"
+          "status": "match"
         }
       ]
     },
@@ -764,7 +746,8 @@
       "alerts": [
         {
           "code": "TITLE_LIKELY_VERIFIED",
-          "found": false
+          "found": true,
+          "severity": "high"
         }
       ],
       "variants": [
@@ -845,13 +828,13 @@
           "path": "benefits[1].days",
           "status": "reported",
           "expected": 784,
-          "actual": 588
+          "actual": 392
         },
         {
           "path": "benefits[1].to",
           "status": "reported",
           "expected": "2027-02-07",
-          "actual": "2026-07-26"
+          "actual": "2026-01-11"
         }
       ],
       "knownDivergence": "Two points do not reproduce. (1) Parental length: 56 weeks were used (65 − 9, the single-child Za życiem length) although two children were born alive, for which 67 − 9 = 58 weeks would apply. (2) Work extension: at 1/2 time the 392 days were doubled to 784 because the extended part was itself combined with work (392 × (1 + 1/2 + 1/4 + …)); a one-step extension of days × f gives 588. The file does not say how ZUS or the employer counted either point.",
@@ -919,8 +902,8 @@
       },
       "counts": {
         "outcome": {
-          "match": 3,
-          "mismatch": 1,
+          "match": 4,
+          "mismatch": 0,
           "reported": 0,
           "knownDivergence": 0
         },
@@ -937,15 +920,8 @@
           "knownDivergence": 0
         }
       },
-      "status": "mismatch",
-      "divergences": [
-        {
-          "path": "outcome.value",
-          "status": "mismatch",
-          "expected": "granted",
-          "actual": "refused"
-        }
-      ],
+      "status": "match",
+      "divergences": [],
       "alerts": [
         {
           "code": "NOT_INSURED_ON_DUE_DATE",
@@ -956,7 +932,7 @@
       "variants": [
         {
           "name": "reregistered-before-birth",
-          "status": "mismatch"
+          "status": "match"
         }
       ]
     },
@@ -1358,6 +1334,111 @@
       "variants": []
     },
     {
+      "id": "B3-07",
+      "title": "Pracownica: martwe urodzenie w 37. tygodniu krótko po poprzednim urlopie macierzyńskim, 8 tygodni zasiłku na podstawie zwykłego zaświadczenia lekarskiego",
+      "scenario": "1.9",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B3-08",
+      "title": "Przysposobienie 5-letniego dziecka z zaświadczeniem „Za życiem”: 20 tygodni + 56 tygodni urlopu rodzicielskiego, krótkie dobrowolne chorobowe na preferencyjnym ZUS",
+      "scenario": "1.12",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B3-09",
+      "title": "Prowadząca działalność, bliźnięta: zasiłek chorobowy w ciąży ok. 3,5 miesiąca, potem 31 tygodni macierzyńskiego (od 6 dni przed porodem) i 34 tygodnie rodzicielskiego",
+      "scenario": "1.11",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 9,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
       "id": "B3-10",
       "title": "Likwidacja pracodawcy w ciąży: zasiłek w wysokości zasiłku macierzyńskiego od dnia po ustaniu zatrudnienia do porodu (art. 30)",
       "scenario": "1.13",
@@ -1382,6 +1463,203 @@
         },
         "amount": {
           "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B3-11",
+      "title": "Prowadząca działalność (preferencyjny ZUS): zasiłek macierzyński tylko za 14 tygodni, bez urlopu rodzicielskiego, powrót do działalności",
+      "scenario": "1.8",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": true
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B3-12",
+      "title": "Umowa o pracę zawarta ok. 10 tygodni przed porodem uznana za pozorną: decyzja o niepodleganiu ubezpieczeniom i odmowa zasiłku macierzyńskiego",
+      "scenario": "1.17",
+      "outcome": "refused",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 5,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "TITLE_LIKELY_VERIFIED",
+          "found": true,
+          "severity": "high"
+        }
+      ],
+      "variants": [
+        {
+          "name": "title-recognised",
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "id": "B3-13",
+      "title": "Pracownica: urlop macierzyński rozpoczęty 2 dni przed porodem, łącznie 52 tygodnie w stawce 81,5%",
+      "scenario": "1.1",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B3-14",
+      "title": "Umowa przedłużona do dnia porodu: zasiłek macierzyński, uzupełniający (dziecko donoszone w szpitalu) i rodzicielski; odmowa za 1 dzień ponad 224 dni",
+      "scenario": "1.18",
+      "outcome": "partial",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 7,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 12,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "DAY_COUNT_MISMATCH",
+          "found": true,
+          "severity": "warning"
+        }
+      ],
+      "variants": [
+        {
+          "name": "parental-224-days",
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "id": "B3-15",
+      "title": "Pracownica: kontynuacja zasiłku chorobowego w ciąży do dnia przed porodem, potem 52 tygodnie zasiłku macierzyńskiego",
+      "scenario": "1.1",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 9,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
           "mismatch": 0,
           "reported": 0,
           "knownDivergence": 0
@@ -1439,14 +1717,14 @@
       },
       "counts": {
         "outcome": {
-          "match": 2,
-          "mismatch": 1,
+          "match": 3,
+          "mismatch": 0,
           "reported": 0,
           "knownDivergence": 0
         },
         "duration": {
-          "match": 4,
-          "mismatch": 2,
+          "match": 6,
+          "mismatch": 0,
           "reported": 0,
           "knownDivergence": 0
         },
@@ -1457,27 +1735,8 @@
           "knownDivergence": 0
         }
       },
-      "status": "mismatch",
-      "divergences": [
-        {
-          "path": "outcome.value",
-          "status": "mismatch",
-          "expected": "granted",
-          "actual": "partial"
-        },
-        {
-          "path": "benefits[1].days",
-          "status": "mismatch",
-          "expected": 297,
-          "actual": 372
-        },
-        {
-          "path": "benefits[1].to",
-          "status": "mismatch",
-          "expected": "2025-01-31",
-          "actual": "2025-04-16"
-        }
-      ],
+      "status": "match",
+      "divergences": [],
       "alerts": [
         {
           "code": "TOP_UP_STATEMENT_NEEDED",

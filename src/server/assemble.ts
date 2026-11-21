@@ -69,7 +69,6 @@ export function assemble(input: AssembleInput): Assembled {
     provenance[path] = { source, asOf: at(source) };
   };
   const extras = answers.caseExtras;
-  const userSrc: SourceId = "user";
 
   // ── Claimant ──────────────────────────────────────────────────────────────
   const manual = answers.manual;

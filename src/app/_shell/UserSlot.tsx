@@ -16,7 +16,7 @@ export async function UserSlot() {
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
       <SimBadge label={session.mode === "case" ? "Sprawa testowa" : "Symulacja"} />
-      <span style={{ fontWeight: 600, whiteSpace: "nowrap" }} className="hide-narrow">
+      <span style={{ fontWeight: 600, whiteSpace: "nowrap" }} className="hide-mobile">
         {summary?.displayName ?? "Zalogowano"}
       </span>
       <form action="/api/v1/auth/logout" method="post">

@@ -13,8 +13,12 @@
     "student-mandate-before"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "12bb00e9e4b5e774cb0d5eb4e26297bcd809ea161be4340a80216f0003290489"
+    ],
+    "fileNameSha256": [
+      "54035ed702b60fa5381e8fd74611353df7b79f1565c2c45f5895ea281825d155"
+    ],
     "pages": 24
   },
   "facts": {

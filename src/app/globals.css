@@ -142,3 +142,14 @@ a:hover {
     white-space: nowrap;
   }
 }
+
+@media (max-width: 599px) {
+  .hide-mobile {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+}

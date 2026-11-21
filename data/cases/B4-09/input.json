@@ -13,8 +13,12 @@
     "no-full-month"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "110e4899d565ea9efe79c345bcbc2b95e92b9baed4955d9e4ed2ee41acdb78e9"
+    ],
+    "fileNameSha256": [
+      "f970a6470ed8dd8e08c0f268c92d4466343e66f25fefc4ad28db46406e40e5b7"
+    ],
     "pages": 16
   },
   "facts": {

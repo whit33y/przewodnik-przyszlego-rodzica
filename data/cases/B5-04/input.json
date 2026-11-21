@@ -15,8 +15,12 @@
     "single-title-statement"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "850dbccfe57dbc0c7128ea78fb00d0e6994cb4844f797a8bbd8b2462499d418f"
+    ],
+    "fileNameSha256": [
+      "9903cb3e3d69ef4bde53e9695315069612eed7e88877397cd0300bd505a6ae27"
+    ],
     "pages": 20
   },
   "facts": {

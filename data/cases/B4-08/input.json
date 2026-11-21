@@ -11,8 +11,12 @@
     "concurrent-mandate"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "9f15cb2eaa68dca74a7b8466a8bb7ff7ccd37c296c7268b2e8681d6eefd644ab"
+    ],
+    "fileNameSha256": [
+      "64335ca29b98ba38b65a9109a4f241eb7e88280e3de77511860ce18a31cb8bde"
+    ],
     "pages": 18
   },
   "facts": {

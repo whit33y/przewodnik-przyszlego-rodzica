@@ -144,9 +144,9 @@
     "limitationMonths": 6
   },
   "titleRisk": {
-    "threshold": 3,
+    "threshold": 2,
     "newTitleMonthsBeforeDue": 10,
-    "sickWithinDaysOfStart": 60,
+    "sickWithinDaysOfStart": 150,
     "smallFraction": {
       "num": 1,
       "den": 4

@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-15",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "sickness",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 16,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2024-01-19",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2024-02-03",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2024-02-04",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2024-06-22",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 224,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2024-06-23",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2025-02-01",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  }
+}

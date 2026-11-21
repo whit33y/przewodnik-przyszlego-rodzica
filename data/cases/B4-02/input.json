@@ -14,8 +14,12 @@
     "allowances-excluded"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "8498706eabc8f0584519aac9b713985f0ed58438485d0ebe451e485d4fc2f8d0"
+    ],
+    "fileNameSha256": [
+      "ca716965e2dd6c52b322805aeee760d9332a7e562543fff57d6175e403047ae4"
+    ],
     "pages": 28
   },
   "facts": {

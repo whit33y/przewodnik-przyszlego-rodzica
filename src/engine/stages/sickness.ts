@@ -48,13 +48,13 @@ export function sicknessBlocksFromNotes(ctx: Ctx): PlanBlock[] {
         const avail = Math.max(0, sickPayDaysFor(ctx, year) - used);
         const payDays = Math.min(avail, days);
         if (payDays > 0) {
-          blocks.push({ id: `sick-${++n}`, parent: "claimant", type: "sickPay", titleId: note.titleId, from, days: payDays });
+          blocks.push({ id: `sickPay-claimant-${++n}`, parent: "claimant", type: "sickPay", titleId: note.titleId, from, days: payDays });
           usedByYear.set(year, used + payDays);
           from = addDays(from, payDays);
           days -= payDays;
         } else usedByYear.set(year, used);
       }
-      if (days > 0) blocks.push({ id: `sick-${++n}`, parent: "claimant", type: "sickness", titleId: note.titleId, from, days });
+      if (days > 0) blocks.push({ id: `sickness-claimant-${++n}`, parent: "claimant", type: "sickness", titleId: note.titleId, from, days });
       from = addDays(segEnd, 1);
     }
   }

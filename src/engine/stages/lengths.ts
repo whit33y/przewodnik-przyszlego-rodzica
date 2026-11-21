@@ -99,12 +99,17 @@ export function run(ctx: Ctx): Ctx {
     reducedAdoptionCase = untilLimit < full;
   }
 
-  const pw = ev.zaZyciem ? p.parental.weeksZaZyciem : p.parental.weeks;
+  // The Za życiem extension needs the certificate (art. 4 ust. 3 of the act); in adjudication a file whose documents
+  // lack it gets the standard pool and the extension is refused (B1-3, first decision).
+  const docs = facts.event.documents;
+  const zaZyciemCertMissing = ctx.mode === "adjudication" && ev.zaZyciem && docs !== undefined && !docs.includes("zaZyciemCert");
+  const zaZyciem = ev.zaZyciem && !zaZyciemCertMissing;
+  const pw = zaZyciem ? p.parental.weeksZaZyciem : p.parental.weeks;
   let parentalWeeks = ev.multiple ? pw.multiple : pw.single;
-  if (reducedAdoptionCase) parentalWeeks = ev.zaZyciem ? p.adoption.parentalWeeksReducedZaZyciem : p.adoption.parentalWeeksReduced;
+  if (reducedAdoptionCase) parentalWeeks = zaZyciem ? p.adoption.parentalWeeksReducedZaZyciem : p.adoption.parentalWeeksReduced;
   if (ev.loss === "total") parentalWeeks = 0;
   const parentalTotal = parentalWeeks * 7;
-  const capWeeks = ev.zaZyciem ? p.parental.combinedCapWeeksZaZyciem : p.parental.combinedCapWeeks;
+  const capWeeks = zaZyciem ? p.parental.combinedCapWeeksZaZyciem : p.parental.combinedCapWeeks;
 
   // The other parent's 9 weeks: lost to the claimant unless the flag releases them when the other parent is uninsured.
   const op = facts.otherParent;
@@ -166,6 +171,7 @@ export function run(ctx: Ctx): Ctx {
     paternityExpiresOn,
     parentalDeadline,
     reducedAdoptionCase,
+    zaZyciemCertMissing,
   };
 
   addTrace(ctx, "lengths", ev.kind === "birth" ? (ev.loss === "total" ? "KP-180-1" : "KP-180-1-TABLE") : "KP-183-ADOPTION", {

@@ -11,8 +11,12 @@
     "high-earner"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "2ae6fefdc576061c41232bd12c6102bb6a620b953333f259831aa27ce9563d51"
+    ],
+    "fileNameSha256": [
+      "a79cdcf6eb009fc64a9f994fee83af622c521f383c2083ce0450e28597729ed2"
+    ],
     "pages": 16
   },
   "facts": {

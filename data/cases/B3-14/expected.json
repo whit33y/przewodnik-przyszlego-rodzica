@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-14",
+  "outcome": {
+    "value": "partial",
+    "reasonCodes": [
+      "EXCESS_DAYS"
+    ],
+    "evidence": "decision"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2026-06-01",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2026-10-18",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "supplementary",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 28,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2026-10-19",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2026-11-15",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 224,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2026-11-16",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2027-06-27",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 1,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2027-06-28",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2027-06-28",
+        "evidence": "printed"
+      }
+    }
+  ],
+  "legalBasisCited": [
+    "UZ art. 29a ust. 1"
+  ],
+  "expectedAlerts": [],
+  "expectedAlertsPostEvent": [
+    "DAY_COUNT_MISMATCH"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": false
+  },
+  "variants": [
+    {
+      "name": "parental-224-days",
+      "factsPatch": [],
+      "planPatch": [
+        {
+          "op": "replace",
+          "path": "/blocks/2/days",
+          "value": 224
+        }
+      ],
+      "expected": {
+        "outcome": {
+          "value": "granted",
+          "reasonCodes": [],
+          "evidence": "decision"
+        }
+      }
+    }
+  ]
+}

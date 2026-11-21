@@ -1,0 +1,259 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-09",
+  "title": "Prowadząca działalność, bliźnięta: zasiłek chorobowy w ciąży ok. 3,5 miesiąca, potem 31 tygodni macierzyńskiego (od 6 dni przed porodem) i 34 tygodnie rodzicielskiego",
+  "scenario": "1.11",
+  "tags": [
+    "self-employed",
+    "mother",
+    "twins",
+    "sickness-in-pregnancy",
+    "maternity-before-birth",
+    "voluntary-sickness",
+    "other-parent-waiver",
+    "carried-over-base"
+  ],
+  "source": {
+    "pdfSha256": [
+      "1d810e7282086831a33f1b7ac202b8252072e85ce8044e67ef8e845a56efe63c"
+    ],
+    "fileNameSha256": [
+      "ab250a33b91b46ff4ded50c386bb3b3e9b03009465d980003082d34ed099d85e"
+    ],
+    "pages": 62
+  },
+  "facts": {
+    "asOf": "2025-01-31",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0510",
+          "from": "2023-06-01",
+          "scheme": "standard",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2023-08-18"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2023-09",
+              "contributionBase": 416100
+            },
+            {
+              "month": "2023-10",
+              "contributionBase": 416100
+            },
+            {
+              "month": "2023-11",
+              "contributionBase": 416100
+            },
+            {
+              "month": "2023-12",
+              "contributionBase": 416100
+            },
+            {
+              "month": "2024-01",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-02",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-03",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-04",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-05",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-06",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-07",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-08",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-09",
+              "contributionBase": 469440
+            }
+          ]
+        }
+      ],
+      "sickNotes": [
+        {
+          "titleId": "t1",
+          "from": "2024-09-27",
+          "to": "2025-01-08",
+          "code": "B"
+        }
+      ],
+      "paidBenefits": [],
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2024-09-27",
+          "aboveThreshold": false
+        },
+        {
+          "account": "own",
+          "onDate": "2025-01-09",
+          "aboveThreshold": false
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2025-08-14",
+        "to": "2026-04-08"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-01-15",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        },
+        {
+          "ref": "child-2",
+          "bornAlive": true
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "blocks": [
+      {
+        "id": "b0",
+        "parent": "claimant",
+        "type": "sickness",
+        "titleId": "t1",
+        "from": "2024-09-27",
+        "days": 104
+      },
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-01-09",
+        "days": 217
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2025-08-14",
+        "days": 238,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-insurance-memo",
+      "page": 58,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 59,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 59,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-insurance-memo",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[12]": {
+      "doc": "zus-insurance-memo",
+      "page": 59,
+      "evidence": "printed"
+    },
+    "facts.claimant.sickNotes[0]": {
+      "doc": "zus-note",
+      "page": 62,
+      "evidence": "inferred"
+    },
+    "facts.claimant.sickNotes[0].code": {
+      "doc": "doctor-certificate",
+      "page": 12,
+      "evidence": "inferred"
+    },
+    "facts.claimant.arrears": {
+      "doc": "zus-insurance-memo",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "other-parent-statement",
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "ZAM",
+      "page": 53,
+      "evidence": "handwritten"
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "page": 53,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-note",
+      "page": 62,
+      "evidence": "printed"
+    },
+    "plan.blocks[1].from": {
+      "doc": "ZAM",
+      "page": 53,
+      "evidence": "printed"
+    },
+    "plan.blocks[1].days": {
+      "doc": "ZAM",
+      "page": 53,
+      "evidence": "inferred"
+    },
+    "plan.blocks[2]": {
+      "doc": "ZAM",
+      "page": 53,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Self-employed mother (standard contributions, voluntary sickness insurance from 2023-08-18) with twins born 2025-01-15. Long sickness in pregnancy on a chain of e-ZLA certificates, each followed by a Z-3b she filed herself; typed ZUS note: sickness benefit paid 2024-09-27..2025-01-08 and maternity benefit 2025-01-09..2026-04-08 (455 days = 31 weeks of maternity for twins + 34 weeks of parental). Maternity started 6 days before the birth, directly after the sickness. ZAM: maternity from 2025-01-09 (end written as 2025-08-18, inconsistent with the parental start 2025-08-14; the 31-week end 2025-08-13 is used) and parental 2025-08-14..2026-04-08; 81.5% box unticked, joint claim, 81.5% inferred. Father's statement of non-use over the mother's parental period. Two ZUS insurance memos (study dates 2024-09-27 and 2025-01-09): no arrears on either date; declared bases 4161.00 (2023-09..12) and 4694.40 (2024-01..09); two short earlier employee titles in 2023-09 and 2023-10 ended by deregistration (not modelled). Sick-note letter code not legible; pregnancy code B inferred. Rates not printed. Address and bank-account change letters omitted."
+}

@@ -13,8 +13,12 @@
     "rate-100-70"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "f04a559ee1d9cb22d14de56ec53d11f592817b7ac1a8e938b4ab342dee473d7a"
+    ],
+    "fileNameSha256": [
+      "c570737dda70751184e61b6435ec90c1c623052775243f4c285186318e7f9c5b"
+    ],
     "pages": 28
   },
   "facts": {
@@ -162,7 +166,7 @@
         "type": "parental",
         "titleId": "t1",
         "from": "2026-06-14",
-        "days": 224,
+        "days": 308,
         "pool": "shared",
         "workFraction": {
           "num": 3,
@@ -228,5 +232,5 @@
       "evidence": "printed"
     }
   },
-  "extractionNotes": "Employee since 2025-05-14 (small employer); own etat not legible. Maternity 2026-01-25..2026-06-13; parental from 2026-06-14 combined with work at 3/8 of full time for the whole 32 weeks (fraction checked on the page image). ZUS note: maternity granted to 2026-06-13, parental extended because of work to 2027-04-17, and a top-up to the 1000 zł minimum was paid. 224 + 224 × 3/8 = 308 days reproduces the printed end date exactly, so the end date is consistent with the extension rule. The Z-3 application date reads about 24.02.2026 (uncertain), roughly a month after the birth, so the 100%/70% option is recorded as inferred and applicationDate is omitted. Z-3 salary table 2025-05..2025-12: fixed 3499.50 + 10.00 laundry allowance paid in full; May is the start month; December 17/20 days worked (sickness). Father declared non-use from 2026-06-14."
+  "extractionNotes": "Employee since 2025-05-14 (small employer); own etat not legible. Maternity 2026-01-25..2026-06-13; parental from 2026-06-14 combined with work at 3/8 of full time for the whole 32 weeks (fraction checked on the page image). ZUS note: maternity granted to 2026-06-13, parental extended because of work to 2027-04-17, and a top-up to the 1000 zł minimum was paid. 224 + 224 × 3/8 = 308 days reproduces the printed end date exactly, so the end date is consistent with the extension rule. The Z-3 application date reads about 24.02.2026 (uncertain), roughly a month after the birth, so the 100%/70% option is recorded as inferred and applicationDate is omitted. Z-3 salary table 2025-05..2025-12: fixed 3499.50 + 10.00 laundry allowance paid in full; May is the start month; December 17/20 days worked (sickness). Father declared non-use from 2026-06-14. Engine triage: the parental block is recorded as the leave granted with the extension (308 days at 3/8 work, ending 2027-04-17 as printed); the engine counts days × (1 − f) against the pool, so the extension is not added automatically."
 }

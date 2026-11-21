@@ -12,8 +12,12 @@
     "standard-zus"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "0c21799370ac261e50405d4deaef2ea70d2d105e42347a2e31c7dea9b0f1c4bd"
+    ],
+    "fileNameSha256": [
+      "a11ce43b7096447ce334a948df5fecde3c58426b7ab884dc27c385e0b4109740"
+    ],
     "pages": 20
   },
   "facts": {

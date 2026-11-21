@@ -14,8 +14,12 @@
     "sickness-in-pregnancy"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "3e34d10a8ceffd035ed2174fa1750c077c6b43adeba96a5be26a283d9c2c1e24"
+    ],
+    "fileNameSha256": [
+      "8d089429237d5230f5d97755a03f45f6cd0233c386639e18217a1882952d5799"
+    ],
     "pages": 20
   },
   "facts": {

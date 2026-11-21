@@ -1,0 +1,282 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-13",
+  "title": "Pracownica: urlop macierzyński rozpoczęty 2 dni przed porodem, łącznie 52 tygodnie w stawce 81,5%",
+  "scenario": "1.1",
+  "tags": [
+    "employee",
+    "mother",
+    "single-child",
+    "averaged-81.5",
+    "maternity-before-birth",
+    "other-parent-waiver",
+    "sick-pay-before-birth"
+  ],
+  "source": {
+    "pdfSha256": [
+      "6ebd4aff43fd93d34300083894f83a16b5e25f9413a9044f0616ba51820d74a5"
+    ],
+    "fileNameSha256": [
+      "6c29985b4a28b7c3a116251187c851f5d74f9770696bfb3ecaefb0668603cfaf"
+    ],
+    "pages": 22
+  },
+  "facts": {
+    "asOf": "2026-05-05",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2022-09-13",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2022-09-13"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2022-09-13",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-01",
+              "contributionBase": 500000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 500000
+            },
+            {
+              "month": "2025-02",
+              "contributionBase": 500000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 500000
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 500000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 500000
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 500000,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 500000
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 500000,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 500000
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 500000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 500000
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 500000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 500000
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 500000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 500000
+            },
+            {
+              "month": "2025-09",
+              "contributionBase": 530000,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 530000
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 530000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 530000
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 530000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 530000
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 580000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 580000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2026-01-15",
+          "to": "2026-02-11"
+        },
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2026-02-12",
+          "to": "2026-02-14"
+        },
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2026-02-15",
+          "to": "2026-02-16"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2026-09-08",
+        "to": "2027-04-19"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-04-23",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2026-04-29",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-04-21",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-09-08",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-benefit-screen",
+      "page": 21,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "other-parent-statement",
+      "page": 9,
+      "evidence": "handwritten"
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "evidence": "inferred"
+    },
+    "plan.rateOption": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "inferred"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "leave-application",
+      "page": 9,
+      "evidence": "handwritten"
+    }
+  },
+  "extractionNotes": "Full-time employee since 2022-09-13; maternity leave started on 2026-04-21, two days before the birth (2026-04-23), followed by 32 weeks of parental leave (52 weeks in one leave request with the father's statement of non-use 2026-09-08..2027-04-19). Z-3: maternity benefit 2026-04-21..2026-09-07, benefit application date 2026-04-29 (day 6 after the birth), so 81.5% is inferred; employer reported up to 20 insured. ZUS EPWD screen shows the case passed for payment with the period from 2026-04-21 (end partly legible, 2027-04-1x) and a typed note that maternity benefit was granted; the split and the end date are the claim. Employer-paid sick pay with the pregnancy code 2026-01-15..2026-02-16 (33 days). Salary table 2025-01..2025-12 (12 months before the first incapacity in 2026-01): 5000.00, 5300.00 from 2025-09, 5800.00 in 2025-12. The Z-3 was filed twice (duplicate). A PESEL assignment notice for the child is in the file. Birth date taken from the case summary of the birth documents (partly legible)."
+}

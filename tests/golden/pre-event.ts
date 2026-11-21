@@ -30,8 +30,8 @@ export function preEventFacts(input: Pick<CaseInput, "facts" | "plan">): Facts {
   const e = facts.event;
   if (e.kind === "birth") {
     const birth = e.date;
-    if (!birth || birth === decisive) {
-      e.expectedDate = e.expectedDate ?? birth ?? decisive;
+    if (birth && birth === decisive) {
+      e.expectedDate = e.expectedDate ?? birth;
       delete e.date;
       delete e.occurred;
       delete e.documents;

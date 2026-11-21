@@ -233,8 +233,8 @@ export interface Entitlement {
 }
 
 export interface PoolState {
-  maternityDays: { total: number; used: number; motherMandatory: number };
-  supplementaryDays: { total: number; capWeeks: 0 | 8 | 15 };
+  maternityDays: { total: number; used: number; usedByOther: number; motherMandatory: number };
+  supplementaryDays: { total: number; used: number; capWeeks: 0 | 8 | 15 };
   parentalDays: { total: number; used: number; reservedPerParent: number;
                   usedByClaimant: number; usedByOther: number; extensionDays: number };
   parentalParts: { used: number; max: number };   // both parents together
@@ -248,6 +248,7 @@ export interface Period {
   status: 'payable' | 'withheld' | 'refused';
   reasonCode?: ReasonCode;
   base: Grosze; rateBps: Bps; workReductionBps?: Bps;
+  extensionDays?: number;                         // parental combined with work: ⌊days × f⌋ (KP 182¹f §2)
   daily: Grosze; gross: Grosze;
   months: { month: YearMonth; days: number; gross: Grosze; pitAdvance: Grosze; net: Grosze; topUp: Grosze }[];
   paidBy: 'payer' | 'zus';

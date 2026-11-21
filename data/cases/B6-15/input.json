@@ -13,8 +13,12 @@
     "short-insurance"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "968cb8afc4a91b9e4901a102e9b670b33947c07aad696ca891d24c5e625b03a0"
+    ],
+    "fileNameSha256": [
+      "4157176a6726a573574783e6d5ddd0e3b6b9e1c77b80fa315806154ff2e7503a"
+    ],
     "pages": 44
   },
   "facts": {

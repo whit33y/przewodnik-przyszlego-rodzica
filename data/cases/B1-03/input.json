@@ -14,8 +14,12 @@
     "minimum-wage-floor"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "bd80693de7a16e653539c943bd9a1fa7927e3178f62771387fa2102c94e95c33"
+    ],
+    "fileNameSha256": [
+      "87b1776c1a06152c307e9dbb09b48fb09cfe62ad29040c2ca9de0e36a02ec012"
+    ],
     "pages": 74
   },
   "facts": {

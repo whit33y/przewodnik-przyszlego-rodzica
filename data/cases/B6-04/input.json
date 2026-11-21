@@ -15,8 +15,12 @@
     "claim-57-days"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "0c34a3c062d604cd5b5c893cb9cc7a8161acff708d05ac59839fc6d0ec1de763"
+    ],
+    "fileNameSha256": [
+      "99310b1bb55324c8aee5c896e2edea1d3fe6a864eefbfd860b5d362a8bec36d7"
+    ],
     "pages": 20
   },
   "facts": {

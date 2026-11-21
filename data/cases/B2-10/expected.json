@@ -62,7 +62,14 @@
           "reasonCodes": [],
           "evidence": "internalNote"
         }
-      }
+      },
+      "planPatch": [
+        {
+          "op": "replace",
+          "path": "/blocks/0/days",
+          "value": 140
+        }
+      ]
     }
   ]
 }

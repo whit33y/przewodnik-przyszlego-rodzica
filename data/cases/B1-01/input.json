@@ -12,8 +12,12 @@
     "second-child"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "7cae1e0a07f2aca7f4b50d7a95f3387bda348cf21085accfc2bc3f5265fb22e2"
+    ],
+    "fileNameSha256": [
+      "ef79e61de94c3ebcff24b4ab0296dbda261ad9514a1f00342dc26baaee54728b"
+    ],
     "pages": 14
   },
   "facts": {

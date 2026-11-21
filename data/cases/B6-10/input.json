@@ -13,8 +13,12 @@
     "not-reproducible"
   ],
   "source": {
-    "pdfSha256": [],
-    "fileNameSha256": [],
+    "pdfSha256": [
+      "80147a4b983df4d217824f0c9c519e02ff75b618823138d17cc1c682a0321be4"
+    ],
+    "fileNameSha256": [
+      "e30af89bec551767dc23d4ebe7e26718997937f0cfea298a6a5782c9579bf633"
+    ],
     "pages": 38
   },
   "facts": {
