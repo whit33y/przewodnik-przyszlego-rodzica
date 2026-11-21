@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-13",
+  "outcome": {
+    "value": "refused",
+    "reasonCodes": [
+      "ARREARS_UNPAID"
+    ],
+    "evidence": "decision"
+  },
+  "benefits": [
+    {
+      "type": "paternity",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 14,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2025-09-25",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2025-10-08",
+        "evidence": "printed"
+      }
+    }
+  ],
+  "legalBasisCited": [
+    "UZ art. 2a"
+  ],
+  "expectedAlerts": [
+    "ARREARS_OWN"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": false
+  },
+  "variants": [
+    {
+      "name": "arrears-at-threshold",
+      "factsPatch": [
+        {
+          "op": "replace",
+          "path": "/claimant/arrears/0",
+          "value": {
+            "account": "own",
+            "onDate": "2025-09-25",
+            "amount": 4666
+          }
+        }
+      ],
+      "expected": {
+        "outcome": {
+          "value": "granted",
+          "reasonCodes": [],
+          "evidence": "decision"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-01",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-02-06",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2025-06-25",
+        "evidence": "claimed"
+      },
+      "toppedUp": {
+        "value": true,
+        "evidence": "printed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 224,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-06-26",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2026-02-04",
+        "evidence": "printed"
+      },
+      "toppedUp": {
+        "value": true,
+        "evidence": "printed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  }
+}

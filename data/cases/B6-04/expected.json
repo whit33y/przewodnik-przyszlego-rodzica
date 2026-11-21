@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-04",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "accountTitle1240"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 56,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2026-02-21",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2026-04-17",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "expectedAlertsPostEvent": [
+    "CERTIFICATE_TYPE",
+    "DAY_COUNT_MISMATCH"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": false
+  },
+  "knownDivergence": {
+    "fields": [
+      "outcome.value"
+    ],
+    "explanation": "The claim asked for 57 days after a stillbirth; ZUS paid the statutory 56 days (title 1240) without a refusal decision for the extra day. The engine refuses the 57th day (EXCESS_DAYS), so its outcome is partial."
+  }
+}

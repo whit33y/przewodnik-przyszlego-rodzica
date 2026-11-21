@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-12",
+  "title": "Pracownica po zmianie etatu z 1/2 na pełny tuż przed długim zwolnieniem w ciąży: macierzyński i rodzicielski 52 tygodnie bez przerwy po zasiłku chorobowym",
+  "scenario": "1.1",
+  "tags": [
+    "employee",
+    "mother",
+    "sickness-in-pregnancy",
+    "work-time-change",
+    "base-single-month",
+    "averaged-81.5",
+    "account-title-1240"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 20
+  },
+  "facts": {
+    "asOf": "2025-03-24",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2023-09-21",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2023-09-21"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2023-09-21",
+              "fraction": {
+                "num": 1,
+                "den": 2
+              }
+            },
+            {
+              "from": "2024-08-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2024-08",
+              "contributionBase": 430000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 430000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [
+        {
+          "titleId": "t1",
+          "from": "2024-09-17",
+          "to": "2024-09-21",
+          "code": "B"
+        },
+        {
+          "titleId": "t1",
+          "from": "2024-10-08",
+          "to": "2024-11-04",
+          "code": "B"
+        },
+        {
+          "titleId": "t1",
+          "from": "2024-11-05",
+          "to": "2024-12-02"
+        },
+        {
+          "titleId": "t1",
+          "from": "2024-12-03",
+          "to": "2024-12-30",
+          "code": "B"
+        },
+        {
+          "titleId": "t1",
+          "from": "2024-12-31",
+          "to": "2025-01-27",
+          "code": "B"
+        },
+        {
+          "titleId": "t1",
+          "from": "2025-01-28",
+          "to": "2025-02-24",
+          "code": "B"
+        },
+        {
+          "titleId": "t1",
+          "from": "2025-02-25",
+          "to": "2025-03-25",
+          "code": "B"
+        }
+      ],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2024-09-17",
+          "to": "2024-09-21"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-03-18",
+      "documents": [
+        "birthAct"
+      ],
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2025-03-24",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-03-18",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2025-08-05",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 19
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 1
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 11
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 8
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 9
+    },
+    "facts.claimant.sickNotes": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 3
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 8
+    },
+    "facts.event.date": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 16
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 16
+    },
+    "plan.applicationDate": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 19
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 16
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 16
+    }
+  },
+  "extractionNotes": "Grant evidenced by the maternity-benefit title on the ZUS account (2025-03-18..2026-03-16) with a handwritten ZUS remark that the right was granted; no decision text. The ZAM (dated 2025-03-24, 6 days after the birth, full-length declaration ticked) splits the 52 weeks into maternity to 2025-08-04 and parental from 2025-08-05; the split is the claim. Employment title from 2023-09-21 on both the ZUS screen and the Z-3. Employer remark: working time raised from 1/2 to full time on 2024-08-01; first incapacity 2024-09-17 (employer sick pay 5 days), then e-ZLA pregnancy notes (code B; one note shows a two-letter code, omitted) from 2024-10-08 to 2025-03-25, overlapping the birth. Only one full month after the change precedes the incapacity, so the Z-3 lists only 2024-08 (4300.00 = the minimum wage); maternity follows sickness without a gap, so that base carries over. Base 3710.47 and daily 100.80 at 81.5% are our computation, reported only. ZUS sick-pay and sickness-benefit amounts are not in the file."
+}

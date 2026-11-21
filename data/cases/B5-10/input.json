@@ -1,0 +1,328 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-10",
+  "title": "Bliźnięta urodzone w 28. tygodniu z zaświadczeniami „Za życiem”: 31 tygodni macierzyńskiego, uzupełniający i rodzicielski po wypisie",
+  "scenario": "1.11",
+  "tags": [
+    "employee",
+    "mother",
+    "twins",
+    "za-zyciem",
+    "preterm",
+    "supplementary-8-weeks",
+    "averaged-81.5",
+    "other-parent-krus",
+    "decision-split"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 46
+  },
+  "facts": {
+    "asOf": "2025-08-07",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "from": "2023-09-05",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2023-09-05"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2023-11-06",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer"
+          },
+          "months": [
+            {
+              "month": "2024-01",
+              "contributionBase": 831720,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 831720
+            },
+            {
+              "month": "2024-02",
+              "contributionBase": 831720,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 831720
+            },
+            {
+              "month": "2024-03",
+              "contributionBase": 831720,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 831720
+            },
+            {
+              "month": "2024-04",
+              "contributionBase": 831720,
+              "daysWorked": 17,
+              "daysDue": 21,
+              "fixedPay": 831720
+            },
+            {
+              "month": "2024-05",
+              "contributionBase": 831720,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 831720
+            },
+            {
+              "month": "2024-06",
+              "contributionBase": 831720,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 831720
+            },
+            {
+              "month": "2024-07",
+              "contributionBase": 831720,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 831720
+            },
+            {
+              "month": "2024-08",
+              "contributionBase": 831720,
+              "daysWorked": 15,
+              "daysDue": 21,
+              "fixedPay": 831720
+            },
+            {
+              "month": "2024-09",
+              "contributionBase": 831720,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 831720
+            },
+            {
+              "month": "2024-10",
+              "contributionBase": 831720,
+              "daysWorked": 15,
+              "daysDue": 23,
+              "fixedPay": 831720
+            },
+            {
+              "month": "2024-11",
+              "contributionBase": 831720,
+              "daysWorked": 11,
+              "daysDue": 19,
+              "fixedPay": 831720
+            },
+            {
+              "month": "2024-12",
+              "contributionBase": 831720,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 831720
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2025-01-29",
+          "to": "2025-03-02"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "krus",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2026-04-19",
+        "to": "2027-05-29"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-07-20",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true,
+          "gestationalWeek": 28,
+          "birthWeightG": 1150,
+          "zaZyciem": true,
+          "hospitalStays": [
+            {
+              "from": "2025-07-20",
+              "to": "2025-10-09"
+            }
+          ]
+        },
+        {
+          "ref": "child-2",
+          "bornAlive": true,
+          "gestationalWeek": 28,
+          "zaZyciem": true,
+          "hospitalStays": [
+            {
+              "from": "2025-07-20",
+              "to": "2025-12-07"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2025-08-07",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-07-20",
+        "days": 217
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "supplementary",
+        "titleId": "t1",
+        "from": "2026-02-22",
+        "days": 56
+      },
+      {
+        "id": "b3",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-04-19",
+        "days": 406,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "Z-3",
+      "page": 10,
+      "evidence": "handwritten"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 10,
+      "evidence": "handwritten"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.otherParent.insured": {
+      "doc": "claimant-statement",
+      "page": 20,
+      "evidence": "printed"
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "claimant-statement",
+      "page": 20,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "zus-notice",
+      "page": 22,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].gestationalWeek": {
+      "doc": "hospital-certificate",
+      "page": 29,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].birthWeightG": {
+      "doc": "hospital-certificate",
+      "page": 29,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].hospitalStays[0]": {
+      "doc": "hospital-certificate",
+      "page": 29,
+      "evidence": "inferred"
+    },
+    "facts.event.children[1].hospitalStays[0]": {
+      "doc": "hospital-certificate",
+      "page": 24,
+      "evidence": "inferred"
+    },
+    "facts.event.children[0].zaZyciem": {
+      "doc": "za-zyciem-certificate",
+      "page": 37,
+      "evidence": "printed"
+    },
+    "facts.event.children[1].zaZyciem": {
+      "doc": "za-zyciem-certificate",
+      "page": 40,
+      "evidence": "printed"
+    },
+    "plan.rateOption": {
+      "doc": "leave-application",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 10,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-notice",
+      "page": 22,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "leave-application",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "plan.blocks[2]": {
+      "doc": "leave-application",
+      "page": 7,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "ZUS notice grants maternity only (217 days at 81.5%) and defers the supplementary and parental parts until discharge and a hospital certificate; no later decision in the file. Those two blocks are in the plan as filed but absent from expected benefits. Weights: one twin 1150 g on two certificates; the other 1280 g on two and 1290 g on two, so it is omitted. Both 28 completed weeks (28+5) and above 1000 g, so the 8-week cap applies. Hospital stays are chains of consecutive certificates from several hospitals (transfers); grouped per child by birth weight and collapsed to one stay each (inferred). The notice confirms both children were still in hospital at its date. Father insured in KRUS; claimant's statement that he will not use parental leave at the same time (dates set to her parental period). Z-3 salary table 2024 (12 months before sick pay from 2025-01-29; carried over to maternity). Column 6 is the contractual amount; contributionBase inferred equal to it. Work-time date on the Z-3 is handwritten and may mark the start of full time. Payer size box not legible."
+}

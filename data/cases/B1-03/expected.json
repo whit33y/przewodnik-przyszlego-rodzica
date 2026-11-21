@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-03",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "decision",
+    "reversedOnAppeal": true
+  },
+  "benefits": [
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 168,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2025-10-14",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2026-03-30",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [
+    "USUS art. 83 ust. 6"
+  ],
+  "expectedAlerts": [],
+  "expectedAlertsPostEvent": [
+    "CERTIFICATE_TYPE"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": false
+  },
+  "variants": [
+    {
+      "name": "without-za-zyciem-certificate (decision of 2025-11-05)",
+      "factsPatch": [
+        {
+          "op": "replace",
+          "path": "/event/documents",
+          "value": [
+            "birthAct",
+            "hospitalStayCert"
+          ]
+        }
+      ],
+      "expected": {
+        "outcome": {
+          "value": "refused",
+          "reasonCodes": [
+            "CERTIFICATE_MISSING"
+          ],
+          "evidence": "decision"
+        },
+        "benefits": [
+          {
+            "type": "parental",
+            "parent": "claimant",
+            "status": "refused",
+            "days": {
+              "value": 168,
+              "evidence": "printed"
+            },
+            "from": {
+              "value": "2025-10-14",
+              "evidence": "printed"
+            },
+            "to": {
+              "value": "2026-03-30",
+              "evidence": "printed"
+            }
+          }
+        ],
+        "legalBasisCited": [
+          "UZ art. 29a ust. 1",
+          "KP art. 184",
+          "ustawa Za życiem art. 4 ust. 3"
+        ]
+      }
+    }
+  ]
+}

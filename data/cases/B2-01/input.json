@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-01",
+  "title": "Skrajny wcześniak (650 g, 29. tydzień): urlop macierzyński, 15 tygodni uzupełniającego i rodzicielski",
+  "scenario": "1.10",
+  "tags": [
+    "employee",
+    "mother",
+    "preterm",
+    "extreme-preterm",
+    "supplementary-15-weeks",
+    "weight-threshold",
+    "hospital-certificate-old-template"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 22
+  },
+  "facts": {
+    "asOf": "2025-06-18",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2011-11-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2011-11-01"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-06-12",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true,
+          "gestationalWeek": 29,
+          "birthWeightG": 650,
+          "hospitalStays": [
+            {
+              "from": "2025-06-12",
+              "to": "2025-09-30"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2025-06-18",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-06-12",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "supplementary",
+        "titleId": "t1",
+        "from": "2025-10-30",
+        "days": 105
+      },
+      {
+        "id": "b3",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-02-12",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "Z-3",
+      "page": 11,
+      "evidence": "handwritten"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 21,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "hospital-certificate",
+      "page": 17,
+      "evidence": "handwritten"
+    },
+    "facts.event.children[0].gestationalWeek": {
+      "doc": "hospital-certificate",
+      "page": 19,
+      "evidence": "handwritten"
+    },
+    "facts.event.children[0].birthWeightG": {
+      "doc": "hospital-certificate",
+      "page": 19,
+      "evidence": "handwritten"
+    },
+    "facts.event.children[0].hospitalStays[0]": {
+      "doc": "hospital-certificate",
+      "page": 19,
+      "evidence": "handwritten"
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "page": 2,
+      "evidence": "inferred"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 11,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "page": 2,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "page": 2,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[2]": {
+      "doc": "ZAM",
+      "page": 2,
+      "evidence": "handwritten"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 11,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Grant evidenced only by the file label (granting decision); the decision is not in the scanned pages, so every period is the claim as filed (handwritten ZAM and Z-3, consistent: whole chain 2025-06-12..2026-09-23 = 140 + 105 + 224 days). Durations therefore inferred. Week 29 with 650 g: the 15-week cap applies through the weight criterion, not the week criterion. Two hospital certificates: new template (stay from birth to 2025-09-30, not finished) and old template (a later stay ending 2025-10-10, start date doubtful). Only the first stay is recorded; it already exceeds 15 weeks. The 81.5% declaration box on the ZAM is not ticked although maternity and parental were requested together 6 days after birth; rateOption is inferred and no rate is asserted. Salary table not legible."
+}

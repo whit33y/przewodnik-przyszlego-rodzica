@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-03",
+  "title": "Zleceniobiorczyni z dobrowolnym ubezpieczeniem chorobowym: zasiłek chorobowy w ciąży i macierzyński 52 tygodnie przy podstawie 940 zł, podwyższenie do świadczenia rodzicielskiego",
+  "scenario": "1.4",
+  "tags": [
+    "mandate",
+    "mother",
+    "single-child",
+    "voluntary-sickness",
+    "sickness-in-pregnancy",
+    "low-base",
+    "top-up",
+    "rate-box-unticked"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 52
+  },
+  "facts": {
+    "asOf": "2024-03-18",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "mandate",
+          "zusCode": "0411",
+          "from": "2023-07-14",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2023-07-14"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "client",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2023-07",
+              "contributionBase": 23500,
+              "fullMonthInsured": false
+            },
+            {
+              "month": "2023-08",
+              "contributionBase": 94000
+            },
+            {
+              "month": "2023-09",
+              "contributionBase": 94000
+            },
+            {
+              "month": "2023-10",
+              "contributionBase": 94000
+            },
+            {
+              "month": "2023-11",
+              "contributionBase": 94000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [
+        {
+          "titleId": "t1",
+          "from": "2023-12-13",
+          "to": "2024-02-15",
+          "code": "B"
+        }
+      ],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2024-02-16",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2024-02-26",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "sickness",
+        "titleId": "t1",
+        "from": "2023-12-13",
+        "days": 65
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2024-02-16",
+        "days": 140
+      },
+      {
+        "id": "b3",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2024-07-05",
+        "days": 224,
+        "pool": "shared"
+      }
+    ],
+    "singleTitleStatement": true
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-notice",
+      "evidence": "printed",
+      "page": 17
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 8
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "Z-3a",
+      "evidence": "printed",
+      "page": 11
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 8
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3a",
+      "evidence": "printed",
+      "page": 13
+    },
+    "facts.claimant.sickNotes[0]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 7
+    },
+    "facts.claimant.sickNotes[0].code": {
+      "doc": "zus-insurance-memo",
+      "evidence": "inferred",
+      "page": 7
+    },
+    "facts.event.date": {
+      "doc": "zus-insurance-memo",
+      "evidence": "inferred",
+      "page": 7
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "evidence": "inferred",
+      "page": 4
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3a",
+      "evidence": "printed",
+      "page": 11
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 7
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "evidence": "printed",
+      "page": 4
+    },
+    "plan.blocks[2]": {
+      "doc": "ZAM",
+      "evidence": "printed",
+      "page": 4
+    },
+    "plan.singleTitleStatement": {
+      "doc": "zus-note",
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "ZUS memo lists sickness benefit 2023-12-13..2024-02-15 and the maternity claim 2024-02-16..2025-02-13; the closing note says all benefits (sickness and maternity for maternity + parental leave from the same mandate contract) were granted and paid. The maternity/parental split is the claim (ZAM). Declared sickness bases from the ZUS memo: 235.00 for 2023-07 (insured from 2023-07-14) and 940.00 for 2023-08..2023-11; the payer's Z-3a shows 940 for 2023-07 in one copy and 235 in another. ZUS letter: the maternity benefit net of tax is below 1000 zl, so a top-up to the parental-benefit level is paid from February 2024 (art. 31 ust. 3a cited there). The 81.5% box on the ZAM appears unticked although both periods were claimed together within 21 days of the birth, so averaged81_5 is inferred and no rate is asserted. Sickness code B (pregnancy) inferred from the sickness ending the day before the birth. Birth date inferred from the start of the maternity claim (birth extract date illegible). 90-day voluntary waiting period met (insured 2023-07-14, sick 2023-12-13). singleTitleStatement set to true: the top-up was paid, which requires the single-title statement (added during engine triage)."
+}

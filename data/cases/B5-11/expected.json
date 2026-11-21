@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-11",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "accountTitle1240"
+  },
+  "benefits": [
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 63,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2026-09-14",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2026-11-15",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 7000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  }
+}

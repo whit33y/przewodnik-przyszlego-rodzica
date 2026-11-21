@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-14",
+  "title": "Pracownica z wysokim wynagrodzeniem i premiami, krótko zatrudniona: zasiłek chorobowy w ciąży po wynagrodzeniu chorobowym, wniosek złożony przez płatnika",
+  "scenario": "1.2",
+  "tags": [
+    "employee",
+    "mother",
+    "sickness-in-pregnancy",
+    "high-earner",
+    "irregular-bonuses",
+    "short-insurance",
+    "small-employer"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 14
+  },
+  "facts": {
+    "asOf": "2026-10-13",
+    "mode": "adjudication",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2026-01-07",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2026-01-07"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2026-01-07",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2026-01",
+              "contributionBase": 1050000,
+              "daysWorked": 18,
+              "daysDue": 20,
+              "fixedPay": 1050000,
+              "fullMonthInsured": false
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 1050000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 1050000
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 1050000,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 1050000
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 1650000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 1150000,
+              "variablePay": 500000
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 1593120,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 1150000,
+              "variablePay": 443120
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 1166984,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 1150000,
+              "variablePay": 16984
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 1150000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 1150000
+            },
+            {
+              "month": "2026-08",
+              "contributionBase": 1550000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 1150000,
+              "variablePay": 400000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [
+        {
+          "titleId": "t1",
+          "from": "2026-09-04",
+          "to": "2026-10-13",
+          "code": "B"
+        }
+      ],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2026-09-04",
+          "to": "2026-10-06"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "children": [
+        {
+          "ref": "child-1"
+        }
+      ],
+      "documents": [
+        "pregnancyCert"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "sickness",
+        "titleId": "t1",
+        "from": "2026-10-07",
+        "days": 7
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 4
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 5
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 5
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 6
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 7
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 7
+    },
+    "facts.claimant.sickNotes[0]": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 6
+    },
+    "facts.claimant.sickNotes[0].code": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 6
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 6
+    },
+    "plan.blocks[0]": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 4
+    }
+  },
+  "extractionNotes": "ZUS cover note: the payer applied on the employee's behalf for sickness benefit during pregnancy, and the benefit was granted. Z-3: employer sick pay 2026-09-04..2026-10-06 (code B, 33 days); sickness benefit claimed 2026-10-07..2026-10-13. The e-ZLA on the ZUS screen covers 2026-09-15..2026-10-13 with code B; the earlier certificate is not shown, so the sick note is collapsed to 2026-09-04..2026-10-13 (start inferred from the sick pay). Salary 2026-01..2026-08 (hired 2026-01-07, January incomplete): contractual 10500.00, then 11500.00 from April; column 7 (variable pay reduced pro rata) 431.20 in May and 169.84 in June; column 8 bonuses 5000.00 in April and 4000.00 in May and August; recorded as fixedPay and variablePay, contributionBase inferred as their sum. Earlier titles on the account (self-employment, mandate contracts, a non-insured period) have illegible dates and are not modelled. The child is not yet born and the due date is not in the file; mode is set to adjudication. Rate 100% (pregnancy) inferred. asOf = last day of the claimed period (the Z-3 is undated)."
+}

@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-05",
+  "title": "Matka prowadząca działalność rezygnuje z urlopu macierzyńskiego po 14 tygodniach, resztę macierzyńskiego i rodzicielski bierze ojciec",
+  "scenario": "1.8",
+  "tags": [
+    "self-employed",
+    "mother",
+    "resignation-after-14-weeks",
+    "father-takeover",
+    "short-voluntary-insurance",
+    "preferential-zus",
+    "rate-100"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 22
+  },
+  "facts": {
+    "asOf": "2024-09-05",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2024-07-01",
+          "to": "2024-08-14",
+          "endReason": "deregisteredBenefitConcurrence",
+          "scheme": "preferential",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-07-01",
+                "to": "2024-08-14"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        },
+        {
+          "id": "t2",
+          "kind": "selfEmployed",
+          "zusCode": "0570T",
+          "from": "2024-08-15",
+          "to": "2024-11-21",
+          "scheme": "preferential",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-08-15",
+                "to": "2024-11-21"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2024-08-15",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2024-08-26",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2024-08-15",
+        "days": 99
+      },
+      {
+        "id": "b2",
+        "parent": "other",
+        "type": "maternity",
+        "from": "2024-11-22",
+        "days": 41,
+        "takeover": "afterResignation"
+      },
+      {
+        "id": "b3",
+        "parent": "other",
+        "type": "parental",
+        "from": "2025-01-02",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-titles-screen",
+      "page": 21,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0]": {
+      "doc": "zus-titles-screen",
+      "page": 19,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].scheme": {
+      "doc": "zus-titles-screen",
+      "page": 19,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[1]": {
+      "doc": "zus-titles-screen",
+      "page": 19,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "ZAM",
+      "page": 4,
+      "evidence": "handwritten"
+    },
+    "plan.applicationDate": {
+      "doc": "zus-note",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "page": 4,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "page": 6,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[1].takeover": {
+      "doc": "claimant-statement",
+      "page": 9,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[2]": {
+      "doc": "ZAM",
+      "page": 6,
+      "evidence": "handwritten"
+    }
+  },
+  "extractionNotes": "Self-employed mother (code 0570, voluntary sickness insurance from 2024-07-01, about six weeks before the birth; maternity benefit has no waiting period). The register shows the business title deregistered for concurrence with maternity benefit from the birth (insured 2024-07-01..2024-08-14) and a 0570T row with voluntary sickness cover 2024-08-15..2024-11-21; modelled as two titles. ZAM received by ZUS 2024-08-26 asks for maternity leave 2024-08-15..2024-11-21, described as 14 weeks although the dates give 99 days; the full-leave box is not ticked, so 100% is inferred. Written statement: she gives up the rest of maternity leave as of 2024-11-21 and the father takes the remainder from 2024-11-22. The ZAM states the father will use 6 weeks of maternity and 32 weeks of parental leave 2024-11-22..2025-08-13; those dates give 265 days = 41 remaining maternity days + 224 parental, so the father's blocks are 41 + 224 (his own case; kept in the plan only and left out of the expected benefits, which cover the mother's decision). The ZUS decisions list shows a granting maternity decision dated 2024-09-05 (text not in the file); the granted period is taken from the 0570T register row matching the claim. Scheme preferential inferred from the code. No declared bases in the file, so months are empty and amounts are not asserted."
+}

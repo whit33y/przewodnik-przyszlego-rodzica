@@ -1,0 +1,10 @@
+.layout { display: flex; flex-direction: column; gap: var(--space-6); max-width: 960px; }
+.section { display: flex; flex-direction: column; gap: var(--space-4); }
+.grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); }
+.muted { color: var(--ink-muted); }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-3); }
+.facts dt { font-size: var(--fs-small); color: var(--ink-muted); }
+.facts dd { font-weight: 600; }
+.cardFoot { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); flex-wrap: wrap; margin-top: auto; padding-top: var(--space-2); border-top: 1px solid var(--line-soft); }
+.cite { font-size: var(--fs-small); color: var(--ink-muted); }
+.cta { display: flex; flex-wrap: wrap; gap: var(--space-3); }

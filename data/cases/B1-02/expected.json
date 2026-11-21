@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-02",
+  "outcome": {
+    "value": "refused",
+    "reasonCodes": [
+      "ARREARS_UNPAID"
+    ],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 140,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-03-21",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2025-08-07",
+        "evidence": "claimed"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 224,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-08-08",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2026-03-19",
+        "evidence": "claimed"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [
+    "ARREARS_PAYER"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  },
+  "variants": [
+    {
+      "name": "no-arrears",
+      "factsPatch": [
+        {
+          "op": "replace",
+          "path": "/claimant/arrears/0",
+          "value": {
+            "account": "payer",
+            "onDate": "2025-03-21",
+            "aboveThreshold": false
+          }
+        }
+      ],
+      "expected": {
+        "outcome": {
+          "value": "granted",
+          "reasonCodes": [],
+          "evidence": "internalNote"
+        }
+      }
+    }
+  ]
+}

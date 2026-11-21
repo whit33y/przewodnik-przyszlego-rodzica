@@ -1,0 +1,261 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-03",
+  "title": "Ojciec, pracownik: zasiłek macierzyński za 32 tygodnie urlopu rodzicielskiego, matka dziecka nieubezpieczona, start po pierwszym roku życia dziecka",
+  "scenario": "1.7",
+  "tags": [
+    "employee",
+    "father",
+    "parental",
+    "other-parent-uninsured",
+    "parental-after-first-year",
+    "form-errors"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 16
+  },
+  "facts": {
+    "asOf": "2024-12-04",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2017-05-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2017-05-01"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2017-05-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2023-12",
+              "contributionBase": 430000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 430000
+            },
+            {
+              "month": "2024-01",
+              "contributionBase": 424200,
+              "daysWorked": 2,
+              "daysDue": 22,
+              "fixedPay": 424200
+            },
+            {
+              "month": "2024-02",
+              "contributionBase": 424200,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 424200
+            },
+            {
+              "month": "2024-03",
+              "contributionBase": 424200,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 424200
+            },
+            {
+              "month": "2024-04",
+              "contributionBase": 424200,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 424200
+            },
+            {
+              "month": "2024-05",
+              "contributionBase": 424200,
+              "daysWorked": 18,
+              "daysDue": 20,
+              "fixedPay": 424200
+            },
+            {
+              "month": "2024-06",
+              "contributionBase": 424200,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 424200
+            },
+            {
+              "month": "2024-07",
+              "contributionBase": 430000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 430000
+            },
+            {
+              "month": "2024-08",
+              "contributionBase": 430000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 430000
+            },
+            {
+              "month": "2024-09",
+              "contributionBase": 430000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 430000
+            },
+            {
+              "month": "2024-10",
+              "contributionBase": 430000,
+              "daysWorked": 9,
+              "daysDue": 23,
+              "fixedPay": 430000
+            },
+            {
+              "month": "2024-11",
+              "contributionBase": 430000,
+              "daysWorked": 19,
+              "daysDue": 19,
+              "fixedPay": 430000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2023-12-28",
+          "to": "2024-01-03"
+        },
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2024-05-16",
+          "to": "2024-05-19"
+        },
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2024-10-14",
+          "to": "2024-10-31"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "mother",
+      "insured": "no",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2024-01-10",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2024-11-20",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2025-01-01",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "Z-3",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[0].month": {
+      "doc": "Z-3",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.otherParent.insured": {
+      "doc": "leave-application",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "page": 7,
+      "evidence": "handwritten"
+    },
+    "plan.applicationDate": {
+      "doc": "ZUR",
+      "page": 3,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZUR",
+      "page": 2,
+      "evidence": "handwritten"
+    }
+  },
+  "extractionNotes": "Employee father claims maternity benefit for parental leave 2025-01-01..2025-08-12 (224 days = 32 weeks), starting when the child is almost one year old; the child's mother is not insured, so the father may use the parental leave that is not reserved for her. No ZUS decision or note in the file; the grant is assumed from the file classification (granted in the digest), so every expected value is the claim. Rate not printed: parental leave claimed on its own, 70% inferred. Form errors: the father ticked the 'full maternity + parental leave in the first year' declaration (irrelevant here) and wrote the birth date in the hospital-discharge field; the employer ticked maternity instead of parental leave on the Z-3. Leave request to the employer with the mother's statement of non-use; birth date handwritten on the birth extract and on the ZUR. Z-3 salary table: the first row is labelled 2024-12 but sits before 2024-01 and is read as 2023-12. 2024-01 mostly not worked (sickness and other absence codes). Employer reported up to 20 insured (ZUS pays). asOf = the Z-3 application date (latest dated document)."
+}

@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-07",
+  "title": "Ojciec prowadzący działalność: zasiłek macierzyński za okres urlopu ojcowskiego, wakacje składkowe w okresie bazowym",
+  "scenario": "1.5",
+  "tags": [
+    "self-employed",
+    "father",
+    "paternity",
+    "contribution-holiday",
+    "no-arrears",
+    "marriage-certificate-unneeded"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 30
+  },
+  "facts": {
+    "asOf": "2025-09-08",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0510",
+          "from": "2024-09-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-09-01"
+              }
+            ]
+          },
+          "scheme": "standard",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2024-09",
+              "contributionBase": 469440,
+              "contributionHoliday": false
+            },
+            {
+              "month": "2024-10",
+              "contributionBase": 469440,
+              "contributionHoliday": false
+            },
+            {
+              "month": "2024-11",
+              "contributionBase": 469440,
+              "contributionHoliday": false
+            },
+            {
+              "month": "2024-12",
+              "contributionBase": 469440,
+              "contributionHoliday": true
+            },
+            {
+              "month": "2025-01",
+              "contributionBase": 520380,
+              "contributionHoliday": false
+            },
+            {
+              "month": "2025-02",
+              "contributionBase": 520380,
+              "contributionHoliday": false
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 520380,
+              "contributionHoliday": false
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 520380,
+              "contributionHoliday": false
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 520380,
+              "contributionHoliday": false
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 520380,
+              "contributionHoliday": true
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 520380,
+              "contributionHoliday": false
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 520380,
+              "contributionHoliday": false
+            }
+          ]
+        },
+        {
+          "id": "t0",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2022-09-01",
+          "to": "2024-08-31",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2022-09-01",
+                "to": "2024-08-31"
+              }
+            ]
+          },
+          "scheme": "preferential",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2025-09-08",
+          "aboveThreshold": false
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-02-05",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "paternity",
+        "titleId": "t1",
+        "from": "2025-09-08",
+        "days": 14
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-insurance-memo",
+      "page": 23,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 24,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-insurance-memo",
+      "page": 24,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionHoliday": {
+      "doc": "zus-insurance-memo",
+      "page": 24,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1]": {
+      "doc": "zus-insurance-memo",
+      "page": 24,
+      "evidence": "printed"
+    },
+    "facts.claimant.arrears[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 25,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "ZAO",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 23,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Self-employed father: preferential 0570 2022-09-01..2024-08-31, then standard 0510 from 2024-09-01, voluntary sickness throughout. Sickness insurance deregistered from 2025-09-08 with the title continuing, the usual effect of starting maternity benefit, so the title is left open. ZUS memo: claim 2025-09-08..2025-09-21 (14 days), examination date 2025-09-08, debt NIE, base below 60% of the forecast wage last in 2024-08. Declared bases 4694.40 (2024-09..12) and 5203.80 (2025-01..08); contribution holidays flagged in 2024-12 and 2025-06 (summary and memo). Two internal notes: maternity benefit granted. Rate 100% by law, not printed. The father also supplied a marriage certificate that was not needed."
+}

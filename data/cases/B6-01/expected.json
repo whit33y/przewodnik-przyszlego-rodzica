@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-01",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "maternityOnAdoption",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2026-01-27",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2026-06-15",
+        "evidence": "printed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 224,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2026-06-16",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2027-01-25",
+        "evidence": "printed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": false
+  }
+}

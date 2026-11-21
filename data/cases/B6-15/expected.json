@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-15",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "decision"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2025-09-10",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2026-01-27",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "printed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 224,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2026-01-28",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2026-09-08",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "printed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": true
+  }
+}

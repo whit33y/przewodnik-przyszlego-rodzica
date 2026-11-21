@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-01",
+  "title": "Mama prowadząca działalność (Mały ZUS Plus): zasiłek macierzyński 20 + 32 tygodnie z podwyższeniem do kwoty świadczenia rodzicielskiego",
+  "scenario": "1.3",
+  "tags": [
+    "self-employed",
+    "mother",
+    "single-child",
+    "maly-zus-plus",
+    "top-up",
+    "single-title-statement",
+    "rate-box-unticked",
+    "sickness-in-pregnancy"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 20
+  },
+  "facts": {
+    "asOf": "2025-03-21",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0590",
+          "from": "2022-04-18",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2022-04-18"
+              }
+            ]
+          },
+          "scheme": "malyZusPlus",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-02-06",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2025-02-20",
+    "singleTitleStatement": true,
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-02-06",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2025-06-26",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-notice",
+      "evidence": "printed",
+      "page": 13
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "evidence": "inferred",
+      "page": 16
+    },
+    "facts.claimant.titles[0].zusCode": {
+      "doc": "zus-titles-screen",
+      "evidence": "inferred",
+      "page": 16
+    },
+    "facts.claimant.titles[0].scheme": {
+      "doc": "zus-titles-screen",
+      "evidence": "inferred",
+      "page": 16
+    },
+    "facts.claimant.titles[0].sickness": {
+      "doc": "Z-3b",
+      "evidence": "handwritten",
+      "page": 11
+    },
+    "facts.event.date": {
+      "doc": "ZAM",
+      "evidence": "inferred",
+      "page": 7
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "evidence": "inferred",
+      "page": 7
+    },
+    "plan.applicationDate": {
+      "doc": "zus-notice",
+      "evidence": "printed",
+      "page": 13
+    },
+    "plan.singleTitleStatement": {
+      "doc": "claimant-statement",
+      "evidence": "printed",
+      "page": 15
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 7
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 7
+    }
+  },
+  "extractionNotes": "Grant evidenced by the closing note (sickness benefit in pregnancy and maternity benefit paid) and by a ZUS letter asking for the single-title statement needed to pay the top-up to the 1000 zl parental-benefit level for 2025-02-06..2026-02-04, which equals the whole claimed maternity + parental period; the claimant then filed the statement. The maternity/parental split is the claim (ZAM). The ZAM 81.5% declaration box is unticked although both periods were claimed together within 21 days of the birth, so averaged81_5 is inferred and no rate is asserted. Birth date: birth extract illegible; taken as the first maternity day. Title: the ZUS register screenshot is partly illegible; a Maly ZUS Plus (0590) self-employed title from 2022-04-18 with voluntary sickness insurance, and a 0510 row around the birth, are visible; one self-employed title is modelled. Declared bases are not in the file (months empty); the top-up shows the benefit was under 1000 zl net per month. Pregnancy sickness benefit (one e-ZLA of 17 days, year illegible) was paid but is not modelled. The other parent's statement is illegible."
+}

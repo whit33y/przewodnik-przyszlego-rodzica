@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-14",
+  "title": "Pracownica na 1/4 etatu: zasiłek chorobowy w ciąży, potem macierzyński i rodzicielski 52 tygodnie podwyższony do kwoty świadczenia rodzicielskiego; ojciec równolegle część swoich 9 tygodni",
+  "scenario": "1.16",
+  "tags": [
+    "employee",
+    "mother",
+    "quarter-time",
+    "top-up",
+    "sickness-in-pregnancy",
+    "concurrent-parental",
+    "averaged-81.5",
+    "single-title-statement"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 56
+  },
+  "facts": {
+    "asOf": "2024-07-15",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "from": "2022-09-12",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2022-09-12"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2022-09-12",
+              "fraction": {
+                "num": 1,
+                "den": 4
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2022-09",
+              "contributionBase": 75250,
+              "daysWorked": 15,
+              "daysDue": 15,
+              "fixedPay": 75250,
+              "fullMonthInsured": false
+            },
+            {
+              "month": "2022-10",
+              "contributionBase": 75250,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 75250
+            },
+            {
+              "month": "2022-11",
+              "contributionBase": 75250,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 75250
+            },
+            {
+              "month": "2022-12",
+              "contributionBase": 75250,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 75250
+            },
+            {
+              "month": "2023-01",
+              "contributionBase": 87250,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 87250
+            },
+            {
+              "month": "2023-02",
+              "contributionBase": 87250,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 87250
+            },
+            {
+              "month": "2023-03",
+              "contributionBase": 87250,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 87250
+            },
+            {
+              "month": "2023-04",
+              "contributionBase": 87250,
+              "daysWorked": 19,
+              "daysDue": 19,
+              "fixedPay": 87250
+            },
+            {
+              "month": "2023-05",
+              "contributionBase": 87250,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 87250
+            },
+            {
+              "month": "2023-06",
+              "contributionBase": 87250,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 87250
+            },
+            {
+              "month": "2023-07",
+              "contributionBase": 90000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 90000
+            },
+            {
+              "month": "2023-08",
+              "contributionBase": 90000,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 90000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2023-09-21",
+          "to": "2023-09-30"
+        },
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2023-10-01",
+          "to": "2023-10-23"
+        },
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2023-10-24",
+          "to": "2023-12-14",
+          "rateBps": 10000
+        },
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2023-12-18",
+          "to": "2024-04-08",
+          "rateBps": 10000
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "yes",
+      "used": [
+        {
+          "type": "parental",
+          "from": "2024-05-13",
+          "to": "2024-06-14"
+        }
+      ]
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2024-04-09",
+      "documents": [
+        "birthAct"
+      ],
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2024-04-30",
+    "singleTitleStatement": true,
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2024-04-09",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2024-08-27",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-notice",
+      "evidence": "printed",
+      "page": 3
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 53
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 7
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 48
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 9
+    },
+    "facts.claimant.titles[0].months[0].fullMonthInsured": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 9
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 48
+    },
+    "facts.claimant.paidBenefits[1]": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 48
+    },
+    "facts.claimant.paidBenefits[2]": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 56
+    },
+    "facts.claimant.paidBenefits[3]": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 56
+    },
+    "facts.otherParent.used[0]": {
+      "doc": "claimant-statement",
+      "evidence": "printed",
+      "page": 14
+    },
+    "facts.event.date": {
+      "doc": "zus-notice",
+      "evidence": "printed",
+      "page": 3
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 24
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 7
+    },
+    "plan.singleTitleStatement": {
+      "doc": "claimant-statement",
+      "evidence": "handwritten",
+      "page": 27
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 24
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 24
+    }
+  },
+  "extractionNotes": "Quarter-time employee whose pay equals 1/4 of the minimum wage (752.50 / 872.50 / 900.00, later 1060.50). Employer sick pay 2023-09-21..2023-10-23, then ZUS sickness benefit 2023-10-24..2023-12-14 and 2023-12-18..2024-04-08 (ZUS note: all benefits granted and paid). Birth 2024-04-09; maternity follows sickness without a gap, so the base carries over from the sickness window 2022-09..2023-08 (September 2022 incomplete: hire on 2022-09-12 per the title register; a second Z-3 says 2022-09-21). ZUS notice of 2024-07-15 confirms maternity benefit 2024-04-09..2025-04-07 and, citing the top-up rule, raises it to the 1000 zl parental-benefit level from 2024-04-09 because the April net amount was lower and no other title exists; it requires a single-title statement, which is in the file. Leave application date on the Z-3 is 2024-04-30 (day 21). The ZAM (full-length declaration ticked) splits maternity to 2024-08-26 and parental from 2024-08-27, and declares the father's parental leave 2024-05-13..2024-06-14, described in a separate statement as part of his own 9 weeks, taken concurrently. Amounts not printed; whether the part-time minimum-wage floor applies is left to the engine."
+}

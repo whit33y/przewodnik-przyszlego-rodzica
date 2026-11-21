@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-08",
+  "title": "Niezawodowa rodzina zastępcza, mama prowadząca działalność: zasiłek macierzyński 20 tygodni na warunkach urlopu macierzyńskiego + 32 tygodnie rodzicielskiego",
+  "scenario": "1.12",
+  "tags": [
+    "self-employed",
+    "foster",
+    "non-professional-foster",
+    "court-order",
+    "concurrent-mandate"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 18
+  },
+  "facts": {
+    "asOf": "2024-01-15",
+    "claimant": {
+      "sex": "F",
+      "role": "foster",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0510",
+          "from": "2023-01-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2023-01-01"
+              }
+            ]
+          },
+          "scheme": "standard",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        },
+        {
+          "id": "t2",
+          "kind": "mandate",
+          "zusCode": "0411",
+          "from": "2024-09-01",
+          "to": "2025-03-31",
+          "sickness": {
+            "mode": "none",
+            "periods": []
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "client"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "foster",
+      "takenIntoCareOn": "2024-01-15",
+      "fosterType": "nonProfessional",
+      "children": [
+        {
+          "ref": "child-1"
+        }
+      ],
+      "documents": [
+        "courtOrder",
+        "fosterCert",
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternityOnAdoption",
+        "titleId": "t1",
+        "from": "2024-01-15",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2024-06-03",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "Z-3b",
+      "evidence": "inferred",
+      "page": 4
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 17
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 17
+    },
+    "facts.claimant.titles[1]": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 17
+    },
+    "facts.event.takenIntoCareOn": {
+      "doc": "Z-3b",
+      "evidence": "inferred",
+      "page": 4
+    },
+    "facts.event.fosterType": {
+      "doc": "ZUR",
+      "evidence": "printed",
+      "page": 7
+    },
+    "plan.blocks[0]": {
+      "doc": "ZUR",
+      "evidence": "handwritten",
+      "page": 7
+    },
+    "plan.blocks[1]": {
+      "doc": "ZUR",
+      "evidence": "handwritten",
+      "page": 7
+    }
+  },
+  "extractionNotes": "Closing note: maternity benefit established and paid. The ZUS register shows the benefit-recipient title (1240) and the health-only self-employment variant for 2024-01-15..2025-01-12, i.e. the whole 52-week period; before that the self-employed title (0510) with voluntary sickness insurance from 2023-01-01 (earlier rows cut off) to 2024-01-14. The ZUR (first parental part, non-professional foster family ticked) gives 15.01.24 - 3.06.24 - 12.01.25, read as 140 days of leave on maternity terms 2024-01-15..2024-06-02 and 224 days of parental leave 2024-06-03..2025-01-12; the split is the claim. Placement: a court order from 2023 amended to place the child in the foster family for the duration of the proceedings, and the foster-care organiser's certificate from January 2024; the placement date is redacted, so takenIntoCareOn is inferred as the first benefit day. The organiser's certificate lists more than one child placed; ages and dates are redacted, and only the child the claim relates to is modelled. A concurrent mandate contract (health insurance only) ran 2024-09-01..2025-03-31. Rate not printed; declared bases not in the file. asOf inferred as the placement date (application date illegible)."
+}

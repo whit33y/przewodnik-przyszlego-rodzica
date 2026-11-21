@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-01",
+  "title": "Przysposobienie: urlop na warunkach urlopu macierzyńskiego 20 tygodni i rodzicielski 32 tygodnie, od dnia po przyjęciu dziecka",
+  "scenario": "1.12",
+  "tags": [
+    "employee",
+    "adoptive",
+    "adoption",
+    "court-care-order",
+    "bonus-reduced-during-benefit"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 16
+  },
+  "facts": {
+    "asOf": "2027-01-25",
+    "claimant": {
+      "sex": "F",
+      "role": "adoptive",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2023-04-20",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2023-04-20"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2023-04-20",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-01",
+              "contributionBase": 853244,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 853244
+            },
+            {
+              "month": "2025-02",
+              "contributionBase": 853244,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 853244
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 853244,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 853244
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 853244,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 853244
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 853244,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 853244
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 853244,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 853244
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 895906,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 895906
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 895906,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 895906
+            },
+            {
+              "month": "2025-09",
+              "contributionBase": 895906,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 895906
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 895906,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 895906
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 971969,
+              "daysWorked": 18,
+              "daysDue": 18,
+              "fixedPay": 895906,
+              "variablePay": 76063
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 895906,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 895906
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "adoptive",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "adoption",
+      "takenIntoCareOn": "2026-01-26",
+      "petitionFiledOn": "2026-01-16",
+      "children": [
+        {
+          "ref": "child-1",
+          "birthDate": "2024-04-20"
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2026-01-22",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternityOnAdoption",
+        "titleId": "t1",
+        "from": "2026-01-27",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-06-16",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-titles-screen",
+      "page": 7,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 10,
+      "evidence": "handwritten"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "inferred"
+    },
+    "facts.event.takenIntoCareOn": {
+      "doc": "ZAS-26",
+      "page": 3,
+      "evidence": "handwritten"
+    },
+    "facts.event.petitionFiledOn": {
+      "doc": "ZAS-26",
+      "page": 3,
+      "evidence": "handwritten"
+    },
+    "facts.event.children[0].birthDate": {
+      "doc": "birth-extract",
+      "page": 5,
+      "evidence": "handwritten"
+    },
+    "plan.rateOption": {
+      "doc": "Z-3",
+      "page": 10,
+      "evidence": "inferred"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-note",
+      "page": 1,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "zus-note",
+      "page": 1,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 11,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Paid periods printed in a ZUS internal note (payments made): 2026-01-27..2026-06-15 and 2026-06-16..2027-01-25. The child was taken into care on 2026-01-26 (same date as the interim court care order); the benefit starts the next day. The plan keeps the filed start; the engine must accept a start after takenIntoCareOn. The court order is an interim order for the duration of adoption proceedings, not a final adoption order, so finalOrderOn is absent. Spouses were entrusted jointly. Child aged about 1 year 9 months at care. Leave application date on the Z-3 precedes the care date. Rate not in the file (81.5% inferred from the joint maternity + parental leave). Employer remark: a bonus paid in 2025-11 is reduced during benefit periods and still applies (column 8, actual amount). Column 6 is the contractual amount; contributionBase inferred as column 6 plus column 8. asOf = query date of the ZUS titles screen next to the payment note (last document ZUS relied on)."
+}

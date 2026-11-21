@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-04",
+  "title": "Martwe urodzenie bez aktu urodzenia (płeć nieustalona), matka prowadząca działalność na niskiej podstawie: 8 tygodni zasiłku macierzyńskiego",
+  "scenario": "1.9",
+  "tags": [
+    "self-employed",
+    "mother",
+    "stillbirth",
+    "no-registry-act",
+    "stillbirth-certificate",
+    "maly-zus-plus",
+    "low-base",
+    "top-up-statement",
+    "claim-57-days"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 20
+  },
+  "facts": {
+    "asOf": "2026-03-10",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0590",
+          "from": "2023-02-08",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2023-05-19"
+              }
+            ]
+          },
+          "scheme": "malyZusPlus",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2025-02",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 93400
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-09",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 139980,
+              "contributionHoliday": true
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 144180
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2025-03-19",
+          "to": "2025-03-25"
+        },
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2025-06-18",
+          "to": "2025-06-27"
+        }
+      ],
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2026-02-21",
+          "aboveThreshold": false
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-02-21",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": false
+        }
+      ],
+      "documents": [
+        "stillbirthCert"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-02-21",
+        "days": 57
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 16
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 15
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 15
+    },
+    "facts.claimant.titles[0].scheme": {
+      "doc": "zus-insurance-memo",
+      "evidence": "inferred",
+      "page": 16
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 15
+    },
+    "facts.claimant.paidBenefits": {
+      "doc": "zus-insurance-memo",
+      "evidence": "inferred",
+      "page": 13
+    },
+    "facts.claimant.arrears[0]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 16
+    },
+    "facts.event.date": {
+      "doc": "stillbirth-certificate",
+      "evidence": "printed",
+      "page": 11
+    },
+    "facts.event.documents": {
+      "doc": "stillbirth-certificate",
+      "evidence": "printed",
+      "page": 11
+    },
+    "facts.event.children[0].bornAlive": {
+      "doc": "stillbirth-certificate",
+      "evidence": "printed",
+      "page": 11
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 2
+    }
+  },
+  "extractionNotes": "Stillbirth on 2026-02-21; sex undetermined, so no stillbirth card went to the registry office and the proof is the special doctor/midwife certificate issued when no birth act exists. The ZAM asks for maternity leave 2026-02-21..2026-04-18 (57 days, one day more than 8 weeks); the ZUS memo repeats the claimed period. The ZUS titles screen with the note that maternity benefit was granted shows title 1240 for 2026-02-21..2026-04-17 (exactly 56 days), while the contribution-exempt 0590 row runs to 2026-04-18; the 1240 period is taken as the granted period. No decision on the extra day. ZUS insurance memo (created 2026-03-09, answered 2026-03-10): 0590 from 2023-02-08, voluntary sickness from 2023-05-19; declared bases 2025-02..2026-01 (minimum bases; 2025-06 partial after a sickness spell; 2025-12 flagged as a contribution-holiday month); no debt on 2026-02-21; base below 60% of the forecast wage (last such month 2026-01). Earlier benefits listed in the memo are summarised as two 2025 sickness spells (benefit-type codes not decoded; 2021-2023 spells including a previous child's 52-week maternity omitted). The claimant filed a statement that she has no other title, asking for the benefit to be raised to the 1000 zł floor; whether the top-up was applied is not printed. Base and amounts not printed; 100% rate expected."
+}

@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-12",
+  "title": "Prowadząca działalność: zasiłek chorobowy w ciąży, potem macierzyński 20 + 32 tygodnie, bez zadłużenia",
+  "scenario": "1.3",
+  "tags": [
+    "self-employed",
+    "mother",
+    "sickness-in-pregnancy",
+    "no-arrears",
+    "carried-over-base",
+    "standard-zus"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 20
+  },
+  "facts": {
+    "asOf": "2026-10-14",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0510",
+          "from": "2025-09-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2025-09-01"
+              }
+            ]
+          },
+          "scheme": "standard",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2025-09",
+              "contributionBase": 520380
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 520380
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 520380
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 520380
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 201857
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 382877
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 18232
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2026-02-11",
+          "to": "2026-03-10"
+        },
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2026-05-02",
+          "to": "2026-09-30"
+        }
+      ],
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2026-10-01",
+          "aboveThreshold": false
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-10-01",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-10-01",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2027-02-18",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-insurance-memo",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 14,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].zusCode": {
+      "doc": "zus-insurance-memo",
+      "page": 14,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 14,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-insurance-memo",
+      "page": 14,
+      "evidence": "printed"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.paidBenefits[1]": {
+      "doc": "zus-insurance-memo",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "facts.claimant.arrears[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 15,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "zus-insurance-memo",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "plan.blocks[1]": {
+      "doc": "zus-insurance-memo",
+      "page": 13,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Self-employed (0510, voluntary sickness from 2025-09-01). ZUS insurance memo: claim 2026-10-01..2027-09-29 (exactly 52 weeks; split 140 + 224 inferred), examination date 2026-10-01, base date 2026-05-02 (start of the uninterrupted sickness spell, so the maternity base is carried over), debt on 2026-10-01: NIE, last document received 2026-10-06. Earlier sickness benefits 2026-02-11..2026-03-10 and 2026-05-02..2026-10-04; the last spell is cut at the birth, so it is recorded to 2026-09-30 (inferred). The title shows an end on 2026-09-30 by concurrence with maternity benefit, a consequence of the claim, so it is left open. Declared bases 2025-09..2026-05 printed (reduced in sick months). Grant evidenced by the 1240 title; application date not legible (about 13.10.2026), full-use box ticked, rate not asserted."
+}

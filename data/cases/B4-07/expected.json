@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-07",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "payments"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "inferred"
+      },
+      "from": {
+        "value": "2026-09-20",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2027-02-06",
+        "evidence": "inferred"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "printed"
+      },
+      "base": {
+        "value": 487711,
+        "evidence": "printed"
+      },
+      "daily": {
+        "value": 13249,
+        "evidence": "printed"
+      },
+      "payments": [
+        {
+          "from": "2026-09-20",
+          "to": "2026-09-30",
+          "days": 11,
+          "gross": {
+            "value": 145739,
+            "evidence": "printed"
+          }
+        },
+        {
+          "from": "2026-10-01",
+          "to": "2026-10-31",
+          "days": 31,
+          "gross": {
+            "value": 410719,
+            "evidence": "printed"
+          }
+        }
+      ],
+      "paidBy": {
+        "value": "zus",
+        "evidence": "printed"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 224,
+        "evidence": "inferred"
+      },
+      "from": {
+        "value": "2027-02-07",
+        "evidence": "inferred"
+      },
+      "to": {
+        "value": "2027-09-18",
+        "evidence": "inferred"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "inferred"
+      },
+      "base": {
+        "value": 487711,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": true
+  }
+}

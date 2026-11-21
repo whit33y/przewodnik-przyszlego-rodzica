@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-06",
+  "title": "Pracownica wracająca z dwuletniego urlopu wychowawczego, chora w ciąży: 52 tygodnie zasiłku macierzyńskiego z podstawy od płacy minimalnej",
+  "scenario": "1.1",
+  "tags": [
+    "employee",
+    "mother",
+    "after-childcare-leave",
+    "minimum-wage-floor",
+    "pregnancy-sick-pay",
+    "averaged-81.5",
+    "parental-one-day-short"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 30
+  },
+  "facts": {
+    "asOf": "2024-06-11",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2017-09-25",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2017-09-25",
+                "to": "2021-09-30"
+              },
+              {
+                "from": "2023-10-02"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2023-10-02",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "statedBenefitBase": 366042,
+          "months": [
+            {
+              "month": "2023-10",
+              "contributionBase": 360000,
+              "daysWorked": 21,
+              "daysDue": 22,
+              "fixedPay": 360000
+            },
+            {
+              "month": "2023-11",
+              "contributionBase": 360000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 360000
+            }
+          ]
+        },
+        {
+          "id": "t0",
+          "kind": "childcareLeave",
+          "from": "2021-10-01",
+          "to": "2023-10-01",
+          "sickness": {
+            "mode": "none",
+            "periods": []
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2024-01-01",
+          "to": "2024-02-02"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2024-10-10",
+        "to": "2025-05-20"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2024-05-23",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2024-06-03",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2024-05-23",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2024-10-10",
+        "days": 223,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "ZAM",
+      "page": 22,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 29,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].sickness.periods": {
+      "doc": "Z-3",
+      "page": 7,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].statedBenefitBase": {
+      "doc": "Z-3",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[1]": {
+      "doc": "Z-3",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "leave-application",
+      "page": 9,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "ZAM",
+      "page": 15,
+      "evidence": "handwritten"
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "page": 22,
+      "evidence": "printed"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "page": 15,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[1]": {
+      "doc": "leave-application",
+      "page": 9,
+      "evidence": "handwritten"
+    }
+  },
+  "extractionNotes": "Employee since 2017 on childcare leave 2021-10-01..2023-10-01, back at work 2023-10-02 (first on overdue holiday); full time. Z-3 salary only 2023-10 (21 of 22 days, childcare leave on the 1st) and 2023-11, 3600.00 each (2023 minimum wage). Employer pregnancy sick pay (code B) 2024-01-01..2024-02-02; the later ZUS sickness benefit is not in the file. The employer's remark explains the base: the 2023 minimum-wage months uplifted to the 2024 minimum wage, 4242.00 less 13.71% = 3660.42, carried over to maternity; recorded as statedBenefitBase (employer-printed, so the expected base is claimed). Birth date: the leave application says 22 May, the corrected ZAM 23 May; ZUS paid from 23 May, so 2024-05-23 is used. ZUS handwritten note on the account screen: case paid, maternity 2024-05-23..2024-10-09 and parental 2024-10-10..2025-05-20. That gives 223 parental days, one short of 224: the employer granted leave to 2025-05-20 (leave application and Z-3) while the corrected ZAM asks until 2025-05-21; the plan follows the employer-granted leave that ZUS paid. Two ZAMs; the second (received about 19 days after the birth) has the full-leave box ticked, and the leave application to the employer is dated 2024-06-03, so 81.5% applies (not printed). The father signed that he will not use parental leave. Employer marked up to 20 insured. asOf = receipt date of the second ZAM (ZUS note undated)."
+}

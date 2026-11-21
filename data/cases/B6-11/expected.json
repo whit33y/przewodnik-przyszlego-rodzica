@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-11",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2025-11-27",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2026-04-15",
+        "evidence": "printed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "supplementary",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 14,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2026-04-16",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2026-04-29",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 224,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2026-04-30",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2026-12-09",
+        "evidence": "printed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "expectedAlertsPostEvent": [
+    "CERTIFICATE_TYPE"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": false
+  }
+}

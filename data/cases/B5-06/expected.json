@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-06",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2024-05-23",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2024-10-09",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "inferred"
+      },
+      "base": {
+        "value": 366042,
+        "evidence": "claimed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 223,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2024-10-10",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2025-05-20",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "inferred"
+      },
+      "base": {
+        "value": 366042,
+        "evidence": "claimed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "expectedAlertsPostEvent": [
+    "DAY_COUNT_MISMATCH"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": false
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-05",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "decision"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 99,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2024-08-15",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2024-11-21",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": false
+  }
+}

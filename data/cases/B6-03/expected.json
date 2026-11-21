@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-03",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "payments"
+  },
+  "benefits": [
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 63,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2025-03-10",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2025-05-11",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 7000,
+        "evidence": "printed"
+      },
+      "base": {
+        "value": 412406,
+        "evidence": "printed"
+      },
+      "daily": {
+        "value": 9623,
+        "evidence": "printed"
+      },
+      "payments": [
+        {
+          "from": "2025-04-01",
+          "to": "2025-04-30",
+          "days": 30,
+          "gross": {
+            "value": 288690,
+            "evidence": "printed"
+          }
+        },
+        {
+          "from": "2025-05-01",
+          "to": "2025-05-11",
+          "days": 11,
+          "gross": {
+            "value": 105853,
+            "evidence": "printed"
+          }
+        }
+      ],
+      "paidBy": {
+        "value": "zus",
+        "evidence": "printed"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "expectedAlertsPostEvent": [
+    "OTHER_PARENT_INFO_MISSING"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": true
+  }
+}
