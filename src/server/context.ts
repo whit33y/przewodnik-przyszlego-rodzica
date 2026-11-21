@@ -1,8 +1,11 @@
 import "server-only";
 import { connection } from "next/server";
+import { selectParameterSet } from "@/engine";
+import type { Bps } from "@/engine/types";
 import { SOURCES, sourceById } from "@/integrations/sources";
 import type { Answers, SourceId, SystemId, SystemPayloads } from "@/integrations/types";
 import { assemble, type Assembled } from "./assemble";
+import { engineParams } from "./engine-facade";
 import { resolvePersona, type ResolvedPersona } from "./persona-store";
 import { getSession, type SessionData } from "./session";
 import { readState, type SessionStateData } from "./session-state";
@@ -24,6 +27,8 @@ export interface AppContext {
   statuses: SourceStatus[];
   assembled: Assembled;
   answers: Answers;
+  /** Employee social deduction of the parameter set in force on the session's "today". */
+  deductionBps: Bps;
 }
 
 const latencyFactor = () => (process.env.SIM_LATENCY === "0" ? 0 : 1);
@@ -57,7 +62,7 @@ export function availablePayloads(statuses: SourceStatus[], persona: ResolvedPer
   return out;
 }
 
-export function buildAssembled(state: SessionStateData, persona: ResolvedPersona | null, statuses: SourceStatus[]): { assembled: Assembled; answers: Answers } {
+export function buildAssembled(state: SessionStateData, persona: ResolvedPersona | null, statuses: SourceStatus[], deductionBps: Bps): { assembled: Assembled; answers: Answers } {
   const answers: Answers = { ...(persona?.presetAnswers ?? {}), ...state.answers };
   const payloads = availablePayloads(statuses, persona);
   const meta = Object.fromEntries(statuses.filter((s) => s.asOf).map((s) => [s.source, { asOf: s.asOf! }])) as Partial<Record<SourceId, { asOf: string }>>;
@@ -65,10 +70,11 @@ export function buildAssembled(state: SessionStateData, persona: ResolvedPersona
   let otherParentPerson;
   if (persona?.otherParent?.consented && answers.otherParent?.mode === "consent") {
     const op = persona.otherParent;
-    const sub = assemble({ payloads: op.systems, meta: {}, answers: {}, overrides: [], asOf, mode: "mobywatel" });
+    const sub = assemble({ payloads: op.systems, meta: {}, answers: {}, overrides: [], asOf, mode: "mobywatel", deductionBps });
     otherParentPerson = { ...sub.facts.claimant, role: op.role };
   }
-  const assembled = assemble({ payloads, meta, answers, overrides: state.overrides, asOf, mode: state.mode, otherParentPerson });
+  const checked = statuses.filter((s) => s.state === "ok").map((s) => s.source);
+  const assembled = assemble({ payloads, meta, answers, overrides: state.overrides, asOf, mode: state.mode, otherParentPerson, checked, deductionBps });
   return { assembled, answers };
 }
 
@@ -81,8 +87,10 @@ export async function loadContext(sessionArg?: SessionData): Promise<AppContext 
   if (!state) return null;
   const persona = state.mode === "manual" ? null : resolvePersona(state.personaId);
   const statuses = sourceStatuses(state, persona);
-  const { assembled, answers } = buildAssembled(state, persona, statuses);
-  return { session, state, persona, statuses, assembled, answers };
+  const asOf = persona?.asOf ?? new Date().toISOString().slice(0, 10);
+  const deductionBps = selectParameterSet(await engineParams(), asOf).deductions.employeeSocialBps;
+  const { assembled, answers } = buildAssembled(state, persona, statuses, deductionBps);
+  return { session, state, persona, statuses, assembled, answers, deductionBps };
 }
 
 export { sourceById };

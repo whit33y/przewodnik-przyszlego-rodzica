@@ -53,7 +53,7 @@ export function ConsentForm({ sources, granted }: { sources: Src[]; granted: str
         })}
       </ul>
       <p className={s.note}>
-        Dane pobieramy jednorazowo, tylko do wyliczeń w tej sesji. Po wylogowaniu usuwamy je w ciągu 24 godzin. W symulacji nie łączymy się z prawdziwymi rejestrami.
+        Dane pobieramy jednorazowo, tylko do wyliczeń w tej sesji. Po wylogowaniu usuwamy je od razu, a jeśli się nie wylogujesz — po 24 godzinach bez aktywności. W symulacji nie łączymy się z prawdziwymi rejestrami.
       </p>
       <div className={s.actions}>
         <Button type="submit" icon="download" disabled={checked.length === 0}>
