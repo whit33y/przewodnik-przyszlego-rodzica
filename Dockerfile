@@ -1,10 +1,12 @@
 # syntax=docker/dockerfile:1.7
-# Single-service image for Railway. Debian slim (glibc) so better-sqlite3 uses its bundled prebuilt binary.
+# Build the native SQLite binding in the dependency stage to keep the runtime image small.
 
 FROM node:22-bookworm-slim AS deps
 WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends python3 make g++ \
+    && rm -rf /var/lib/apt/lists/*
 COPY package.json package-lock.json ./
-RUN npm ci --no-audit --no-fund
+RUN npm_config_nodedir=/usr/local npm ci --no-audit --no-fund
 
 FROM node:22-bookworm-slim AS build
 WORKDIR /app
