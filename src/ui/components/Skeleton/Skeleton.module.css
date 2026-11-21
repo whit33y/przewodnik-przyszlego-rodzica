@@ -1,0 +1,7 @@
+.wrap { display: flex; flex-direction: column; gap: var(--space-3); }
+.line { height: 16px; border-radius: var(--radius-xs); background: linear-gradient(90deg, var(--surface-alt) 0%, var(--line-soft) 50%, var(--surface-alt) 100%); background-size: 200% 100%; animation: shimmer 1.4s ease-in-out infinite; }
+.line:last-child:not(:first-child) { width: 60%; }
+.block { border-radius: var(--radius-sm); }
+.card { padding: var(--space-5); border: 1px solid var(--line-soft); border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: var(--space-3); }
+@keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+@media (prefers-reduced-motion: reduce) { .line { animation: none; } }

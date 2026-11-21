@@ -1,0 +1,10 @@
+.card { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-5); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); min-width: 0; }
+.alt { background: var(--surface-alt); border-color: transparent; }
+.compact { padding: var(--space-4); gap: var(--space-2); }
+.head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-3); }
+.footer { margin-top: auto; padding-top: var(--space-3); border-top: 1px solid var(--line-soft); display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; }
+.link { position: relative; transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease); }
+.link:hover { border-color: var(--primary); background: var(--primary-soft); }
+.link:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
+.link a::after { content: ""; position: absolute; inset: 0; }
+.link a:focus-visible { outline: none; }
