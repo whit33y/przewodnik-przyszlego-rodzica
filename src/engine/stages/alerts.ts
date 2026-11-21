@@ -216,6 +216,11 @@ export function run(ctx: Ctx): Ctx {
       let raised: string | undefined;
       for (let k = 1; k < ms.length; k++) if (`${ms[k].month}-01` >= from && ms[k].contributionBase * 2 >= ms[k - 1].contributionBase * 3 && ms[k - 1].contributionBase > 0) raised = ms[k].month;
       const wt = (t.workTime ?? []).find((w, k) => k > 0 && w.from >= from && compareFractions(w.fraction, t.workTime![k - 1].fraction) > 0);
+      // A business started inside the window with a declared base well above the minimum is scrutinised too.
+      if (!raised && isDeclaredBaseTitle(t) && t.from >= from) {
+        const high = ms.find((m) => m.contributionBase * 2 >= nonEmployeeMinBase(paramsAt(ctx, `${m.month}-01`)) * 3);
+        if (high) raised = high.month;
+      }
       if (raised || wt) {
         add({ code: "BASE_CHANGE_SCRUTINY", severity: "warning", onDate: due, values: { titleId: t.id, month: raised ?? wt!.from.slice(0, 7) }, citations: [...C.sham, ...C.baseWorkTime], factPaths: [`facts.claimant.titles[${i}].months`, `facts.claimant.titles[${i}].workTime`] });
       }
@@ -223,9 +228,12 @@ export function run(ctx: Ctx): Ctx {
   }
 
   // 11. Date-driven reminders.
-  if (isFather && lengths.paternityExpiresOn && ev.loss !== "total" && ctx.pools.paternityDays.used < lengths.paternityDays && facts.asOf <= lengths.paternityExpiresOn) {
+  // Paternity not yet taken (paid) — planned days do not count until they are used.
+  const paternityTaken = ev.refDate ? person.paidBenefits.filter((b) => b.type === "paternity" && b.from >= ev.refDate!).reduce((a, b) => a + diffDays(b.from, b.to) + 1, 0) : 0;
+  if (isFather && lengths.paternityExpiresOn && ev.loss !== "total" && paternityTaken < lengths.paternityDays && facts.asOf <= lengths.paternityExpiresOn) {
+    const left = lengths.paternityDays - paternityTaken;
     const soon = diffDays(facts.asOf, lengths.paternityExpiresOn) <= 60;
-    add({ code: "PATERNITY_EXPIRES", severity: soon ? "warning" : "info", onDate: lengths.paternityExpiresOn, deadline: lengths.paternityExpiresOn, fix: { action: "USE_PATERNITY_BEFORE", byDate: addDays(lengths.paternityExpiresOn, -(lengths.paternityDays - ctx.pools.paternityDays.used) + 1) }, values: { daysLeft: lengths.paternityDays - ctx.pools.paternityDays.used }, citations: C.paternity, factPaths: ["facts.event.date", "facts.claimant.paidBenefits"] });
+    add({ code: "PATERNITY_EXPIRES", severity: soon ? "warning" : "info", onDate: lengths.paternityExpiresOn, deadline: lengths.paternityExpiresOn, fix: { action: "USE_PATERNITY_BEFORE", byDate: addDays(lengths.paternityExpiresOn, -left + 1) }, values: { daysLeft: left }, citations: C.paternity, factPaths: ["facts.event.date", "facts.claimant.paidBenefits"] });
   }
   if (ctx.trace.some((t) => t.ruleId === "R-AMT-815-1Y-TOPUP")) {
     add({ code: "NO_PARENTAL_IN_FIRST_YEAR", severity: "warning", onDate: ev.childBirthDate ? addMonths(ev.childBirthDate, 12) : undefined, values: {}, citations: C.rateFirstYear, factPaths: ["plan.blocks"] });

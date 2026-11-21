@@ -12,10 +12,10 @@
       "mismatch": 0
     },
     "amountFields": {
-      "match": 267,
+      "match": 268,
       "mismatch": 0
     },
-    "reported": 14,
+    "reported": 13,
     "knownDivergences": 5,
     "alertRecallRefusals": {
       "refusals": 12,
@@ -658,21 +658,14 @@
           "knownDivergence": 0
         },
         "amount": {
-          "match": 1,
+          "match": 2,
           "mismatch": 0,
-          "reported": 1,
+          "reported": 0,
           "knownDivergence": 0
         }
       },
       "status": "match",
-      "divergences": [
-        {
-          "path": "benefits[0].rateBps",
-          "status": "reported",
-          "expected": 10000,
-          "actual": 8000
-        }
-      ],
+      "divergences": [],
       "alerts": [],
       "variants": []
     },

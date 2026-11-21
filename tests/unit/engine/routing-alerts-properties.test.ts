@@ -57,7 +57,7 @@ describe("alerts (prospective)", () => {
     expect(codes(run(birth({ asOf: "2026-04-01", expected: B, claimant: person([selfEmployed({ from: "2026-01-01", scheme: "ulgaNaStart" })]) })))).toContain("NO_SCHEME_ULGA_NA_START");
   });
   it("contract ending before the birth: resignation blocks, liquidation and the 3rd-month extension do not", () => {
-    const mk = (date: string, reason: "resignation" | "employerLiquidation" | "fixedTermExpired") => run(birth({ asOf: "2026-03-01", expected: B, claimant: person([{ ...employee({ from: "2020-01-01" }), plannedEnd: { date, reason } }]) }));
+    const mk = (date: string, reason: "resignation" | "employerLiquidation" | "fixedTermExpired") => run(birth({ asOf: "2025-10-01", expected: B, claimant: person([{ ...employee({ from: "2020-01-01" }), plannedEnd: { date, reason } }]) }));
     expect(codes(mk("2026-04-30", "resignation"))).toContain("CONTRACT_ENDS_BEFORE_BIRTH");
     expect(codes(mk("2026-04-30", "employerLiquidation"))).not.toContain("CONTRACT_ENDS_BEFORE_BIRTH");
     expect(codes(mk("2026-04-30", "fixedTermExpired"))).not.toContain("CONTRACT_ENDS_BEFORE_BIRTH");
