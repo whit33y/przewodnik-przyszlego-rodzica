@@ -2,6 +2,8 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 import { cacheLife, cacheTag } from "next/cache";
+import type { CaseExpected } from "@/engine/case-types";
+import { deriveTiers } from "@/integrations/case-schema";
 import type { CaseInputFile } from "./persona-store";
 
 export interface CaseListItem {
@@ -13,15 +15,8 @@ export interface CaseListItem {
   tiers: { outcome: boolean; duration: boolean; amount: boolean };
 }
 
-export interface CaseExpectedFile {
-  id: string;
-  outcome: { value: "granted" | "refused" | "partial"; reasonCodes: string[]; evidence: string; reversedOnAppeal?: boolean };
-  benefits: unknown[];
-  legalBasisCited: string[];
-  expectedAlerts: string[];
-  tiers?: { outcome: boolean; duration: boolean; amount: boolean };
-  knownDivergence?: { fields: string[]; explanation: string };
-}
+/** expected.json as validated by `npm run fixtures:validate` (schema in src/integrations/case-schema.ts). */
+export type CaseExpectedFile = CaseExpected;
 
 const dir = () => path.join(process.cwd(), "data", "cases");
 
@@ -42,10 +37,9 @@ export function readExpected(id: string): CaseExpectedFile | null {
   return readJson<CaseExpectedFile>(path.join(dir(), id, "expected.json"));
 }
 
+/** Tier chips: each benefit field's own `evidence`, never a file-wide guess (S9). */
 function derivedTiers(e: CaseExpectedFile): CaseListItem["tiers"] {
-  if (e.tiers) return e.tiers;
-  const printed = (k: string) => JSON.stringify(e.benefits).includes(`"${k}":{"value"`) && JSON.stringify(e.benefits).includes('"evidence":"printed"');
-  return { outcome: true, duration: printed("days"), amount: printed("daily") || printed("base") };
+  return deriveTiers(e);
 }
 
 export async function listCases(): Promise<CaseListItem[]> {

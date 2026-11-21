@@ -20,8 +20,8 @@ const statusLabel: Record<FieldResult["status"], { tone: "positive" | "negative"
 
 const tierLabel: Record<string, string> = { outcome: "Rozstrzygnięcie", duration: "Okres", amount: "Kwota", alerts: "Ostrzeżenie" };
 
-function show(v: unknown, path: string): string {
-  if (v === null || v === undefined) return "nie podano w aktach";
+function show(v: unknown, path: string, side: "ours" | "zus"): string {
+  if (v === null || v === undefined) return side === "zus" ? "nie podano w aktach" : "—";
   if (typeof v === "number") {
     if (/base|daily|gross|net|amount/i.test(path)) return formatMoney(v);
     if (/rate/i.test(path)) return `${(v / 100).toLocaleString("pl-PL")}%`;
@@ -55,18 +55,20 @@ export async function CompareContent({ id }: { id: string }) {
   await connection();
   const out = await compareCase(id);
   if (!out) return null;
-  const { result, expected, fields, summary, error } = out;
+  const { result, expected, fields, summary, preEvent } = out;
   if (!result) {
     return (
       <Notice tone="caution" title="Silnik obliczeń jest chwilowo niedostępny" role="alert">
-        <p>{error}</p>
+        <p>Nie udało się teraz przeliczyć tej sprawy. Spróbuj ponownie za chwilę.</p>
       </Notice>
     );
   }
   const ours = result.outcome.value;
   const theirs = expected.outcome.value;
   const same = ours === theirs || (theirs === "refused" && ours === "withheld");
-  const firedExpected = result.alerts.filter((a) => expected.expectedAlerts.includes(a.code));
+  // Pre-event replay: only what the engine actually raised on the facts known 60 days before the decisive date.
+  const fired = (preEvent?.alerts ?? []).filter((a) => a.severity !== "info");
+  const missed = expected.expectedAlerts.filter((code) => !fired.some((a) => a.code === code));
   return (
     <div className={s.layout}>
       <section className={s.verdicts} aria-labelledby="cmp-title">
@@ -112,8 +114,8 @@ export async function CompareContent({ id }: { id: string }) {
                     <th scope="row">
                       <span className={s.tierTag}>{tierLabel[f.tier] ?? f.tier}</span> {pathLabel(f.path)}
                     </th>
-                    <td className="tabular">{show(f.actual, f.path)}</td>
-                    <td className="tabular">{show(f.expected, f.path)}</td>
+                    <td className="tabular">{show(f.actual, f.path, "ours")}</td>
+                    <td className="tabular">{show(f.expected, f.path, "zus")}</td>
                     <td>
                       <StatusBadge tone={statusLabel[f.status].tone} label={statusLabel[f.status].label} />
                     </td>
@@ -125,11 +127,26 @@ export async function CompareContent({ id }: { id: string }) {
         </section>
       ) : null}
 
-      {expected.expectedAlerts.length ? (
+      {expected.expectedAlerts.length || fired.length ? (
         <section aria-labelledby="alerts-title" className={s.section}>
           <h2 id="alerts-title">Co aplikacja pokazałaby wcześniej</h2>
-          <p className={s.muted}>Te ostrzeżenia nasz silnik wyświetliłby jeszcze przed porodem — z terminem i sposobem naprawy.</p>
-          {firedExpected.length ? <AlertList alerts={firedExpected} /> : expected.expectedAlerts.map((code) => <Notice key={code} tone="caution" title={alertText(code as never).title} />)}
+          {preEvent ? (
+            <p className={s.muted}>
+              Ponownie uruchomiliśmy silnik na danych znanych {formatDateShort(preEvent.asOf)} — 60 dni przed dniem, od którego zależało prawo do zasiłku (bez daty porodu, decyzji ZUS i późniejszych zwolnień). Poniżej tylko ostrzeżenia, które silnik wtedy faktycznie wygenerował.
+            </p>
+          ) : null}
+          {fired.length ? (
+            <AlertList alerts={fired} />
+          ) : (
+            <Notice tone="neutral" title="Silnik nie wygenerował ostrzeżenia" hideToneWord>
+              <p>Na danych sprzed zdarzenia nasz silnik nie zgłosił żadnego problemu wymagającego działania.</p>
+            </Notice>
+          )}
+          {fired.length && missed.length ? (
+            <p className={s.muted}>
+              Oczekiwane, ale niewygenerowane: {missed.map((code) => alertText(code).title).join("; ")}.
+            </p>
+          ) : null}
         </section>
       ) : null}
 
