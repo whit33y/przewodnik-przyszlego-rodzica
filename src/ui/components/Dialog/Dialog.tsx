@@ -31,7 +31,9 @@ export function Dialog({ title, description, open, onOpenChange, trigger, childr
               <Icon name="close" />
             </D.Close>
           </div>
-          <div className={s.body}>{children}</div>
+          <div className={s.body} tabIndex={0} role="group" aria-label="Treść okna">
+            {children}
+          </div>
         </D.Content>
       </D.Portal>
     </D.Root>

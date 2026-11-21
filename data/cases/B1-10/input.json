@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-10",
+  "title": "Pracownica, umowa przedłużona do dnia porodu: zasiłek macierzyński i rodzicielski po ustaniu zatrudnienia, wypłacany przez ZUS",
+  "scenario": "1.14",
+  "tags": [
+    "employee",
+    "mother",
+    "extended-to-birth",
+    "after-title",
+    "payer-switch",
+    "large-employer",
+    "sickness-in-pregnancy"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 20
+  },
+  "facts": {
+    "asOf": "2026-01-20",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2024-11-04",
+          "to": "2025-12-27",
+          "endReason": "extendedToBirth",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2024-11-04",
+                "to": "2025-12-27"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": true
+          },
+          "months": [
+            {
+              "month": "2024-11",
+              "contributionBase": 569880,
+              "fixedPay": 569880,
+              "daysDue": 19,
+              "daysWorked": 19,
+              "fullMonthInsured": false
+            },
+            {
+              "month": "2024-12",
+              "contributionBase": 584604,
+              "fixedPay": 569880,
+              "variablePay": 14724,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2025-01",
+              "contributionBase": 569880,
+              "fixedPay": 569880,
+              "daysDue": 21,
+              "daysWorked": 21
+            },
+            {
+              "month": "2025-02",
+              "contributionBase": 599328,
+              "fixedPay": 569880,
+              "variablePay": 29448,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 582263,
+              "fixedPay": 527880,
+              "variablePay": 54383,
+              "daysDue": 21,
+              "daysWorked": 21
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2025-04-03",
+          "to": "2025-04-04"
+        },
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2025-05-12",
+          "to": "2025-06-11"
+        },
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2025-06-12",
+          "to": "2025-12-26",
+          "rateBps": 10000
+        },
+        {
+          "type": "maternity",
+          "titleId": "t1",
+          "from": "2025-12-27",
+          "to": "2025-12-27",
+          "rateBps": 10000
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-12-27",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-12-27",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-05-16",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-benefit-screen",
+      "page": 19,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 17,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].to": {
+      "doc": "zus-titles-screen",
+      "page": 17,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].endReason": {
+      "doc": "Z-3",
+      "page": 15,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "page": 1,
+      "evidence": "printed"
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "page": 4,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "page": 4,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Fixed-term employment 2024-11-04..2025-12-27, ending on the birth date (contract extended to the birth; the KP mechanism is implied, not cited). Large employer (>20 insured) paid sick pay (2025-04-03..04 and 2025-05-12..06-11, codes A/B), pregnancy sickness benefit 2025-06-12..2025-12-26 and one day of maternity benefit on 2025-12-27 at 100% = 150.11 (employer remark), implying a base of 4503.30; ZUS added title 1240 from 2025-12-28 and took over. Handwritten ZUS note: right to maternity benefit granted. The Z-3 salary rows legible are 2024-11..2025-03 (fixed 5698.80, 5278.80 in March, plus variable 147.24 / 294.48 / 543.83); they do not reproduce 4503.30 with the standard rule (likely partial-month actual pay), so no base is asserted. The one-day payment at 100% predates the 81.5% choice on the ZAM (full-use box) and is recorded as inferred."
+}

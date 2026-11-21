@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-04",
+  "title": "Mama prowadząca działalność (Mały ZUS Plus): martwe urodzenie, 8 tygodni zasiłku macierzyńskiego przyznane decyzją",
+  "scenario": "1.9",
+  "tags": [
+    "self-employed",
+    "mother",
+    "stillbirth",
+    "maly-zus-plus",
+    "decision",
+    "birth-act-stillborn"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 20
+  },
+  "facts": {
+    "asOf": "2025-06-12",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0590",
+          "from": "2023-01-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2023-01-01"
+              }
+            ]
+          },
+          "scheme": "malyZusPlus",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-05-12",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": false
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-05-12",
+        "days": 56
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 19
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 17
+    },
+    "facts.claimant.titles[0].zusCode": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 17
+    },
+    "facts.claimant.titles[0].scheme": {
+      "doc": "zus-titles-screen",
+      "evidence": "inferred",
+      "page": 17
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 17
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "evidence": "printed",
+      "page": 13
+    },
+    "facts.event.children[0].bornAlive": {
+      "doc": "birth-extract",
+      "evidence": "printed",
+      "page": 13
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 17
+    }
+  },
+  "extractionNotes": "Stillbirth on 2025-05-12, proven by a birth-act extract with the stillbirth annotation. ZAM claims maternity 2025-05-12..2025-07-06 only, with no parental leave. The ZUS register shows the Maly ZUS Plus title (0590) from 2023-01-01 with voluntary sickness insurance until 2025-05-11 and the benefit-period variant (0590T) 2025-05-12..2025-07-06, confirmed 2025-06-06; the benefit-period variant and its end are not modelled (the sickness period is left open, as in the pilots). A letter register lists a granting decision dated 2025-06-12; its text is not in the file, so the period is taken from the benefit-period title row. Rate not printed (100% for stillbirth inferred). Declared bases not in the file. A marriage-certificate extract was filed but is not needed."
+}

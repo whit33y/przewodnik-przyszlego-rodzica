@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-02",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "art30PreBirth",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 75,
+        "evidence": "inferred"
+      },
+      "from": {
+        "value": "2025-08-01",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2025-10-14",
+        "evidence": "inferred"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "printed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": true
+  }
+}

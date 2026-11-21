@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-08",
+  "title": "Pracownica, trojaczki (jedno martwo urodzone, jedno z zaświadczeniem „Za życiem”): 31 tygodni macierzyńskiego, potem rodzicielski łączony z pracą na 1/2 etatu",
+  "scenario": "1.11",
+  "tags": [
+    "employee",
+    "mother",
+    "triplets",
+    "stillborn-sibling",
+    "za-zyciem",
+    "parental-with-work",
+    "work-fraction",
+    "rate-100-70",
+    "separate-parental-claim"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 40
+  },
+  "facts": {
+    "asOf": "2024-12-17",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2011-05-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2011-05-01"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2024-12-16",
+        "to": "2027-02-07"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2024-05-13",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": false
+        },
+        {
+          "ref": "child-2",
+          "bornAlive": true,
+          "zaZyciem": true
+        },
+        {
+          "ref": "child-3",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct",
+        "zaZyciemCert"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2024-05-15",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2024-05-13",
+        "days": 217
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2024-12-16",
+        "days": 392,
+        "pool": "shared",
+        "workFraction": {
+          "num": 1,
+          "den": 2
+        },
+        "claimedSeparatelyOn": "2024-12-17"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "Z-3",
+      "page": 27,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 39,
+      "evidence": "printed"
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "ZAM",
+      "page": 36,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "zus-titles-screen",
+      "page": 39,
+      "evidence": "inferred"
+    },
+    "facts.event.children": {
+      "doc": "birth-extract",
+      "evidence": "printed"
+    },
+    "facts.event.children[1].zaZyciem": {
+      "doc": "za-zyciem-certificate",
+      "page": 33,
+      "evidence": "inferred"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 16,
+      "evidence": "printed"
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "page": 3,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "Z-3",
+      "page": 16,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "Z-3",
+      "page": 27,
+      "evidence": "printed"
+    },
+    "plan.blocks[1].workFraction": {
+      "doc": "Z-3",
+      "page": 23,
+      "evidence": "printed"
+    },
+    "plan.blocks[1].claimedSeparatelyOn": {
+      "doc": "Z-3",
+      "page": 27,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Employee (0110 since 2011-05-01). Triplets: one stillborn (registry extract with the stillbirth annotation) and two live-born; a Za życiem certificate for one child (which child is not recorded; assigned to child-2). Maternity 2024-05-13..2024-12-15 = 217 days (31 weeks; the stillborn child counts), applied for alone (application 2024-05-15, full-use box not ticked), so 100%. Parental claimed separately: 56 weeks 2024-12-16..2026-01-11 extended for work at 1/2 time to 2027-02-07 (another 56 weeks), with the extended part also combined with work (employer remark and leave applications), so a separate parental claim at 70%. ZUS register: 1240 from 2024-05-13 and again from 2024-12-16. Grant evidenced by the file label (granting decision); decision text and salary tables not legible."
+}

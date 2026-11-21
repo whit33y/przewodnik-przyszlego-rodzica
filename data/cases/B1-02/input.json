@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-02",
+  "title": "Osoba współpracująca: odmowa zasiłku macierzyńskiego z powodu zadłużenia składkowego na koncie płatnika",
+  "scenario": "1.17",
+  "tags": [
+    "collaborator",
+    "mother",
+    "refusal",
+    "arrears",
+    "payer-account",
+    "instalment-agreement",
+    "same-person-pair"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 26
+  },
+  "facts": {
+    "asOf": "2025-10-16",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "collaborator",
+          "zusCode": "0511",
+          "from": "2024-08-03",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-08-22"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "businessOwner"
+          },
+          "months": [
+            {
+              "month": "2024-08",
+              "contributionBase": 439154
+            },
+            {
+              "month": "2024-09",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-10",
+              "contributionBase": 242292
+            }
+          ]
+        },
+        {
+          "id": "t0",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2022-09-01",
+          "to": "2024-08-02",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2022-09-01",
+                "to": "2024-08-02"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-2",
+            "kind": "employer"
+          },
+          "months": []
+        },
+        {
+          "id": "t00",
+          "kind": "mandate",
+          "zusCode": "0411",
+          "from": "2024-02-01",
+          "to": "2024-06-30",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-02-29",
+                "to": "2024-06-30"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-3",
+            "kind": "client"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2024-10-17",
+          "to": "2025-03-20"
+        }
+      ],
+      "arrears": [
+        {
+          "account": "payer",
+          "onDate": "2025-03-21",
+          "aboveThreshold": true,
+          "instalmentAgreement": true
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2025-03-21",
+        "to": "2026-03-19"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-03-21",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2025-03-31",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-03-21",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2025-08-08",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 20,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].zusCode": {
+      "doc": "zus-insurance-memo",
+      "page": 20,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 20,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-insurance-memo",
+      "page": 20,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1]": {
+      "doc": "zus-insurance-memo",
+      "page": 20,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[2]": {
+      "doc": "zus-insurance-memo",
+      "page": 20,
+      "evidence": "printed"
+    },
+    "facts.asOf": {
+      "doc": "zus-insurance-memo",
+      "page": 19,
+      "evidence": "printed"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 19,
+      "evidence": "inferred"
+    },
+    "facts.claimant.arrears[0].onDate": {
+      "doc": "zus-insurance-memo",
+      "page": 21,
+      "evidence": "printed"
+    },
+    "facts.claimant.arrears[0].aboveThreshold": {
+      "doc": "zus-insurance-memo",
+      "page": 21,
+      "evidence": "printed"
+    },
+    "facts.claimant.arrears[0].instalmentAgreement": {
+      "doc": "claimant-statement",
+      "page": 17,
+      "evidence": "handwritten"
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "other-parent-statement",
+      "evidence": "handwritten"
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "plan.applicationDate": {
+      "doc": "ZAM",
+      "page": 6,
+      "evidence": "handwritten"
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "page": 6,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "page": 6,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "page": 6,
+      "evidence": "handwritten"
+    }
+  },
+  "extractionNotes": "Cooperating family member (0511, voluntary sickness from 2024-08-22), very likely the same person as B1-04. ZUS insurance memo (examination date = birth date 2025-03-21): debt on the business owner's (payer's) account TAK, repayment field empty; case closed with a refusal, decision text not in the file, so no legal basis is recorded. The claimant later signed an instalment agreement, which does not count as repayment. The 0511 title shows an end on 2025-03-20 with reason 'concurrence with maternity benefit'; that is a consequence of the claim, not a gap, so the title is left open. The ZAM mixes '100% for 20 weeks then 70%' with the ticked full-use box; averaged81_5 is recorded as inferred. Earlier titles (employment 0110 and an agency contract 0411) are kept for the insurance history. Declared bases printed for 2024-08..2024-10 (the memo window ends at the start of sickness on 2024-10-17)."
+}

@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-07",
+  "title": "Martwe urodzenie bliźniąt, pracownica na 1/4 etatu zatrudniona od 3,5 miesiąca: 8 tygodni zasiłku macierzyńskiego podwyższonego do 1000 zł",
+  "scenario": "1.9",
+  "tags": [
+    "employee",
+    "mother",
+    "stillbirth",
+    "twins",
+    "part-time-quarter",
+    "short-tenure",
+    "top-up",
+    "pregnancy-sick-pay",
+    "rate-100"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 16
+  },
+  "facts": {
+    "asOf": "2024-05-29",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2024-01-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2024-01-01"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2024-01-01",
+              "fraction": {
+                "num": 1,
+                "den": 4
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2024-01",
+              "contributionBase": 106050,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 106050
+            },
+            {
+              "month": "2024-02",
+              "contributionBase": 106050,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 106050
+            },
+            {
+              "month": "2024-03",
+              "contributionBase": 106050,
+              "daysWorked": 9,
+              "daysDue": 21,
+              "fixedPay": 106050
+            }
+          ]
+        },
+        {
+          "id": "t0",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2014-01-01",
+          "to": "2015-12-31",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2014-01-01",
+                "to": "2015-12-31"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-2",
+            "kind": "employer"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2024-03-15",
+          "to": "2024-04-11"
+        },
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2024-04-15",
+          "to": "2024-04-16"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2024-04-17",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": false
+        },
+        {
+          "ref": "child-2",
+          "bornAlive": false
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2024-04-19",
+    "singleTitleStatement": true,
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2024-04-17",
+        "days": 56
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-notice",
+      "page": 15,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[1]": {
+      "doc": "zus-titles-screen",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.paidBenefits": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "page": 9,
+      "evidence": "printed"
+    },
+    "facts.event.children": {
+      "doc": "birth-extract",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "plan.singleTitleStatement": {
+      "doc": "zus-notice",
+      "page": 16,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Two stillborn children at one birth (2024-04-17), each with a registry birth extract annotated as stillborn; the 8 weeks are not multiplied. Quarter-time employment from 2024-01-01 at 1060.50 a month (a quarter of the 2024 minimum wage); an earlier employment title ended in 2015. Employer pregnancy sick pay 2024-03-15..2024-04-11 and 2024-04-15..2024-04-16, then the birth, so the base (full months 2024-01 and 2024-02 before the first incapacity) carries over. Z-3 salary 2024-01..2024-03 (March 9 of 21 days, sickness); column 6 is the contractual amount and contributionBase is inferred equal to it. ZUS letter of 2024-05-29 refers to the claim for 17 April to 11 June 2024 (56 days), states the right was established and paid for two stillborn children, and that the net benefit for April 2024 was below the 1000 zl parental benefit, so it is raised to that level from 2024-04-17; ZUS found no other title in its own data, which stands in for the single-title statement (inferred). Rate not printed (100% inferred for the 8-week leave). Employer marked up to 20 insured."
+}

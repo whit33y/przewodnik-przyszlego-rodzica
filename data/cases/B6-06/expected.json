@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-06",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "sickness",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 10,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2026-02-02",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2026-02-11",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2026-04-28",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2026-09-14",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 224,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2026-09-15",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2027-04-26",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 7000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [
+    "ARREARS_OWN"
+  ],
+  "variants": [
+    {
+      "name": "arrears-not-repaid",
+      "factsPatch": [
+        {
+          "op": "remove",
+          "path": "/claimant/arrears/0/repaidOn"
+        }
+      ],
+      "expected": {
+        "outcome": {
+          "value": "refused",
+          "reasonCodes": [
+            "ARREARS_UNPAID"
+          ],
+          "evidence": "internalNote"
+        }
+      }
+    }
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  }
+}

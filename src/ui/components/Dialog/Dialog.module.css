@@ -11,3 +11,4 @@
 }
 @keyframes fade { from { opacity: 0; } }
 @keyframes up { from { transform: translateY(24px); opacity: 0; } }
+.body:focus-visible { outline-offset: -3px; }

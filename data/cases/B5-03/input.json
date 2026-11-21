@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-03",
+  "title": "Pracownica zatrudniona 4 miesiące przed porodem, dziecko donoszone hospitalizowane 5 dni: 20 tygodni macierzyńskiego, 1 tydzień uzupełniającego i 32 tygodnie rodzicielskiego",
+  "scenario": "1.10",
+  "tags": [
+    "employee",
+    "mother",
+    "supplementary-1-week",
+    "term-child-hospitalised",
+    "short-tenure",
+    "averaged-81.5",
+    "employer-z3-incomplete"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 42
+  },
+  "facts": {
+    "asOf": "2026-04-28",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2025-10-07",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2025-10-07"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2025-10-07",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-10",
+              "contributionBase": 570000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 570000,
+              "fullMonthInsured": false
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 570000,
+              "daysWorked": 18,
+              "daysDue": 18,
+              "fixedPay": 570000
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 570000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 570000
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 570000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 570000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-02-15",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true,
+          "gestationalWeek": 38,
+          "birthWeightG": 3625,
+          "hospitalStays": [
+            {
+              "from": "2026-02-21",
+              "to": "2026-02-25"
+            }
+          ]
+        }
+      ],
+      "documents": [
+        "birthAct",
+        "hospitalStayCert"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2026-02-15",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-02-15",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "supplementary",
+        "titleId": "t1",
+        "from": "2026-07-05",
+        "days": 7
+      },
+      {
+        "id": "b3",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-07-12",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-notice",
+      "page": 19,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 37,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 37,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 38,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 29,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 29,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months[0].fullMonthInsured": {
+      "doc": "Z-3",
+      "page": 37,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "zus-note",
+      "page": 1,
+      "evidence": "inferred"
+    },
+    "facts.event.children[0].gestationalWeek": {
+      "doc": "hospital-certificate",
+      "page": 1,
+      "evidence": "handwritten"
+    },
+    "facts.event.children[0].birthWeightG": {
+      "doc": "hospital-certificate",
+      "page": 1,
+      "evidence": "handwritten"
+    },
+    "facts.event.children[0].hospitalStays[0]": {
+      "doc": "hospital-certificate",
+      "page": 1,
+      "evidence": "handwritten"
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 37,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "page": 4,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "page": 4,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[2]": {
+      "doc": "ZAM",
+      "page": 4,
+      "evidence": "handwritten"
+    }
+  },
+  "extractionNotes": "ZUS internal note on the file grants maternity benefit for basic, supplementary and parental leave as one span 2026-02-15..2027-02-20 (371 days = 140 + 7 + 224); the split per leave type comes from the hand-corrected ZAM (corrections dated in March 2026) and is therefore claimed. Birth date taken as the first day of the granted span (birth extract illegible). Term child (38 completed weeks, 3625 g) in hospital 2026-02-21..2026-02-25, i.e. 5 days starting on day 7 after birth, on the new-template hospital certificate (its end date is written with the previous year by mistake) -> 1 week of supplementary leave. Full-leave declaration ticked on the ZAM and the employee's leave application dated on the birth day (Z-3), so 81.5% is inferred for maternity and parental; supplementary assumed at 100%; no rate printed. Employment from 2025-10-07, full time; Z-3 salary 5700.00 for 2025-10..2026-01 (October not a full calendar month of insurance; the employer still reports 23 of 23 days). Column 6 is the contractual amount; contributionBase inferred equal to it. Employer marked up to 20 insured. ZUS twice asked the employer for a corrected Z-3 (missing application date and missing supplementary leave in point 6) and sent a reminder; asOf = the dated ZUS letter of 2026-04-28 (the reminder and the grant note are undated)."
+}

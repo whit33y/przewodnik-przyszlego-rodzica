@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-07",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "paternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 14,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-09-08",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2025-09-21",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  }
+}

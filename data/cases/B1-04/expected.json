@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-04",
+  "outcome": {
+    "value": "refused",
+    "reasonCodes": [
+      "ARREARS_UNPAID"
+    ],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "sickness",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 28,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-03-04",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2025-03-31",
+        "evidence": "claimed"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [
+    "ARREARS_PAYER"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  },
+  "variants": [
+    {
+      "name": "no-arrears",
+      "factsPatch": [
+        {
+          "op": "replace",
+          "path": "/claimant/arrears/0",
+          "value": {
+            "account": "payer",
+            "onDate": "2025-03-04",
+            "aboveThreshold": false
+          }
+        }
+      ],
+      "expected": {
+        "outcome": {
+          "value": "granted",
+          "reasonCodes": [],
+          "evidence": "internalNote"
+        }
+      }
+    }
+  ]
+}

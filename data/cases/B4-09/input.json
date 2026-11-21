@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-09",
+  "title": "Ojciec, pracownik: druga 7-dniowa część urlopu ojcowskiego tuż przed upływem 12 miesięcy, nowe zatrudnienie",
+  "scenario": "1.5",
+  "tags": [
+    "employee",
+    "father",
+    "paternity",
+    "paternity-two-parts",
+    "new-job",
+    "twelve-month-deadline",
+    "no-full-month"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 16
+  },
+  "facts": {
+    "asOf": "2026-04-20",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2026-01-07",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2026-01-07"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2026-01-07",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2026-01",
+              "contributionBase": 490000,
+              "daysWorked": 18,
+              "daysDue": 20,
+              "fixedPay": 490000,
+              "fullMonthInsured": false
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 490000,
+              "daysWorked": 10,
+              "daysDue": 20,
+              "fixedPay": 490000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "paternity",
+          "titleId": "t1",
+          "from": "2026-02-11",
+          "to": "2026-02-17",
+          "part": 1,
+          "childRef": "child-1"
+        },
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2026-02-23",
+          "to": "2026-03-22"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "mother",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-05-10",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "paternity",
+        "titleId": "t1",
+        "from": "2026-04-28",
+        "days": 7,
+        "claimedSeparatelyOn": "2026-04-20"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "leave-application",
+      "page": 9,
+      "evidence": "handwritten"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[0].contributionBase": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months[1].contributionBase": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.paidBenefits[0].to": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[1]": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "page": 11,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[0]": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "plan.blocks[0].claimedSeparatelyOn": {
+      "doc": "leave-application",
+      "page": 9,
+      "evidence": "handwritten"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "First paternity part: start printed in the ZUS register (benefit-recipient title row), end truncated on the screenshot. End inferred as day 7: the February payroll row shows 10 of 20 working days not worked, which equals 5 working days of a 7-day part plus 5 working days of sick pay from 2026-02-23. Second part end date: printed as the last day of a benefit row in the ZUS register; the Z-3 gives the same period. The leave application misstates the end year. No full calendar month before the right arose; the employer states the contractual monthly salary 4900.00 in remarks. Z-3 column 6 is the contractual amount, not the actual contribution base, so contributionBase is inferred equal to it. Sick-pay amounts in the register do not match a 13.71% deduction (employer-side computation, not asserted)."
+}

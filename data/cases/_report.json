@@ -1,0 +1,3186 @@
+{
+  "schemaVersion": 1,
+  "totals": {
+    "cases": 78,
+    "matching": 75,
+    "outcomeTier": {
+      "asserted": 78,
+      "match": 75
+    },
+    "durationFields": {
+      "match": 365,
+      "mismatch": 2
+    },
+    "amountFields": {
+      "match": 237,
+      "mismatch": 0
+    },
+    "reported": 14,
+    "knownDivergences": 5,
+    "alertRecallRefusals": {
+      "refusals": 11,
+      "recalled": 10
+    }
+  },
+  "cases": [
+    {
+      "id": "B1-01",
+      "title": "Prowadząca działalność (Mały ZUS Plus): zasiłek macierzyński 20 + 32 tygodnie, podwyższenie do kwoty minimalnej",
+      "scenario": "1.3",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B1-02",
+      "title": "Osoba współpracująca: odmowa zasiłku macierzyńskiego z powodu zadłużenia składkowego na koncie płatnika",
+      "scenario": "1.17",
+      "outcome": "refused",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 5,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "ARREARS_PAYER",
+          "found": true,
+          "severity": "blocking"
+        }
+      ],
+      "variants": [
+        {
+          "name": "no-arrears",
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "id": "B1-03",
+      "title": "Pracownica: przedłużenie urlopu rodzicielskiego „Za życiem” – odmowa (złe zaświadczenie), uchylona przez ZUS po odwołaniu",
+      "scenario": "1.11",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 3,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 1,
+          "mismatch": 0,
+          "reported": 1,
+          "knownDivergence": 0
+        }
+      },
+      "status": "mismatch",
+      "divergences": [
+        {
+          "path": "benefits[0].rateBps",
+          "status": "reported",
+          "expected": 8150,
+          "actual": 7000
+        },
+        {
+          "path": "outcome.value",
+          "status": "mismatch",
+          "expected": "refused",
+          "actual": "granted"
+        },
+        {
+          "path": "outcome.reasonCodes[0]",
+          "status": "mismatch",
+          "expected": "CERTIFICATE_MISSING",
+          "actual": []
+        },
+        {
+          "path": "benefits[0].status",
+          "status": "mismatch",
+          "expected": "refused",
+          "actual": "payable"
+        }
+      ],
+      "alerts": [
+        {
+          "code": "CERTIFICATE_TYPE",
+          "found": true,
+          "severity": "info"
+        }
+      ],
+      "variants": [
+        {
+          "name": "without-za-zyciem-certificate (decision of 2025-11-05)",
+          "status": "mismatch"
+        }
+      ]
+    },
+    {
+      "id": "B1-04",
+      "title": "Osoba współpracująca w ciąży: odmowa kontynuacji zasiłku chorobowego z powodu zadłużenia na koncie płatnika",
+      "scenario": "1.17",
+      "outcome": "refused",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "ARREARS_PAYER",
+          "found": true,
+          "severity": "blocking"
+        }
+      ],
+      "variants": [
+        {
+          "name": "no-arrears",
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "id": "B1-05",
+      "title": "Pracownica: urlop macierzyński, potem rodzicielski łączony z pracą w wymiarze 3/8 etatu, podwyższenie do kwoty minimalnej",
+      "scenario": "1.15",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 1
+        }
+      },
+      "status": "match",
+      "divergences": [
+        {
+          "path": "benefits[1].toppedUp",
+          "status": "knownDivergence",
+          "expected": true,
+          "actual": false
+        }
+      ],
+      "knownDivergence": "ZUS paid a top-up to the 1000 zł minimum during the parental leave combined with 3/8-time work. From the Z-3 (about 3509.50 gross a month, base about 3028) the reduced parental benefit at 70% × 5/8 is about 1325 gross / 1166 net, above the floor, so the top-up does not reproduce from the file; the claimant's own etat, the exact rate and the month the top-up applied to are not legible. The extended end date 2027-04-17 itself does reproduce (224 × (1 + 3/8)).",
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B1-06",
+      "title": "Pracownik: zasiłek macierzyński za okres urlopu ojcowskiego (2 tygodnie), ok. 5 miesięcy po porodzie",
+      "scenario": "1.5",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B1-07",
+      "title": "Pracownik: decyzja przyznająca zasiłek macierzyński za okres urlopu ojcowskiego, stałe wynagrodzenie",
+      "scenario": "1.5",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": true
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B1-08",
+      "title": "Ojciec prowadzący działalność (Mały ZUS Plus): 9 tygodni urlopu rodzicielskiego, samodzielna korekta okresu z 8 tygodni i 3 dni na 63 dni",
+      "scenario": "1.6",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": [
+        {
+          "name": "original-claim-59-days",
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "id": "B1-09",
+      "title": "Ojciec-pracownik przejmuje resztę urlopu macierzyńskiego po 19 tygodniach matki (działalność), potem urlop rodzicielski z przerwą na ojcowski",
+      "scenario": "1.8",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 2,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [
+        {
+          "path": "benefits[1].days",
+          "status": "reported",
+          "expected": 210,
+          "actual": 224
+        },
+        {
+          "path": "benefits[1].to",
+          "status": "reported",
+          "expected": "2027-03-05",
+          "actual": "2027-04-02"
+        }
+      ],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B1-10",
+      "title": "Pracownica, umowa przedłużona do dnia porodu: zasiłek macierzyński i rodzicielski po ustaniu zatrudnienia, wypłacany przez ZUS",
+      "scenario": "1.14",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 1,
+          "mismatch": 0,
+          "reported": 1,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [
+        {
+          "path": "benefits[0].payments[0].gross",
+          "status": "reported",
+          "expected": 15011,
+          "actual": 13691
+        }
+      ],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B1-11",
+      "title": "Umowa zlecenie z dobrowolnym ubezpieczeniem chorobowym, podstawa 200 zł: zasiłek macierzyński i rodzicielski",
+      "scenario": "1.4",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 2,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [
+        {
+          "path": "benefits[0].toppedUp",
+          "status": "reported",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "path": "benefits[1].toppedUp",
+          "status": "reported",
+          "expected": true,
+          "actual": false
+        }
+      ],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B1-12",
+      "title": "Prowadząca działalność: zasiłek chorobowy w ciąży, potem macierzyński 20 + 32 tygodnie, bez zadłużenia",
+      "scenario": "1.3",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B2-01",
+      "title": "Skrajny wcześniak (650 g, 29. tydzień): urlop macierzyński, 15 tygodni uzupełniającego i rodzicielski",
+      "scenario": "1.10",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 9,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 1,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B2-02",
+      "title": "Pracownica: zasiłek chorobowy w ciąży, potem macierzyński 20 + 32 tygodnie w stawce 81,5% (stawka na ekranie ZUS)",
+      "scenario": "1.1",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": true
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B2-03",
+      "title": "Ojciec prowadzący działalność: 9 tygodni urlopu rodzicielskiego w stawce 70%, ok. 20 miesięcy po porodzie",
+      "scenario": "1.6",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": true
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 8,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B2-04",
+      "title": "Pracownica na 1/4 etatu: zasiłek chorobowy w ciąży, przyznany po wezwaniu do dostarczenia Z-3 od pracodawcy",
+      "scenario": "1.2",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 1,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 1,
+          "mismatch": 0,
+          "reported": 1,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [
+        {
+          "path": "benefits[0].rateBps",
+          "status": "reported",
+          "expected": 10000,
+          "actual": 8000
+        }
+      ],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B2-05",
+      "title": "Prowadząca działalność po przejściu z Małego ZUS Plus na pełny ZUS: zasiłek chorobowy w ciąży",
+      "scenario": "1.2",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B2-06",
+      "title": "Pracownica zatrudniona 4 miesiące przed zwolnieniem: odmowa zasiłku chorobowego w ciąży po decyzji ZUS o niepodleganiu ubezpieczeniom",
+      "scenario": "1.17",
+      "outcome": "refused",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "TITLE_LIKELY_VERIFIED",
+          "found": false
+        }
+      ],
+      "variants": [
+        {
+          "name": "without-non-coverage-decision",
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "id": "B2-07",
+      "title": "Ojciec prowadzący działalność: zasiłek macierzyński za okres urlopu ojcowskiego, wakacje składkowe w okresie bazowym",
+      "scenario": "1.5",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B2-08",
+      "title": "Pracownica, trojaczki (jedno martwo urodzone, jedno z zaświadczeniem „Za życiem”): 31 tygodni macierzyńskiego, potem rodzicielski łączony z pracą na 1/2 etatu",
+      "scenario": "1.11",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 2,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [
+        {
+          "path": "benefits[1].days",
+          "status": "reported",
+          "expected": 784,
+          "actual": 588
+        },
+        {
+          "path": "benefits[1].to",
+          "status": "reported",
+          "expected": "2027-02-07",
+          "actual": "2026-07-26"
+        }
+      ],
+      "knownDivergence": "Two points do not reproduce. (1) Parental length: 56 weeks were used (65 − 9, the single-child Za życiem length) although two children were born alive, for which 67 − 9 = 58 weeks would apply. (2) Work extension: at 1/2 time the 392 days were doubled to 784 because the extended part was itself combined with work (392 × (1 + 1/2 + 1/4 + …)); a one-step extension of days × f gives 588. The file does not say how ZUS or the employer counted either point.",
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B2-09",
+      "title": "Ojciec prowadzący działalność po martwym urodzeniu dziecka: zasiłek macierzyński za 9 tygodni urlopu macierzyńskiego",
+      "scenario": "1.9",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 2
+        },
+        "duration": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [
+        {
+          "path": "outcome.value",
+          "status": "knownDivergence",
+          "expected": "granted",
+          "actual": "refused"
+        },
+        {
+          "path": "benefits[0].status",
+          "status": "knownDivergence",
+          "expected": "granted",
+          "actual": "refused"
+        }
+      ],
+      "knownDivergence": "The file does not show the legal path by which a father received 9 weeks of maternity benefit after a stillbirth (no mother-situation reason ticked, no decision text, mother's insurance unknown). The engine's stillbirth rule gives the mother 56 days and has no branch that reproduces this grant; flagged in the digest for mentor verification.",
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B2-10",
+      "title": "Prowadząca działalność: odmowa zasiłku macierzyńskiego – brak ubezpieczenia chorobowego w dniu porodu (przerwa w działalności, ponowne zgłoszenie po porodzie)",
+      "scenario": "1.17",
+      "outcome": "refused",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 1,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "mismatch",
+      "divergences": [
+        {
+          "path": "outcome.value",
+          "status": "mismatch",
+          "expected": "granted",
+          "actual": "refused"
+        }
+      ],
+      "alerts": [
+        {
+          "code": "NOT_INSURED_ON_DUE_DATE",
+          "found": true,
+          "severity": "blocking"
+        }
+      ],
+      "variants": [
+        {
+          "name": "reregistered-before-birth",
+          "status": "mismatch"
+        }
+      ]
+    },
+    {
+      "id": "B2-11",
+      "title": "Pracownica zatrudniona 10 tygodni: martwe urodzenie bez aktu urodzenia, 8 tygodni zasiłku macierzyńskiego",
+      "scenario": "1.9",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "CERTIFICATE_TYPE",
+          "found": true,
+          "severity": "info"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B2-12",
+      "title": "Pracownica: zasiłek macierzyński 20 + 32 tygodnie po wezwaniu ZUS do złożenia ZAM i Z-3 (pismo do pracodawcy to nie wniosek)",
+      "scenario": "1.1",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B2-13",
+      "title": "Pracownica: zasiłek macierzyński 20 + 32 tygodnie w stawce 81,5%, pełny harmonogram wypłat",
+      "scenario": "1.1",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": true
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 21,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B2-14",
+      "title": "Pracownica po powrocie z urlopu wychowawczego, ponownie w ciąży: zasiłek macierzyński 52 tygodnie, podstawa na poziomie minimalnego wynagrodzenia",
+      "scenario": "1.1",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 5,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B2-15",
+      "title": "Prowadząca działalność: zasiłek macierzyński 52 tygodnie po odrzuceniu skanu wysłanego z PUE biura rachunkowego i uzupełnieniu oświadczenia ojca",
+      "scenario": "1.3",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B3-01",
+      "title": "Pracownica: zasiłek macierzyński za 52 tygodnie (81,5%) po zwiększeniu wymiaru czasu pracy 3 miesiące przed porodem",
+      "scenario": "1.1",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "BASE_CHANGE_SCRUTINY",
+          "found": true,
+          "severity": "warning"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B3-02",
+      "title": "Likwidacja pracodawcy w ciąży: zasiłek w wysokości zasiłku macierzyńskiego od dnia po ustaniu zatrudnienia do porodu (art. 30), wniosek złożony przed końcem umowy",
+      "scenario": "1.13",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": true
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B3-03",
+      "title": "Ojciec, pracownik: zasiłek macierzyński za 32 tygodnie urlopu rodzicielskiego, matka dziecka nieubezpieczona, start po pierwszym roku życia dziecka",
+      "scenario": "1.7",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B3-04",
+      "title": "Zamknięcie jednoosobowej działalności pracodawcy w ciąży: zasiłek w wysokości zasiłku macierzyńskiego od dnia po ustaniu zatrudnienia (art. 30), wcześniej obniżenie etatu do 1/3",
+      "scenario": "1.13",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B3-05",
+      "title": "Martwe urodzenie bez aktu urodzenia (płeć nieustalona): 8 tygodni zasiłku macierzyńskiego w stawce 100%",
+      "scenario": "1.9",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": true
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B3-06",
+      "title": "Ojciec przechodzący z etatu na działalność (preferencyjny ZUS): 9 tygodni urlopu rodzicielskiego, dobrowolne chorobowe od 2 dni po porodzie",
+      "scenario": "1.6",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B3-10",
+      "title": "Likwidacja pracodawcy w ciąży: zasiłek w wysokości zasiłku macierzyńskiego od dnia po ustaniu zatrudnienia do porodu (art. 30)",
+      "scenario": "1.13",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B4-01",
+      "title": "Mama prowadząca działalność (Mały ZUS Plus): zasiłek macierzyński 20 + 32 tygodnie z podwyższeniem do kwoty świadczenia rodzicielskiego",
+      "scenario": "1.3",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B4-02",
+      "title": "Pracownica: urlop macierzyński, potem rodzicielski łączony z pracą na pół etatu, zakończony wcześniej na jej wniosek; podwyższenie do świadczenia rodzicielskiego",
+      "scenario": "1.15",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 1,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 4,
+          "mismatch": 2,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 5,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "mismatch",
+      "divergences": [
+        {
+          "path": "outcome.value",
+          "status": "mismatch",
+          "expected": "granted",
+          "actual": "partial"
+        },
+        {
+          "path": "benefits[1].days",
+          "status": "mismatch",
+          "expected": 297,
+          "actual": 372
+        },
+        {
+          "path": "benefits[1].to",
+          "status": "mismatch",
+          "expected": "2025-01-31",
+          "actual": "2025-04-16"
+        }
+      ],
+      "alerts": [
+        {
+          "code": "TOP_UP_STATEMENT_NEEDED",
+          "found": true,
+          "severity": "info"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B4-03",
+      "title": "Zleceniobiorczyni z dobrowolnym ubezpieczeniem chorobowym: zasiłek chorobowy w ciąży i macierzyński 52 tygodnie przy podstawie 940 zł, podwyższenie do świadczenia rodzicielskiego",
+      "scenario": "1.4",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 9,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "TOP_UP_STATEMENT_NEEDED",
+          "found": true,
+          "severity": "info"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B4-04",
+      "title": "Mama prowadząca działalność (Mały ZUS Plus): martwe urodzenie, 8 tygodni zasiłku macierzyńskiego przyznane decyzją",
+      "scenario": "1.9",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B4-05",
+      "title": "Ojciec, pracownik małego pracodawcy: zasiłek macierzyński za 7-dniowy urlop ojcowski wypłacany przez ZUS",
+      "scenario": "1.5",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B4-06",
+      "title": "Pracownica na 1/10 etatu z wysokim wynagrodzeniem, niezdolna do pracy 24 dni po zatrudnieniu: odmowa zasiłku macierzyńskiego po decyzji o niepodleganiu ubezpieczeniom",
+      "scenario": "1.17",
+      "outcome": "refused",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 5,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "TITLE_LIKELY_VERIFIED",
+          "found": true,
+          "severity": "high"
+        }
+      ],
+      "variants": [
+        {
+          "name": "title-recognised",
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "id": "B4-07",
+      "title": "Prowadząca działalność: zasiłek macierzyński 20 + 32 tygodnie w stawce 81,5%, podstawa przeniesiona z zasiłku chorobowego",
+      "scenario": "1.3",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": true
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 9,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B4-08",
+      "title": "Niezawodowa rodzina zastępcza, mama prowadząca działalność: zasiłek macierzyński 20 tygodni na warunkach urlopu macierzyńskiego + 32 tygodnie rodzicielskiego",
+      "scenario": "1.12",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B4-09",
+      "title": "Ojciec, pracownik: druga 7-dniowa część urlopu ojcowskiego tuż przed upływem 12 miesięcy, nowe zatrudnienie",
+      "scenario": "1.5",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B4-10",
+      "title": "Pracownica zgłoszona z opóźnieniem po zleceniu u tego samego płatnika, druga praca na pełen etat, niezdolna miesiąc po zatrudnieniu: odmowa zasiłku chorobowego i macierzyńskiego (umowa pozorna)",
+      "scenario": "1.17",
+      "outcome": "refused",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 9,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "TITLE_LIKELY_VERIFIED",
+          "found": true,
+          "severity": "high"
+        }
+      ],
+      "variants": [
+        {
+          "name": "title-recognised",
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "id": "B4-11",
+      "title": "Pracownica po poprzednim urlopie rodzicielskim i przerwie w pracy: zasiłek chorobowy w ciąży, potem zasiłek macierzyński 20 + 32 tygodnie",
+      "scenario": "1.1",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 9,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B4-12",
+      "title": "Ojciec prowadzący działalność: odmowa zasiłku za szóstą część urlopu rodzicielskiego, limit 5 części wspólny dla obojga rodziców",
+      "scenario": "1.17",
+      "outcome": "refused",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "PARTS_LIMIT_NEAR",
+          "found": true,
+          "severity": "high"
+        },
+        {
+          "code": "PARTS_LIMIT_NEAR",
+          "found": true,
+          "severity": "high"
+        }
+      ],
+      "variants": [
+        {
+          "name": "only-three-earlier-parts",
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "id": "B4-13",
+      "title": "Pracownica, umowa trwająca do dnia porodu: zasiłek chorobowy w ciąży, potem zasiłek macierzyński 81,5% po ustaniu zatrudnienia; korekty Z-3 sprawdzane z RCA",
+      "scenario": "1.14",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 1,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [
+        {
+          "path": "benefits[0].paidBy",
+          "status": "reported",
+          "expected": "zus",
+          "actual": [
+            "payer",
+            "zus"
+          ]
+        }
+      ],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B4-14",
+      "title": "Pracownica z wysokim wynagrodzeniem i premiami, krótko zatrudniona: zasiłek chorobowy w ciąży po wynagrodzeniu chorobowym, wniosek złożony przez płatnika",
+      "scenario": "1.2",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B4-15",
+      "title": "Pracownica: zasiłek macierzyński 20 tygodni (81,5%) + 1 tydzień uzupełniającego urlopu macierzyńskiego (100%, pobyt dziecka urodzonego o czasie w szpitalu) + 32 tygodnie rodzicielskiego",
+      "scenario": "1.10",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 9,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B5-01",
+      "title": "Martwe urodzenie bez aktu urodzenia (płeć nieustalona), pracownica: 8 tygodni zasiłku macierzyńskiego mimo urlopu bezpłatnego tuż przed porodem",
+      "scenario": "1.9",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "CERTIFICATE_TYPE",
+          "found": true,
+          "severity": "info"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B5-02",
+      "title": "Ojciec prowadzący działalność (preferencyjny ZUS): 57 dni urlopu rodzicielskiego równolegle z matką, zasiłek podwyższony do 1000 zł",
+      "scenario": "1.7",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "LOW_BASE",
+          "found": true,
+          "severity": "info"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B5-03",
+      "title": "Pracownica zatrudniona 4 miesiące przed porodem, dziecko donoszone hospitalizowane 5 dni: 20 tygodni macierzyńskiego, 1 tydzień uzupełniającego i 32 tygodnie rodzicielskiego",
+      "scenario": "1.10",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 9,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "CERTIFICATE_TYPE",
+          "found": true,
+          "severity": "info"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B5-04",
+      "title": "Pracownica na 1/4 etatu, wcześniak z 36. tygodnia ponownie hospitalizowany 10 dni: 2 tygodnie uzupełniającego, ojciec równolegle ze swojej puli",
+      "scenario": "1.10",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 9,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "LOW_BASE",
+          "found": true,
+          "severity": "info"
+        },
+        {
+          "code": "CERTIFICATE_TYPE",
+          "found": true,
+          "severity": "info"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B5-05",
+      "title": "Matka prowadząca działalność rezygnuje z urlopu macierzyńskiego po 14 tygodniach, resztę macierzyńskiego i rodzicielski bierze ojciec",
+      "scenario": "1.8",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B5-06",
+      "title": "Pracownica wracająca z dwuletniego urlopu wychowawczego, chora w ciąży: 52 tygodnie zasiłku macierzyńskiego z podstawy od płacy minimalnej",
+      "scenario": "1.1",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "DAY_COUNT_MISMATCH",
+          "found": true,
+          "severity": "warning"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B5-07",
+      "title": "Martwe urodzenie bliźniąt, pracownica na 1/4 etatu zatrudniona od 3,5 miesiąca: 8 tygodni zasiłku macierzyńskiego podwyższonego do 1000 zł",
+      "scenario": "1.9",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "LOW_BASE",
+          "found": true,
+          "severity": "info"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B5-08",
+      "title": "Prowadząca działalność: odmowa zasiłku za urlop rodzicielski zgłoszony osobno po przerwie, bez ponownego zgłoszenia do ubezpieczenia chorobowego",
+      "scenario": "1.17",
+      "outcome": "refused",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "REREGISTER_AFTER_MATERNITY",
+          "found": true,
+          "severity": "high"
+        },
+        {
+          "code": "INSURANCE_GAP_BEFORE_PART",
+          "found": true,
+          "severity": "high"
+        }
+      ],
+      "variants": [
+        {
+          "name": "reregistered-before-parental",
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "id": "B5-09",
+      "title": "Ojciec zatrudniony na etacie: zasiłek za pierwszą tygodniową część urlopu ojcowskiego, wysokie wynagrodzenie",
+      "scenario": "1.5",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B5-10",
+      "title": "Bliźnięta urodzone w 28. tygodniu z zaświadczeniami „Za życiem”: 31 tygodni macierzyńskiego, uzupełniający i rodzicielski po wypisie",
+      "scenario": "1.11",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": true
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 1,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B5-11",
+      "title": "Ojciec zatrudniony od kilku miesięcy: 9 tygodni urlopu rodzicielskiego po wykorzystaniu przez matkę 52 tygodni",
+      "scenario": "1.6",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B5-12",
+      "title": "Umowa zlecenia bez dobrowolnego ubezpieczenia chorobowego (równolegle umowy o pracę): odmowa zasiłku macierzyńskiego z tytułu zlecenia",
+      "scenario": "1.17",
+      "outcome": "refused",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "VOLUNTARY_SICKNESS_NOT_JOINED",
+          "found": true,
+          "severity": "high"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B5-13",
+      "title": "Osoba współpracująca: zasiłek za urlop rodzicielski w dwóch kolejnych częściach, ZUS wezwał o oświadczenie drugiego rodzica i pulę 32/9 tygodni",
+      "scenario": "1.3",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B5-14",
+      "title": "Ojciec prowadzący działalność (preferencyjny ZUS): zasiłek za 32 tygodnie urlopu rodzicielskiego jako pierwsza część, wniosek o podwyższenie do 1000 zł",
+      "scenario": "1.7",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 1,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B6-01",
+      "title": "Przysposobienie: urlop na warunkach urlopu macierzyńskiego 20 tygodni i rodzicielski 32 tygodnie, od dnia po przyjęciu dziecka",
+      "scenario": "1.12",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B6-02",
+      "title": "Martwe urodzenie u pracownicy: 8 tygodni zasiłku macierzyńskiego od dnia porodu, premie zmienne w podstawie",
+      "scenario": "1.9",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B6-03",
+      "title": "Ojciec prowadzący działalność: 9 tygodni urlopu rodzicielskiego w stawce 70% około roku po porodzie; matka bez ubezpieczenia, ZUS żąda dokumentu z KRUS",
+      "scenario": "1.6",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": true
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "OTHER_PARENT_INFO_MISSING",
+          "found": true,
+          "severity": "warning"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B6-04",
+      "title": "Martwe urodzenie bez aktu urodzenia (płeć nieustalona), matka prowadząca działalność na niskiej podstawie: 8 tygodni zasiłku macierzyńskiego",
+      "scenario": "1.9",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 1,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 1
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [
+        {
+          "path": "outcome.value",
+          "status": "knownDivergence",
+          "expected": "granted",
+          "actual": "partial"
+        }
+      ],
+      "knownDivergence": "The claim asked for 57 days after a stillbirth; ZUS paid the statutory 56 days (title 1240) without a refusal decision for the extra day. The engine refuses the 57th day (EXCESS_DAYS), so its outcome is partial.",
+      "alerts": [
+        {
+          "code": "CERTIFICATE_TYPE",
+          "found": true,
+          "severity": "info"
+        },
+        {
+          "code": "DAY_COUNT_MISMATCH",
+          "found": true,
+          "severity": "warning"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B6-05",
+      "title": "Ojciec zatrudniony za minimalnym wynagrodzeniem: urlop ojcowski 2 tygodnie w jednej części",
+      "scenario": "1.5",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B6-06",
+      "title": "Matka prowadząca działalność: zasiłek chorobowy w ciąży i macierzyński wypłacone dopiero po spłacie zaległości składkowej; wniosek po 21 dniach od porodu",
+      "scenario": "1.3",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 9,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "ARREARS_OWN",
+          "found": true,
+          "severity": "blocking"
+        }
+      ],
+      "variants": [
+        {
+          "name": "arrears-not-repaid",
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "id": "B6-07",
+      "title": "Pracownica w ciąży zwolniona z powodu likwidacji pracodawcy: zasiłek w wysokości zasiłku macierzyńskiego do porodu, potem 20 + 32 tygodnie",
+      "scenario": "1.13",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 9,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B6-08",
+      "title": "Odmowa zasiłku macierzyńskiego: brak ubezpieczenia chorobowego w dniu porodu (wniosek złożony dla uzyskania decyzji odmownej dla instytucji zagranicznej)",
+      "scenario": "1.17",
+      "outcome": "refused",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 5,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "NOT_INSURED_ON_DUE_DATE",
+          "found": true,
+          "severity": "blocking"
+        }
+      ],
+      "variants": [
+        {
+          "name": "employed-at-birth",
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "id": "B6-09",
+      "title": "Ojciec zatrudniony z bardzo wysokim wynagrodzeniem: pierwsza 1-tygodniowa część urlopu ojcowskiego, obniżona stopa potrącenia po przekroczeniu rocznego limitu składek",
+      "scenario": "1.5",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 2,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B6-10",
+      "title": "Matka prowadząca działalność (preferencyjny ZUS): uzupełniający urlop macierzyński po 8 dniach na OIOM noworodków, zmieniony z 2 na 8 tygodni drugim wnioskiem",
+      "scenario": "1.10",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 1
+        },
+        "duration": {
+          "match": 7,
+          "mismatch": 0,
+          "reported": 2,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [
+        {
+          "path": "outcome.value",
+          "status": "knownDivergence",
+          "expected": "granted",
+          "actual": "partial"
+        },
+        {
+          "path": "benefits[1].days",
+          "status": "reported",
+          "expected": 56,
+          "actual": 14
+        },
+        {
+          "path": "benefits[1].to",
+          "status": "reported",
+          "expected": "2026-06-14",
+          "actual": "2026-05-03"
+        }
+      ],
+      "knownDivergence": "A second ZAM raised the supplementary leave from 2 to 8 weeks and ZUS granted it; the file shows only an 8-day neonatal stay (2 weeks under KP 180²) and no reason for the change, so the engine grants 2 weeks and refuses the other 6.",
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B6-11",
+      "title": "Matka prowadząca działalność: dziecko urodzone w 36. tygodniu, 8 dni w szpitalu, 2 tygodnie uzupełniającego urlopu macierzyńskiego po poprawionym wniosku",
+      "scenario": "1.10",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 9,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "CERTIFICATE_TYPE",
+          "found": true,
+          "severity": "info"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B6-12",
+      "title": "Pracownica po zmianie etatu z 1/2 na pełny tuż przed długim zwolnieniem w ciąży: macierzyński i rodzicielski 52 tygodnie bez przerwy po zasiłku chorobowym",
+      "scenario": "1.1",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 2,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [
+        {
+          "path": "benefits[0].base",
+          "status": "reported",
+          "expected": 371047,
+          "actual": 402629
+        },
+        {
+          "path": "benefits[0].daily",
+          "status": "reported",
+          "expected": 10080,
+          "actual": 10938
+        }
+      ],
+      "alerts": [],
+      "variants": []
+    },
+    {
+      "id": "B6-13",
+      "title": "Ojciec prowadzący działalność (preferencyjny ZUS): odmowa zasiłku za urlop ojcowski z powodu zadłużenia składkowego",
+      "scenario": "1.17",
+      "outcome": "refused",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 0,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "ARREARS_OWN",
+          "found": true,
+          "severity": "blocking"
+        }
+      ],
+      "variants": [
+        {
+          "name": "arrears-at-threshold",
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "id": "B6-14",
+      "title": "Pracownica na 1/4 etatu: zasiłek chorobowy w ciąży, potem macierzyński i rodzicielski 52 tygodnie podwyższony do kwoty świadczenia rodzicielskiego; ojciec równolegle część swoich 9 tygodni",
+      "scenario": "1.16",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": false,
+        "amount": false
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [
+        {
+          "code": "LOW_BASE",
+          "found": true,
+          "severity": "info"
+        },
+        {
+          "code": "TOP_UP_STATEMENT_NEEDED",
+          "found": true,
+          "severity": "info"
+        }
+      ],
+      "variants": []
+    },
+    {
+      "id": "B6-15",
+      "title": "Umowa zlecenie z dobrowolnym ubezpieczeniem chorobowym od 5 miesięcy przed porodem: zasiłek chorobowy w ciąży, potem macierzyński 140 + 224 dni w stawce 81,5%",
+      "scenario": "1.4",
+      "outcome": "granted",
+      "tiers": {
+        "outcome": true,
+        "duration": true,
+        "amount": true
+      },
+      "counts": {
+        "outcome": {
+          "match": 3,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "duration": {
+          "match": 6,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        },
+        "amount": {
+          "match": 4,
+          "mismatch": 0,
+          "reported": 0,
+          "knownDivergence": 0
+        }
+      },
+      "status": "match",
+      "divergences": [],
+      "alerts": [],
+      "variants": []
+    }
+  ]
+}

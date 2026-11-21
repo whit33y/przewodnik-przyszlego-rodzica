@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-09",
+  "title": "Ojciec prowadzący działalność po martwym urodzeniu dziecka: zasiłek macierzyński za 9 tygodni urlopu macierzyńskiego",
+  "scenario": "1.9",
+  "tags": [
+    "self-employed",
+    "father",
+    "stillbirth",
+    "maternity-for-father",
+    "open-legal-question"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 10
+  },
+  "facts": {
+    "asOf": "2024-08-23",
+    "mode": "adjudication",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "from": "2024-08-23",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-08-23"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "mother",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "occurred": true,
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": false
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ],
+      "mother": {
+        "insuredAtBirth": "unknown"
+      }
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2024-08-23",
+        "days": 63
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "ZAM",
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "ZAM",
+      "evidence": "inferred"
+    },
+    "facts.event.occurred": {
+      "doc": "birth-extract",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].bornAlive": {
+      "doc": "birth-extract",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "evidence": "handwritten"
+    },
+    "plan.blocks[0].days": {
+      "doc": "ZAM",
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Self-employed father (Z-3b filled as his own payer); no ZUS register printout, so the insurance start is unknown: titles[0].from is a placeholder equal to the claim start (he was paid, so he was insured then), not a real start date. Child stillborn (registry extract with the stillbirth annotation); birth date redacted, so event.occurred is set and mode is adjudication. ZAM: maternity-leave box only, 81.5% box not ticked, birth ticked as reason; the mother's data filled in but no reason box (resignation, hospital, incapacity, work, abandonment, death) visibly ticked. Requested 2024-08-23 to a handwritten end in late October (read as 24.10.2024, i.e. 63 days = 9 weeks; uncertain). ZUS note: entitlement established and benefit paid. Application date not legible; asOf set to the claim start."
+}

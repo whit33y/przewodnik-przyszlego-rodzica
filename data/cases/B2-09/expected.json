@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-09",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 63,
+        "evidence": "inferred"
+      },
+      "from": {
+        "value": "2024-08-23",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  },
+  "knownDivergence": {
+    "fields": [
+      "outcome",
+      "benefits[0]"
+    ],
+    "explanation": "The file does not show the legal path by which a father received 9 weeks of maternity benefit after a stillbirth (no mother-situation reason ticked, no decision text, mother's insurance unknown). The engine's stillbirth rule gives the mother 56 days and has no branch that reproduces this grant; flagged in the digest for mentor verification."
+  }
+}

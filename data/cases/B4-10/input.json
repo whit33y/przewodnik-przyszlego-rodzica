@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-10",
+  "title": "Pracownica zgłoszona z opóźnieniem po zleceniu u tego samego płatnika, druga praca na pełen etat, niezdolna miesiąc po zatrudnieniu: odmowa zasiłku chorobowego i macierzyńskiego (umowa pozorna)",
+  "scenario": "1.17",
+  "tags": [
+    "employee",
+    "mother",
+    "refusal",
+    "title-invalidated",
+    "sham-employment",
+    "late-registration",
+    "same-firm-prior-contract",
+    "second-full-time-job",
+    "sickness-in-pregnancy"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 46
+  },
+  "facts": {
+    "asOf": "2025-07-22",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t0",
+          "kind": "mandate",
+          "zusCode": "0411",
+          "from": "2023-12-01",
+          "to": "2024-12-31",
+          "endReason": "contractEnded",
+          "sickness": {
+            "mode": "none",
+            "periods": []
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "client"
+          },
+          "months": []
+        },
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2025-01-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2025-01-01"
+              }
+            ]
+          },
+          "registeredOn": "2025-01-21",
+          "workTime": [
+            {
+              "from": "2025-01-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "sameFirmPriorContract": true
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [
+        {
+          "titleId": "t1",
+          "from": "2025-02-03",
+          "to": "2025-05-27",
+          "code": "B"
+        }
+      ],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2025-02-03",
+          "to": "2025-03-07"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": [
+        {
+          "titleId": "t1",
+          "kind": "nonCoverage",
+          "from": "2025-01-01"
+        }
+      ]
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-05-28",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2025-06-02",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "sickness",
+        "titleId": "t1",
+        "from": "2025-03-08",
+        "days": 81
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-05-28",
+        "days": 140
+      },
+      {
+        "id": "b3",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2025-10-15",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 35
+    },
+    "facts.claimant.titles[0]": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 40
+    },
+    "facts.claimant.titles[1].from": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 36
+    },
+    "facts.claimant.titles[1].registeredOn": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 36
+    },
+    "facts.claimant.titles[1].workTime": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 38
+    },
+    "facts.claimant.titles[1].payer.sameFirmPriorContract": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 40
+    },
+    "facts.claimant.sickNotes[0]": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 36
+    },
+    "facts.claimant.sickNotes[0].code": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 4
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 4
+    },
+    "facts.claimant.insuranceDecisions[0]": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 35
+    },
+    "facts.event.date": {
+      "doc": "leave-application",
+      "evidence": "handwritten",
+      "page": 33
+    },
+    "plan.rateOption": {
+      "doc": "leave-application",
+      "evidence": "inferred",
+      "page": 29
+    },
+    "plan.applicationDate": {
+      "doc": "leave-application",
+      "evidence": "handwritten",
+      "page": 29
+    },
+    "plan.blocks[0]": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 36
+    },
+    "plan.blocks[1]": {
+      "doc": "leave-application",
+      "evidence": "handwritten",
+      "page": 29
+    },
+    "plan.blocks[2]": {
+      "doc": "leave-application",
+      "evidence": "handwritten",
+      "page": 29
+    }
+  },
+  "extractionNotes": "Two decisions. (1) Insurance decision of 2025-07-22: the claimant is not subject to compulsory pension, disability, sickness and accident insurance as the payer's employee from 2025-01-01 (contract found apparent under art. 83 KC with art. 300 KP). Grounds listed by ZUS: registration filed 2025-01-21, after the 7-day deadline; the same payer had reported her for health insurance only as a mandate contractor 2023-12-01..2024-12-31; incapacity from 2025-02-03, about a month after hiring; she holds a full-time job with another employer since 2018 during the same hours; cash wages without the written request; safety training dated a year before hiring; no pre-employment medical certificate, contract or attendance lists. (2) Benefit refusal decision (July 2025, day illegible; art. 1 ust. 1, art. 6 ust. 1, art. 29 ust. 1 UZ): sickness benefit 2025-03-01..2025-05-27 and maternity benefit 2025-05-28..2026-05-26 from this employment. The sickness claim itself started 2025-03-08 after employer-paid sick pay 2025-02-03..2025-03-07 (code B), so the plan uses 2025-03-08 and the refused sickness period is recorded as the claim. The other, genuine employment is not part of this claim and is not modelled (whether benefits were paid from it is not shown). Salary amounts redacted. Leave application of 2025-06-02 for 52 weeks (maternity 2025-05-28..2025-10-14, parental 2025-10-15..2026-05-26) with the father's non-use statement; 81.5% inferred from the joint request within 21 days. asOf = insurance-decision date (the benefit decision followed it in July 2025). Variant: with the non-coverage decision removed the claim is granted."
+}

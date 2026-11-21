@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-09",
+  "title": "Ojciec-pracownik przejmuje resztę urlopu macierzyńskiego po 19 tygodniach matki (działalność), potem urlop rodzicielski z przerwą na ojcowski",
+  "scenario": "1.8",
+  "tags": [
+    "employee",
+    "father",
+    "maternity-takeover",
+    "mother-resigned-after-19-weeks",
+    "parental",
+    "high-earner",
+    "contribution-cap"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 16
+  },
+  "facts": {
+    "asOf": "2026-04-13",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2025-09-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2025-09-01"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "mother",
+      "insured": "yes",
+      "used": [
+        {
+          "type": "maternity",
+          "from": "2026-03-21",
+          "to": "2026-07-31"
+        }
+      ],
+      "declaresNonUse": {
+        "from": "2026-08-08",
+        "to": "2027-04-02"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-03-21",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2026-04-13",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-08-01",
+        "days": 7,
+        "takeover": "afterResignation"
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-08-08",
+        "days": 210,
+        "pool": "shared"
+      },
+      {
+        "id": "b3",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2027-03-20",
+        "days": 14,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.otherParent.insured": {
+      "doc": "zus-titles-screen",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "facts.otherParent.used": {
+      "doc": "zus-titles-screen",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "other-parent-statement",
+      "page": 13,
+      "evidence": "handwritten"
+    },
+    "facts.event.date": {
+      "doc": "zus-note",
+      "page": 16,
+      "evidence": "printed"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-titles-screen",
+      "page": 9,
+      "evidence": "inferred"
+    },
+    "plan.blocks[1]": {
+      "doc": "Z-3",
+      "page": 7,
+      "evidence": "inferred"
+    },
+    "plan.blocks[2]": {
+      "doc": "Z-3",
+      "page": 7,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Father employed since 2025-09-01 (small employer). Mother self-employed (0510 from 2022-05-15, voluntary sickness), maternity benefit on her account 2026-03-21..2026-07-31 = 19 weeks, after which she gave up the rest of maternity leave in his favour. Father's 1240 title starts 2026-08-01, so his remaining maternity is 2026-08-01..2026-08-07. The mother's statement of non-use covers 2026-08-08..2027-04-02 and excludes the father's 9 weeks; that window is 238 days = 224 days of shared parental + 14 days of paternity leave taken as a break (to be filed on a new form). The ZUS screen search window ends 2027-03-05, which fits a first parental part 2026-08-08..2027-03-05 (210 days), paternity 2027-03-06..19 and a final part 2027-03-20..2027-04-02 (14 days, printed in the employer remark); the split of the first part is inferred. ZUS note: benefit granted as requested; rate not printed. Salary about 53,333 a month with the deduction falling to 3.24% and 2.45% in mid-2026 (annual contribution cap); the monthly amounts are mostly illegible, so months are omitted."
+}

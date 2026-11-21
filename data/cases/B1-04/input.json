@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-04",
+  "title": "Osoba współpracująca w ciąży: odmowa kontynuacji zasiłku chorobowego z powodu zadłużenia na koncie płatnika",
+  "scenario": "1.17",
+  "tags": [
+    "collaborator",
+    "sickness-in-pregnancy",
+    "refusal",
+    "arrears",
+    "payer-account",
+    "continuation",
+    "same-person-pair"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 16
+  },
+  "facts": {
+    "asOf": "2025-03-04",
+    "mode": "adjudication",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "collaborator",
+          "zusCode": "0511",
+          "from": "2024-08-03",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-08-22"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "businessOwner"
+          },
+          "months": [
+            {
+              "month": "2024-08",
+              "contributionBase": 439154
+            },
+            {
+              "month": "2024-09",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-10",
+              "contributionBase": 242292
+            }
+          ]
+        },
+        {
+          "id": "t0",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2022-09-01",
+          "to": "2024-08-02",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2022-09-01",
+                "to": "2024-08-02"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-2",
+            "kind": "employer"
+          },
+          "months": []
+        },
+        {
+          "id": "t00",
+          "kind": "mandate",
+          "zusCode": "0411",
+          "from": "2024-02-01",
+          "to": "2024-06-30",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-02-29",
+                "to": "2024-06-30"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-3",
+            "kind": "client"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [
+        {
+          "titleId": "t1",
+          "from": "2024-11-06",
+          "to": "2024-12-03",
+          "code": "B"
+        },
+        {
+          "titleId": "t1",
+          "from": "2024-12-04",
+          "to": "2024-12-23",
+          "code": "B"
+        },
+        {
+          "titleId": "t1",
+          "from": "2024-12-24",
+          "to": "2025-01-12",
+          "code": "B"
+        },
+        {
+          "titleId": "t1",
+          "from": "2025-01-13",
+          "to": "2025-02-10",
+          "code": "B"
+        },
+        {
+          "titleId": "t1",
+          "from": "2025-02-11",
+          "to": "2025-03-03",
+          "code": "B"
+        },
+        {
+          "titleId": "t1",
+          "from": "2025-03-04",
+          "to": "2025-03-31",
+          "code": "B"
+        }
+      ],
+      "paidBenefits": [
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2024-10-17",
+          "to": "2025-03-03",
+          "rateBps": 10000
+        }
+      ],
+      "arrears": [
+        {
+          "account": "payer",
+          "onDate": "2025-03-04",
+          "aboveThreshold": true
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "children": []
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "sickness",
+        "titleId": "t1",
+        "from": "2025-03-04",
+        "days": 28
+      }
+    ]
+  },
+  "provenance": {
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 20,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].zusCode": {
+      "doc": "zus-insurance-memo",
+      "page": 20,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 20,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-insurance-memo",
+      "page": 20,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1]": {
+      "doc": "zus-insurance-memo",
+      "page": 20,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[2]": {
+      "doc": "zus-insurance-memo",
+      "page": 20,
+      "evidence": "printed"
+    },
+    "facts.asOf": {
+      "doc": "zus-insurance-memo",
+      "page": 9,
+      "evidence": "inferred"
+    },
+    "facts.claimant.sickNotes": {
+      "doc": "doctor-certificate",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 9,
+      "evidence": "inferred"
+    },
+    "facts.claimant.arrears[0].onDate": {
+      "doc": "zus-insurance-memo",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.claimant.arrears[0].aboveThreshold": {
+      "doc": "zus-insurance-memo",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "doctor-certificate",
+      "page": 7,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Same insurance history as B1-02 (very likely the same person). Pregnancy sickness benefit (code B) had been paid from 2024-10-17; the continuation e-ZLA 2025-03-04..2025-03-31 was examined on 2025-03-04 and ZUS found a debt on the business owner's account (TAK); case closed with a refusal, decision text not in the file. The memo also records that the debt was later repaid in full on a date in summer 2025, after the claimed spell; the refusal reflects the state at the decision, so the repayment date is not put into facts (asOf = examination date). The child was born during the claimed spell (2025-03-21, see B1-02), which would end sickness benefit on 2025-03-20 anyway; the event date is not in this file, so the event is left undated and mode is set to adjudication. Plan block = the continuation as claimed."
+}

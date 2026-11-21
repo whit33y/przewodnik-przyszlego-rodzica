@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-10",
+  "title": "Matka prowadząca działalność (preferencyjny ZUS): uzupełniający urlop macierzyński po 8 dniach na OIOM noworodków, zmieniony z 2 na 8 tygodni drugim wnioskiem",
+  "scenario": "1.10",
+  "tags": [
+    "self-employed",
+    "mother",
+    "supplementary",
+    "neonatal-icu",
+    "second-application",
+    "preferential-zus",
+    "not-reproducible"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 38
+  },
+  "facts": {
+    "asOf": "2026-01-26",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2024-11-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-11-01"
+              }
+            ]
+          },
+          "scheme": "preferential",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-12-01",
+      "documents": [
+        "birthAct"
+      ],
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true,
+          "birthWeightG": 2350,
+          "hospitalStays": [
+            {
+              "from": "2025-12-01",
+              "to": "2025-12-08"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2025-12-16",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-12-01",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "supplementary",
+        "titleId": "t1",
+        "from": "2026-04-20",
+        "days": 56
+      },
+      {
+        "id": "b3",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-06-15",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 37
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 35
+    },
+    "facts.claimant.titles[0].zusCode": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 35
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 35
+    },
+    "facts.claimant.titles[0].scheme": {
+      "doc": "zus-titles-screen",
+      "evidence": "inferred",
+      "page": 35
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "evidence": "printed",
+      "page": 11
+    },
+    "facts.event.children[0].birthWeightG": {
+      "doc": "hospital-certificate",
+      "evidence": "printed",
+      "page": 12
+    },
+    "facts.event.children[0].hospitalStays[0]": {
+      "doc": "hospital-certificate",
+      "evidence": "printed",
+      "page": 12
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "evidence": "inferred",
+      "page": 24
+    },
+    "plan.applicationDate": {
+      "doc": "ZAM",
+      "evidence": "printed",
+      "page": 29
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 18
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 18
+    },
+    "plan.blocks[2]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 18
+    }
+  },
+  "extractionNotes": "Self-employed mother (Z-3b box for a business owner ticked; title 0570, voluntary sickness insurance from 2024-11-01; the 0570 sickness period closes on 2025-11-30 because of the concurrence with maternity benefit and a 0570T title runs 2025-12-01..2027-01-24, modelled as one open title). Child in a neonatal intensive-care unit 2025-12-01..2025-12-08 (8 days), weight 2350 g on admission; gestational week not in the file. First ZAM (received 2025-12-16, full-length declaration ticked): maternity 140 days, supplementary 2026-04-20..2026-05-03 (2 weeks), parental 32 weeks; first grant decision 2025-12-18. Second ZAM (received 2026-01-21): supplementary 2026-04-20..2026-06-14 (8 weeks), parental 2026-06-15..2027-01-24; second grant decision 2026-01-26. Only the decision list is in the file, not the decision texts; the 0570T title ending 2027-01-24 confirms the 8-week version. The plan holds the second (final) claim. No declared bases in the file, so months are empty and amounts are not asserted. Rate not printed (81.5% inferred from the joint application within 21 days). The other parent declared no use of parental leave."
+}

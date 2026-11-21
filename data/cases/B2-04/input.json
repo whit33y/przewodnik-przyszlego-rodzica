@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-04",
+  "title": "Pracownica na 1/4 etatu: zasiłek chorobowy w ciąży, przyznany po wezwaniu do dostarczenia Z-3 od pracodawcy",
+  "scenario": "1.2",
+  "tags": [
+    "employee",
+    "sickness-in-pregnancy",
+    "quarter-time",
+    "low-base",
+    "missing-employer-certificate"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 38
+  },
+  "facts": {
+    "asOf": "2025-10-10",
+    "mode": "adjudication",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2024-10-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2024-10-01"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2024-10-01",
+              "fraction": {
+                "num": 1,
+                "den": 4
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2024-10",
+              "contributionBase": 107500,
+              "fixedPay": 107500,
+              "daysDue": 23,
+              "daysWorked": 23
+            },
+            {
+              "month": "2024-11",
+              "contributionBase": 107500,
+              "fixedPay": 107500,
+              "daysDue": 19,
+              "daysWorked": 19
+            },
+            {
+              "month": "2024-12",
+              "contributionBase": 107500,
+              "fixedPay": 107500,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2025-01",
+              "contributionBase": 116650,
+              "fixedPay": 116650,
+              "daysDue": 21,
+              "daysWorked": 21
+            }
+          ]
+        },
+        {
+          "id": "t0",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2022-06-22",
+          "to": "2022-09-05",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2022-06-22",
+                "to": "2022-09-05"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-2",
+            "kind": "employer"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [
+        {
+          "titleId": "t1",
+          "from": "2025-02-18",
+          "to": "2025-03-07",
+          "code": "B"
+        }
+      ],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2025-02-18",
+          "to": "2025-03-22"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "children": []
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "sickness",
+        "titleId": "t1",
+        "from": "2025-03-23",
+        "days": 66
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-titles-screen",
+      "page": 37,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 9,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 9,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1]": {
+      "doc": "zus-titles-screen",
+      "page": 37,
+      "evidence": "printed"
+    },
+    "facts.claimant.sickNotes[0]": {
+      "doc": "zus-titles-screen",
+      "page": 37,
+      "evidence": "printed"
+    },
+    "facts.claimant.sickNotes[0].code": {
+      "doc": "zus-titles-screen",
+      "page": 37,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-notice",
+      "page": 4,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Employee at 1/4 time since 2024-10-01 (small employer); an earlier short employment 2022-06-22..2022-09-05. Salary exactly 1/4 of the minimum wage (1075.00 in 2024, 1166.50 in 2025), 13.71% deducted. Pregnancy sick leave from 2025-02-18; employer sick pay 2025-02-18..2025-03-22 (33 days), ZUS sickness benefit from 2025-03-23. A ZUS letter said the benefit for 2025-02-18 onwards could not be paid without the employer's Z-3 (deadline 2025-05-27); the end of the claimed period in that letter is not reliably legible, so the plan block ends on 2025-05-27 as an inferred placeholder and the expected period is not asserted. Internal note: sickness benefit granted. Code B (pregnancy) inferred from the file label. Due date and birth not in the file; mode set to adjudication."
+}

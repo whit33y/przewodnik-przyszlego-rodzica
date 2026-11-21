@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-14",
+  "title": "Ojciec prowadzący działalność (preferencyjny ZUS): zasiłek za 32 tygodnie urlopu rodzicielskiego jako pierwsza część, wniosek o podwyższenie do 1000 zł",
+  "scenario": "1.7",
+  "tags": [
+    "self-employed",
+    "father",
+    "parental",
+    "shared-pool",
+    "top-up",
+    "single-title-statement",
+    "preferential-zus",
+    "event-date-unknown"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 14
+  },
+  "facts": {
+    "asOf": "2026-10-05",
+    "mode": "adjudication",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2025-03-01",
+          "to": "2026-09-16",
+          "endReason": "deregisteredBenefitConcurrence",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2025-03-01",
+                "to": "2026-09-16"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        },
+        {
+          "id": "t2",
+          "kind": "selfEmployed",
+          "zusCode": "0570T",
+          "from": "2026-09-17",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2026-09-17"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "mother",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "occurred": true,
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "singleTitleStatement": true,
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t2",
+        "from": "2026-10-01",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 13
+    },
+    "facts.claimant.titles[0]": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 13
+    },
+    "facts.claimant.titles[1]": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 13
+    },
+    "facts.otherParent.used": {
+      "doc": "ZUR",
+      "evidence": "printed",
+      "page": 3
+    },
+    "facts.event.occurred": {
+      "doc": "birth-extract",
+      "evidence": "inferred",
+      "page": 11
+    },
+    "plan.singleTitleStatement": {
+      "doc": "claimant-statement",
+      "evidence": "handwritten",
+      "page": 9
+    },
+    "plan.blocks[0]": {
+      "doc": "ZUR",
+      "evidence": "printed",
+      "page": 2
+    }
+  },
+  "extractionNotes": "Case note on the first page: right to maternity benefit for the parental period granted 2026-10-01..2027-05-12 (224 days, 32 weeks), claimed on a ZUR as the first part. On the ZUR neither parent had received maternity benefit before and the other parent will not use parental leave at the same time; the mother's insurance status is not in the file. ZUS titles screen: self-employed title 0570 with voluntary sickness from 2025-03-01, ended 2026-09-16 with the reason benefit concurrence; then code 0570T with voluntary sickness 2026-09-17..2026-09-30 and from 2026-10-01 (a row for 2026-10-01..2027-05-12 entered by a clerk); the two 0570T rows are merged into one open title t2. Why the concurrence end falls before the parental start is not explained in the file. The claimant's statement says the benefit is due only from his business and asks for the benefit to be raised to the parental-benefit level (art. 31 ust. 3a UZ). No declared bases, base or amounts in the file (low preferential base implied by the top-up request). Child's birth date redacted, hence event.occurred with mode adjudication. Rate not printed. asOf = last confirmation date on the ZUS titles screen."
+}

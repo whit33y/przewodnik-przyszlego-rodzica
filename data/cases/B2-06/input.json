@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-06",
+  "title": "Pracownica zatrudniona 4 miesiące przed zwolnieniem: odmowa zasiłku chorobowego w ciąży po decyzji ZUS o niepodleganiu ubezpieczeniom",
+  "scenario": "1.17",
+  "tags": [
+    "employee",
+    "sickness-in-pregnancy",
+    "refusal",
+    "title-invalidated",
+    "sham-contract",
+    "minimum-wage",
+    "new-job"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 14
+  },
+  "facts": {
+    "asOf": "2026-05-11",
+    "mode": "adjudication",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2025-10-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2025-10-01"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2025-10-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer"
+          },
+          "months": [
+            {
+              "month": "2025-10",
+              "contributionBase": 466600,
+              "fixedPay": 466600,
+              "daysDue": 23,
+              "daysWorked": 23
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 466600,
+              "fixedPay": 466600,
+              "daysDue": 19,
+              "daysWorked": 19
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 466600,
+              "fixedPay": 466600,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 480600,
+              "fixedPay": 480600,
+              "daysDue": 20,
+              "daysWorked": 20
+            }
+          ]
+        }
+      ],
+      "sickNotes": [
+        {
+          "titleId": "t1",
+          "from": "2026-02-03",
+          "to": "2026-03-27",
+          "code": "B"
+        }
+      ],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2026-02-03",
+          "to": "2026-03-07"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": [
+        {
+          "titleId": "t1",
+          "kind": "nonCoverage",
+          "from": "2025-10-01"
+        }
+      ]
+    },
+    "event": {
+      "kind": "birth",
+      "children": []
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "sickness",
+        "titleId": "t1",
+        "from": "2026-03-08",
+        "days": 20
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-insurance-memo",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.sickNotes[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 11,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.claimant.insuranceDecisions[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 11,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Declared full-time employee from 2025-10-01 at the minimum wage (4666.00, then 4806.00); pregnancy incapacity from 2026-02-03, employer sick pay 2026-02-03..2026-03-07 (33 days). ZUS opened an insurance-validity check (examination date 2026-02-03, last document 2026-04-03) and on 2026-05-11 decided she was not subject to compulsory insurance as an employee from 2025-10-01; the cover note records the sickness-benefit refusal because the title ceased under that decision. The ZUS sickness claim in the memo ends 2026-03-27; the plan block runs from the day after sick pay to that date (start inferred). Benefit-decision text not in the file, so no legal basis is recorded. Due date unknown; mode adjudication. TITLE_LIKELY_VERIFIED is expected when the non-coverage decision is stripped (new full-time job at the minimum wage, sick leave about four months after hiring)."
+}

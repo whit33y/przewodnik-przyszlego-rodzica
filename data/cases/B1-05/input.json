@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-05",
+  "title": "Pracownica: urlop macierzyński, potem rodzicielski łączony z pracą w wymiarze 3/8 etatu, podwyższenie do kwoty minimalnej",
+  "scenario": "1.15",
+  "tags": [
+    "employee",
+    "mother",
+    "parental-with-work",
+    "work-fraction",
+    "top-up",
+    "late-application",
+    "rate-100-70"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 28
+  },
+  "facts": {
+    "asOf": "2026-05-08",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2025-05-14",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2025-05-14"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-05",
+              "contributionBase": 350950,
+              "fixedPay": 349950,
+              "variablePay": 1000,
+              "daysDue": 13,
+              "daysWorked": 13,
+              "fullMonthInsured": false
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 350950,
+              "fixedPay": 349950,
+              "variablePay": 1000,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 350950,
+              "fixedPay": 349950,
+              "variablePay": 1000,
+              "daysDue": 23,
+              "daysWorked": 23
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 350950,
+              "fixedPay": 349950,
+              "variablePay": 1000,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2025-09",
+              "contributionBase": 350950,
+              "fixedPay": 349950,
+              "variablePay": 1000,
+              "daysDue": 22,
+              "daysWorked": 22
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 350950,
+              "fixedPay": 349950,
+              "variablePay": 1000,
+              "daysDue": 23,
+              "daysWorked": 23
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 350950,
+              "fixedPay": 349950,
+              "variablePay": 1000,
+              "daysDue": 18,
+              "daysWorked": 18
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 350950,
+              "fixedPay": 349950,
+              "variablePay": 1000,
+              "daysDue": 20,
+              "daysWorked": 17
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2026-01-01",
+          "to": "2026-01-23"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2026-06-14",
+        "to": "2027-04-17"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-01-25",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-01-25",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-06-14",
+        "days": 224,
+        "pool": "shared",
+        "workFraction": {
+          "num": 3,
+          "den": 8
+        }
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "leave-application",
+      "page": 9,
+      "evidence": "handwritten"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 17,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 19,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 19,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "page": 18,
+      "evidence": "printed"
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "other-parent-statement",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "plan.rateOption": {
+      "doc": "Z-3",
+      "page": 17,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "page": 2,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "leave-application",
+      "page": 9,
+      "evidence": "printed"
+    },
+    "plan.blocks[1].workFraction": {
+      "doc": "leave-application",
+      "page": 9,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Employee since 2025-05-14 (small employer); own etat not legible. Maternity 2026-01-25..2026-06-13; parental from 2026-06-14 combined with work at 3/8 of full time for the whole 32 weeks (fraction checked on the page image). ZUS note: maternity granted to 2026-06-13, parental extended because of work to 2027-04-17, and a top-up to the 1000 zł minimum was paid. 224 + 224 × 3/8 = 308 days reproduces the printed end date exactly, so the end date is consistent with the extension rule. The Z-3 application date reads about 24.02.2026 (uncertain), roughly a month after the birth, so the 100%/70% option is recorded as inferred and applicationDate is omitted. Z-3 salary table 2025-05..2025-12: fixed 3499.50 + 10.00 laundry allowance paid in full; May is the start month; December 17/20 days worked (sickness). Father declared non-use from 2026-06-14."
+}

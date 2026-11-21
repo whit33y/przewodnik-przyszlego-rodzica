@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-08",
+  "title": "Odmowa zasiłku macierzyńskiego: brak ubezpieczenia chorobowego w dniu porodu (wniosek złożony dla uzyskania decyzji odmownej dla instytucji zagranicznej)",
+  "scenario": "1.17",
+  "tags": [
+    "mother",
+    "refusal",
+    "not-insured",
+    "no-title",
+    "eu-coordination",
+    "late-application"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 10
+  },
+  "facts": {
+    "asOf": "2025-05-23",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "expectedDate": "2025-02-03",
+      "date": "2025-02-03",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2025-05-23",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "from": "2025-02-03",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "from": "2025-06-23",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.claimant.titles": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 10
+    },
+    "facts.event.date": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.event.expectedDate": {
+      "doc": "decision",
+      "evidence": "inferred",
+      "page": 9
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "evidence": "inferred",
+      "page": 2
+    },
+    "plan.applicationDate": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 9
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 2
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 2
+    }
+  },
+  "extractionNotes": "Formal refusal decision citing UZ art. 1 ust. 1 and art. 29 ust. 1: the child was born on 2025-02-03 while the claimant was not covered by sickness insurance; refused for 2025-02-03..2026-02-01. The case summary notes no registration for sickness insurance, so no title is modelled. The ZAM (filed 2025-05-23, about 3.5 months after the birth) carries the claimant's remark that she applies to obtain a refusal for a foreign institution (EU coordination). Requested maternity from the birth and parental to 2026-02-01; the handwritten intermediate dates are only partly legible, so the split is the statutory 140 + 224 days, consistent with the printed refusal period. The decision date is redacted; asOf = application date printed in the decision. expectedDate is set to the birth date (inferred) so the pre-event replay has a due date. Rate box not reliably legible (averaged rate assumed). Other parent not described."
+}

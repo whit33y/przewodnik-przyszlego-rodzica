@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-06",
+  "title": "Pracownik: zasiłek macierzyński za okres urlopu ojcowskiego (2 tygodnie), ok. 5 miesięcy po porodzie",
+  "scenario": "1.5",
+  "tags": [
+    "employee",
+    "father",
+    "paternity",
+    "minimum-wage"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 12
+  },
+  "facts": {
+    "asOf": "2026-10-01",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2016-09-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2016-09-01"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2016-09-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-10",
+              "contributionBase": 466600,
+              "fixedPay": 466600,
+              "daysDue": 23,
+              "daysWorked": 23
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 466600,
+              "fixedPay": 466600,
+              "daysDue": 18,
+              "daysWorked": 18
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 466600,
+              "fixedPay": 466600,
+              "daysDue": 21,
+              "daysWorked": 21
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 480600,
+              "fixedPay": 480600,
+              "daysDue": 19,
+              "daysWorked": 19
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 480600,
+              "fixedPay": 480600,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 480600,
+              "fixedPay": 480600,
+              "daysDue": 22,
+              "daysWorked": 22
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 480600,
+              "fixedPay": 480600,
+              "daysDue": 21,
+              "daysWorked": 16
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 480600,
+              "fixedPay": 480600,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 480600,
+              "fixedPay": 480600,
+              "daysDue": 21,
+              "daysWorked": 21
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 480600,
+              "fixedPay": 480600,
+              "daysDue": 23,
+              "daysWorked": 23
+            },
+            {
+              "month": "2026-08",
+              "contributionBase": 480600,
+              "fixedPay": 480600,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2026-09",
+              "contributionBase": 480600,
+              "fixedPay": 480600,
+              "daysDue": 22,
+              "daysWorked": 22
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2026-04-20",
+          "to": "2026-04-24"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-05-05",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2026-10-01",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "paternity",
+        "titleId": "t1",
+        "from": "2026-10-12",
+        "days": 14
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "Z-3",
+      "page": 6,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 6,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 6,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 8,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "ZAO",
+      "page": 2,
+      "evidence": "printed"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 6,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "Z-3",
+      "page": 6,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Full-time employee since 2016 (small employer). Paternity 2026-10-12..2026-10-25 claimed on the ZAO and Z-3 (application 2026-10-01). The only evidence of the grant is the 1240 title on the ZUS account screen (dates not legible), so periods are the claim. Z-3 salary 2025-10..2026-09: 4666.00 (2025) and 4806.00 (2026), no variable pay; April 2026 16/21 days worked (sick pay 2026-04-20..24). Not a separate claim for other benefits; rate 100% by law, not printed."
+}

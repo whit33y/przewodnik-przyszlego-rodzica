@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-06",
+  "title": "Pracownica na 1/10 etatu z wysokim wynagrodzeniem, niezdolna do pracy 24 dni po zatrudnieniu: odmowa zasiłku macierzyńskiego po decyzji o niepodleganiu ubezpieczeniom",
+  "scenario": "1.17",
+  "tags": [
+    "employee",
+    "mother",
+    "refusal",
+    "title-invalidated",
+    "sham-employment",
+    "small-fraction",
+    "pay-disproportionate",
+    "early-sick-leave"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 22
+  },
+  "facts": {
+    "asOf": "2025-10-28",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2024-10-04",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2024-10-04"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2024-10-04",
+              "fraction": {
+                "num": 1,
+                "den": 10
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [
+        {
+          "titleId": "t1",
+          "from": "2024-10-28",
+          "to": "2025-05-11"
+        }
+      ],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": [
+        {
+          "titleId": "t1",
+          "kind": "nonCoverage",
+          "from": "2024-10-04"
+        }
+      ]
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-06-12",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-06-12",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2025-10-30",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-note",
+      "evidence": "inferred",
+      "page": 3
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 4
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 4
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 19
+    },
+    "facts.claimant.sickNotes[0]": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 4
+    },
+    "facts.claimant.insuranceDecisions[0]": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 1
+    },
+    "facts.event.date": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 1
+    },
+    "plan.rateOption": {
+      "doc": "leave-application",
+      "evidence": "inferred",
+      "page": 15
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 3
+    },
+    "plan.blocks[1]": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 3
+    }
+  },
+  "extractionNotes": "Refusal decision (art. 29 ust. 1 pkt 1 UZ): no right to maternity benefit 2025-06-12..2026-06-10 because, by a separate ZUS decision, the claimant was not compulsorily insured as the payer's employee from 2024-10-04; the child was born 2025-06-12. Internal verification request (study date 2025-06-12; reply dated 2025-10-28): employment at 1/10 of full time with a fixed salary disproportionate to the fraction; incapacity from 2024-10-28 (24 days after hiring) to 2025-05-11, certified with the pregnancy code from 2024-11-14; the payer filed no sickness claims; the contribution base was also found incorrect. The refusal decision is undated in the scan; asOf = date of the verification reply. The salary amount is not legible and is omitted. The claim covered 52 weeks; the maternity/parental split is the claim, and the 81.5% option is inferred from the joint request. Variant: with the non-coverage decision removed the title stands and the claim is granted."
+}

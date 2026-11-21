@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-01",
+  "title": "Prowadząca działalność (Mały ZUS Plus): zasiłek macierzyński 20 + 32 tygodnie, podwyższenie do kwoty minimalnej",
+  "scenario": "1.3",
+  "tags": [
+    "self-employed",
+    "mother",
+    "mały-zus-plus",
+    "top-up",
+    "single-title-statement",
+    "second-child"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 14
+  },
+  "facts": {
+    "asOf": "2024-03-11",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0590",
+          "from": "2021-10-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2021-10-01"
+              }
+            ]
+          },
+          "scheme": "malyZusPlus",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2024-01-23",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "singleTitleStatement": true,
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2024-01-23",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2024-06-11",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "claimant-statement",
+      "page": 12,
+      "evidence": "handwritten"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].zusCode": {
+      "doc": "zus-titles-screen",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].scheme": {
+      "doc": "zus-titles-screen",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "hospital-certificate",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "page": 5,
+      "evidence": "handwritten"
+    },
+    "plan.singleTitleStatement": {
+      "doc": "claimant-statement",
+      "page": 12,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-titles-screen",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "zus-titles-screen",
+      "page": 13,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Self-employed mother on Mały ZUS Plus (title 0590 with voluntary sickness insurance from 2021-10-01; an earlier preferential title 0570 ran 2019-10-01..2021-06-01 and ended with an earlier maternity benefit). ZUS note on the titles screen: maternity right 2024-01-23..2024-06-10 and parental 2024-06-11..2025-01-20. Full-use (81.5%) box ticked; application date not legible, so applicationDate is omitted and the rate is not asserted. In answer to a ZUS letter she declared a single benefit title and asked for the raise to the minimum; the raise itself is evidenced only by the file label, so toppedUp is inferred. No declared bases in the file, so months are empty and amounts are not asserted."
+}

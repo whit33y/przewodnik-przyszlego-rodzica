@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-13",
+  "title": "Ojciec prowadzący działalność (preferencyjny ZUS): odmowa zasiłku za urlop ojcowski z powodu zadłużenia składkowego",
+  "scenario": "1.17",
+  "tags": [
+    "self-employed",
+    "father",
+    "paternity",
+    "refusal",
+    "arrears",
+    "preferential-zus"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 16
+  },
+  "facts": {
+    "asOf": "2025-09-24",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2024-12-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-12-01"
+              }
+            ]
+          },
+          "scheme": "preferential",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2024-12",
+              "contributionBase": 129000
+            },
+            {
+              "month": "2025-01",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-02",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 139980
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2025-09-25",
+          "aboveThreshold": true
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "occurred": true,
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2025-09-24",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "paternity",
+        "titleId": "t1",
+        "from": "2025-09-25",
+        "days": 14
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "decision",
+      "page": 15,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].scheme": {
+      "doc": "zus-insurance-memo",
+      "page": 12,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-insurance-memo",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.arrears[0].onDate": {
+      "doc": "decision",
+      "page": 15,
+      "evidence": "printed"
+    },
+    "facts.claimant.arrears[0].amount": {
+      "doc": "decision",
+      "page": 15,
+      "evidence": "inferred"
+    },
+    "plan.applicationDate": {
+      "doc": "decision",
+      "page": 15,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAO",
+      "page": 6,
+      "evidence": "handwritten"
+    }
+  },
+  "extractionNotes": "Formal refusal decision citing UZ art. 2a: on the day the right arose (2025-09-25) the contribution debt exceeded 1% of the minimum wage (46.66) and was not repaid. The amount of the debt is not stated anywhere; recorded as aboveThreshold. Repayment date blank in the memo. Child birth date redacted on the ZAO and absent elsewhere, so event.date is omitted although the event has happened. Declared bases: 1290.00 in 2024-12 (30% of 4300) and 1399.80 in 2025 (30% of 4666), confirming the 2024-07 and 2025 minimum wages. The memo flags that the base was below 60% of the forecast wage (last such month 2025-08). Days derived from the printed refusal period. Adjudication: unpaid arrears at the decision date give a refusal (ARREARS_UNPAID)."
+}

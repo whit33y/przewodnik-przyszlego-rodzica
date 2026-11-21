@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-13",
+  "title": "Osoba współpracująca: zasiłek za urlop rodzicielski w dwóch kolejnych częściach, ZUS wezwał o oświadczenie drugiego rodzica i pulę 32/9 tygodni",
+  "scenario": "1.3",
+  "tags": [
+    "collaborator",
+    "mother",
+    "parental",
+    "parental-parts",
+    "contribution-holiday",
+    "other-parent-statement-letter",
+    "event-date-unknown"
+  ],
+  "source": {
+    "pdfSha256": [],
+    "fileNameSha256": [],
+    "pages": 30
+  },
+  "facts": {
+    "asOf": "2026-10-06",
+    "mode": "adjudication",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "collaborator",
+          "zusCode": "0510",
+          "from": "2025-06-03",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2025-06-03"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "businessOwner"
+          },
+          "months": [
+            {
+              "month": "2025-09",
+              "contributionBase": 520380
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 520380
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 520380,
+              "contributionHoliday": true
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 520380
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 565200,
+              "contributionHoliday": true
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-08",
+              "contributionBase": 565200
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [
+        {
+          "account": "payer",
+          "onDate": "2026-09-20",
+          "aboveThreshold": false
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2026-09-20",
+        "to": "2026-12-31"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "occurred": true,
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-09-20",
+        "days": 42,
+        "pool": "shared"
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-11-01",
+        "days": 61,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-notice",
+      "evidence": "inferred",
+      "page": 11
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 18
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 18
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 18
+    },
+    "facts.claimant.titles[0].months[*].contributionHoliday": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 18
+    },
+    "facts.claimant.arrears[0]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 19
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "other-parent-statement",
+      "evidence": "inferred",
+      "page": 15
+    },
+    "facts.event.occurred": {
+      "doc": "birth-extract",
+      "evidence": "inferred",
+      "page": 5
+    },
+    "plan.blocks[0]": {
+      "doc": "ZUR",
+      "evidence": "printed",
+      "page": 2
+    },
+    "plan.blocks[1]": {
+      "doc": "ZUR",
+      "evidence": "printed",
+      "page": 22
+    }
+  },
+  "extractionNotes": "Cooperating family member (0510) with sickness insurance from 2025-06-03; the business owner files the Z-3b as payer. Two ZUR forms: first part of parental 2026-09-20..2026-10-31 and the next part 2026-11-01..2026-12-31 (the second ZUR gives the earlier part as starting in August, an obvious slip). On the first ZUR she declared that neither parent had received maternity benefit before the claimed period, so no maternity period is recorded; the child's birth date is redacted, hence event.occurred with mode adjudication. The ZUS insurance memo (examination date 2026-09-20) prints the 12 declared bases (5,203.80 in 2025-09..12, 5,652.00 in 2026-01..08) with contribution holidays in 2025-11 and 2026-02, and no debt on the payer account. ZUS then wrote (2026-10-06, citing par. 22 ust. 1 of the 2015 documents regulation) asking within 7 days, under threat of refusal, for the other parent's statement, whether the 32-week or 9-week pool is claimed, and whether the other parent used parental benefit; she answered: 32-week pool, other parent did not use it, and attached the other parent's statement. A handwritten ZUS note records payment for 2026-09-20..2026-12-31 (both parts). Rate not printed (separately claimed parental, 70% expected). asOf = date of the ZUS letter (the reply and the payment note are undated)."
+}
