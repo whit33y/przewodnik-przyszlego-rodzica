@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { seeOther } from "@/server/api";
+import { safeNext, seeOther } from "@/server/api";
 import { resolvePersona } from "@/server/persona-store";
 import { getMutableSession } from "@/server/session";
 import { createState } from "@/server/session-state";
@@ -24,7 +24,8 @@ export async function POST(req: Request) {
   session.mode = resolvedMode;
   session.since = new Date().toISOString();
   await session.save();
-  const next = String(form.get("next") ?? "");
-  if (next.startsWith("/") && !next.startsWith("//")) return seeOther(next);
+  const next = safeNext(form.get("next"));
+  if (next) return seeOther(next);
   return seeOther(resolvedMode === "mobywatel" ? "/zgoda" : "/sytuacja");
 }
+

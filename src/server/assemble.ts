@@ -3,8 +3,10 @@
  * plus a provenance map (fact path → source) the UI joins to source badges, plus the questions
  * that no available source could answer. Spec: docs/plan/03-phase-2-data-layer.md §2.
  */
-import type { BirthEvent, CareEvent, Child, Facts, FamilyEvent, InsuranceTitle, ISODate, OtherParent, Person, Role } from "@/engine/types";
-import type { Answers, SourceId, SystemPayloads } from "@/integrations/types";
+import { netOfDeduction } from "@/engine/money";
+import type { BirthEvent, Bps, CareEvent, Child, Facts, FamilyEvent, InsuranceTitle, ISODate, OtherParent, Person, Role } from "@/engine/types";
+import { SOURCES } from "@/integrations/sources";
+import type { Answers, SourceId, SystemId, SystemPayloads } from "@/integrations/types";
 
 export type FactPath = string;
 export interface ProvenanceEntry {
@@ -21,7 +23,7 @@ export interface Override {
   note?: string;
 }
 
-export type QuestionId = "expectedDate" | "childrenCount" | "zaZyciem" | "plannedEnd" | "otherParent" | "eventKind" | "careDetails" | "manual";
+export type QuestionId = "expectedDate" | "childrenCount" | "zaZyciem" | "plannedEnd" | "otherParent" | "eventKind" | "careDetails" | "manual" | "arrears";
 
 export interface Question {
   id: QuestionId;
@@ -37,29 +39,24 @@ export interface AssembleInput {
   asOf: ISODate;
   mode: "mobywatel" | "manual" | "case";
   otherParentPerson?: Person;
+  /** Registries that answered (state `ok`), even with an empty payload. Default: the keys of `payloads`. */
+  checked?: SystemId[];
+  /** Employee social-insurance deduction of the parameter set in force (gross pay → benefit base). */
+  deductionBps: Bps;
 }
 
 export interface Assembled {
   facts: Facts;
   provenance: Provenance;
   missing: Question[];
+  /**
+   * Registries we did not read (declined, skipped, unavailable or still pending) whose facts the user has not
+   * supplied either. Their facts are absent from `facts`, and absence must never be shown as "nothing there".
+   */
+  unverified: SystemId[];
 }
 
-/** Paths a user may correct (each validated by a zod schema at the API boundary). */
-export const OVERRIDABLE = [
-  /^facts\.event\.expectedDate$/,
-  /^facts\.event\.date$/,
-  /^facts\.claimant\.titles\[\d+\]\.(from|to|registeredOn)$/,
-  /^facts\.claimant\.titles\[\d+\]\.statedBenefitBase$/,
-  /^facts\.claimant\.titles\[\d+\]\.payer\.over20Insured$/,
-  /^facts\.claimant\.titles\[\d+\]\.months\[\d+\]\.contributionBase$/,
-  /^facts\.claimant\.titles\[\d+\]\.sickness\.mode$/,
-  /^facts\.claimant\.arrears\[\d+\]\.(amount|repaidOn)$/,
-];
-
-export function isOverridable(path: string): boolean {
-  return OVERRIDABLE.some((re) => re.test(path));
-}
+/** Paths a user may correct live in ./override-rules.ts (whitelist + a zod schema per path). */
 
 export function assemble(input: AssembleInput): Assembled {
   const { payloads: p, answers, asOf } = input;
@@ -76,18 +73,18 @@ export function assemble(input: AssembleInput): Assembled {
   if (p["zus-konto"]) mark("facts.claimant.titles", "zus-konto");
 
   // Payer size and status from the payer registry and KRS.
-  for (const t of titles) {
+  titles.forEach((t, i) => {
     const payer = p["zus-platnik"]?.payers.find((x) => x.ref === t.payer.ref);
     if (payer) {
       Object.assign(t.payer, stripUndef(payer));
-      mark(`facts.claimant.titles[${titles.indexOf(t)}].payer`, "zus-platnik");
+      mark(`facts.claimant.titles[${i}].payer`, "zus-platnik");
     }
     const krs = p.krs?.payerStatus.find((x) => x.ref === t.payer.ref);
     if (krs) {
       t.payer.status = krs.status;
-      mark(`facts.claimant.titles[${titles.indexOf(t)}].payer.status`, "krs");
+      mark(`facts.claimant.titles[${i}].payer.status`, "krs");
     }
-  }
+  });
   // Business suspensions from CEIDG.
   for (const s of p.ceidg?.suspensions ?? []) {
     const i = titles.findIndex((t) => t.id === s.titleId);
@@ -96,7 +93,10 @@ export function assemble(input: AssembleInput): Assembled {
       mark(`facts.claimant.titles[${i}].suspensions`, "ceidg");
     }
   }
-  if (!p["zus-konto"] && manual) titles = manualTitles(manual);
+  if (!p["zus-konto"] && manual) {
+    titles = manualTitles(manual, input.deductionBps);
+    mark("facts.claimant.titles", "user");
+  }
   // User-declared future change (contract ending, business closing).
   if (answers.plannedEnd) {
     const i = titles.findIndex((t) => t.id === answers.plannedEnd!.titleId);
@@ -107,10 +107,24 @@ export function assemble(input: AssembleInput): Assembled {
   }
 
   const sex = p.mobywatel?.sex ?? manual?.sex ?? "F";
-  if (p.mobywatel) mark("facts.claimant.sex", "mobywatel");
-  const eventKind = extras?.event?.kind ?? (p.rsc?.event?.kind as FamilyEvent["kind"] | undefined) ?? answers.eventKind ?? "birth";
-  const role: Role = extras?.claimantRole ?? p["zus-konto"]?.role ?? manual?.role ?? (eventKind === "adoption" ? "adoptive" : eventKind === "foster" ? "foster" : sex === "F" ? "mother" : "father");
+  if (p.mobywatel) {
+    mark("facts.claimant.sex", "mobywatel");
+    if (p.mobywatel.birthYear) mark("facts.claimant.birthYear", "mobywatel");
+  } else if (manual) mark("facts.claimant.sex", "user");
+  const rscKind = p.rsc?.event?.kind as FamilyEvent["kind"] | undefined;
+  const eventKind = extras?.event?.kind ?? rscKind ?? answers.eventKind ?? "birth";
+  const { role, roleSource } = claimantRole();
+  if (roleSource) mark("facts.claimant.role", roleSource);
 
+  function claimantRole(): { role: Role; roleSource?: SourceId } {
+    if (extras?.claimantRole) return { role: extras.claimantRole, roleSource: "zus-konto" };
+    if (p["zus-konto"]?.role) return { role: p["zus-konto"].role, roleSource: "zus-konto" };
+    if (manual?.role) return { role: manual.role, roleSource: "user" };
+    if (eventKind !== "birth") return { role: eventKind === "adoption" ? "adoptive" : "foster", roleSource: rscKind ? "rsc" : "user" };
+    return { role: sex === "F" ? "mother" : "father", roleSource: p.mobywatel ? "mobywatel" : undefined };
+  }
+
+  const declaredArrears = manual?.arrears ?? answers.arrears;
   const claimant: Person = stripUndef({
     sex,
     birthYear: p.mobywatel?.birthYear,
@@ -118,18 +132,15 @@ export function assemble(input: AssembleInput): Assembled {
     titles,
     sickNotes: p["zus-ezla"]?.sickNotes ?? [],
     paidBenefits: p["zus-swiadczenia"]?.paidBenefits ?? [],
-    arrears: p["zus-saldo"]?.arrears ?? (manual?.arrears ? [{ account: "own", onDate: asOf, aboveThreshold: true }] : []),
+    arrears: p["zus-saldo"]?.arrears ?? (declaredArrears ? [{ account: "own", onDate: asOf, aboveThreshold: true }] : []),
     insuranceDecisions: p["zus-postepowania"]?.insuranceDecisions ?? [],
     flags: p["zus-konto"]?.flags,
   }) as Person;
   if (p["zus-ezla"]) mark("facts.claimant.sickNotes", "zus-ezla");
   if (p["zus-swiadczenia"]) mark("facts.claimant.paidBenefits", "zus-swiadczenia");
   if (p["zus-saldo"]) mark("facts.claimant.arrears", "zus-saldo");
+  else if (declaredArrears !== undefined) mark("facts.claimant.arrears", "user");
   if (p["zus-postepowania"]) mark("facts.claimant.insuranceDecisions", "zus-postepowania");
-  if (manual) {
-    mark("facts.claimant.titles", "user");
-    if (manual.arrears !== undefined) mark("facts.claimant.arrears", "user");
-  }
 
   // ── Event ─────────────────────────────────────────────────────────────────
   let event: FamilyEvent;
@@ -152,10 +163,20 @@ export function assemble(input: AssembleInput): Assembled {
       children,
     }) as BirthEvent;
     if (rsc) mark("facts.event.date", "rsc");
-    if (rsc) mark("facts.event.children", "rsc");
+    // Coarse first, then per child field: the longest-prefix lookup picks the most specific source.
+    if (answers.childrenCount !== undefined) mark("facts.event.children", "user");
+    else if (rsc) mark("facts.event.children", "rsc");
+    else if (ez?.children?.length) mark("facts.event.children", "ezdrowie");
+    children.forEach((ch, i) => {
+      const fields = (o: object | undefined) => Object.entries(o ?? {}).filter(([k, v]) => k !== "ref" && v !== undefined).map(([k]) => k);
+      for (const k of fields(ez?.children?.find((c) => c.ref === ch.ref))) mark(`facts.event.children[${i}].${k}`, "ezdrowie");
+      for (const k of fields(rsc?.children.find((c) => c.ref === ch.ref))) mark(`facts.event.children[${i}].${k}`, "rsc");
+      const ezChild = ez?.children?.find((c) => c.ref === ch.ref) ?? {};
+      if (!("gestationalWeek" in ezChild || "hospitalStays" in ezChild)) for (const k of Object.keys(whatIfChild(answers, rsc?.date ?? answers.expectedDate ?? ez?.expectedDate))) mark(`facts.event.children[${i}].${k}`, "user");
+      if (answers.zaZyciem !== undefined) mark(`facts.event.children[${i}].zaZyciem`, "user");
+    });
     if (answers.expectedDate) mark("facts.event.expectedDate", "user");
     else if (ez?.expectedDate) mark("facts.event.expectedDate", "ezdrowie");
-    if (answers.zaZyciem !== undefined) mark("facts.event.children.zaZyciem", "user");
   } else {
     const rsc = p.rsc?.event && p.rsc.event.kind !== "birth" ? p.rsc.event : undefined;
     event = stripUndef({
@@ -168,6 +189,8 @@ export function assemble(input: AssembleInput): Assembled {
       children: rsc?.children ?? [{ ref: "child-1", birthDate: answers.care?.childBirthDate, schoolDeferred: answers.care?.schoolDeferred }],
     }) as CareEvent;
     mark("facts.event", rsc ? "rsc" : "user");
+    if (answers.care?.petitionFiledOn) mark("facts.event.petitionFiledOn", "user");
+    if (answers.care?.fosterType) mark("facts.event.fosterType", "user");
   }
   // Case extras carry everything no registry owns; they win so a case round-trips exactly.
   if (extras?.event) event = { ...event, ...extras.event } as FamilyEvent;
@@ -175,14 +198,17 @@ export function assemble(input: AssembleInput): Assembled {
   // ── Other parent ──────────────────────────────────────────────────────────
   let otherParent: OtherParent | undefined = extras?.otherParent;
   if (!otherParent && answers.otherParent && answers.otherParent.mode !== "none") {
+    const op = answers.otherParent;
     otherParent = stripUndef({
-      role: answers.otherParent.role ?? (role === "father" ? "mother" : "father"),
-      insured: answers.otherParent.insured ?? (input.otherParentPerson ? "yes" : "unknown"),
-      person: answers.otherParent.mode === "consent" ? input.otherParentPerson : undefined,
-      estimatedBase: answers.otherParent.mode === "estimate" ? answers.otherParent.estimatedBase : undefined,
+      role: op.role ?? (role === "father" ? "mother" : "father"),
+      insured: op.insured ?? (input.otherParentPerson ? "yes" : "unknown"),
+      person: op.mode === "consent" ? input.otherParentPerson : undefined,
+      // Estimated gross pay → base with the parameter set's deduction (never a hard-coded rate).
+      estimatedBase: op.mode === "estimate" && op.estimatedGross !== undefined ? netOfDeduction(op.estimatedGross, input.deductionBps) : undefined,
       used: p["zus-swiadczenia"]?.otherParentUsed ?? [],
     }) as OtherParent;
-    mark("facts.otherParent", answers.otherParent.mode === "consent" ? "zus-konto" : "user");
+    mark("facts.otherParent", op.mode === "consent" ? "zus-konto" : "user");
+    if (p["zus-swiadczenia"]?.otherParentUsed) mark("facts.otherParent.used", "zus-swiadczenia");
   }
 
   let facts: Facts = stripUndef({
@@ -201,13 +227,30 @@ export function assemble(input: AssembleInput): Assembled {
     provenance[o.path] = { source: "user", asOf: o.at.slice(0, 10), overridden: { original, at: o.at, note: o.note } };
   }
 
-  return { facts, provenance, missing: questions(facts, answers, input) };
+  const unverified = unverifiedSystems(input);
+  return { facts, provenance, missing: questions(facts, answers, input, unverified), unverified };
 }
 
-function questions(facts: Facts, answers: Answers, input: AssembleInput): Question[] {
+/** Systems neither read nor replaced by the user's own statements (case mode: the file stands in for every registry). */
+function unverifiedSystems(input: AssembleInput): SystemId[] {
+  if (input.mode === "case") return [];
+  const { answers } = input;
+  const checked = new Set<string>(input.checked ?? Object.keys(input.payloads));
+  const coveredByUser: Partial<Record<SystemId, boolean>> = {
+    mobywatel: Boolean(answers.manual),
+    "zus-konto": Boolean(answers.manual),
+    "zus-saldo": answers.manual?.arrears !== undefined || answers.arrears !== undefined,
+  };
+  return SOURCES.map((s) => s.id).filter((id) => !checked.has(id) && !coveredByUser[id]);
+}
+
+function questions(facts: Facts, answers: Answers, input: AssembleInput, unverified: SystemId[]): Question[] {
   if (input.mode === "case") return [];
   const q: Question[] = [];
-  if (input.mode === "manual" && !answers.manual) q.push({ id: "manual", group: "you", required: true });
+  // Without the insurance account (declined, unavailable, or manual mode) the user describes their work themselves.
+  if (!answers.manual && (input.mode === "manual" || unverified.includes("zus-konto"))) q.push({ id: "manual", group: "you", required: true });
+  const selfEmployed = facts.claimant.titles.some((t) => t.kind === "selfEmployed" || t.kind === "collaborator");
+  if (selfEmployed && unverified.includes("zus-saldo")) q.push({ id: "arrears", group: "insurance", required: false });
   const ev = facts.event;
   if (ev.kind === "birth" && !ev.date && !ev.occurred) {
     if (!ev.expectedDate) q.push({ id: "expectedDate", group: "event", required: true });
@@ -231,7 +274,7 @@ function whatIfChild(answers: Answers, birth?: ISODate): Partial<Child> {
   return { ...shape, hospitalStays: [{ from: iso(startOffset), to: iso(startOffset + h.days - 1) }] };
 }
 
-function manualTitles(m: NonNullable<Answers["manual"]>): InsuranceTitle[] {
+function manualTitles(m: NonNullable<Answers["manual"]>, deductionBps: Bps): InsuranceTitle[] {
   if (m.work === "none") return [];
   const kind = m.work === "employment" ? "employment" : m.work === "mandate" ? "mandate" : "selfEmployed";
   const mode = m.sicknessInsurance;
@@ -245,7 +288,8 @@ function manualTitles(m: NonNullable<Answers["manual"]>): InsuranceTitle[] {
       workTime: kind === "employment" && m.fraction ? [{ from: m.since, fraction: m.fraction }] : undefined,
       payer: { ref: "payer-1", kind: kind === "employment" ? "employer" : kind === "mandate" ? "client" : "self", over20Insured: m.over20Insured },
       months: [],
-      statedBenefitBase: m.monthlyGross !== undefined ? Math.round((m.monthlyGross * 8629) / 10000) : undefined,
+      // Gross pay → benefit base with the employee social-insurance deduction of the parameter set in force.
+      statedBenefitBase: m.monthlyGross !== undefined ? netOfDeduction(m.monthlyGross, deductionBps) : undefined,
     }) as InsuranceTitle,
   ];
 }

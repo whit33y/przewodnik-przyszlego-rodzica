@@ -13,3 +13,12 @@
 .table th, .table td { text-align: left; padding: 6px var(--space-2); border-bottom: 1px solid var(--line-soft); }
 .table td:last-child, .table th:last-child { text-align: right; }
 .cta { display: flex; flex-direction: column; gap: var(--space-2); align-items: flex-start; }
+.progress:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.today { font-size: var(--fs-small); color: var(--ink-muted); }
+.question { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius-sm); background: var(--primary-soft); border-left: 4px solid var(--primary); }
+.questionTitle { font-weight: 700; }
+.questionHint { color: var(--ink-muted); font-size: var(--fs-small); line-height: var(--lh-small); }
+.error { color: var(--negative); font-weight: 600; }
+.form { display: flex; flex-direction: column; gap: var(--space-5); }
+.actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.unverified { display: flex; flex-direction: column; gap: var(--space-2); }
