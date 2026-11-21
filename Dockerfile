@@ -1,0 +1,36 @@
+# syntax=docker/dockerfile:1.7
+# Single-service image for Railway. Debian slim (glibc) so better-sqlite3 uses its bundled prebuilt binary.
+
+FROM node:22-bookworm-slim AS deps
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --no-audit --no-fund
+
+FROM node:22-bookworm-slim AS build
+WORKDIR /app
+ENV NEXT_TELEMETRY_DISABLED=1
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
+
+FROM node:22-bookworm-slim AS run
+WORKDIR /app
+ENV NODE_ENV=production \
+    NEXT_TELEMETRY_DISABLED=1 \
+    HOSTNAME=0.0.0.0 \
+    PORT=3000 \
+    DATABASE_PATH=/data/app.db
+COPY --from=build /app/.next/standalone ./
+COPY --from=build /app/.next/static ./.next/static
+COPY --from=build /app/public ./public
+COPY --from=build /app/data/params ./data/params
+COPY --from=build /app/data/cases ./data/cases
+COPY --from=build /app/data/personas ./data/personas
+COPY --from=build /app/data/content ./data/content
+COPY --from=build /app/drizzle ./drizzle
+# better-sqlite3 is a server external package; make sure its native binding is present.
+COPY --from=build /app/node_modules/better-sqlite3 ./node_modules/better-sqlite3
+RUN mkdir -p /data
+EXPOSE 3000
+# Runs as root: Railway mounts volumes root-owned.
+CMD ["node", "server.js"]

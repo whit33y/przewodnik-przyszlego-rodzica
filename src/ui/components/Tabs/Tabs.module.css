@@ -1,0 +1,7 @@
+.list { display: flex; gap: var(--space-1); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+.trigger { flex: none; min-height: var(--touch-min); padding: 0 var(--space-4); border: 0; background: transparent; font: 600 var(--fs-body) / var(--lh-body) var(--font-sans); color: var(--ink); cursor: pointer; position: relative; }
+.trigger:hover { color: var(--primary); }
+.trigger[data-state="active"] { color: var(--primary); }
+.trigger[data-state="active"]::after { content: ""; position: absolute; left: var(--space-2); right: var(--space-2); bottom: -1px; height: 3px; background: var(--primary); }
+.panel { padding-top: var(--space-5); }
+.panel:focus-visible { outline-offset: 4px; }
