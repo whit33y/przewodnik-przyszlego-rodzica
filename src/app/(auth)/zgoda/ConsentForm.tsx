@@ -37,7 +37,11 @@ export function ConsentForm({ sources, granted }: { sources: Src[]; granted: str
                   name="sources"
                   value={src.id}
                   checked={on}
-                  onChange={(e) => setChecked((c) => (e.currentTarget.checked ? [...c, src.id] : c.filter((x) => x !== src.id)))}
+                  onChange={(e) => {
+                    // Read the value now: React clears currentTarget before a deferred state updater runs.
+                    const on = e.currentTarget.checked;
+                    setChecked((c) => (on ? [...c.filter((x) => x !== src.id), src.id] : c.filter((x) => x !== src.id)));
+                  }}
                 />
                 <span className={s.text}>
                   <span className={s.name}>
