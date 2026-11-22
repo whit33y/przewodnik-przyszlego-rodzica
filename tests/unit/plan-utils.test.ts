@@ -13,7 +13,7 @@ const sets = fs
 
 function personaFacts(id: string, answers: Record<string, unknown> = {}) {
   const p = JSON.parse(fs.readFileSync(`data/personas/${id}.json`, "utf8"));
-  return assemble({ payloads: p.systems, meta: {}, answers: { expectedDate: "2027-03-12", ...answers }, overrides: [], asOf: p.asOf, mode: "mobywatel" }).facts;
+  return assemble({ payloads: p.systems, meta: {}, answers: { expectedDate: "2027-03-12", ...answers }, overrides: [], asOf: p.asOf, mode: "mobywatel", deductionBps: 1371 }).facts;
 }
 
 describe("dates", () => {
