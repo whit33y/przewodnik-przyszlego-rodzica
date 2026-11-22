@@ -1,19 +1,22 @@
 import "server-only";
-import * as engine from "@/engine";
+import { evaluate } from "@/engine";
 import type { Facts, ParameterSet, Plan, Result } from "@/engine/types";
 import { getPublishedParams } from "./params-repo";
 
-type Evaluate = (facts: Facts, plan: Plan | null, params: ParameterSet[]) => Result;
-
-/** Single seam between the app and the rules engine. */
-export async function evaluateFacts(facts: Facts, plan: Plan | null): Promise<{ result: Result | null; paramsVersion: string; error?: string }> {
+/** Single seam between the app and the rules engine. Errors are logged here; callers show a generic message. */
+export async function evaluateFacts(facts: Facts, plan: Plan | null): Promise<{ result: Result | null; paramsVersion: string; sets: ParameterSet[]; error?: string }> {
   const { sets, version } = await getPublishedParams();
-  const evaluate = (engine as unknown as { evaluate?: Evaluate }).evaluate;
-  if (typeof evaluate !== "function") return { result: null, paramsVersion: version, error: "engine-not-ready" };
+  const typed = sets as unknown as ParameterSet[];
   try {
-    return { result: evaluate(facts, plan, sets as unknown as ParameterSet[]), paramsVersion: version };
+    return { result: evaluate(facts, plan, typed), paramsVersion: version, sets: typed };
   } catch (err) {
     console.error("[engine] evaluation failed", err);
-    return { result: null, paramsVersion: version, error: (err as Error).message };
+    return { result: null, paramsVersion: version, sets: typed, error: "engine-error" };
   }
+}
+
+/** Published parameter sets typed for the engine (the files are validated at publish time). */
+export async function engineParams(): Promise<ParameterSet[]> {
+  const { sets } = await getPublishedParams();
+  return sets as unknown as ParameterSet[];
 }

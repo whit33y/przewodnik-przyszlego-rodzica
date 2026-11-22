@@ -18,14 +18,25 @@ export interface SessionStateData {
   plan: Plan | null;
 }
 
-let cleaned = false;
+const RETENTION_MS = 24 * 3600 * 1000;
+const CLEANUP_EVERY_MS = 3600 * 1000;
+let lastCleanup = 0;
+
+/** Deletes rows idle for more than 24 h — at most once an hour, on the next session read. */
+function cleanupExpired(now = Date.now()) {
+  if (now - lastCleanup < CLEANUP_EVERY_MS) return;
+  lastCleanup = now;
+  getDb().delete(sessionState).where(lt(sessionState.updatedAt, new Date(now - RETENTION_MS).toISOString())).run();
+}
+
+/** Logout: this session's simulated registry data, answers and corrections are removed immediately. */
+export function deleteState(sid: string) {
+  getDb().delete(sessionState).where(eq(sessionState.sid, sid)).run();
+}
 
 export function readState(sid: string): SessionStateData | null {
   const db = getDb();
-  if (!cleaned) {
-    cleaned = true;
-    db.delete(sessionState).where(lt(sessionState.updatedAt, new Date(Date.now() - 24 * 3600 * 1000).toISOString())).run();
-  }
+  cleanupExpired();
   const row = db.select().from(sessionState).where(eq(sessionState.sid, sid)).get();
   if (!row) return null;
   return {
@@ -62,6 +73,7 @@ export function createState(data: Omit<SessionStateData, "retries" | "overrides"
 
 export function updateState(sid: string, patch: Partial<Omit<SessionStateData, "sid">>) {
   const set: Record<string, string | null> = { updatedAt: new Date().toISOString() };
+  if (patch.mode) set.mode = patch.mode;
   if (patch.consents) set.consents = JSON.stringify(patch.consents);
   if (patch.fetchStartedAt !== undefined) set.fetchStartedAt = patch.fetchStartedAt;
   if (patch.retries) set.retries = JSON.stringify(patch.retries);

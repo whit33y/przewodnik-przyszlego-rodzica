@@ -1,0 +1,15 @@
+.layout { display: flex; flex-direction: column; gap: var(--space-6); max-width: 880px; }
+.section { display: flex; flex-direction: column; gap: var(--space-4); }
+.muted { color: var(--ink-muted); }
+.small { font-size: var(--fs-small); line-height: var(--lh-small); color: var(--ink-muted); }
+.why { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); list-style: none; }
+.why li { padding: var(--space-3) var(--space-4); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); }
+.why strong { display: block; }
+.form { display: flex; flex-direction: column; gap: var(--space-5); }
+.inlineForm { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-4); }
+.checklist { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); }
+.item { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-4); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); }
+.itemHead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-2) var(--space-3); }
+.itemHead h3 { font-size: var(--fs-body); line-height: var(--lh-body); font-weight: 700; }
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.errorList { padding-left: var(--space-5); }
