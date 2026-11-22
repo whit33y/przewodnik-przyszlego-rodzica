@@ -11,7 +11,7 @@ import { addTrace, isDeclaredBaseTitle, paramsAt, titlePath, type Ctx, type Segm
 import { addDays, addMonths, addYearMonths, monthStart, yearMonth, yearOf } from "../dates";
 import { divRoundHalfUp, netOfDeduction, sum } from "../money";
 import { afterTitleCap, employeeFloor, nonEmployeeMinBase, preferentialBase, selectParameterSet, voluntaryCap } from "../params";
-import type { BaseCalculation, Grosze, InsuranceTitle, ISODate, LeaveType, MonthRecord, ParameterSet, Person } from "../types";
+import type { BaseCalculation, Grosze, InsuranceTitle, ISODate, LeaveType, MonthRecord, ParameterSet, Person, YearMonth } from "../types";
 import { voluntaryStart } from "./insurance";
 
 export interface BaseContext {
@@ -19,6 +19,12 @@ export interface BaseContext {
   /** All parameter sets: per-month minimum bases use the set in force in that month. */
   sets?: ParameterSet[];
   parameterDate?: ISODate;
+  /**
+   * Prospective mode: the month of "today". Months of the window from this month on have not happened yet; the last
+   * recorded month is carried forward for them (the person keeps the same pay or declared base), instead of counting
+   * them as uninsured — which would wrongly trigger art. 48a for a self-employed parent.
+   */
+  projectFrom?: YearMonth;
 }
 
 type MonthUsed = BaseCalculation["monthsUsed"][number];
@@ -71,6 +77,18 @@ export function computeBase(title: InsuranceTitle, rightArisesOn: ISODate, ctx: 
       return dec ? { ...m, contributionBase: dec.reducedBase! } : m;
     })
     .sort((a, b) => (a.month < b.month ? -1 : 1));
+  const projected = new Set<YearMonth>();
+  const last = months.at(-1);
+  const titleRunsOn = !title.to || title.to >= monthStart(M);
+  if (ctx.projectFrom && last && titleRunsOn) {
+    for (let ym = addYearMonths(last.month, 1); ym < M; ym = addYearMonths(ym, 1)) {
+      if (ym < ctx.projectFrom || ym < windowStart) continue;
+      const suspended = (title.suspensions ?? []).some((s) => s.from <= monthStart(ym) && (!s.to || s.to >= monthStart(ym)));
+      if (suspended) continue;
+      months.push({ ...last, month: ym });
+      projected.add(ym);
+    }
+  }
   const inWindow = months.filter((m) => m.month >= windowStart && m.month < M);
 
   if (title.kind === "employment" || title.kind === "childcareLeave") {
@@ -138,6 +156,7 @@ export function computeBase(title: InsuranceTitle, rightArisesOn: ISODate, ctx: 
     const floor = employeeFloor(p);
     if (p.base.employeeFloorFullTime && fullTime && title.kind === "employment" && base < floor) { base = floor; floorApplied = true; }
     used.sort((a, b) => (a.month < b.month ? -1 : 1));
+    for (const u of used) if (projected.has(u.month) && !u.reason) u.reason = "projected";
     return { titleId: title.id, method, base, monthsUsed: used, floorApplied: floorApplied || undefined, dataMissing: dataMissing || undefined };
   }
 
@@ -208,6 +227,7 @@ export function computeBase(title: InsuranceTitle, rightArisesOn: ISODate, ctx: 
   let capApplied = monthCapped;
   if (base > cap) { base = cap; capApplied = true; }
   used.sort((a, b) => (a.month < b.month ? -1 : 1));
+  for (const u of used) if (projected.has(u.month) && !u.reason) u.reason = "projected";
   return { titleId: title.id, method, base, monthsUsed: used, capApplied: capApplied || undefined, dataMissing: dataMissing || undefined };
 }
 
@@ -230,7 +250,7 @@ function resolveBase(ctx: Ctx, title: InsuranceTitle, date: ISODate, priors: Pri
       : resolveBase(ctx, title, prev.chainStart, priors, depth + 1);
     calc = { ...inner, method: "carriedOver", carriedOverFrom: prev.type };
   } else {
-    calc = computeBase(title, date, { person: ctx.facts.claimant, sets: ctx.sets, parameterDate: ctx.facts.parameterDate }, paramsAt(ctx, date));
+    calc = computeBase(title, date, { person: ctx.facts.claimant, sets: ctx.sets, parameterDate: ctx.facts.parameterDate, projectFrom: ctx.mode === "prospective" ? yearMonth(ctx.facts.asOf) : undefined }, paramsAt(ctx, date));
   }
   ctx.baseMemo.set(memoKey, calc);
   return calc;
@@ -256,7 +276,7 @@ export function run(ctx: Ctx): Ctx {
     if (first.parent === "other") {
       const op = ctx.facts.otherParent;
       const t = op?.person?.titles.find((x) => x.id === first.titleId) ?? op?.person?.titles[0];
-      if (t && op?.person) calc = computeBase(t, first.rightArisesOn, { person: op.person, sets: ctx.sets, parameterDate: ctx.facts.parameterDate }, paramsAt(ctx, first.rightArisesOn));
+      if (t && op?.person) calc = computeBase(t, first.rightArisesOn, { person: op.person, sets: ctx.sets, parameterDate: ctx.facts.parameterDate, projectFrom: ctx.mode === "prospective" ? yearMonth(ctx.facts.asOf) : undefined }, paramsAt(ctx, first.rightArisesOn));
       else calc = { titleId: "other", method: "stated", base: op?.estimatedBase ?? 0, monthsUsed: [], dataMissing: op?.estimatedBase === undefined || undefined };
     } else {
       const title = person.titles.find((t) => t.id === first.titleId);

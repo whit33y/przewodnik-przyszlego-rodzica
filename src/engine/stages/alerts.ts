@@ -117,7 +117,9 @@ export function run(ctx: Ctx): Ctx {
   // 3. Voluntary cover ends with the maternity benefit (title concurrence): re-register before a later separate part.
   const matSegs = claimantSegs.filter((s) => s.type === "maternity" || s.type === "maternityOnAdoption");
   const vTitle = person.titles.find((t) => isNonEmployeeTitle(t) && t.sickness.mode === "voluntary" && (matSegs.some((s) => s.titleId === t.id) || (motherLike && due && coverOn(person, t, due, true).insured)));
-  if (vTitle && motherLike && ev.loss !== "total") {
+  // Not when the benefit itself is refused (withheld for arrears still counts: the right exists).
+  const maternityGranted = matSegs.length === 0 || matSegs.some((s) => !s.reasonCode || s.reasonCode === "ARREARS_UNPAID");
+  if (vTitle && motherLike && ev.loss !== "total" && maternityGranted) {
     const matStart = matSegs.map((s) => s.from).sort()[0] ?? due;
     const matEnd = claimantSegs.filter((s) => s.type === "maternity" || s.type === "maternityOnAdoption" || s.type === "supplementary").map((s) => s.to).sort().at(-1) ?? (due ? addDays(due, lengths.maternityDays - 1) : undefined);
     const separatePart = claimantSegs.find((s) => s.type === "parental" && (s.block.claimedSeparatelyOn || (matEnd && s.from > addDays(matEnd, 1))));

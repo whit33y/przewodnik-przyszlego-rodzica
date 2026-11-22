@@ -131,6 +131,24 @@ describe("properties", () => {
   });
 });
 
+describe("demo personas: scenario review regressions", () => {
+  const load = (id: string) => JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../data/personas", `${id}.json`), "utf8"));
+  const evalPersona = (id: string) => {
+    const p = load(id);
+    const { facts } = assemble({ payloads: p.systems ?? {}, meta: {}, answers: { ...(p.presetAnswers ?? {}), ...typedAnswers(p.id) }, overrides: [], asOf: p.asOf, mode: "mobywatel", deductionBps: 1371 });
+    return evaluate(facts, null, sets);
+  };
+  it("self-employed with 30 months of cover: future months are carried forward, no art. 48a dilution", () => {
+    const r = evalPersona("weronika");
+    expect(r.bases[0].method).toBe("nonEmployee12m");
+    expect(r.alerts.map((a) => a.code)).not.toContain("BASE_DILUTED_ART48A");
+    expect(r.alerts.map((a) => a.code)).toContain("REREGISTER_AFTER_MATERNITY"); // withheld, not refused
+  });
+  it("refused benefit: no re-registration alert", () => {
+    expect(evalPersona("lucja").alerts.map((a) => a.code)).not.toContain("REREGISTER_AFTER_MATERNITY");
+  });
+});
+
 describe("demo personas (data/personas): evaluate with plan = null never throws", () => {
   const dir = path.resolve(__dirname, "../../../data/personas");
   const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith(".json")) : [];
