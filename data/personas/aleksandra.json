@@ -140,5 +140,12 @@
     "insured": "yes",
     "role": "adoptive",
     "systems": {}
+  },
+  "sampleAnswers": {
+    "care": {
+      "petitionFiledOn": "2026-09-15",
+      "takenIntoCareOn": "2026-11-02",
+      "childBirthDate": "2023-05-14"
+    }
   }
 }

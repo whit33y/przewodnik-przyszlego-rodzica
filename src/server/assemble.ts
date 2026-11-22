@@ -267,7 +267,8 @@ function questions(facts: Facts, answers: Answers, input: AssembleInput, unverif
   if (liveBirth && !childDetailsKnown && answers.whatIf?.hospital === undefined) q.push({ id: "hospital", group: "event", required: false });
   const ongoing = facts.claimant.titles.some((t) => !t.to && t.kind !== "maternityBenefit");
   if (ongoing && answers.plannedEnd === undefined && !(ev.kind === "birth" && ev.date)) q.push({ id: "plannedEnd", group: "insurance", required: false });
-  if (!facts.otherParent && answers.otherParent === undefined) q.push({ id: "otherParent", group: "otherParent", required: false });
+  // After a loss the other parent's leave is not asked about: parental leave does not arise.
+  if (!loss && !facts.otherParent && answers.otherParent === undefined) q.push({ id: "otherParent", group: "otherParent", required: false });
   return q;
 }
 

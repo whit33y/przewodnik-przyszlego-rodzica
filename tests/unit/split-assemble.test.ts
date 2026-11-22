@@ -148,7 +148,9 @@ describe("assembler on personas (no case extras)", () => {
     expect(run("patrycja").missing.map((q) => q.id)).not.toContain("zaZyciem");
     expect(run("monika").missing.map((q) => q.id)).toEqual(["zaZyciem", "otherParent"]);
     // adoption: dates from the court order are asked, never read from a registry
-    expect(run("aleksandra").missing.map((q) => q.id)).toContain("careDetails");
+    expect(run("aleksandra", { typed: false }).missing.map((q) => q.id)).toContain("careDetails");
+    // after a loss the other parent's leave is not asked about
+    expect(run("patrycja").missing.map((q) => q.id)).not.toContain("otherParent");
     expect(run("oliwia").missing.find((q) => q.id === "expectedDate")?.required).toBe(true);
   });
 });
