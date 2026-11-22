@@ -76,4 +76,5 @@
 }
 @media print {
   .header, .tabbar, .footer, .skip { display: none !important; }
+  .main { padding: 0 !important; }
 }

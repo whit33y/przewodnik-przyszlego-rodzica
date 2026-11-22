@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
-import { Stub } from "@/ui/components/Stub/Stub";
+import { Suspense } from "react";
+import { formsText } from "@/content/forms";
+import { PageHeader } from "@/ui/components/PageHeader/PageHeader";
+import { CardSkeleton } from "@/ui/components/Skeleton/Skeleton";
+import { FormsContent } from "./FormsContent";
 
 export const metadata: Metadata = { title: "Wnioski" };
 
 export default function Page() {
-  return <Stub title="Wnioski" lead="Wnioski o urlopy i zasiłki wypełnione Twoimi danymi." />;
+  return (
+    <>
+      <PageHeader title="Wnioski" lead={formsText.lead} />
+      <Suspense fallback={<CardSkeleton count={3} lines={2} />}>
+        <FormsContent />
+      </Suspense>
+    </>
+  );
 }
