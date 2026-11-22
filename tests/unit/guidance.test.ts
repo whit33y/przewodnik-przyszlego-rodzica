@@ -27,9 +27,9 @@ function inputFor(p: PersonaFile, submissions: GuidanceInput["submissions"] = []
   let otherParentPerson;
   if (p.otherParent?.consented) {
     answers.otherParent = { mode: "consent" };
-    otherParentPerson = { ...assemble({ payloads: p.otherParent.systems, meta: {}, answers: {}, overrides: [], asOf: p.asOf, mode: "mobywatel" }).facts.claimant, role: p.otherParent.role };
+    otherParentPerson = { ...assemble({ payloads: p.otherParent.systems, meta: {}, answers: {}, overrides: [], asOf: p.asOf, mode: "mobywatel", deductionBps: 1371 }).facts.claimant, role: p.otherParent.role };
   }
-  const a = assemble({ payloads: p.systems, meta: {}, answers, overrides: [], asOf: p.asOf, mode: "mobywatel", otherParentPerson });
+  const a = assemble({ payloads: p.systems, meta: {}, answers, overrides: [], asOf: p.asOf, mode: "mobywatel", otherParentPerson, deductionBps: 1371 });
   const r0 = evaluate(a.facts, null, params);
   const plan = answers.plan ?? r0.defaultPlan ?? null;
   const result = plan ? evaluate(a.facts, plan, params) : r0;
