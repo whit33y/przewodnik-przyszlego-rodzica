@@ -13,6 +13,7 @@ test("mObywatel login → consent → fetch → situation", async ({ page }) => 
   await page.locator('input[name="personaId"][value="magdalena"]').check();
   await page.getByRole("button", { name: "Zaloguj" }).click();
   await expect(page).toHaveURL(/\/zgoda/);
+  await page.waitForLoadState("networkidle"); // controlled checkboxes: click only after hydration
   await axe(page);
   await page.getByRole("button", { name: "Zaznacz wszystkie" }).click();
   await page.getByRole("button", { name: "Pobierz dane" }).click();
