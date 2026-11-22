@@ -64,6 +64,7 @@ test("scripted outage: retry the unavailable registry, then its data arrives", a
   await loginAs(page, "magdalena");
   const notice = page.getByText(/e-zdrowie \(P1\)” nie odpowiada/);
   await expect(notice).toBeVisible();
+  await page.waitForLoadState("networkidle"); // the retry button needs hydration
   await page.getByRole("button", { name: "Spróbuj ponownie" }).click();
   await expect(notice).toHaveCount(0, { timeout: 10000 });
   await expect(page.getByRole("status").filter({ hasText: /Gotowe\. Pobrano dane z 11 z 11/ })).toBeVisible({ timeout: 10000 });
