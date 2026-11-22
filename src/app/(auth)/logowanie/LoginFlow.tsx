@@ -65,7 +65,17 @@ export function LoginFlow({ personas }: { personas: PersonaListItem[] }) {
   const titles = { 1: "Zaloguj się do Przewodnika Rodzica", 2: "Potwierdź logowanie", 3: "Wybierz profil testowy" } as const;
 
   return (
-    <section data-login-flow="" className={s.layout} aria-labelledby="login-step">
+    <section data-login-flow="" className={s.split} aria-labelledby="login-step">
+      <aside className={s.aside} aria-label="Po zalogowaniu">
+        {/* Pre-sized files in /public/img; decorative photo, so alt is empty. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/img/rodzina-1400.jpg" srcSet="/img/rodzina-800.jpg 800w, /img/rodzina-1400.jpg 1400w, /img/rodzina-2000.jpg 2000w" sizes="(min-width: 960px) 40vw, 100vw" width={2000} height={1335} alt="" />
+        <div className={s.asideCard}>
+          <strong>Po zalogowaniu nie wpisujesz</strong>
+          <span>historii ubezpieczenia, zarobków, zwolnień lekarskich ani danych pracodawcy — mamy je z ZUS.</span>
+        </div>
+      </aside>
+      <div className={s.layout}>
       <div className={s.intro}>
         <div className={s.step}>
           <span className={s.track} aria-hidden="true">
@@ -150,6 +160,7 @@ export function LoginFlow({ personas }: { personas: PersonaListItem[] }) {
             </div>
           </form>
         ) : null}
+      </div>
       </div>
     </section>
   );
