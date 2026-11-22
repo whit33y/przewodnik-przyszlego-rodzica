@@ -1,0 +1,17 @@
+# Never upload the ZUS sample case files or working material to Railway (HackNation use only).
+docs/
+.work/
+*.pdf
+# Not needed for the image build
+node_modules/
+.next/
+.claude/
+tests/
+playwright-report/
+test-results/
+coverage/
+data/runtime/
+*.db
+*.db-*
+.env
+.env.*
