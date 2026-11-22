@@ -9,6 +9,41 @@ Entry for **HackNation 2026**, ZUS challenge *„Zasiłkowy Przewodnik Przyszłe
 >
 > Every number can be traced to an article of law and to the admin-managed parameter it came from.
 
+## What is in it
+
+| Screen | What it does | Brief item |
+|---|---|---|
+| `/logowanie` → `/zgoda` → `/pobieranie` | Simulated login.gov.pl / mObywatel, consent per registry, fetch from 10 simulated registries with one scripted outage | mObywatel, ZUS data |
+| `/sytuacja` | Every value with its source ("z ZUS", "z CEIDG", "z e-ZLA"…); asks only what no registry knows; corrections never delete the original and can be reported to PUE/eZUS | individual situation |
+| `/uprawnienia` | Verdict on the day of birth, pregnancy benefits (incl. "nie przysługuje"), who pays (employer vs ZUS), alerts with deadlines and fixes, "Dlaczego?" trace with legal basis | a, g, h |
+| `/plan` | One integrated calculator: both parents on a timeline, presets, part-time work, 81,5% vs 100/70% comparison, cash-flow per month, what-if (children, „Za życiem", hospital stay, adoption) | b, c, d, e, j |
+| `/planuje-dziecko` | Readiness check-up months ahead: what to secure so the benefit is not refused | h |
+| `/kroki`, `/wnioski` | Dated checklist, leave applications per the regulation, ZAM/ZAS-53 data sheets, USC birth-certificate request, PUE question (all simulated sending) | g, simulations |
+| `/trudna-sytuacja`, `/wsparcie` | Quiet path for loss, preterm, illness; purely charitable organisations; official links | a, i |
+| `/sprawy` | Jury mode: pick or drop any of the 86 ZUS case PDFs (hashed in the browser) and compare our result with ZUS's decision field by field | f, testing |
+| `/admin` | Effective-dated legal parameters: draft → regression on all 86 cases → publish | admin panel |
+| `/api/docs` | REST API documentation (OpenAPI 3.1 at `/api/openapi.json`) | REST |
+
+## Accuracy against real ZUS decisions
+
+The engine re-adjudicates all 86 sample cases (`npm run test:golden`):
+
+- **86 / 86** outcomes (granted / refused / partial) match ZUS;
+- **424 / 424** printed leave dates and day counts match;
+- **268 / 268** printed amounts (base, rate, daily, payments) match to the grosz;
+- **12 / 12** refusals would have been flagged *before the birth* by the alert replay;
+- 5 documented divergences where the case file does not explain ZUS's decision (shown on the case page).
+
+## Demo script (3 minutes)
+
+1. **Start → "Zaloguj się przez mObywatel"** → confirm → profile *Magdalena* → "Zaznacz wszystkie" → "Pobierz dane". One registry (e-zdrowie) is down on purpose: the app degrades to a question.
+2. **Twoja sytuacja:** source badges everywhere; enter the due date (12.03.2027); correct a value → "poprawione przez Ciebie — ZUS zweryfikuje".
+3. **Uprawnienia:** "masz prawo do zasiłku macierzyńskiego", employer pays, "Dlaczego?" shows each step with the article of law.
+4. **Plan:** preset "Łączę urlop z pracą na pół etatu" → leave doubles, monthly amount halves; switch 81,5% ↔ 100/70%; set parental leave to 60 weeks → violation with a one-click fix.
+5. **Log out → profile *Weronika*** (self-employed): arrears of 312,40 zł block the payment, with the repayment deadline. *Oliwia* / **Planuję dziecko**: no voluntary sickness insurance — fix it months before.
+6. **Przykładowe sprawy:** drop a PDF from the ZUS set → case opens → "Wynik zgodny z rozstrzygnięciem ZUS"; a refusal case shows the alert the app would have raised earlier.
+7. **Admin:** change the parental rate 70% → 75% in a draft → run on 86 cases → publish from 2027-01-01 → the planner uses it.
+
 ## Run locally
 
 ```bash
