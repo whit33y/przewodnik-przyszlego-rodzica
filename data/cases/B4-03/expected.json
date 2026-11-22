@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-03",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "sickness",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 65,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2023-12-13",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2024-02-15",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2024-02-16",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2024-07-04",
+        "evidence": "claimed"
+      },
+      "toppedUp": {
+        "value": true,
+        "evidence": "printed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 224,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2024-07-05",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2025-02-13",
+        "evidence": "printed"
+      },
+      "toppedUp": {
+        "value": true,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [
+    "UZ art. 31 ust. 3a"
+  ],
+  "expectedAlerts": [],
+  "expectedAlertsPostEvent": [
+    "TOP_UP_STATEMENT_NEEDED"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": false
+  }
+}

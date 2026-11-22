@@ -1,0 +1,18 @@
+# Never upload the ZUS sample case files or working material to Railway (HackNation use only).
+# Patterns are root-anchored where a same-named folder exists deeper (src/app/api/docs).
+/docs/
+/.work/
+*.pdf
+# Not needed for the image build
+/node_modules/
+/.next/
+/.claude/
+/tests/
+playwright-report/
+test-results/
+/coverage/
+data/runtime/
+*.db
+*.db-*
+.env
+.env.*

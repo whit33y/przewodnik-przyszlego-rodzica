@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-15",
+  "title": "Umowa zlecenie z dobrowolnym ubezpieczeniem chorobowym od 5 miesięcy przed porodem: zasiłek chorobowy w ciąży, potem macierzyński 140 + 224 dni w stawce 81,5%",
+  "scenario": "1.4",
+  "tags": [
+    "mandate",
+    "mother",
+    "voluntary-sickness",
+    "sickness-in-pregnancy",
+    "waiting-period-met",
+    "averaged-81.5",
+    "short-insurance"
+  ],
+  "source": {
+    "pdfSha256": [
+      "968cb8afc4a91b9e4901a102e9b670b33947c07aad696ca891d24c5e625b03a0"
+    ],
+    "fileNameSha256": [
+      "4157176a6726a573574783e6d5ddd0e3b6b9e1c77b80fa315806154ff2e7503a"
+    ],
+    "pages": 44
+  },
+  "facts": {
+    "asOf": "2025-10-17",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "mandate",
+          "zusCode": "0411",
+          "from": "2022-09-22",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2025-04-03"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "client",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-04",
+              "contributionBase": 242475,
+              "daysWorked": 30,
+              "daysDue": 30,
+              "fullMonthInsured": false
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 352580,
+              "daysWorked": 31,
+              "daysDue": 31
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 277550,
+              "daysWorked": 30,
+              "daysDue": 30
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2025-07-14",
+          "to": "2025-09-09",
+          "rateBps": 10000
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-09-10",
+      "documents": [
+        "birthAct"
+      ],
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2025-09-22",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-09-10",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-01-28",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-benefit-screen",
+      "evidence": "printed",
+      "page": 3
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3a",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.claimant.titles[0].zusCode": {
+      "doc": "zus-benefit-screen",
+      "evidence": "printed",
+      "page": 3
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-benefit-screen",
+      "evidence": "printed",
+      "page": 3
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3a",
+      "evidence": "printed",
+      "page": 25
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3a",
+      "evidence": "printed",
+      "page": 11
+    },
+    "facts.claimant.titles[0].months[0].fullMonthInsured": {
+      "doc": "zus-benefit-screen",
+      "evidence": "inferred",
+      "page": 3
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3a",
+      "evidence": "printed",
+      "page": 12
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "evidence": "printed",
+      "page": 5
+    },
+    "plan.rateOption": {
+      "doc": "zus-benefit-screen",
+      "evidence": "printed",
+      "page": 3
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3a",
+      "evidence": "printed",
+      "page": 9
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-benefit-screen",
+      "evidence": "printed",
+      "page": 3
+    },
+    "plan.blocks[1]": {
+      "doc": "zus-benefit-screen",
+      "evidence": "printed",
+      "page": 3
+    }
+  },
+  "extractionNotes": "Mandate contract (0411) with accident insurance since 2022-09-22 and voluntary sickness insurance from 2025-04-03 (ZUS insurance period 2025-04-03..2025-09-09; one payer form says 2025-04-01). Sickness in pregnancy 2025-07-14..2025-09-09 in three notes (payer remark), day 103 of voluntary cover, so the 90-day waiting period is met; ZUS issued a sickness-benefit decision and a maternity-benefit decision together (cover page), modelled here as paid history plus the maternity claim. Birth 2025-09-10, maternity application filed 2025-09-22 (day 12). ZUS benefit screen (decision dated 2025-10-17) prints 2025-09-10..2026-01-27 (140 days) and 2026-01-28..2026-09-08 (224 days), both 81.5%, 364 days in total. Declared contribution bases for April-June 2025 only; April is marked as not a full month of sickness insurance because cover started on the 3rd. Base and amounts not printed."
+}

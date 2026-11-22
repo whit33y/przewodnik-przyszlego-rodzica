@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-10",
+  "title": "Prowadząca działalność: odmowa zasiłku macierzyńskiego – brak ubezpieczenia chorobowego w dniu porodu (przerwa w działalności, ponowne zgłoszenie po porodzie)",
+  "scenario": "1.17",
+  "tags": [
+    "self-employed",
+    "mother",
+    "refusal",
+    "not-insured-at-birth",
+    "business-suspended",
+    "late-reregistration",
+    "preferential-zus"
+  ],
+  "source": {
+    "pdfSha256": [
+      "07c1865ed3362f821f1b2a708932a32972e0997214c94a5c79d486394cf5bfef"
+    ],
+    "fileNameSha256": [
+      "948486eb1aa2dc385131b0d6408fc10f53f9fba9c9c25be36d750e0df9fdead6"
+    ],
+    "pages": 28
+  },
+  "facts": {
+    "asOf": "2026-10-05",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2025-12-01",
+          "to": "2026-06-30",
+          "endReason": "businessSuspended",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2025-12-01",
+                "to": "2026-06-30"
+              }
+            ]
+          },
+          "scheme": "preferential",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        },
+        {
+          "id": "t2",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2026-07-28",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2026-07-28"
+              }
+            ]
+          },
+          "scheme": "preferential",
+          "registeredOn": "2026-07-28",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-07-09",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-07-09",
+        "days": 141
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-titles-screen",
+      "page": 25,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 25,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].to": {
+      "doc": "zus-titles-screen",
+      "page": 25,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].endReason": {
+      "doc": "claimant-statement",
+      "page": 15,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[1].from": {
+      "doc": "zus-titles-screen",
+      "page": 25,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].registeredOn": {
+      "doc": "zus-titles-screen",
+      "page": 25,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "ZAM",
+      "page": 2,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-note",
+      "page": 1,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Self-employed on the preferential base (0570). First period 2025-12-01..2026-06-30 with voluntary sickness insurance, deregistered (confirmed with the account); the same title again from 2026-07-28 with sickness from 2026-07-28, the date of her correction filing. No cover 2026-07-01..2026-07-27, which includes the birth on 2026-07-09 (taken as the maternity start). She wrote that she had resumed the business on 2026-07-01; the retroactive start was not accepted. ZUS cover note: maternity benefit refused for 2026-07-09..2026-11-26 (as claimed; 141 days, one more than 20 weeks). Decision text not in the file, so no legal basis is recorded. A second ZAM for parental leave is not decided in the file and is not modelled. endReason businessSuspended is inferred from her statement."
+}

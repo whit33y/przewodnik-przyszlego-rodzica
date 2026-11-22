@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-12",
+  "title": "Ojciec prowadzący działalność: odmowa zasiłku za szóstą część urlopu rodzicielskiego, limit 5 części wspólny dla obojga rodziców",
+  "scenario": "1.17",
+  "tags": [
+    "self-employed",
+    "father",
+    "parental",
+    "refusal",
+    "parts-limit",
+    "concurrent-parental",
+    "decision"
+  ],
+  "source": {
+    "pdfSha256": [
+      "522b7bf501e300f2a80013f828970244333df3b272601a351c6c067d450e993d"
+    ],
+    "fileNameSha256": [
+      "0ce5321ad22c759f2184a2e1432d5d7c42bdd14a4bcf69149fd03a9d756d3c0d"
+    ],
+    "pages": 14
+  },
+  "facts": {
+    "asOf": "2024-10-08",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0510",
+          "from": "2022-04-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2022-04-01"
+              }
+            ]
+          },
+          "scheme": "standard",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2023-04",
+              "contributionBase": 416100
+            },
+            {
+              "month": "2023-05",
+              "contributionBase": 416100
+            },
+            {
+              "month": "2023-06",
+              "contributionBase": 416100
+            },
+            {
+              "month": "2023-07",
+              "contributionBase": 40267
+            },
+            {
+              "month": "2023-08",
+              "contributionBase": 416100
+            },
+            {
+              "month": "2023-09",
+              "contributionBase": 416100
+            },
+            {
+              "month": "2023-10",
+              "contributionBase": 241606
+            },
+            {
+              "month": "2023-11",
+              "contributionBase": 263530
+            },
+            {
+              "month": "2023-12",
+              "contributionBase": 161071
+            },
+            {
+              "month": "2024-01",
+              "contributionBase": 272578
+            },
+            {
+              "month": "2024-03",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-04",
+              "contributionBase": 250368
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2023-07-04",
+          "to": "2023-07-31"
+        },
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2023-10-19",
+          "to": "2023-10-31"
+        },
+        {
+          "type": "paternity",
+          "titleId": "t1",
+          "from": "2024-02-02",
+          "to": "2024-02-15",
+          "childRef": "child-1"
+        },
+        {
+          "type": "parental",
+          "titleId": "t1",
+          "from": "2024-04-10",
+          "to": "2024-04-23",
+          "part": 1,
+          "childRef": "child-1"
+        },
+        {
+          "type": "parental",
+          "titleId": "t1",
+          "from": "2024-05-13",
+          "to": "2024-05-26",
+          "part": 2,
+          "childRef": "child-1"
+        },
+        {
+          "type": "parental",
+          "titleId": "t1",
+          "from": "2024-06-10",
+          "to": "2024-06-23",
+          "part": 3,
+          "childRef": "child-1"
+        },
+        {
+          "type": "parental",
+          "titleId": "t1",
+          "from": "2024-07-08",
+          "to": "2024-07-21",
+          "part": 4,
+          "childRef": "child-1"
+        }
+      ],
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2024-08-12",
+          "aboveThreshold": false
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "mother",
+      "insured": "yes",
+      "used": [
+        {
+          "type": "parental",
+          "from": "2024-06-03",
+          "to": "2025-01-12",
+          "part": 1,
+          "childRef": "child-1"
+        }
+      ]
+    },
+    "event": {
+      "kind": "birth",
+      "occurred": true,
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2024-08-12",
+        "days": 7,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 13
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 11
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 12
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.claimant.paidBenefits[1]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.claimant.paidBenefits[2]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 10
+    },
+    "facts.claimant.paidBenefits[2].type": {
+      "doc": "zus-insurance-memo",
+      "evidence": "inferred",
+      "page": 10
+    },
+    "facts.claimant.paidBenefits[3]": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 14
+    },
+    "facts.claimant.paidBenefits[4]": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 14
+    },
+    "facts.claimant.paidBenefits[5]": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 14
+    },
+    "facts.claimant.paidBenefits[6]": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 14
+    },
+    "facts.claimant.arrears[0]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 12
+    },
+    "facts.otherParent.used[0]": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 14
+    },
+    "plan.blocks[0]": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 13
+    }
+  },
+  "extractionNotes": "Refusal decision of 2024-10-08 (art. 29a ust. 1 and 3 UZ with the Labour Code): no maternity benefit for parental leave 2024-08-12..2024-08-18. The father had already drawn parental benefit in 4 parts (2024-04-10..04-23, 05-13..05-26, 06-10..06-23, 07-08..07-21) and the mother draws parental benefit in one part 2024-06-03..2025-01-12, so the 5-part limit shared by both parents is used up. ZUS insurance memo (study date 2024-08-12): voluntary sickness insurance from 2022-04-01, suspended during each benefit part (concurrence with maternity benefit, deregistration) and resumed after it; the suspensions are not modelled (sickness period left open, as in the pilots). Declared bases 2023-04..2024-04 (2024-02 missing, benefit month); no arrears on the study date. Earlier benefits listed: sickness 2023-07-04..07-31 and 2023-10-19..10-31, a third sickness row (2023-11-20..2023-12-19, end partly illegible) and a carer-type row 2024-01-19..2024-02-01, both omitted; a 14-day maternity-benefit row 2024-02-02..2024-02-15 recorded as paternity (inferred). Child's birth date not in the file (event.date absent). The parts-limit alert can only be computed from post-birth benefit history; it is listed under expectedAlerts to satisfy the refusal rule and under expectedAlertsPostEvent where it can actually fire. Variant: without the father's fourth part the sixth request is only the fifth part and is granted."
+}

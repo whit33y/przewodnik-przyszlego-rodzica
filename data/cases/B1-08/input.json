@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-08",
+  "title": "Ojciec prowadzący działalność (Mały ZUS Plus): 9 tygodni urlopu rodzicielskiego, samodzielna korekta okresu z 8 tygodni i 3 dni na 63 dni",
+  "scenario": "1.6",
+  "tags": [
+    "self-employed",
+    "father",
+    "nine-weeks",
+    "day-count-correction",
+    "mały-zus-plus",
+    "pue"
+  ],
+  "source": {
+    "pdfSha256": [
+      "d2c3d5a60b4a4c727a882640c67305d5b1b8276bdda11ab3cd4321ac52986d6e"
+    ],
+    "fileNameSha256": [
+      "df599a46f26dc2a446fe47b55216022beb8b7c147c2b6835181b9b8eb7f72a19"
+    ],
+    "pages": 18
+  },
+  "facts": {
+    "asOf": "2026-01-28",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0590",
+          "from": "2023-03-01",
+          "to": "2026-03-18",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2025-03-01"
+              }
+            ]
+          },
+          "scheme": "malyZusPlus",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "mother",
+      "insured": "yes",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-11-18",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-01-15",
+        "days": 63,
+        "pool": "ownNineWeeks"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-note",
+      "page": 17,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 15,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].to": {
+      "doc": "zus-titles-screen",
+      "page": 15,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 15,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].scheme": {
+      "doc": "zus-titles-screen",
+      "page": 15,
+      "evidence": "inferred"
+    },
+    "facts.otherParent.insured": {
+      "doc": "ZAM",
+      "page": 3,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "ZAM",
+      "page": 2,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[0]": {
+      "doc": "claimant-statement",
+      "page": 9,
+      "evidence": "handwritten"
+    }
+  },
+  "extractionNotes": "Self-employed father: preferential title 0570 from 2023-03-01, then Mały ZUS Plus 0590 from 2025-03-01 with voluntary sickness insurance (CWR), the business title ending 2026-03-18, the last day of the leave. The sickness start before 2025-03-01 is not legible, so the voluntary period starts at 2025-03-01. The ZAM asked for 8 weeks + 3 days (about 15/16.01..14.03.2026); the claimant corrected it in writing to end on 18.03.2026 and declared no other title, giving exactly 63 days from 2026-01-15. The correction was filed via PUE (received 2026-01-20); decision granting the benefit issued 2026-01-28 (outgoing-documents list), decision text not in the file, so the period is the corrected claim. The mother had used maternity benefit before (box ticked, dates illegible). Father's 9 weeks are always 70%; rate not printed. Mały ZUS Plus base: possible top-up, not stated."
+}

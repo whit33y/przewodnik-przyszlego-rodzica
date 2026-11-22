@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-03",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "fileLabel"
+  },
+  "benefits": [
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 224,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-01-01",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2025-08-12",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 7000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  }
+}

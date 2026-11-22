@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-02",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2023-11-22",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2024-04-09",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 297,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2024-04-10",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2025-01-31",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 7000,
+        "evidence": "inferred"
+      },
+      "toppedUp": {
+        "value": true,
+        "evidence": "printed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "expectedAlertsPostEvent": [
+    "TOP_UP_STATEMENT_NEEDED"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": false
+  }
+}

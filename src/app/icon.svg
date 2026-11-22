@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Przewodnik Rodzica</title>
+  <clipPath id="r"><rect width="32" height="32" rx="7"/></clipPath>
+  <g clip-path="url(#r)">
+    <rect width="32" height="32" fill="#00693e"/>
+    <rect y="28" width="32" height="4" fill="#d4213d"/>
+  </g>
+  <circle cx="12.5" cy="9.5" r="4" fill="#fff"/>
+  <path d="M5.5 25.5c0-5.2 3.1-9 7-9s7 3.8 7 9z" fill="#fff"/>
+  <circle cx="22.5" cy="14.5" r="2.8" fill="#fff"/>
+  <path d="M17.6 25.5c0-3.7 2.2-6.4 4.9-6.4s4.9 2.7 4.9 6.4z" fill="#fff"/>
+</svg>

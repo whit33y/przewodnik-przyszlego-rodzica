@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-04",
+  "title": "Pracownica na 1/4 etatu, wcześniak z 36. tygodnia ponownie hospitalizowany 10 dni: 2 tygodnie uzupełniającego, ojciec równolegle ze swojej puli",
+  "scenario": "1.10",
+  "tags": [
+    "employee",
+    "mother",
+    "part-time-quarter",
+    "preterm",
+    "supplementary-2-weeks",
+    "averaged-81.5",
+    "father-concurrent-own-pool",
+    "multiple-employers",
+    "single-title-statement"
+  ],
+  "source": {
+    "pdfSha256": [
+      "850dbccfe57dbc0c7128ea78fb00d0e6994cb4844f797a8bbd8b2462499d418f"
+    ],
+    "fileNameSha256": [
+      "9903cb3e3d69ef4bde53e9695315069612eed7e88877397cd0300bd505a6ae27"
+    ],
+    "pages": 20
+  },
+  "facts": {
+    "asOf": "2026-03-16",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2022-10-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2022-10-01"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2022-10-01",
+              "fraction": {
+                "num": 1,
+                "den": 4
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2024-08",
+              "contributionBase": 107500,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 107500
+            },
+            {
+              "month": "2024-09",
+              "contributionBase": 107500,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 107500
+            },
+            {
+              "month": "2024-10",
+              "contributionBase": 107500,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 107500
+            },
+            {
+              "month": "2024-11",
+              "contributionBase": 107500,
+              "daysWorked": 19,
+              "daysDue": 19,
+              "fixedPay": 107500
+            },
+            {
+              "month": "2024-12",
+              "contributionBase": 107500,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 107500
+            },
+            {
+              "month": "2025-01",
+              "contributionBase": 116650,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 116650
+            },
+            {
+              "month": "2025-02",
+              "contributionBase": 116650,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 116650
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 116650,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 116650
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 116650,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 116650
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 116650,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 116650
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 116650,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 116650
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 116650,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 116650
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "yes",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-02-26",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true,
+          "gestationalWeek": 36,
+          "birthWeightG": 2640,
+          "hospitalStays": [
+            {
+              "from": "2026-03-04",
+              "to": "2026-03-13"
+            }
+          ]
+        }
+      ],
+      "documents": [
+        "hospitalStayCert"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2026-03-16",
+    "singleTitleStatement": true,
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-02-26",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "supplementary",
+        "titleId": "t1",
+        "from": "2026-07-16",
+        "days": 14
+      },
+      {
+        "id": "b3",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-07-30",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "leave-application",
+      "page": 13,
+      "evidence": "handwritten"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.otherParent.insured": {
+      "doc": "claimant-statement",
+      "page": 16,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "hospital-certificate",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].gestationalWeek": {
+      "doc": "hospital-certificate",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].birthWeightG": {
+      "doc": "hospital-certificate",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].hospitalStays[0]": {
+      "doc": "hospital-certificate",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "plan.rateOption": {
+      "doc": "leave-application",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "plan.singleTitleStatement": {
+      "doc": "claimant-statement",
+      "page": 18,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "leave-application",
+      "page": 13,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[1]": {
+      "doc": "leave-application",
+      "page": 13,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[2]": {
+      "doc": "leave-application",
+      "page": 13,
+      "evidence": "handwritten"
+    }
+  },
+  "extractionNotes": "Grant evidenced only by a ZUS note (maternity benefit granted) next to a register extract; no dates or rate printed by ZUS, so all periods are the claim (employee's leave application of 2026-03-16 and the Z-3 span 2026-02-26..2027-03-10: 140 + 14 + 224 = 378 days, 54 weeks). Child born at 36 completed weeks, 2640 g, discharged and re-admitted 2026-03-04..2026-03-13 (10 days) on the new-template certificate -> 2 weeks of supplementary leave. The leave application (18 days after birth) covers the whole leave, so 81.5% is inferred; supplementary assumed at 100%. After a phone call from ZUS the claimant wrote that the father will use his own pool at the same time while she uses her whole leave herself; his periods are not given. She also wrote that maternity benefit is due from only one workplace (single-title statement); the register extract shows a second, greyed-out row that is not legible. Quarter-time employment since 2022-10-01; Z-3 salary 1075.00 (2024-08..12) and 1166.50 (2025-01..07), a quarter of the minimum wage, so a low base and a likely top-up (not documented). The salary table ends in 2025-07 although the birth is in 2026-02, which suggests a base carried over from an earlier incapacity that is not in the file; months kept as printed. Column 6 is the contractual amount; contributionBase inferred equal to it. Employer marked up to 20 insured. asOf = leave application / Z-3 application date (ZUS note undated)."
+}

@@ -1,0 +1,106 @@
+/*
+ * Przewodnik Rodzica — design tokens.
+ * gov.pl visual language (Open Sans, 4px radii, flat cards, red AppBar rule),
+ * re-themed green. Every text/background pair used in the UI is declared in
+ * scripts/check-contrast.mjs and verified against WCAG 2.1 AA on `npm run verify`.
+ */
+:root {
+  /* surfaces and lines */
+  --surface: #ffffff;
+  --surface-alt: #f2f2f2;
+  --surface-sunken: #e9ecea;
+  --line: #c4c4c4; /* decorative only */
+  --line-strong: #6e6e6e; /* form controls, outlined buttons */
+  --line-soft: #e6e6e6;
+
+  /* text */
+  --ink: #1b1b1b;
+  --ink-muted: #595959;
+
+  /* brand: green replaces gov.pl blue */
+  --primary: #00693e;
+  --primary-hover: #00522f;
+  --primary-strong: #003b22;
+  --primary-soft: #e6f1eb;
+  --primary-soft-hover: #dcece3;
+  --primary-line: #a7cbbb; /* decorative border on primary-soft */
+  --on-primary: #ffffff;
+  --accent-red: #d4213d; /* AppBar vertical rule only */
+  --focus: #003b22;
+  --focus-on-dark: #ffffff;
+
+  /* text and accents on dark green bands (hero, summary headers) */
+  --on-dark-muted: #cfe6d8;
+  --on-dark-soft: #e8f3ec;
+  --on-dark-accent: #9fd3b3;
+
+  /* status: never solid, never colour-only */
+  --positive: #3d6b00;
+  --positive-bg: #eef5dc;
+  --info: #0052a5;
+  --info-bg: #eef4fb;
+  --caution: #8a4b00;
+  --caution-bg: #fff1d6;
+  --negative: #b3122e;
+  --negative-bg: #fce8eb;
+  --neutral: #3f4a5a;
+  --neutral-bg: #eceff3;
+
+  /* simulation marking */
+  --sim-bg: #ffd54a;
+  --sim-ink: #1b1b1b;
+
+  /* timeline categories (each also has a pattern and a label) */
+  --tl-maternity: #00693e;
+  --tl-supplementary: #5b3e99;
+  --tl-parental: #0052a5;
+  --tl-paternity: #8a4b00;
+  --tl-loss: #3f4a5a;
+
+  /* type */
+  --font-sans: var(--font-open-sans), "Open Sans", "Segoe UI", Roboto, system-ui, sans-serif;
+  --fs-display: 30px;
+  --lh-display: 38px;
+  --fs-h1: 24px;
+  --lh-h1: 32px;
+  --fs-h2: 20px;
+  --lh-h2: 28px;
+  --fs-h3: 18px;
+  --lh-h3: 26px;
+  --fs-body-lg: 18px;
+  --lh-body-lg: 28px;
+  --fs-body: 16px;
+  --lh-body: 24px;
+  --fs-small: 14px;
+  --lh-small: 20px;
+
+  /* space, radius, size, shadow */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --touch-min: 48px;
+  --appbar-h: 64px;
+  --tabbar-h: 64px;
+  --content-max: 1120px;
+  --reading-max: 720px;
+  --shadow-bar: 0 1px 0 #e6e6e6, 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-sheet: 0 -4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-pop: 0 4px 16px rgba(0, 0, 0, 0.14);
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --dur: 150ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur: 0ms;
+  }
+}

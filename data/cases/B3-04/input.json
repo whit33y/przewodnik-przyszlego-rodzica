@@ -1,0 +1,261 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-04",
+  "title": "Zamknięcie jednoosobowej działalności pracodawcy w ciąży: zasiłek w wysokości zasiłku macierzyńskiego od dnia po ustaniu zatrudnienia (art. 30), wcześniej obniżenie etatu do 1/3",
+  "scenario": "1.13",
+  "tags": [
+    "employee",
+    "mother",
+    "art30",
+    "employer-business-closed",
+    "after-title",
+    "work-time-change",
+    "part-time",
+    "birth-not-in-file"
+  ],
+  "source": {
+    "pdfSha256": [
+      "33f2f33dcc7ec8091834f35d86185749c066ad0ef6d0b7acf0d0a8c4f3f698cc"
+    ],
+    "fileNameSha256": [
+      "748d2e9f016401538b22bed6b496b0ce1717aff2689c2a2fd5f13094645e5271"
+    ],
+    "pages": 22
+  },
+  "facts": {
+    "asOf": "2026-09-01",
+    "mode": "adjudication",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2025-02-01",
+          "to": "2026-08-31",
+          "endReason": "employerLiquidation",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2025-02-01",
+                "to": "2026-08-31"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2025-02-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            },
+            {
+              "from": "2025-10-01",
+              "fraction": {
+                "num": 1,
+                "den": 3
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "status": "closed",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-10",
+              "contributionBase": 155600,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 155600
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 155600,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 155600
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 155600,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 155600
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 220000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 220000
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 220000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 220000
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 220000,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 220000
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 220000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 220000
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 220000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 220000
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 220000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 220000
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 220000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 220000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2026-08-08",
+          "to": "2026-08-31"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "expectedDate": "2027-02-23",
+      "children": [
+        {
+          "ref": "child-1"
+        }
+      ],
+      "pregnancyDuringEmploymentCertified": true,
+      "documents": [
+        "pregnancyCert"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "art30PreBirth",
+        "titleId": "t1",
+        "from": "2026-09-01",
+        "days": 175
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-titles-screen",
+      "page": 19,
+      "evidence": "inferred"
+    },
+    "facts.mode": {
+      "doc": "zus-note",
+      "page": 21,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].to": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].endReason": {
+      "doc": "Z-3",
+      "page": 6,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.status": {
+      "doc": "Z-3",
+      "page": 6,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 6,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.event.expectedDate": {
+      "doc": "Z-3",
+      "page": 6,
+      "evidence": "printed"
+    },
+    "facts.event.pregnancyDuringEmploymentCertified": {
+      "doc": "doctor-certificate",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 19,
+      "evidence": "printed"
+    },
+    "plan.blocks[0].days": {
+      "doc": "Z-3",
+      "page": 6,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Employer was a sole proprietor who closed the business; the employment was terminated by the employer's notice for that reason, ending 2026-08-31 (work certificate and Z-3 remarks). Full time from 2025-02-01, one third of full time from 2025-10-01; the Z-3 remarks give the due date 2027-02-23 and state that a pregnancy certificate is attached. ZAS-55 claims the benefit from 2026-09-01 with the declaration that no other employment was offered. The ZUS register shows a 1240 title (maternity-benefit recipient) from 2026-09-01, open, and a typed note that the case was closed with payment. The birth is not in the file, so the benefit end (day before birth) is inferred from the due date and mode is set to adjudication. A greyed agency/mandate title (0411) with the same payer and dates is also listed in the register; not modelled. Salary table 2025-10..2026-07 only (after the work-time change): 1556.00 then 2200.00. Employer-paid sick pay 2026-08-08..31. Employer reported up to 20 insured. No dated ZUS document; asOf = first benefit day."
+}

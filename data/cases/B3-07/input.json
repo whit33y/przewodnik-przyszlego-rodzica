@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-07",
+  "title": "Pracownica: martwe urodzenie w 37. tygodniu krótko po poprzednim urlopie macierzyńskim, 8 tygodni zasiłku na podstawie zwykłego zaświadczenia lekarskiego",
+  "scenario": "1.9",
+  "tags": [
+    "employee",
+    "mother",
+    "stillbirth",
+    "eight-weeks",
+    "back-to-back-pregnancies",
+    "doctor-note-proof",
+    "reference-window-on-benefit"
+  ],
+  "source": {
+    "pdfSha256": [
+      "38e0cdcf078c1b9e681cdbb48663b96e3cdb00e455338e1c50ada61c07328cb8"
+    ],
+    "fileNameSha256": [
+      "6741807ccc2e1c1331d92bbf709b24292adc9643e8cad5f1440d9de4fbe9aec0"
+    ],
+    "pages": 10
+  },
+  "facts": {
+    "asOf": "2026-07-03",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2020-01-02",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2020-01-02"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2020-01-02",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer"
+          },
+          "months": [
+            {
+              "month": "2024-11",
+              "contributionBase": 450000,
+              "daysWorked": 0,
+              "daysDue": 19,
+              "fixedPay": 450000
+            },
+            {
+              "month": "2024-12",
+              "contributionBase": 450000,
+              "daysWorked": 0,
+              "daysDue": 20,
+              "fixedPay": 450000
+            },
+            {
+              "month": "2025-01",
+              "contributionBase": 450000,
+              "daysWorked": 0,
+              "daysDue": 21,
+              "fixedPay": 450000
+            },
+            {
+              "month": "2025-02",
+              "contributionBase": 450000,
+              "daysWorked": 0,
+              "daysDue": 20,
+              "fixedPay": 450000
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 450000,
+              "daysWorked": 0,
+              "daysDue": 21,
+              "fixedPay": 450000
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 450000,
+              "daysWorked": 0,
+              "daysDue": 21,
+              "fixedPay": 450000
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 450000,
+              "daysWorked": 0,
+              "daysDue": 21,
+              "fixedPay": 450000
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 450000,
+              "daysWorked": 0,
+              "daysDue": 20,
+              "fixedPay": 450000
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 450000,
+              "daysWorked": 0,
+              "daysDue": 23,
+              "fixedPay": 450000
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 450000,
+              "daysWorked": 0,
+              "daysDue": 20,
+              "fixedPay": 450000
+            },
+            {
+              "month": "2025-09",
+              "contributionBase": 460000,
+              "daysWorked": 21,
+              "daysDue": 22,
+              "fixedPay": 460000
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 460000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 460000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "maternity",
+          "titleId": "t1",
+          "from": "2024-11-01",
+          "to": "2025-09-01",
+          "childRef": "child-0"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-04-12",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": false,
+          "gestationalWeek": 37
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-04-12",
+        "days": 56
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-benefit-screen",
+      "page": 9,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 2,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 2,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months[*].fixedPay": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "doctor-certificate",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].bornAlive": {
+      "doc": "doctor-certificate",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].gestationalWeek": {
+      "doc": "doctor-certificate",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "Z-3",
+      "page": 2,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Stillbirth at 37 weeks on 2026-04-12 (third pregnancy, second delivery) evidenced by a generic doctor's certificate stating the stillbirth, not the dedicated stillbirth certificate form and no registry act; ZUS accepted it. 8-week maternity leave requested from the employer; the Z-3 states the benefit period 2026-04-12..2026-06-06 and the ZUS benefit screen shows the same period; a typed note says maternity benefit was granted. Rate not printed (100% inferred). The Z-3 salary table runs 2024-11..2025-10: every month up to 2025-08 fully on maternity benefit for an earlier child (last day 2025-09-01), then two worked months at 4600.00; the contractual amount in the benefit months is about 4500.00 (two rows could also read 4600.00; those months have no days worked and do not count). The earlier benefit is recorded from the first table month only; its real start and leave types are not in the file. The table does not reach the months just before the event (2025-11..2026-03 missing); not shifted. Title start 2020-01-02 on the Z-3, 2020-01-05 in the register. Payer size box not legible. asOf = verification date on the ZUS screen (partly legible)."
+}

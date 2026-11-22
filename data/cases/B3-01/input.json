@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-01",
+  "title": "Pracownica: zasiłek macierzyński za 52 tygodnie (81,5%) po zwiększeniu wymiaru czasu pracy 3 miesiące przed porodem",
+  "scenario": "1.1",
+  "tags": [
+    "employee",
+    "mother",
+    "single-child",
+    "averaged-81.5",
+    "work-time-change",
+    "base-new-work-time",
+    "sick-pay-before-birth"
+  ],
+  "source": {
+    "pdfSha256": [
+      "1a2f0afda53a2532786b66fcdac990a7327ddfc9b4487dcaea4565b246975c7e"
+    ],
+    "fileNameSha256": [
+      "fcfa84e7572459a6db3ae54ceeba9fd272f5a74a9c100ecc5a261b16ff0146eb"
+    ],
+    "pages": 8
+  },
+  "facts": {
+    "asOf": "2025-10-06",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2023-07-23",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2023-07-23"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2025-07-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2024-09",
+              "contributionBase": 57000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 57000
+            },
+            {
+              "month": "2024-10",
+              "contributionBase": 57000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 57000
+            },
+            {
+              "month": "2024-11",
+              "contributionBase": 57000,
+              "daysWorked": 19,
+              "daysDue": 19,
+              "fixedPay": 57000
+            },
+            {
+              "month": "2024-12",
+              "contributionBase": 57000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 57000
+            },
+            {
+              "month": "2025-01",
+              "contributionBase": 58325,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 58325
+            },
+            {
+              "month": "2025-02",
+              "contributionBase": 58325,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 58325
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 58325,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 58325
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 58325,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 58325
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 58325,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 58325
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 58325,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 58325
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 466600,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 466600
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 466600,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 466600
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2025-09-15",
+          "to": "2025-09-25"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-09-26",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2025-10-06",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-09-26",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-02-13",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "zus-note",
+      "page": 1,
+      "evidence": "handwritten"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "plan.rateOption": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Only the employer's Z-3 and a handwritten ZUS note are in the file. The note says maternity benefit was paid for the period in the application, child born 2025-09-26; no decision, no rate. Employer granted maternity + parental leave 2025-09-26..2026-09-24 (364 days) and stated the benefit application date 2025-10-06 (day 10 after the birth), so the 81.5% option is inferred. Working time 1/1 from 2025-07-01; the earlier fraction is not printed (salary 570.00 then 583.25 suggests a small fraction), so only the post-change entry is recorded. Pay jumped to 4666.00 from 2025-07: the base should use only full months after the change (2025-07, 2025-08). Employer-paid sick pay 2025-09-15..25 just before the birth. Employer reported up to 20 insured (ZUS pays). Other parent not in the file."
+}

@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-14",
+  "title": "Umowa przedłużona do dnia porodu: zasiłek macierzyński, uzupełniający (dziecko donoszone w szpitalu) i rodzicielski; odmowa za 1 dzień ponad 224 dni",
+  "scenario": "1.18",
+  "tags": [
+    "employee",
+    "mother",
+    "partial",
+    "excess-day",
+    "contract-extended-to-birth",
+    "after-title",
+    "supplementary-leave",
+    "term-hospitalised",
+    "averaged-81.5"
+  ],
+  "source": {
+    "pdfSha256": [
+      "1a4375131143b2cf81273851db217b7282a7dbf4ef06a56be066c3fa1b6cd73e"
+    ],
+    "fileNameSha256": [
+      "9d1c36dafe341083b3f247ebd2cb374c29a1441f11a42c8e7fec46aa2d71e2ea"
+    ],
+    "pages": 30
+  },
+  "facts": {
+    "asOf": "2026-07-29",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2024-04-10",
+          "to": "2026-06-01",
+          "endReason": "extendedToBirth",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2024-04-10",
+                "to": "2026-06-01"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2024-04-10",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2026-10-19",
+        "to": "2027-05-30"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-06-01",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true,
+          "gestationalWeek": 37,
+          "hospitalStays": [
+            {
+              "from": "2026-06-01",
+              "to": "2026-06-29"
+            }
+          ]
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2026-06-14",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-06-01",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "supplementary",
+        "titleId": "t1",
+        "from": "2026-10-19",
+        "days": 28
+      },
+      {
+        "id": "b3",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-11-16",
+        "days": 225,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "ZAM",
+      "page": 24,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].to": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].endReason": {
+      "doc": "Z-3",
+      "page": 15,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "other-parent-statement",
+      "page": 1,
+      "evidence": "handwritten"
+    },
+    "facts.event.date": {
+      "doc": "ZAM",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].gestationalWeek": {
+      "doc": "ZAM",
+      "page": 25,
+      "evidence": "inferred"
+    },
+    "facts.event.children[0].hospitalStays": {
+      "doc": "ZAM",
+      "page": 25,
+      "evidence": "printed"
+    },
+    "plan.rateOption": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "inferred"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "page": 24,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "page": 24,
+      "evidence": "printed"
+    },
+    "plan.blocks[2]": {
+      "doc": "decision",
+      "page": 20,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Fixed-term employment 2024-04-10..2026-06-01, extended to the day of birth (employer remark); the child was born 2026-06-01, so maternity benefit after the employment, paid by ZUS. First ZAM and leave request: maternity 2026-06-01..2026-10-18 and parental 2026-10-19..2027-05-30 (father's statement of non-use for that period); Z-3 application date 2026-06-14 (day 13), so 81.5% is inferred. Term baby (box: born after 37 completed weeks) in hospital 2026-06-01..2026-06-29; second ZAM filed 2026-07-29 added supplementary maternity leave 2026-10-19..2026-11-15 (4 weeks) and moved parental to 2026-11-16..2027-06-28 (handwritten end on the ZAM reads 2027-06-26; the decision quotes 2027-06-28 = 225 days). ZUS decision (UZ art. 29a ust. 1): parental benefit for one child is 224 days, so the benefit for 2027-06-28 is refused; the rest was granted (case summary: maternity, supplementary and 32 weeks of parental). Hence two parental entries: 224 days granted and the excess day refused. Salary table (2024-11..2025-10) is partly illegible (6/8 confusion in every amount) and does not reach the months before the birth; months omitted, no base printed. She registered the child for health insurance herself. Payer-size box not legible. asOf = date of the second ZAM (decision undated in the scan)."
+}

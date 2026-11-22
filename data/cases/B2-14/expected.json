@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-14",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "fileLabel"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2024-05-22",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2024-10-08",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "inferred"
+      },
+      "base": {
+        "value": 366042,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 224,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2024-10-09",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2025-05-20",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  }
+}

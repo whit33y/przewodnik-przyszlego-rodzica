@@ -1,0 +1,289 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-03",
+  "title": "Pracownica: przedłużenie urlopu rodzicielskiego „Za życiem” – odmowa (złe zaświadczenie), uchylona przez ZUS po odwołaniu",
+  "scenario": "1.11",
+  "tags": [
+    "employee",
+    "mother",
+    "za-zyciem",
+    "wrong-certificate",
+    "reversed-on-appeal",
+    "supplementary-transitional-rule",
+    "sickness-in-pregnancy",
+    "minimum-wage-floor"
+  ],
+  "source": {
+    "pdfSha256": [
+      "bd80693de7a16e653539c943bd9a1fa7927e3178f62771387fa2102c94e95c33"
+    ],
+    "fileNameSha256": [
+      "87b1776c1a06152c307e9dbb09b48fb09cfe62ad29040c2ca9de0e36a02ec012"
+    ],
+    "pages": 74
+  },
+  "facts": {
+    "asOf": "2025-12-04",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2022-09-19",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2022-09-19"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2022-09-19",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2023-02",
+              "contributionBase": 349000,
+              "fixedPay": 349000,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2023-03",
+              "contributionBase": 349000,
+              "fixedPay": 349000,
+              "daysDue": 23,
+              "daysWorked": 18
+            },
+            {
+              "month": "2023-04",
+              "contributionBase": 349000,
+              "fixedPay": 349000,
+              "daysDue": 19,
+              "daysWorked": 19
+            },
+            {
+              "month": "2023-05",
+              "contributionBase": 349000,
+              "fixedPay": 349000,
+              "daysDue": 21,
+              "daysWorked": 21
+            },
+            {
+              "month": "2023-06",
+              "contributionBase": 389000,
+              "fixedPay": 349000,
+              "variablePay": 40000,
+              "daysDue": 21,
+              "daysWorked": 21
+            },
+            {
+              "month": "2023-07",
+              "contributionBase": 420000,
+              "fixedPay": 360000,
+              "variablePay": 60000,
+              "daysDue": 21,
+              "daysWorked": 21
+            },
+            {
+              "month": "2023-08",
+              "contributionBase": 360000,
+              "fixedPay": 360000,
+              "daysDue": 22,
+              "daysWorked": 22
+            },
+            {
+              "month": "2023-09",
+              "contributionBase": 390000,
+              "fixedPay": 390000,
+              "daysDue": 21,
+              "daysWorked": 21
+            },
+            {
+              "month": "2023-10",
+              "contributionBase": 390000,
+              "fixedPay": 390000,
+              "daysDue": 22,
+              "daysWorked": 20
+            },
+            {
+              "month": "2023-11",
+              "contributionBase": 390000,
+              "fixedPay": 390000,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2023-12",
+              "contributionBase": 463353,
+              "fixedPay": 390000,
+              "variablePay": 73353,
+              "daysDue": 19,
+              "daysWorked": 16
+            },
+            {
+              "month": "2024-01",
+              "contributionBase": 424200,
+              "fixedPay": 424200,
+              "daysDue": 21,
+              "daysWorked": 21
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2024-04-01",
+          "to": "2024-10-14",
+          "rateBps": 10000
+        },
+        {
+          "type": "maternity",
+          "titleId": "t1",
+          "from": "2024-10-15",
+          "to": "2025-03-03"
+        },
+        {
+          "type": "parental",
+          "titleId": "t1",
+          "from": "2025-03-04",
+          "to": "2025-10-13"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2024-10-15",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true,
+          "zaZyciem": true,
+          "hospitalStays": [
+            {
+              "from": "2024-10-17",
+              "to": "2024-10-25"
+            },
+            {
+              "from": "2024-12-03",
+              "to": "2024-12-20"
+            }
+          ]
+        }
+      ],
+      "documents": [
+        "birthAct",
+        "hospitalStayCert",
+        "zaZyciemCert"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2025-09-30",
+    "blocks": [
+      {
+        "id": "b3",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2025-10-14",
+        "days": 168,
+        "pool": "shared",
+        "claimedSeparatelyOn": "2025-09-30"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "decision",
+      "page": 72,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 10,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "zus-benefit-screen",
+      "page": 49,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[1]": {
+      "doc": "decision",
+      "page": 67,
+      "evidence": "printed"
+    },
+    "facts.claimant.paidBenefits[2]": {
+      "doc": "decision",
+      "page": 67,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "decision",
+      "page": 67,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].hospitalStays": {
+      "doc": "hospital-certificate",
+      "page": 61,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].zaZyciem": {
+      "doc": "decision",
+      "page": 72,
+      "evidence": "printed"
+    },
+    "plan.applicationDate": {
+      "doc": "decision",
+      "page": 67,
+      "evidence": "printed"
+    },
+    "plan.rateOption": {
+      "doc": "leave-application",
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "decision",
+      "page": 66,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Employee (0110, small employer). The case file centres on the Za życiem extension of parental leave 2025-10-14..2026-03-30 (24 weeks, 65 − 41), filed by the employer on 2025-09-30. Maternity 2024-10-15..2025-03-03 and parental 2025-03-04..2025-10-13 were already paid (stated in the refusal decision) and are recorded as paidBenefits; the plan holds only the extension. First decision (2025-11-05) refused: the three doctor's certificates were supplementary-leave hospital certificates, not the Za życiem certificate; it also explained the supplementary-leave transitional rule (on 2025-03-19 the claimant was on parental, not maternity, leave). On appeal with the correct certificate ZUS revoked its own decision on 2025-12-04 (USUS art. 83 ust. 6). Pregnancy sickness benefit: printed bases 3660.42 (daily 122.01, May 2024) and 3710.47 (daily 123.68, Oct 2024) at 100%, i.e. the full-time minimum-wage floor. Z-3 salary table 2023-02..2024-01 included (fixed + bonus columns); a third hospital stay (~January 2025) and the birth weight are uncertain and omitted. Employment start read as 2022-09-19 (one copy may read 2022-08-19). Rate of the maternity package not printed (leave application 20 days after birth suggests 81.5%)."
+}

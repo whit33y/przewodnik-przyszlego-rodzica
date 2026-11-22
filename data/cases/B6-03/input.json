@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-03",
+  "title": "Ojciec prowadzący działalność: 9 tygodni urlopu rodzicielskiego w stawce 70% około roku po porodzie; matka bez ubezpieczenia, ZUS żąda dokumentu z KRUS",
+  "scenario": "1.6",
+  "tags": [
+    "self-employed",
+    "father",
+    "parental",
+    "own-nine-weeks",
+    "rate-70",
+    "other-parent-uninsured",
+    "municipal-benefit",
+    "krus-check",
+    "payments-printed"
+  ],
+  "source": {
+    "pdfSha256": [
+      "83a2003ca7fdf5dbd443c2a1966abda265017ee0335ed0bdaa80d1750a5d93f6"
+    ],
+    "fileNameSha256": [
+      "3df05cf6ce016714feb84009ca2145c81a7199977664fd3a5a59b5942666aa32"
+    ],
+    "pages": 16
+  },
+  "facts": {
+    "asOf": "2025-04-08",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0510",
+          "from": "2024-03-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-03-01"
+              }
+            ]
+          },
+          "scheme": "standard",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2024-03",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-04",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-05",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-06",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-07",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-08",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-09",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-10",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-11",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2024-12",
+              "contributionBase": 469440
+            },
+            {
+              "month": "2025-01",
+              "contributionBase": 520380
+            },
+            {
+              "month": "2025-02",
+              "contributionBase": 520380
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "mother",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2024-02-27",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2025-03-10",
+        "days": 63,
+        "pool": "ownNineWeeks"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-payment-screen",
+      "evidence": "printed",
+      "page": 2
+    },
+    "facts.claimant.titles[0].zusCode": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 1
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-payment-screen",
+      "evidence": "inferred",
+      "page": 2
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-payment-screen",
+      "evidence": "inferred",
+      "page": 2
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-payment-screen",
+      "evidence": "inferred",
+      "page": 2
+    },
+    "facts.otherParent.insured": {
+      "doc": "zus-notice",
+      "evidence": "inferred",
+      "page": 3
+    },
+    "facts.event.date": {
+      "doc": "claimant-statement",
+      "evidence": "inferred",
+      "page": 15
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 1
+    }
+  },
+  "extractionNotes": "Self-employed father (title 0510, voluntary sickness) claims his own 9 weeks of parental leave out of the 32-week form, as a first part, about a year after the birth. ZUS benefit screen prints the payment rows (parental, 70%): base 4124.06, daily 96.23; 30 days = 2886.90 and 11 days = 1058.53, decision date 2025-04-08; the cumulative-day column (52, then 63) shows an earlier, unshown 22-day row for 2025-03-10..2025-03-31, so the two rows are April and 2025-05-01..2025-05-11. The 1240 title on the ZUS titles screen covers 2025-03-10..2025-05-11. The declared bases are not in the file; the printed base is reproduced exactly by 10 months at the 2024 minimum declared base (4694.40) plus 2 months at the 2025 minimum (5203.80), i.e. window 2024-03..2025-02, so months are included as inferred and the title start is set to 2024-03-01 as a lower bound (the real start is illegible on the titles screen). Mother: not employed, received the municipal parental benefit for the first year (statement); ZUS suspended the case and asked for a KRUS document about her insurance and KRUS maternity benefit, so her status is recorded as unknown. Birth date inferred as the start of her municipal benefit (birth extract illegible). Application date not legible."
+}

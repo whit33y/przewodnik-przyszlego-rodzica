@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-05",
+  "title": "Prowadząca działalność po przejściu z Małego ZUS Plus na pełny ZUS: zasiłek chorobowy w ciąży",
+  "scenario": "1.2",
+  "tags": [
+    "self-employed",
+    "sickness-in-pregnancy",
+    "mały-zus-plus",
+    "scheme-switch",
+    "base-60pct-flag",
+    "no-arrears"
+  ],
+  "source": {
+    "pdfSha256": [
+      "a382c4791019b946fe7268a19d04d17e3f847b52ba66917e5f2671acd990180b"
+    ],
+    "fileNameSha256": [
+      "58b010c74ab29f4cdee3bccddf0275714dc77bbeb361e731e48d008e2a3d927d"
+    ],
+    "pages": 12
+  },
+  "facts": {
+    "asOf": "2026-06-16",
+    "mode": "adjudication",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0510",
+          "from": "2026-01-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2026-01-01"
+              }
+            ]
+          },
+          "scheme": "standard",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2026-01",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 565200
+            }
+          ]
+        },
+        {
+          "id": "t0",
+          "kind": "selfEmployed",
+          "from": "2025-01-01",
+          "to": "2025-12-31",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2025-01-01",
+                "to": "2025-12-31"
+              }
+            ]
+          },
+          "scheme": "malyZusPlus",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2025-06",
+              "contributionBase": 139980,
+              "minimumBase": 139980
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 139980,
+              "minimumBase": 139980
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 139980,
+              "minimumBase": 139980
+            },
+            {
+              "month": "2025-09",
+              "contributionBase": 139980,
+              "minimumBase": 139980
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 139980,
+              "minimumBase": 139980
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 139980,
+              "minimumBase": 139980
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 139980,
+              "minimumBase": 139980
+            }
+          ]
+        }
+      ],
+      "sickNotes": [
+        {
+          "titleId": "t1",
+          "from": "2026-06-04",
+          "to": "2026-06-24",
+          "code": "B"
+        }
+      ],
+      "paidBenefits": [
+        {
+          "type": "maternity",
+          "from": "2022-03-04",
+          "to": "2023-03-02"
+        }
+      ],
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2026-06-04",
+          "aboveThreshold": false
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "children": []
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "sickness",
+        "titleId": "t1",
+        "from": "2026-06-04",
+        "days": 21
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-insurance-memo",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].zusCode": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].from": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].to": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].scheme": {
+      "doc": "zus-insurance-memo",
+      "page": 8,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[1].months": {
+      "doc": "zus-insurance-memo",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "facts.claimant.sickNotes[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.sickNotes[0].code": {
+      "doc": "zus-insurance-memo",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 6,
+      "evidence": "printed"
+    },
+    "facts.claimant.arrears[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 5,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Self-employed. 2025: reduced-contribution title (code read as 0530, most likely 0590 Mały ZUS Plus; individual minimum base 1399.80 for 2025) with voluntary sickness insurance 2025-01-01..2025-12-31, ended with the title; from 2026-01-01 standard 0510 with voluntary sickness, so cover is continuous. ZUS memo (2026-06-16): claim for sickness benefit 2026-06-04..2026-06-24, debt on the examination date NIE; the base was below 60% of the forecast average wage in 057X/059X months (last such month 2025-12). Declared bases: 1399.80 for 2025-06..2025-12 and 5652.00 for 2026-01..2026-05. Prior benefits include maternity 2022-03-04..2023-03-02 (and care benefits, not recorded). Note: sickness granted (pregnancy, 100% by law); amount not shown. Code B inferred."
+}

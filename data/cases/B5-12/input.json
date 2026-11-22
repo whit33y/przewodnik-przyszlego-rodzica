@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-12",
+  "title": "Umowa zlecenia bez dobrowolnego ubezpieczenia chorobowego (równolegle umowy o pracę): odmowa zasiłku macierzyńskiego z tytułu zlecenia",
+  "scenario": "1.17",
+  "tags": [
+    "mandate",
+    "mother",
+    "maternity",
+    "refusal",
+    "no-sickness-insurance-on-title",
+    "multi-title",
+    "other-parent-statement-letter"
+  ],
+  "source": {
+    "pdfSha256": [
+      "f7ab67f49f422218339a9dc4622dc1edf1705f6e409e9f7791749a44fcd7f747"
+    ],
+    "fileNameSha256": [
+      "834065e7a268e9b7951800559f36dc57c572905a37b8980e46a8fc86cba6a905"
+    ],
+    "pages": 20
+  },
+  "facts": {
+    "asOf": "2025-09-11",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "mandate",
+          "zusCode": "0411",
+          "from": "2024-01-04",
+          "sickness": {
+            "mode": "none",
+            "periods": []
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "client",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2024-08",
+              "contributionBase": 151200
+            },
+            {
+              "month": "2024-09",
+              "contributionBase": 166400
+            },
+            {
+              "month": "2024-10",
+              "contributionBase": 166400
+            },
+            {
+              "month": "2024-11",
+              "contributionBase": 166400
+            },
+            {
+              "month": "2024-12",
+              "contributionBase": 166400
+            },
+            {
+              "month": "2025-01",
+              "contributionBase": 180000
+            },
+            {
+              "month": "2025-02",
+              "contributionBase": 180000
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 180000
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 180000
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 180000
+            }
+          ]
+        },
+        {
+          "id": "t2",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2023-09-01",
+          "to": "2024-06-21",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2023-09-01",
+                "to": "2024-06-21"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-2",
+            "kind": "employer"
+          },
+          "months": []
+        },
+        {
+          "id": "t3",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2024-09-01",
+          "to": "2025-02-02",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2024-09-01",
+                "to": "2025-02-02"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-3",
+            "kind": "employer"
+          },
+          "months": []
+        },
+        {
+          "id": "t4",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2024-09-01",
+          "to": "2025-08-31",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2024-09-01",
+                "to": "2025-08-31"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-4",
+            "kind": "employer"
+          },
+          "months": []
+        },
+        {
+          "id": "t5",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2024-09-01",
+          "to": "2025-08-31",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2024-09-01",
+                "to": "2025-08-31"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-5",
+            "kind": "employer"
+          },
+          "months": []
+        },
+        {
+          "id": "t6",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2025-02-17",
+          "to": "2025-06-27",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2025-02-17",
+                "to": "2025-06-27"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-6",
+            "kind": "employer"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2025-08-24",
+        "to": "2026-01-10"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-08-24",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-08-24",
+        "days": 140
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-titles-screen",
+      "evidence": "inferred",
+      "page": 7
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3a",
+      "evidence": "handwritten",
+      "page": 11
+    },
+    "facts.claimant.titles[0].sickness": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 17
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3a",
+      "evidence": "printed",
+      "page": 12
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3a",
+      "evidence": "handwritten",
+      "page": 12
+    },
+    "facts.claimant.titles[1]": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 7
+    },
+    "facts.claimant.titles[2]": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 7
+    },
+    "facts.claimant.titles[3]": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 7
+    },
+    "facts.claimant.titles[4]": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 7
+    },
+    "facts.claimant.titles[5]": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 7
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "claimant-statement",
+      "evidence": "inferred",
+      "page": 19
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "evidence": "printed",
+      "page": 15
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "evidence": "printed",
+      "page": 2
+    }
+  },
+  "extractionNotes": "Maternity benefit claimed from the civil-law mandate title (0411) for 2025-08-24..2026-01-10. The ZUS sickness-insurance memo for the claimed period (examination date = birth date) states that she was never registered for voluntary sickness insurance on that title; the payer's Z-3a (sent on ZUS request) confirms she did not opt in and was covered by accident insurance only. A case note on the first page records that a refusal decision was issued; the decision itself is not in the file, so no legal basis is recorded. ZUS also noted that she held two employment contracts paid above the minimum wage, so the mandate was not subject to compulsory pension insurance. The employment titles (0110) are listed as printed on the ZUS screen; benefit entitlement from them is outside this file and the plan block is tied to the mandate title only. Mandate start = first accident-insurance period on the Z-3a (several interrupted spells, last from 2025-06-28; simplified). Monthly income from the Z-3a 2024-08..2025-05 (16 hours a month); 2025-06 partial and 2025-07 none because of sick leave from 2025-06-03 (sick note title unknown, not modelled). The e-form field for the other parent was inactive, so she sent a separate letter that the father will not use parental leave (dates set to the claimed period). asOf = last-document date on the ZUS case screen (last digit partly covered)."
+}

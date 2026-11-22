@@ -1,0 +1,273 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-07",
+  "title": "Pracownica w ciąży zwolniona z powodu likwidacji pracodawcy: zasiłek w wysokości zasiłku macierzyńskiego do porodu, potem 20 + 32 tygodnie",
+  "scenario": "1.13",
+  "tags": [
+    "former-employee",
+    "mother",
+    "art30",
+    "employer-liquidation",
+    "pregnancy-certificate",
+    "minimum-wage",
+    "averaged-81.5"
+  ],
+  "source": {
+    "pdfSha256": [
+      "ad58e85426ba41960753951e2646ee2a65e53386fb14e1462ebf66db63318143"
+    ],
+    "fileNameSha256": [
+      "cf213538bbbfbd8255b30a865ecacb6418a9671fbbde1a0756f3620fbe5bde02"
+    ],
+    "pages": 20
+  },
+  "facts": {
+    "asOf": "2024-07-24",
+    "mode": "adjudication",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "from": "2013-08-01",
+          "to": "2023-12-31",
+          "endReason": "employerLiquidation",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2013-08-01",
+                "to": "2023-12-31"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2013-08-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false,
+            "status": "liquidation"
+          },
+          "months": [
+            {
+              "month": "2023-01",
+              "contributionBase": 349000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 349000
+            },
+            {
+              "month": "2023-02",
+              "contributionBase": 349000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 349000
+            },
+            {
+              "month": "2023-03",
+              "contributionBase": 349000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 349000
+            },
+            {
+              "month": "2023-04",
+              "contributionBase": 349000,
+              "daysWorked": 19,
+              "daysDue": 19,
+              "fixedPay": 349000
+            },
+            {
+              "month": "2023-05",
+              "contributionBase": 349000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 349000
+            },
+            {
+              "month": "2023-06",
+              "contributionBase": 349000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 349000
+            },
+            {
+              "month": "2023-07",
+              "contributionBase": 360000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 360000
+            },
+            {
+              "month": "2023-08",
+              "contributionBase": 360000,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 360000
+            },
+            {
+              "month": "2023-09",
+              "contributionBase": 360000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 360000
+            },
+            {
+              "month": "2023-10",
+              "contributionBase": 360000,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 360000
+            },
+            {
+              "month": "2023-11",
+              "contributionBase": 360000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 360000
+            },
+            {
+              "month": "2023-12",
+              "contributionBase": 360000,
+              "daysWorked": 19,
+              "daysDue": 19,
+              "fixedPay": 360000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2024-07-24",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "pregnancyDuringEmploymentCertified": true,
+      "documents": [
+        "birthAct",
+        "pregnancyCert"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "blocks": [
+      {
+        "id": "b0",
+        "parent": "claimant",
+        "type": "art30PreBirth",
+        "titleId": "t1",
+        "from": "2024-01-01",
+        "days": 205
+      },
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2024-07-24",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2024-12-11",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "ZAM",
+      "evidence": "inferred",
+      "page": 16
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "work-certificate",
+      "evidence": "printed",
+      "page": 3
+    },
+    "facts.claimant.titles[0].to": {
+      "doc": "work-certificate",
+      "evidence": "printed",
+      "page": 3
+    },
+    "facts.claimant.titles[0].endReason": {
+      "doc": "work-certificate",
+      "evidence": "printed",
+      "page": 3
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 8
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 10
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 10
+    },
+    "facts.event.date": {
+      "doc": "ZAM",
+      "evidence": "inferred",
+      "page": 16
+    },
+    "facts.event.pregnancyDuringEmploymentCertified": {
+      "doc": "doctor-certificate",
+      "evidence": "handwritten",
+      "page": 5
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "evidence": "printed",
+      "page": 16
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAS-55",
+      "evidence": "inferred",
+      "page": 2
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 16
+    },
+    "plan.blocks[2]": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 16
+    }
+  },
+  "extractionNotes": "Grant evidenced only by the file label (right granted); no ZUS decision, note or screen in the file, so every period and rate is the claim or inferred. Full-time employment 2013-08-01..2023-12-31, terminated by notice because the workplace was liquidated (work certificate dated 2024-01-02; shortened notice not applied). ZAS-55 dated 2024-01-02 with the statement that no other employment was offered; its start date is redacted, so the Art. 30 block is inferred from the day after termination to the day before the birth. Doctor's certificate for ZUS dated 2023-12-21 states a first-trimester pregnancy, i.e. pregnancy during employment. Z-3 salary table 2023-01..2023-12 at the minimum wage of each half-year (3490.00, then 3600.00), all days worked; payer up to 20 insured. ZAM (undated) asks for maternity 2024-07-24..2024-12-10 and parental 2024-12-11..2025-07-22 with the full-length declaration ticked. The birth extract carries a handwritten date of 2024-07-29, which conflicts with the ZAM; a former employee cannot start maternity before the birth and the Art. 30 benefit runs to the birth, so the birth date is inferred from the ZAM start (2024-07-24). asOf is set to the inferred birth date (the ZAM is undated) and adjudication mode is explicit. Rates not in file: 100% for the Art. 30 benefit and 81.5% for maternity + parental expected."
+}

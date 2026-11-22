@@ -1,0 +1,259 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-02",
+  "title": "Pracownica: urlop macierzyński, potem rodzicielski łączony z pracą na pół etatu, zakończony wcześniej na jej wniosek; podwyższenie do świadczenia rodzicielskiego",
+  "scenario": "1.15",
+  "tags": [
+    "employee",
+    "mother",
+    "single-child",
+    "parental-with-work",
+    "half-time",
+    "top-up",
+    "early-stop",
+    "allowances-excluded"
+  ],
+  "source": {
+    "pdfSha256": [
+      "8498706eabc8f0584519aac9b713985f0ed58438485d0ebe451e485d4fc2f8d0"
+    ],
+    "fileNameSha256": [
+      "ca716965e2dd6c52b322805aeee760d9332a7e562543fff57d6175e403047ae4"
+    ],
+    "pages": 28
+  },
+  "facts": {
+    "asOf": "2025-02-01",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2023-01-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2023-01-01"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2023-01-01",
+              "fraction": {
+                "num": 63,
+                "den": 100
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2023-01",
+              "contributionBase": 310000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 310000
+            },
+            {
+              "month": "2023-02",
+              "contributionBase": 330000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 330000
+            },
+            {
+              "month": "2023-03",
+              "contributionBase": 330000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 330000
+            },
+            {
+              "month": "2023-04",
+              "contributionBase": 330000,
+              "daysWorked": 19,
+              "daysDue": 19,
+              "fixedPay": 330000
+            },
+            {
+              "month": "2023-05",
+              "contributionBase": 330000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 330000
+            },
+            {
+              "month": "2023-06",
+              "contributionBase": 330000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 330000
+            },
+            {
+              "month": "2023-07",
+              "contributionBase": 341000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 341000
+            },
+            {
+              "month": "2023-08",
+              "contributionBase": 341000,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 341000
+            },
+            {
+              "month": "2023-09",
+              "contributionBase": 341000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 341000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2024-04-10",
+        "to": "2025-07-08"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2023-11-22",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2024-03-20",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2023-11-22",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2024-04-10",
+        "days": 297,
+        "pool": "shared",
+        "workFraction": {
+          "num": 1,
+          "den": 2
+        },
+        "claimedSeparatelyOn": "2024-03-20"
+      }
+    ],
+    "singleTitleStatement": true
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "claimant-statement",
+      "evidence": "inferred",
+      "page": 25
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 18
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 18
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 19
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 20
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 20
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "other-parent-statement",
+      "evidence": "handwritten",
+      "page": 14
+    },
+    "facts.event.date": {
+      "doc": "zus-note",
+      "evidence": "inferred",
+      "page": 1
+    },
+    "plan.rateOption": {
+      "doc": "leave-application",
+      "evidence": "inferred",
+      "page": 2
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 18
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 1
+    },
+    "plan.blocks[1]": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 1
+    },
+    "plan.blocks[1].workFraction": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 18
+    },
+    "plan.blocks[1].claimedSeparatelyOn": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 18
+    },
+    "plan.singleTitleStatement": {
+      "doc": "zus-note",
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "ZUS closing note prints: maternity benefit 2023-11-22..2024-04-09; parental benefit 2024-04-10..2025-01-31 while working half-time; payment stopped from 2025-02-01 at the claimant's request (she returned at three-quarter time); top-up to the parental-benefit level paid 2024-05-01..2025-01-31. The parental leave combined with work was granted by the employer until 2025-07-08 (Z-3); the plan block ends on the last paid day because the claimant ended it by notice, which the engine cannot know. Maternity was requested separately before the parental leave, so 100% then 70% is inferred (rate not printed). The Z-3 states a working-time fraction of 0.63 from the start of employment. The employer states that the allowances in columns 7 and 8 (seniority and function allowances, paid also during absence) are excluded from the benefit base, so only column 6 is recorded; contributionBase is inferred equal to it. The salary table stops at 2023-09. Birth date taken from the first maternity day (birth extract illegible). The father's statement covers the whole planned parental period. singleTitleStatement set to true: the top-up was paid, which requires the single-title statement (added during engine triage)."
+}

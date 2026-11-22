@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-12",
+  "title": "Pracownica: zasiłek macierzyński 20 + 32 tygodnie po wezwaniu ZUS do złożenia ZAM i Z-3 (pismo do pracodawcy to nie wniosek)",
+  "scenario": "1.1",
+  "tags": [
+    "employee",
+    "mother",
+    "missing-application",
+    "missing-employer-certificate",
+    "continuation-after-sickness"
+  ],
+  "source": {
+    "pdfSha256": [
+      "6a4b2d0f113e6a9d5de3ce60b41545514259a2e7c6f4dac1996b5d9a6539eceb"
+    ],
+    "fileNameSha256": [
+      "e47327a1dea97754a96ad3ed1949b76b50dee51c15081de7342eed110aaf2a0b"
+    ],
+    "pages": 30
+  },
+  "facts": {
+    "asOf": "2026-03-27",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2021-09-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2021-09-01"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2021-09-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2024-12",
+              "contributionBase": 685014,
+              "fixedPay": 685014,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2025-01",
+              "contributionBase": 685014,
+              "fixedPay": 685014
+            },
+            {
+              "month": "2025-02",
+              "contributionBase": 685014,
+              "fixedPay": 685014
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 685014,
+              "fixedPay": 685014
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 685014,
+              "fixedPay": 685014,
+              "daysDue": 21,
+              "daysWorked": 19
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 685014,
+              "fixedPay": 685014,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 685014,
+              "fixedPay": 685014,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 685014,
+              "fixedPay": 685014,
+              "daysDue": 20,
+              "daysWorked": 20
+            },
+            {
+              "month": "2025-09",
+              "contributionBase": 685014,
+              "fixedPay": 685014,
+              "daysDue": 22,
+              "daysWorked": 18
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 685014,
+              "fixedPay": 685014,
+              "daysDue": 23,
+              "daysWorked": 23
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2026-07-19",
+        "to": "2027-02-27"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-03-01",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-03-01",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-07-19",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-notice",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 19,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 19,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 21,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 23,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 23,
+      "evidence": "inferred"
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "leave-application",
+      "page": 1,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "leave-application",
+      "page": 1,
+      "evidence": "inferred"
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "page": 10,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "page": 10,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Full-time employee since 2021-09-01 (small employer). The claimant first sent only a leave letter to her employer (maternity 2026-03-01..2026-07-18 and parental 224 days to 2027-02-27; the father will not use the leave). ZUS letters of 2026-03-27 asked the employer for the Z-3 and the claimant for a ZAM by 2026-04-10, otherwise a refusal; the ZAM (maternity + parental) and a continuation Z-3 followed (undated). Grant evidenced only by the file label (right to maternity benefit established). Z-3: fixed salary 6850.14 for 2024-12..2025-10 (2025-07 row not legible; care-benefit absences in 2025-02 and 2025-04, sickness in 2025-09); the continuation Z-3 suggests a sickness benefit before the birth, dates not in the file. Birth date taken as the maternity start. Application date unknown, so the rate is inferred (joint ZAM)."
+}

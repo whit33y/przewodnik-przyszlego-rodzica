@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-08",
+  "outcome": {
+    "value": "refused",
+    "reasonCodes": [
+      "NOT_INSURED_AT_EVENT"
+    ],
+    "evidence": "decision"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 140,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-02-03",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2025-06-22",
+        "evidence": "claimed"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 224,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-06-23",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2026-02-01",
+        "evidence": "printed"
+      }
+    }
+  ],
+  "legalBasisCited": [
+    "UZ art. 1 ust. 1",
+    "UZ art. 29 ust. 1"
+  ],
+  "expectedAlerts": [
+    "NOT_INSURED_ON_DUE_DATE"
+  ],
+  "variants": [
+    {
+      "name": "employed-at-birth",
+      "factsPatch": [
+        {
+          "op": "add",
+          "path": "/claimant/titles/-",
+          "value": {
+            "id": "t1",
+            "kind": "employment",
+            "zusCode": "0110",
+            "from": "2024-01-01",
+            "sickness": {
+              "mode": "mandatory",
+              "periods": [
+                {
+                  "from": "2024-01-01"
+                }
+              ]
+            },
+            "payer": {
+              "ref": "payer-1",
+              "kind": "employer",
+              "over20Insured": false
+            },
+            "months": []
+          }
+        }
+      ],
+      "planPatch": [
+        {
+          "op": "add",
+          "path": "/blocks/0/titleId",
+          "value": "t1"
+        },
+        {
+          "op": "add",
+          "path": "/blocks/1/titleId",
+          "value": "t1"
+        }
+      ],
+      "expected": {
+        "outcome": {
+          "value": "granted",
+          "reasonCodes": [],
+          "evidence": "decision"
+        }
+      }
+    }
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-11",
+  "title": "Matka prowadząca działalność: dziecko urodzone w 36. tygodniu, 8 dni w szpitalu, 2 tygodnie uzupełniającego urlopu macierzyńskiego po poprawionym wniosku",
+  "scenario": "1.10",
+  "tags": [
+    "self-employed",
+    "mother",
+    "supplementary",
+    "preterm",
+    "second-application",
+    "form-error"
+  ],
+  "source": {
+    "pdfSha256": [
+      "efb8ff8918d46e3eeda2711ea6a65742a3fa740682d263a66dd4b2402f53efa4"
+    ],
+    "fileNameSha256": [
+      "5e7f8b7ea356bcbb4b7ad8416808e3b5ceda92139187dd88f2e06450e2eef74f"
+    ],
+    "pages": 22
+  },
+  "facts": {
+    "asOf": "2025-12-19",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0510",
+          "from": "2024-02-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-02-01"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-11-27",
+      "documents": [
+        "birthAct",
+        "hospitalStayCert"
+      ],
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true,
+          "gestationalWeek": 36,
+          "birthWeightG": 3100,
+          "hospitalStays": [
+            {
+              "from": "2025-11-27",
+              "to": "2025-12-04"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2025-12-09",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-11-27",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "supplementary",
+        "titleId": "t1",
+        "from": "2026-04-16",
+        "days": 14
+      },
+      {
+        "id": "b3",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-04-30",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 20
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 21
+    },
+    "facts.claimant.titles[0].zusCode": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 21
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-titles-screen",
+      "evidence": "inferred",
+      "page": 21
+    },
+    "facts.event.date": {
+      "doc": "hospital-certificate",
+      "evidence": "printed",
+      "page": 13
+    },
+    "facts.event.children[0].gestationalWeek": {
+      "doc": "hospital-certificate",
+      "evidence": "printed",
+      "page": 13
+    },
+    "facts.event.children[0].birthWeightG": {
+      "doc": "hospital-certificate",
+      "evidence": "printed",
+      "page": 13
+    },
+    "facts.event.children[0].hospitalStays[0]": {
+      "doc": "hospital-certificate",
+      "evidence": "printed",
+      "page": 13
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "evidence": "inferred",
+      "page": 6
+    },
+    "plan.applicationDate": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 10
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 22
+    },
+    "plan.blocks[1]": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 22
+    },
+    "plan.blocks[2]": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 22
+    }
+  },
+  "extractionNotes": "Self-employed mother, title 0510 from 2024-02-01 (sickness insurance shown in the title type), a new 0510 period and a maternity-benefit title from the birth date. Dedicated hospital certificate for supplementary leave: completed week 36, 3100 g, in hospital 2025-11-27..2025-12-04 (8 days), hospitalisation finished. First ZAM (dated 2025-12-09) claimed the whole 52 weeks as maternity leave; the corrected ZAM (dated 2025-12-19, one day after the 21-day window) split it into maternity 140 days, supplementary 14 days and parental 224 days. Both ZAMs leave the full-length declaration unticked; 81.5% is inferred from the first, in-time application covering 52 weeks, and no rate is asserted. Granted periods printed in a ZUS note. No declared bases in the file, so months are empty. The other parent will not use parental leave."
+}

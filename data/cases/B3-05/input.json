@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-05",
+  "title": "Martwe urodzenie bez aktu urodzenia (płeć nieustalona): 8 tygodni zasiłku macierzyńskiego w stawce 100%",
+  "scenario": "1.9",
+  "tags": [
+    "employee",
+    "mother",
+    "stillbirth",
+    "no-registry-act",
+    "stillbirth-certificate",
+    "rate-100",
+    "months-relabelled"
+  ],
+  "source": {
+    "pdfSha256": [
+      "3e771a9a8ac7404b89212cb954ad717cb8e04feb16a446ca0c7c3ff83ea542fe"
+    ],
+    "fileNameSha256": [
+      "b1307227b9c4a2a8f58b666f71d67f11b14b377e64818f84c8d898e2cd55b235"
+    ],
+    "pages": 16
+  },
+  "facts": {
+    "asOf": "2026-09-11",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2020-12-16",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2020-12-16"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-06",
+              "contributionBase": 509105,
+              "daysWorked": 19,
+              "daysDue": 19,
+              "fixedPay": 509105
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 509105,
+              "daysWorked": 17,
+              "daysDue": 22,
+              "fixedPay": 509105
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 509105,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 509105
+            },
+            {
+              "month": "2025-09",
+              "contributionBase": 509105,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 509105
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 509105,
+              "daysWorked": 17,
+              "daysDue": 21,
+              "fixedPay": 509105
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 509105,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 509105
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 509105,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 509105
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 509105,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 509105
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 509105,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 509105
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 509105,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 509105
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 509105,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 509105
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 509105,
+              "daysWorked": 19,
+              "daysDue": 19,
+              "fixedPay": 509105
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2026-06-09",
+          "to": "2026-07-11"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-09-11",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": false
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-09-11",
+        "days": 56
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-benefit-screen",
+      "page": 15,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].month": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "zus-benefit-screen",
+      "page": 15,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].bornAlive": {
+      "doc": "stillbirth-certificate",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "leave-application",
+      "page": 9,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Proof of stillbirth is the special doctor/midwife certificate issued when no registry act exists (sex undetermined); no birth act in the file. Granted period printed on the ZUS benefit screen (56 days, 100%) and in a handwritten ZUS note. Application date not legible; asOf set to the event date. The Z-3 salary table is printed for 2023-12..2024-11 while the sick pay and the event are dated 2026; the table is the 12 months before the first incapacity (sick pay from 2026-06-09), so month labels were shifted by +18 months to 2025-06..2026-05. Constant salary 5091.05; two months with a few sickness days. Etat fraction not legible. The employer ticked the wrong benefit box on the Z-3; ZUS paid the correct benefit. Base and amounts not printed."
+}

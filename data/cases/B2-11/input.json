@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-11",
+  "title": "Pracownica zatrudniona 10 tygodni: martwe urodzenie bez aktu urodzenia, 8 tygodni zasiłku macierzyńskiego",
+  "scenario": "1.9",
+  "tags": [
+    "employee",
+    "mother",
+    "stillbirth",
+    "stillbirth-certificate",
+    "no-birth-act",
+    "short-employment",
+    "student-mandate-before"
+  ],
+  "source": {
+    "pdfSha256": [
+      "12bb00e9e4b5e774cb0d5eb4e26297bcd809ea161be4340a80216f0003290489"
+    ],
+    "fileNameSha256": [
+      "54035ed702b60fa5381e8fd74611353df7b79f1565c2c45f5895ea281825d155"
+    ],
+    "pages": 24
+  },
+  "facts": {
+    "asOf": "2025-09-15",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2025-06-26",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2025-06-26"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2025-06-26",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-07",
+              "contributionBase": 509398,
+              "fixedPay": 509398,
+              "daysDue": 23,
+              "daysWorked": 23
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2025-08-05",
+          "to": "2025-09-05"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-09-06",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": false
+        }
+      ],
+      "documents": [
+        "stillbirthCert"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2025-09-15",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-09-06",
+        "days": 56
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 23,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "work-certificate",
+      "page": 15,
+      "evidence": "printed"
+    },
+    "facts.event.documents": {
+      "doc": "stillbirth-certificate",
+      "evidence": "printed"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "page": 10,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Full-time employee from 2025-06-26 (about 10 weeks before the birth); before that a student mandate with the same employer, without contributions (no title). Employer sick pay 2025-08-05..2025-09-05. Stillbirth on 2025-09-06; no registry act because the sex could not be determined, so the special medical stillbirth certificate was supplied (two copies). ZUS note: maternity benefit granted 2025-09-06..2025-10-31 (56 days) from the employment title. Z-3: July 2025 full month 5093.98; June is the start month. Rate 100% by law, not printed."
+}

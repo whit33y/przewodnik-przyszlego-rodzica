@@ -1,0 +1,166 @@
+{
+  "id": "2026-01-01",
+  "validFrom": "2026-01-01",
+  "label": "Stan prawny 2026",
+  "sources": [
+    "UZ (Dz.U. 2026 poz. 854)",
+    "KP (Dz.U. 2026 poz. 1245)",
+    "RD (Dz.U. 2026 poz. 1316)"
+  ],
+  "wage": {
+    "minimumWage": 480600,
+    "forecastAverageWage": 942000
+  },
+  "deductions": {
+    "employeeSocialBps": 1371
+  },
+  "base": {
+    "employeeFloorFullTime": true,
+    "nonEmployeeMinBasePctOfForecastBps": 6000,
+    "preferentialBasePctOfMinWageBps": 3000,
+    "voluntaryCapPctOfForecastBps": 25000,
+    "afterTitleCapPctOfForecastBps": 10000,
+    "monthDays": 30,
+    "noRecalcGapMonths": 1
+  },
+  "rates": {
+    "maternity": 10000,
+    "parental": 7000,
+    "averaged": 8150,
+    "otherParentReserved": 7000,
+    "paternity": 10000,
+    "supplementary": 10000,
+    "sicknessPregnancy": 10000,
+    "sicknessStandard": 8000,
+    "careAllowance": 8000,
+    "rehabPregnancy": 10000
+  },
+  "maternity": {
+    "weeksByChildren": {
+      "1": 20,
+      "2": 31,
+      "3": 33,
+      "4": 35,
+      "5plus": 37
+    },
+    "preBirthMaxWeeks": 6,
+    "motherMandatoryWeeks": 14,
+    "motherMandatoryWeeksSpecial": 8
+  },
+  "parental": {
+    "weeks": {
+      "single": 41,
+      "multiple": 43
+    },
+    "weeksZaZyciem": {
+      "single": 65,
+      "multiple": 67
+    },
+    "reservedWeeksPerParent": 9,
+    "maxParts": 5,
+    "partsSharedBetweenParents": true,
+    "untilEndOfYearChildTurns": 6,
+    "workMaxFraction": {
+      "num": 1,
+      "den": 2
+    },
+    "combinedCapWeeks": {
+      "single": 82,
+      "multiple": 86
+    },
+    "combinedCapWeeksZaZyciem": {
+      "single": 130,
+      "multiple": 134
+    },
+    "applicationLeadDays": 21
+  },
+  "paternity": {
+    "days": 14,
+    "maxParts": 2,
+    "minPartDays": 7,
+    "untilChildMonths": 12,
+    "adoptionMaxChildAgeYears": 14,
+    "applicationLeadDays": 7
+  },
+  "supplementary": {
+    "validFrom": "2025-03-19",
+    "extremePretermBeforeWeek": 28,
+    "extremeMaxWeightG": 1000,
+    "pretermBeforeWeek": 37,
+    "capWeeksExtreme": 15,
+    "capWeeksPreterm": 8,
+    "capWeeksTerm": 8,
+    "termMinConsecutiveDays": 2,
+    "termFirstDayFrom": 5,
+    "termFirstDayTo": 28,
+    "applicationLeadDays": 21
+  },
+  "loss": {
+    "weeksAfterStillbirthOrEarlyDeath": 8,
+    "earlyDeathBeforeWeeks": 8,
+    "minDaysFromDeath": 7,
+    "funeralGrant": 700000
+  },
+  "adoption": {
+    "fosterMaxAgeYears": 7,
+    "fosterMaxAgeDeferredYears": 10,
+    "adoptionMaxAgeYears": 14,
+    "minLeaveWeeks": 9,
+    "parentalWeeksReduced": 38,
+    "parentalWeeksReducedZaZyciem": 62,
+    "averagedOptionDeadlineDays": 21
+  },
+  "averagedOption": {
+    "deadlineDaysAfterEvent": 21
+  },
+  "sickness": {
+    "waitingDaysMandatory": 30,
+    "waitingDaysVoluntary": 90,
+    "bridgingGapDays": 30,
+    "sickPayDays": 33,
+    "sickPayDaysAge50": 14,
+    "benefitPeriodDays": 182,
+    "benefitPeriodPregnancyDays": 270,
+    "afterTitleStartWithinDays": 14,
+    "afterTitleMinDays": 30
+  },
+  "arrears": {
+    "thresholdPctOfMinWageBps": 100,
+    "expiryMonths": 6
+  },
+  "payer": {
+    "ownPaymentAboveInsured": 20,
+    "forwardWithinDays": 7
+  },
+  "minimumBenefit": {
+    "netMonthly": 100000,
+    "proration": "calendarDays"
+  },
+  "tax": {
+    "pitAdvanceBps": 1200,
+    "roundToFullZloty": true
+  },
+  "claims": {
+    "limitationMonths": 6
+  },
+  "titleRisk": {
+    "threshold": 2,
+    "newTitleMonthsBeforeDue": 10,
+    "sickWithinDaysOfStart": 150,
+    "smallFraction": {
+      "num": 1,
+      "den": 4
+    },
+    "lateRegistrationDays": 7,
+    "dueDateWindowDays": 30,
+    "baseRaiseMonthsBeforeDue": 12
+  },
+  "interpretation": {
+    "nineWeeksLostIfOtherParentUninsured": true,
+    "art30CoversParental": true,
+    "art30PreBirthIncludesUnlawfulTermination": false,
+    "fatherSharedPartAtAveragedRate": true,
+    "supplementaryForNonEmployees": true,
+    "stillbornCountsForMaternityLength": false
+  }
+}

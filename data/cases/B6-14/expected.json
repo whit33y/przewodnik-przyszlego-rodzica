@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-14",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "notice"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2024-04-09",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2024-08-26",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "claimed"
+      },
+      "toppedUp": {
+        "value": true,
+        "evidence": "printed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "printed"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 224,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2024-08-27",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2025-04-07",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 8150,
+        "evidence": "claimed"
+      },
+      "toppedUp": {
+        "value": true,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "printed"
+      }
+    }
+  ],
+  "legalBasisCited": [
+    "UZ art. 31 ust. 3a",
+    "UZ art. 62 ust. 4",
+    "UZ art. 62 ust. 6",
+    "RD § 21"
+  ],
+  "expectedAlerts": [
+    "LOW_BASE"
+  ],
+  "expectedAlertsPostEvent": [
+    "TOP_UP_STATEMENT_NEEDED"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-11",
+  "title": "Ojciec zatrudniony od kilku miesięcy: 9 tygodni urlopu rodzicielskiego po wykorzystaniu przez matkę 52 tygodni",
+  "scenario": "1.6",
+  "tags": [
+    "employee",
+    "father",
+    "parental",
+    "own-nine-weeks",
+    "rate-70",
+    "minimum-wage",
+    "short-tenure",
+    "after-first-birthday"
+  ],
+  "source": {
+    "pdfSha256": [
+      "5eec3e175b761599d6d548cf57539c242acdba16cb6652802a0e7a79141d8b8c"
+    ],
+    "fileNameSha256": [
+      "7ad9bf9a7aeffd0a3c326490eb9bb146ec571b8cbc04e9ea089bc6e0c91c1785"
+    ],
+    "pages": 20
+  },
+  "facts": {
+    "asOf": "2026-08-21",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2025-04-02",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2025-04-02"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2025-04-02",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-09",
+              "contributionBase": 466600,
+              "daysWorked": 11,
+              "daysDue": 22,
+              "fixedPay": 466600,
+              "deductionBps": 1371
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 466600,
+              "daysWorked": 15,
+              "daysDue": 23,
+              "fixedPay": 466600,
+              "deductionBps": 1371
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 466600,
+              "daysWorked": 18,
+              "daysDue": 18,
+              "fixedPay": 466600,
+              "deductionBps": 1371
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 466600,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 466600,
+              "deductionBps": 1371
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 480600,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 480600,
+              "deductionBps": 1371
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 480600,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 480600,
+              "deductionBps": 1371
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 480600,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 480600,
+              "deductionBps": 1371
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 480600,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 480600,
+              "deductionBps": 1371
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 480600,
+              "daysWorked": 19,
+              "daysDue": 19,
+              "fixedPay": 480600,
+              "deductionBps": 1371
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 480600,
+              "daysWorked": 16,
+              "daysDue": 21,
+              "fixedPay": 480600,
+              "deductionBps": 1371
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 480600,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 480600,
+              "deductionBps": 1371
+            },
+            {
+              "month": "2026-08",
+              "contributionBase": 480600,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 480600,
+              "deductionBps": 1371
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "mother",
+      "insured": "yes",
+      "used": [
+        {
+          "type": "maternity",
+          "from": "2025-08-05",
+          "to": "2025-12-22",
+          "rateBps": 8150
+        },
+        {
+          "type": "parental",
+          "from": "2025-12-23",
+          "to": "2026-08-03",
+          "rateBps": 8150
+        }
+      ]
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-08-05",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2026-08-21",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-09-14",
+        "days": 63,
+        "pool": "ownNineWeeks"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 3
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 15
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 3
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 4
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 5
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 5
+    },
+    "facts.otherParent.used": {
+      "doc": "zus-benefit-screen",
+      "evidence": "handwritten",
+      "page": 17
+    },
+    "facts.event.date": {
+      "doc": "ZUR",
+      "evidence": "printed",
+      "page": 12
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 3
+    },
+    "plan.blocks[0]": {
+      "doc": "ZUR",
+      "evidence": "printed",
+      "page": 12
+    }
+  },
+  "extractionNotes": "Father's own 9 weeks of parental leave (63 days), claimed on a ZUR after the mother used 20 weeks of maternity (2025-08-05..2025-12-22) and 32 weeks of parental (2025-12-23..2026-08-03), both at 81.5%; ZUS printed the mother's benefit history and added a handwritten note, and the father declared her parental period on the ZUR. Grant evidenced by benefit title 1240 from 2026-09-14 on the ZUS titles screen (queried up to 2026-11-15); the end date is the claim. The leave starts after the child's first birthday. Employment from 2025-04-02, full time, about 4 months before the birth. Z-3 salary table 2025-09..2026-08 at the minimum wage (4,666.00 in 2025, 4,806.00 in 2026), sickness in 2025-09, 2025-10 and 2026-06 (fewer days worked); contributionBase inferred equal to column 6. Rate not printed (70% by law for the father's reserved weeks). asOf = date of the leave application to the employer from the Z-3 (no dated ZUS document). Birth date from the ZUR (the birth extract is illegible)."
+}

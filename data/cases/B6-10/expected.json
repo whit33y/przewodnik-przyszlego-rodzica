@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-10",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "decision"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 140,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-12-01",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2026-04-19",
+        "evidence": "claimed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "supplementary",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 56,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2026-04-20",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2026-06-14",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 224,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2026-06-15",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2027-01-24",
+        "evidence": "printed"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  },
+  "knownDivergence": {
+    "fields": [
+      "outcome.value",
+      "benefits[1]"
+    ],
+    "explanation": "A second ZAM raised the supplementary leave from 2 to 8 weeks and ZUS granted it; the file shows only an 8-day neonatal stay (2 weeks under KP 180²) and no reason for the change, so the engine grants 2 weeks and refuses the other 6."
+  }
+}

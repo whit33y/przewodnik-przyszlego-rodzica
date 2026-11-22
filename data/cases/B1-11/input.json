@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "id": "B1-11",
+  "title": "Umowa zlecenie z dobrowolnym ubezpieczeniem chorobowym, podstawa 200 zł: zasiłek macierzyński i rodzicielski",
+  "scenario": "1.4",
+  "tags": [
+    "mandate",
+    "mother",
+    "voluntary-sickness",
+    "tiny-base",
+    "top-up",
+    "payer-registration-error"
+  ],
+  "source": {
+    "pdfSha256": [
+      "8573441e27599f356975f5d7481a94ae55ec9007c622102783e0f363ad777063"
+    ],
+    "fileNameSha256": [
+      "8e6a9f47f87484680c825b8b1089597f71837e4ebe337d75eefaaaebaeb6a9c0"
+    ],
+    "pages": 14
+  },
+  "facts": {
+    "asOf": "2025-07-01",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "mandate",
+          "zusCode": "0411",
+          "from": "2024-10-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-10-01"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "client",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2024-10",
+              "contributionBase": 20000,
+              "daysDue": 31,
+              "daysWorked": 31
+            },
+            {
+              "month": "2024-11",
+              "contributionBase": 20000,
+              "daysDue": 30,
+              "daysWorked": 30
+            },
+            {
+              "month": "2024-12",
+              "contributionBase": 20000,
+              "daysDue": 31,
+              "daysWorked": 31
+            },
+            {
+              "month": "2025-01",
+              "contributionBase": 20000,
+              "daysDue": 31,
+              "daysWorked": 31
+            },
+            {
+              "month": "2025-02",
+              "contributionBase": 20000,
+              "daysDue": 28,
+              "daysWorked": 28
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 20000,
+              "daysDue": 31,
+              "daysWorked": 31
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 20000,
+              "daysDue": 30,
+              "daysWorked": 30
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 20000,
+              "daysDue": 31,
+              "daysWorked": 29
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-05-30",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-05-30",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2025-10-17",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-note",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].zusCode": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3a",
+      "page": 12,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "Z-3a",
+      "page": 12,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3a",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3a",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "page": 2,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "inferred"
+    },
+    "plan.blocks[1]": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Mandate contract (0411) with voluntary sickness insurance; Z-3a shows a declared base of 200.00 for every month 2024-10..2025-05 (May 29 of 31 days), so the title and sickness start are taken as 2024-10-01 (inferred; the register start is not printed). ZUS memo: claim for maternity benefit 2025-05-30..2026-05-31, base date and examination date 2025-05-30. The printed end date is three days longer than 52 weeks; the plan uses the statutory 140 + 224 days and the split is inferred. ZUS note of 2025-07-01: letter to the payer to file correct registration documents in connection with the claimant receiving maternity benefit, which is the only evidence of the grant. With a 200 zł base the benefit is far below the 1000 zł minimum, so a top-up is expected (inferred; no single-title statement in the file). ZAM handwriting barely legible; rate not known."
+}

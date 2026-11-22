@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-12",
+  "outcome": {
+    "value": "refused",
+    "reasonCodes": [
+      "NO_SICKNESS_INSURANCE_ON_TITLE"
+    ],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 140,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-08-24",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2026-01-10",
+        "evidence": "claimed"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [
+    "VOLUNTARY_SICKNESS_NOT_JOINED"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  }
+}

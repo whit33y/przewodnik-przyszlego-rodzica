@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-12",
+  "outcome": {
+    "value": "refused",
+    "reasonCodes": [
+      "PARTS_LIMIT"
+    ],
+    "evidence": "decision"
+  },
+  "benefits": [
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 7,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2024-08-12",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2024-08-18",
+        "evidence": "printed"
+      }
+    }
+  ],
+  "legalBasisCited": [
+    "UZ art. 29a ust. 1",
+    "UZ art. 29a ust. 3"
+  ],
+  "expectedAlerts": [
+    "PARTS_LIMIT_NEAR"
+  ],
+  "expectedAlertsPostEvent": [
+    "PARTS_LIMIT_NEAR"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": false
+  },
+  "variants": [
+    {
+      "name": "only-three-earlier-parts",
+      "factsPatch": [
+        {
+          "op": "remove",
+          "path": "/claimant/paidBenefits/6"
+        }
+      ],
+      "expected": {
+        "outcome": {
+          "value": "granted",
+          "reasonCodes": [],
+          "evidence": "decision"
+        }
+      }
+    }
+  ]
+}

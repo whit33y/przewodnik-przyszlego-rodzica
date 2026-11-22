@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-02",
+  "title": "Pracownica: zasiłek chorobowy w ciąży, potem macierzyński 20 + 32 tygodnie w stawce 81,5% (stawka na ekranie ZUS)",
+  "scenario": "1.1",
+  "tags": [
+    "employee",
+    "mother",
+    "sickness-in-pregnancy",
+    "averaged-81.5",
+    "printed-rate",
+    "decision"
+  ],
+  "source": {
+    "pdfSha256": [
+      "9758bb8e6cf5396b29f54530dcc5f73deda4c10cf3624979691d626b8c1f9f83"
+    ],
+    "fileNameSha256": [
+      "7e786900b84249cd62c893de550b48ceff8f6091a0529aa20b93041e6727f6f7"
+    ],
+    "pages": 58
+  },
+  "facts": {
+    "asOf": "2025-11-13",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2022-09-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2022-09-01"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2022-09-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2025-07-21",
+          "to": "2025-08-22"
+        },
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2025-08-23",
+          "to": "2025-11-12",
+          "rateBps": 10000
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2026-04-02",
+        "to": "2026-11-11"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-11-13",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-11-13",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-04-02",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-titles-screen",
+      "page": 2,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 12,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.paidBenefits[1]": {
+      "doc": "Z-3",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "ZAM",
+      "page": 7,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "zus-titles-screen",
+      "page": 2,
+      "evidence": "inferred"
+    },
+    "plan.rateOption": {
+      "doc": "zus-benefit-screen",
+      "page": 2,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "Z-3",
+      "page": 16,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "zus-benefit-screen",
+      "page": 2,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Full-time employee since 2022-09-01, small employer. Cover sheet: decisions granting pregnancy sickness benefit and maternity benefit (texts not in the file). Employer sick pay 2025-07-21..2025-08-22 (33 days, one copy reads 18.07..19.08), then ZUS sickness benefit until the birth (end inferred). ZUS benefit screen: parental 2026-04-02..2026-11-11, 224 days, cumulative 364 days, 81.5%; 1240 title from 2025-11-13. Birth date taken as the maternity start. Application date on the Z-3 only partly legible, so applicationDate is omitted; the printed 81.5% shows the joint claim was filed in time, and maternity is assumed at the same rate. Salary table (basic 4300 → 4666 plus a 250 attendance bonus withheld during sickness) is too garbled for month records; base not printed. Father: box 'will not use parental' ticked."
+}

@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-06",
+  "title": "Matka prowadząca działalność: zasiłek chorobowy w ciąży i macierzyński wypłacone dopiero po spłacie zaległości składkowej; wniosek po 21 dniach od porodu",
+  "scenario": "1.3",
+  "tags": [
+    "self-employed",
+    "mother",
+    "sickness-in-pregnancy",
+    "arrears",
+    "arrears-repaid",
+    "late-application",
+    "maly-zus-plus",
+    "low-base",
+    "title-code-change"
+  ],
+  "source": {
+    "pdfSha256": [
+      "1d10d12bfd45c3c7058d690141ae26bf2dc6603c73ffc9acbecd85641784a95d"
+    ],
+    "fileNameSha256": [
+      "5a53b07ff8fa12b2f43b67e0f5229a6969a69b8e56653125df357aa5b94e75e8"
+    ],
+    "pages": 26
+  },
+  "facts": {
+    "asOf": "2026-05-28",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2023-07-01",
+          "to": "2025-06-30",
+          "endReason": "other",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2023-07-01",
+                "to": "2025-06-30"
+              }
+            ]
+          },
+          "scheme": "preferential",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        },
+        {
+          "id": "t2",
+          "kind": "selfEmployed",
+          "zusCode": "0590",
+          "from": "2025-07-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2025-07-01"
+              }
+            ]
+          },
+          "scheme": "malyZusPlus",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2025-02",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-09",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 144180
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 5149,
+              "fullMonthInsured": false
+            }
+          ]
+        }
+      ],
+      "sickNotes": [
+        {
+          "titleId": "t2",
+          "from": "2026-02-02",
+          "to": "2026-02-11"
+        },
+        {
+          "titleId": "t2",
+          "from": "2026-02-12",
+          "to": "2026-04-22"
+        }
+      ],
+      "paidBenefits": [
+        {
+          "type": "sickness",
+          "titleId": "t2",
+          "from": "2026-02-12",
+          "to": "2026-04-22"
+        }
+      ],
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2026-02-02",
+          "aboveThreshold": true,
+          "repaidOn": "2026-05-21"
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-04-28",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2026-05-28",
+    "singleTitleStatement": true,
+    "blocks": [
+      {
+        "id": "b0",
+        "parent": "claimant",
+        "type": "sickness",
+        "titleId": "t2",
+        "from": "2026-02-02",
+        "days": 10
+      },
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t2",
+        "from": "2026-04-28",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t2",
+        "from": "2026-09-15",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.claimant.titles[0]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 10
+    },
+    "facts.claimant.titles[1].from": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 10
+    },
+    "facts.claimant.titles[1].sickness.periods[0].from": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 10
+    },
+    "facts.claimant.titles[1].months": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 10
+    },
+    "facts.claimant.titles[0].scheme": {
+      "doc": "zus-insurance-memo",
+      "evidence": "inferred",
+      "page": 11
+    },
+    "facts.claimant.titles[1].scheme": {
+      "doc": "zus-insurance-memo",
+      "evidence": "inferred",
+      "page": 11
+    },
+    "facts.claimant.sickNotes": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.claimant.paidBenefits[0].type": {
+      "doc": "zus-insurance-memo",
+      "evidence": "inferred",
+      "page": 9
+    },
+    "facts.claimant.arrears[0]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 11
+    },
+    "facts.event.date": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 18
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "evidence": "printed",
+      "page": 18
+    },
+    "plan.applicationDate": {
+      "doc": "ZAM",
+      "evidence": "handwritten",
+      "page": 22
+    },
+    "plan.singleTitleStatement": {
+      "doc": "claimant-statement",
+      "evidence": "printed",
+      "page": 24
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 9
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "evidence": "printed",
+      "page": 18
+    },
+    "plan.blocks[2]": {
+      "doc": "ZAM",
+      "evidence": "printed",
+      "page": 18
+    }
+  },
+  "extractionNotes": "ZUS page-1 note: the right to both benefits (sickness and maternity) was established and paid. ZUS insurance memo dated 2026-05-28 for the sickness claim 2026-02-02..2026-02-11: title 0590 with voluntary sickness from 2025-07-01, preceded without a gap by 0570 (2023-07-01..2025-06-30, ended by deregistration when the title changed); a sickness benefit 2026-02-12..2026-04-22 is listed as already paid or granted (type code redacted); contribution debt on 2026-02-02 = yes, repaid in full on 2026-05-21 (amount not stated, recorded as aboveThreshold); base below 60% of the forecast wage (last month 2026-02). The memo lists the declared bases 2025-02..2026-02 as one series across both codes; they are all attached to the current title (2026-02 is a partial-month base). Birth 2026-04-28; maternity follows the sickness after a 5-day gap, so the base is not recalculated. The ZAM (maternity 20 weeks + parental 32 weeks, full-length declaration ticked) is dated 2026-05-28, 30 days after the birth, so the 21-day deadline for the averaged rate was missed; rates are not printed (100% then 70% expected). A follow-up statement confirms maternity benefit from one title only. Payment came only after the debt was repaid, within the 6-month window."
+}

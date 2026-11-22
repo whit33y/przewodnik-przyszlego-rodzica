@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-11",
+  "title": "Prowadząca działalność (preferencyjny ZUS): zasiłek macierzyński tylko za 14 tygodni, bez urlopu rodzicielskiego, powrót do działalności",
+  "scenario": "1.8",
+  "tags": [
+    "self-employed",
+    "mother",
+    "maternity-shortened",
+    "fourteen-weeks",
+    "preferential-zus",
+    "z3b-not-application",
+    "zbieg-deregistration"
+  ],
+  "source": {
+    "pdfSha256": [
+      "5bc3054d6453a8a3d24e9e0ca5edc0ace3f97eebe4e62d9f8ccaa06e7df0910e"
+    ],
+    "fileNameSha256": [
+      "26c08fdca6b5298e55ccecf9252e0679ebdf25c0b8ba6fb5d8425b092b59eb62"
+    ],
+    "pages": 22
+  },
+  "facts": {
+    "asOf": "2026-08-12",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2026-01-01",
+          "scheme": "preferential",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2026-01-01"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2026-01",
+              "contributionBase": 144180
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 144180
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 144180
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 144180
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 144180
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 144180
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 144180
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2026-08-05",
+          "aboveThreshold": false
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-08-05",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-08-05",
+        "days": 98
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-note",
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 16,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 16,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].scheme": {
+      "doc": "zus-insurance-memo",
+      "page": 17,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-insurance-memo",
+      "page": 16,
+      "evidence": "printed"
+    },
+    "facts.claimant.arrears[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 16,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-benefit-screen",
+      "page": 21,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Self-employed mother on preferential contributions (declared base 1441.80 every month 2026-01..07, below 60% of the forecast wage) with voluntary sickness insurance from 2026-01-01; child born 2026-08-05. She first sent only a Z-3b with the benefit period; ZUS wrote on 2026-08-12 asking for a ZAM within 14 days. The ZAM asks for maternity benefit only until 2026-11-10, i.e. the mother ends maternity leave after the minimum 14 weeks (98 days) and claims no parental leave; she wrote the birth date in the adoption field by mistake. ZUS memo (study date 2026-08-05): no arrears; social and sickness insurance deregistered from 2026-08-05 because of the concurrence with maternity benefit (kept open here, as in the pilots, because the benefit itself causes it); after the benefit, health insurance until 2026-11-10 and pension/accident insurance again from 2026-11-11 (back to business). Benefit screen: 2026-08-05..2026-11-10, 98 days, 100%; handwritten note: maternity benefit granted for that period. The ZUS memo request quoted the end as 2026-11-11. Base not printed (about 1244.13 from 1441.80 less 13.71%). asOf = date of the ZUS letter (the ZAM date is not legible)."
+}

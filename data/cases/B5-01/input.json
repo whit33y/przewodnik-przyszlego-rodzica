@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-01",
+  "title": "Martwe urodzenie bez aktu urodzenia (płeć nieustalona), pracownica: 8 tygodni zasiłku macierzyńskiego mimo urlopu bezpłatnego tuż przed porodem",
+  "scenario": "1.9",
+  "tags": [
+    "employee",
+    "mother",
+    "stillbirth",
+    "no-registry-act",
+    "stillbirth-certificate",
+    "unpaid-leave-before-birth"
+  ],
+  "source": {
+    "pdfSha256": [
+      "6bcda503b0b6c213eb150f880e94ed065bb09a1d5e7fe794686e9953a21dca8b"
+    ],
+    "fileNameSha256": [
+      "07e6dd40270cf4f7cb94cc98db7fba5d30b4ed6e46f034498726b1f26fb24d96"
+    ],
+    "pages": 14
+  },
+  "facts": {
+    "asOf": "2025-09-23",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2023-01-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2023-01-01"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2024-09",
+              "contributionBase": 430000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 430000
+            },
+            {
+              "month": "2024-10",
+              "contributionBase": 430000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 430000
+            },
+            {
+              "month": "2024-11",
+              "contributionBase": 430000,
+              "daysWorked": 19,
+              "daysDue": 19,
+              "fixedPay": 430000
+            },
+            {
+              "month": "2024-12",
+              "contributionBase": 430000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 430000
+            },
+            {
+              "month": "2025-01",
+              "contributionBase": 516600,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 516600
+            },
+            {
+              "month": "2025-02",
+              "contributionBase": 496600,
+              "daysWorked": 15,
+              "daysDue": 20,
+              "fixedPay": 496600
+            },
+            {
+              "month": "2025-03",
+              "contributionBase": 496600,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 496600
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 496600,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 496600
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 496600,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 496600
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 556600,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 556600
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 556600,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 556600
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 556600,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 556600
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2024-02-21",
+          "to": "2024-02-24"
+        },
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2024-03-25",
+          "to": "2024-03-29"
+        },
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2025-02-03",
+          "to": "2025-02-07"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-09-20",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": false
+        }
+      ],
+      "documents": [
+        "stillbirthCert"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2025-09-23",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2025-09-20",
+        "days": 56
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "leave-application",
+      "page": 9,
+      "evidence": "handwritten"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].zusCode": {
+      "doc": "zus-titles-screen",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 5,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits": {
+      "doc": "zus-titles-screen",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "zus-titles-screen",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.event.children[0].bornAlive": {
+      "doc": "stillbirth-certificate",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "facts.event.documents": {
+      "doc": "stillbirth-certificate",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "plan.applicationDate": {
+      "doc": "leave-application",
+      "page": 9,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[0]": {
+      "doc": "leave-application",
+      "page": 9,
+      "evidence": "handwritten"
+    }
+  },
+  "extractionNotes": "Stillbirth where the sex could not be determined, so no registry act was drawn up; proof is the special doctor/midwife stillbirth certificate. The grant is evidenced by the ZUS account screen (benefit title 1240 from 2025-09-20 to 2025-11-14, 56 days; maternity benefit row from 2025-09-20) and a case-closure note saying the case ended with payment. No decision; rate not printed (100% expected for the 8-week leave). The leave application asks for 8 weeks from the birth but writes the end date one day too late (57 days by its dates); the plan uses the 8 weeks (56 days) the application names. The account screen also shows two days of unpaid leave immediately before the birth (2025-09-18..19); there is no field for an unpaid-leave break and it did not affect the grant. Z-3 salary table 2024-09..2025-08 (12 months before the birth); column 6 is the contractual amount and contributionBase is inferred equal to it; 2025-02 had sickness days. Employer marked up to 20 insured. Working-time fraction not legible. asOf = date of the leave application and the stillbirth certificate (the ZUS screen and closure note are undated)."
+}

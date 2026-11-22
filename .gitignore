@@ -1,0 +1,26 @@
+# dependencies & builds
+node_modules/
+.next/
+out/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+next-env.d.ts
+
+# local data
+*.db
+*.db-journal
+*.sqlite
+data/runtime/
+
+# working material derived from restricted ZUS case files (contains personal data) — never commit
+.work/
+
+# env & os
+.env
+.env.*
+!.env.example
+.DS_Store
+.claude/worktrees/

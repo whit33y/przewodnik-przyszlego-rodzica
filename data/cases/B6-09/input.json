@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-09",
+  "title": "Ojciec zatrudniony z bardzo wysokim wynagrodzeniem: pierwsza 1-tygodniowa część urlopu ojcowskiego, obniżona stopa potrącenia po przekroczeniu rocznego limitu składek",
+  "scenario": "1.5",
+  "tags": [
+    "employee",
+    "father",
+    "paternity",
+    "paternity-in-parts",
+    "high-earner",
+    "deduction-245",
+    "no-base-cap"
+  ],
+  "source": {
+    "pdfSha256": [
+      "668c6fb1ab18fcc9afc269505eb244d8a18d2324b398ea1fe480db359117272c"
+    ],
+    "fileNameSha256": [
+      "2d69f23d23128853b3b9146547325410cad063f054e5cc140bbcc446dae8e2a6"
+    ],
+    "pages": 16
+  },
+  "facts": {
+    "asOf": "2026-08-06",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2024-11-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2024-11-01"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2024-11-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-07",
+              "contributionBase": 5730000,
+              "deductionBps": 245,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 5730000
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 5730000,
+              "deductionBps": 245,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 5730000
+            },
+            {
+              "month": "2025-09",
+              "contributionBase": 5730000,
+              "deductionBps": 245,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 5730000
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 5730000,
+              "deductionBps": 245,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 5730000
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 5730000,
+              "deductionBps": 245,
+              "daysWorked": 18,
+              "daysDue": 18,
+              "fixedPay": 5730000
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 5730000,
+              "deductionBps": 245,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 5730000
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 6303333,
+              "deductionBps": 1371,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 6303333
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 6303333,
+              "deductionBps": 351,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 6303333
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 6303333,
+              "deductionBps": 245,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 6303333
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 6303333,
+              "deductionBps": 245,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 6303333
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 6303333,
+              "deductionBps": 245,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 6303333
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 6303333,
+              "deductionBps": 245,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 6303333
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "occurred": true,
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2026-08-06",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "paternity",
+        "titleId": "t1",
+        "from": "2026-07-13",
+        "days": 7
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "ZAO",
+      "evidence": "handwritten",
+      "page": 3
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "evidence": "printed",
+      "page": 16
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 7
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 8
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 9
+    },
+    "facts.claimant.titles[0].months[*].deductionBps": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.event.occurred": {
+      "doc": "birth-extract",
+      "evidence": "inferred",
+      "page": 15
+    },
+    "plan.applicationDate": {
+      "doc": "ZAO",
+      "evidence": "handwritten",
+      "page": 3
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 1
+    }
+  },
+  "extractionNotes": "Granted period printed in a ZUS note on the first page (1-week paternity part, 2026-07-13..2026-07-19); the leave request to the employer asks for paternity leave in parts. Leave application to the employer dated 2026-07-03 (Z-3); the ZAO is dated 2026-08-06, after the leave ended, and is used as asOf. The child's birth date is not legible, so event.date is omitted with occurred = true. Z-3 salary table 2025-07..2026-06 (12 full months before the leave): constant contractual pay, no variable components. Column 9 deduction is 2.45% in most months because the annual pension/disability cap was exceeded; 13.71% in 2026-01 and 3.51% in 2026-02 (cap reached during February). contributionBase inferred equal to column 6. Rate not printed (100% inferred). Base and daily below are our computation with the per-month deduction, reported only; the benefit base has no upper cap."
+}

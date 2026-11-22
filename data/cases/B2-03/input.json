@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-03",
+  "title": "Ojciec prowadzący działalność: 9 tygodni urlopu rodzicielskiego w stawce 70%, ok. 20 miesięcy po porodzie",
+  "scenario": "1.6",
+  "tags": [
+    "self-employed",
+    "father",
+    "nine-weeks",
+    "rate-70",
+    "printed-amounts",
+    "stated-base",
+    "other-parent-used-pool",
+    "contribution-holiday"
+  ],
+  "source": {
+    "pdfSha256": [
+      "95befcf305df2f5b98125492c9c5cb2d6476e45647b5c2131125d98e043baa6a"
+    ],
+    "fileNameSha256": [
+      "3f467eeee9c61d8e96b2c70b98e98889050a7d539d3c275fe1c90db3c46206d1"
+    ],
+    "pages": 14
+  },
+  "facts": {
+    "asOf": "2026-09-29",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0510",
+          "from": "2020-05-01",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2020-05-01"
+              }
+            ]
+          },
+          "scheme": "standard",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [],
+          "statedBenefitBase": 434411
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "mother",
+      "insured": "yes",
+      "used": [
+        {
+          "type": "maternity",
+          "from": "2025-02-10",
+          "to": "2025-06-29"
+        },
+        {
+          "type": "parental",
+          "from": "2025-06-30",
+          "to": "2026-02-08"
+        }
+      ]
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-02-10",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-09-29",
+        "days": 63,
+        "pool": "ownNineWeeks",
+        "claimedSeparatelyOn": "2026-09-29"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-insurance-memo",
+      "page": 2,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].scheme": {
+      "doc": "zus-insurance-memo",
+      "page": 3,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].statedBenefitBase": {
+      "doc": "zus-payment-screen",
+      "page": 1,
+      "evidence": "printed"
+    },
+    "facts.otherParent.used": {
+      "doc": "zus-certificate-other-parent",
+      "page": 9,
+      "evidence": "printed"
+    },
+    "facts.otherParent.insured": {
+      "doc": "zus-certificate-other-parent",
+      "page": 9,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "zus-certificate-other-parent",
+      "page": 9,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZUR",
+      "page": 6,
+      "evidence": "printed"
+    },
+    "plan.blocks[0].claimedSeparatelyOn": {
+      "doc": "zus-insurance-memo",
+      "page": 2,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Application form undated; asOf and claimedSeparatelyOn set to the date ZUS examined the right. Birth date taken as the first day of the mother's maternity period. The memo prints 12 monthly declared bases (2025-09..2026-08: four months 5203.80, five months 5652.00, three part months 3099.48 / 3202.80 / 2552.52, one month flagged as contribution holiday), but no averaging rule we tried reproduces the printed base 4344.11, so months are left empty and the printed base is used. 5203.80 = 60% of 8673.00 confirms the 2025 forecast average wage. Payments printed only for Sep-Oct 2026; the end date is the claim period printed by ZUS, so duration is inferred. Earlier sickness benefit periods in the memo have redacted types and are omitted. Arrears were not analysed by ZUS."
+}

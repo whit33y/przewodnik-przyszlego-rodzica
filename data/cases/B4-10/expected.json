@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-10",
+  "outcome": {
+    "value": "refused",
+    "reasonCodes": [
+      "TITLE_INVALIDATED"
+    ],
+    "evidence": "decision"
+  },
+  "benefits": [
+    {
+      "type": "sickness",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 81,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-03-08",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2025-05-27",
+        "evidence": "printed"
+      }
+    },
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 140,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-05-28",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2025-10-14",
+        "evidence": "claimed"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 224,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-10-15",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2026-05-26",
+        "evidence": "printed"
+      }
+    }
+  ],
+  "legalBasisCited": [
+    "UZ art. 1 ust. 1",
+    "UZ art. 6 ust. 1",
+    "UZ art. 29 ust. 1",
+    "USUS art. 83 ust. 1 pkt 1",
+    "USUS art. 68 ust. 1 pkt 1 lit. a",
+    "USUS art. 36 ust. 4",
+    "KC art. 83 § 1",
+    "KP art. 300"
+  ],
+  "expectedAlerts": [
+    "TITLE_LIKELY_VERIFIED"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  },
+  "variants": [
+    {
+      "name": "title-recognised",
+      "factsPatch": [
+        {
+          "op": "remove",
+          "path": "/claimant/insuranceDecisions/0"
+        }
+      ],
+      "expected": {
+        "outcome": {
+          "value": "granted",
+          "reasonCodes": [],
+          "evidence": "decision"
+        },
+        "expectedAlerts": [
+          "TITLE_LIKELY_VERIFIED"
+        ]
+      }
+    }
+  ]
+}

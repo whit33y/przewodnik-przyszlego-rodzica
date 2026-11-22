@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-10",
+  "title": "Likwidacja pracodawcy w ciąży: zasiłek w wysokości zasiłku macierzyńskiego od dnia po ustaniu zatrudnienia do porodu (art. 30)",
+  "scenario": "1.13",
+  "tags": [
+    "employee",
+    "mother",
+    "art30",
+    "employer-liquidation",
+    "after-title",
+    "pregnancy-certificate",
+    "high-earner"
+  ],
+  "source": {
+    "pdfSha256": [
+      "2c9571b439f2cbafb131647f72c713c71326be698dae0c33bf1edb8527cf86e4"
+    ],
+    "fileNameSha256": [
+      "29645bb43b40e19dd0a8e4666de8720505abbee46c6d074cf30f83bf54eb0190"
+    ],
+    "pages": 14
+  },
+  "facts": {
+    "asOf": "2026-10-21",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2020-03-01",
+          "to": "2026-09-30",
+          "endReason": "employerLiquidation",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2020-03-01",
+                "to": "2026-09-30"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2020-03-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "status": "liquidation",
+            "over20Insured": true
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "expectedDate": "2026-10-21",
+      "date": "2026-10-22",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "pregnancyDuringEmploymentCertified": true
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2026-10-13",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "art30PreBirth",
+        "titleId": "t1",
+        "from": "2026-10-01",
+        "days": 21
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-titles-screen",
+      "page": 14,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].to": {
+      "doc": "zus-titles-screen",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].endReason": {
+      "doc": "work-certificate",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.status": {
+      "doc": "work-certificate",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.event.expectedDate": {
+      "doc": "doctor-certificate",
+      "page": 6,
+      "evidence": "handwritten"
+    },
+    "facts.event.date": {
+      "doc": "zus-titles-screen",
+      "page": 13,
+      "evidence": "inferred"
+    },
+    "facts.event.pregnancyDuringEmploymentCertified": {
+      "doc": "doctor-certificate",
+      "page": 6,
+      "evidence": "printed"
+    },
+    "plan.applicationDate": {
+      "doc": "ZAS-55",
+      "page": 2,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-titles-screen",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 9,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Granted period typed as a ZUS note on the titles screen: 2026-10-01..2026-10-21. Birth date not in the file; inferred as the day after the last benefit day (the benefit runs until the day before birth); the doctor gave 2026-10-21 as the due date. Termination under the 2003 collective-dismissal act because the employer was liquidated; ZAS-55 with the declaration that no other employment was provided; doctor certificate explicitly states the pregnancy existed before the employment ended. Title start: 2020-03-01 on the Z-3 and work certificate, a later date on the ZUS register (anonymisation inconsistency); Z-3 used. Employer reported more than 20 insured. Salary table (2025-2026, 23 500-25 200 monthly plus small benefits in kind and a Christmas bonus) only partly legible and its reference window is unclear (sickness from 2026-04 with carry-over); months omitted, base not printed. Sick-pay and sickness-benefit periods partly illegible; omitted. asOf = query date of the ZUS titles screen carrying the grant note (last document ZUS relied on); the ZAS-55 was filed on 2026-10-13 (plan.applicationDate). The post-birth maternity claim is not in this file."
+}

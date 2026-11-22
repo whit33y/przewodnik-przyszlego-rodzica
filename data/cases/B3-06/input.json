@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-06",
+  "title": "Ojciec przechodzący z etatu na działalność (preferencyjny ZUS): 9 tygodni urlopu rodzicielskiego, dobrowolne chorobowe od 2 dni po porodzie",
+  "scenario": "1.6",
+  "tags": [
+    "self-employed",
+    "father",
+    "parental",
+    "father-nine-weeks",
+    "preferential-zus",
+    "voluntary-sickness-late",
+    "title-switch-before-birth",
+    "concurrent-parental"
+  ],
+  "source": {
+    "pdfSha256": [
+      "224731f3e3a6d88ed7d62aeffc171069a58df2a1b54c998955a639ba5ed06cd7"
+    ],
+    "fileNameSha256": [
+      "896b3bee471b56ca42bb980e84e760567754eea76d22fef7c6d00666cf2be5a3"
+    ],
+    "pages": 12
+  },
+  "facts": {
+    "asOf": "2026-07-02",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t0",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2025-04-01",
+          "to": "2026-03-31",
+          "endReason": "other",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2025-04-01",
+                "to": "2026-03-31"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer"
+          },
+          "months": []
+        },
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2026-04-13",
+          "scheme": "preferential",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2026-04-29"
+              }
+            ]
+          },
+          "registeredOn": "2026-04-29",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2026-04",
+              "contributionBase": 565200,
+              "fullMonthInsured": false
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 144180
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "parental",
+          "titleId": "t1",
+          "from": "2026-05-25",
+          "to": "2026-06-07",
+          "part": 1,
+          "childRef": "child-1"
+        }
+      ],
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2026-06-08",
+          "aboveThreshold": false
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "mother",
+      "insured": "yes",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-04-27",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-06-08",
+        "days": 63,
+        "pool": "ownNineWeeks"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].from": {
+      "doc": "zus-insurance-memo",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].sickness.periods[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].registeredOn": {
+      "doc": "zus-insurance-memo",
+      "page": 9,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].scheme": {
+      "doc": "zus-insurance-memo",
+      "page": 9,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[1].months": {
+      "doc": "zus-insurance-memo",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].months[0].fullMonthInsured": {
+      "doc": "zus-insurance-memo",
+      "page": 8,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "zus-titles-screen",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.claimant.paidBenefits[0].type": {
+      "doc": "ZUR",
+      "page": 3,
+      "evidence": "inferred"
+    },
+    "facts.claimant.arrears[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 9,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "page": 5,
+      "evidence": "printed"
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Father switched from employment (ended 2026-03-31) to a business on preferential contributions (0570) from 2026-04-13; while employed full time he was only health-insured from the business. Voluntary sickness insurance from 2026-04-29, the day the ZUA reached ZUS, two days after the birth (2026-04-27). ZUS insurance memo (study date 2026-06-08, reply 2026-07-02): no arrears on the study date; declared sickness base 5652.00 for 2026-04 (60% of the forecast wage) and 1441.80 for 2026-05 (30% of the minimum wage); base below 60% in 2026-05; claim form wrongly referred to code 0510. The claim is the next part of parental leave, the father's own 9 weeks, 2026-06-08..2026-08-09 (63 days); the ZUR shows a later end date in handwriting, ZUS used 2026-08-09 in the memo and the register, and a typed note says the 9-week parental benefit was granted. Earlier benefit 2026-05-25..06-07 (register title 1240) is declared on the ZUR as an earlier parental part; it may have been paternity leave. The mother declared benefit for 52 weeks from the birth and concurrent parental leave over the father's period; her periods are partly illegible and are not modelled. Rate not printed; 70% inferred for the father's own weeks. Self-employed month 2026-04 not a full insured month."
+}

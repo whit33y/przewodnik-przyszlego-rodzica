@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "id": "B6-02",
+  "title": "Martwe urodzenie u pracownicy: 8 tygodni zasiłku macierzyńskiego od dnia porodu, premie zmienne w podstawie",
+  "scenario": "1.9",
+  "tags": [
+    "employee",
+    "mother",
+    "stillbirth",
+    "hospital-certificate",
+    "variable-bonus",
+    "sick-pay-before-birth"
+  ],
+  "source": {
+    "pdfSha256": [
+      "1a53dd703904345c728ca7c21600eacd1a8f07848ca52876ca3b1e5ab120e140"
+    ],
+    "fileNameSha256": [
+      "7b3aeb70270c4ba7767ff5983aba6b3675810b54b20de693b66b88f747fdedbb"
+    ],
+    "pages": 12
+  },
+  "facts": {
+    "asOf": "2026-09-14",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "from": "2024-06-01",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2024-06-01"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2025-09-08",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-09",
+              "contributionBase": 645048,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 645048
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 722200,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 722200
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 722200,
+              "daysWorked": 18,
+              "daysDue": 18,
+              "fixedPay": 722200
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 722200,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 722200
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 722200,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 722200
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 722200,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 722200
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 1183844,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 722200,
+              "variablePay": 461644
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 1125135,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 722200,
+              "variablePay": 402935
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 1125135,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 722200,
+              "variablePay": 402935
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 1198488,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 722200,
+              "variablePay": 476288
+            },
+            {
+              "month": "2026-07",
+              "contributionBase": 1198488,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 722200,
+              "variablePay": 476288
+            },
+            {
+              "month": "2026-08",
+              "contributionBase": 1418548,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 722200,
+              "variablePay": 696348
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2026-09-11",
+          "to": "2026-09-13"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-09-14",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": false
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2026-09-14",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-09-14",
+        "days": 56
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "leave-application",
+      "evidence": "handwritten",
+      "page": 2
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 7
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 7
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 8
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 9
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 9
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 8
+    },
+    "facts.event.date": {
+      "doc": "leave-application",
+      "evidence": "inferred",
+      "page": 2
+    },
+    "facts.event.children[0].bornAlive": {
+      "doc": "leave-application",
+      "evidence": "handwritten",
+      "page": 2
+    },
+    "plan.applicationDate": {
+      "doc": "leave-application",
+      "evidence": "handwritten",
+      "page": 2
+    },
+    "plan.blocks[0]": {
+      "doc": "leave-application",
+      "evidence": "handwritten",
+      "page": 2
+    }
+  },
+  "extractionNotes": "ZUS internal note on page 1 records payment of maternity benefit for 2026-09-14..2026-11-08 (56 days); no decision, rate not printed (100% expected). The stillbirth date is redacted in the leave application; the 8-week leave runs from the birth day and starts 2026-09-14, and the Z-3 shows employer sick pay 2026-09-11..2026-09-13 directly before it, so event.date is inferred as 2026-09-14. Proof is a hospital certificate that the child was stillborn (plus a mirrored scan, probably the stillbirth card); no registry-act status is visible, so no document code is set. Z-3 salary table 2025-09..2026-08 = 12 months before the month of incapacity; column 8 holds engagement bonuses taken at actual amount (contributionBase = col. 6 + col. 8, inferred). The Z-3 gives full time from 2025-09-08 (earlier fraction not stated); 2025-09 is printed at a lower fixed amount. The Z-3 application-date box is not reliably legible; asOf and applicationDate use the date of the leave application to the employer. Base and amounts not printed."
+}

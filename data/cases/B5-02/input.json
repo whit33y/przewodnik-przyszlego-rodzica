@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-02",
+  "title": "Ojciec prowadzący działalność (preferencyjny ZUS): 57 dni urlopu rodzicielskiego równolegle z matką, zasiłek podwyższony do 1000 zł",
+  "scenario": "1.7",
+  "tags": [
+    "self-employed",
+    "father",
+    "parental",
+    "concurrent-with-mother",
+    "preferential-zus",
+    "top-up",
+    "voluntary-sickness-from-zua-receipt"
+  ],
+  "source": {
+    "pdfSha256": [
+      "59ace4c6d8bd99dc35451969e26646ac65f840a88a44f3c8fd1f4c280d46727b"
+    ],
+    "fileNameSha256": [
+      "a461eb44d51a8f27bbc51a76a0977e8e2261897bf14020b2d53040485f5e6841"
+    ],
+    "pages": 12
+  },
+  "facts": {
+    "asOf": "2026-01-30",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t0",
+          "kind": "selfEmployed",
+          "zusCode": "0540",
+          "from": "2024-07-18",
+          "to": "2025-01-31",
+          "scheme": "ulgaNaStart",
+          "sickness": {
+            "mode": "none",
+            "periods": []
+          },
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        },
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2025-02-01",
+          "registeredOn": "2025-03-27",
+          "scheme": "preferential",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2025-03-27"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2025-03",
+              "contributionBase": 139980,
+              "fullMonthInsured": false
+            },
+            {
+              "month": "2025-04",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-05",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-09",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 139980
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 139980
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2026-01-05",
+          "aboveThreshold": false
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "mother",
+      "insured": "yes",
+      "used": [
+        {
+          "type": "maternity",
+          "from": "2025-10-29",
+          "to": "2026-03-17"
+        },
+        {
+          "type": "parental",
+          "from": "2026-03-18",
+          "to": "2026-10-27"
+        }
+      ]
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-10-29",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2025-12-30",
+    "singleTitleStatement": true,
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-01-05",
+        "days": 57,
+        "pool": "ownNineWeeks"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-notice",
+      "page": 11,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].from": {
+      "doc": "zus-insurance-memo",
+      "page": 6,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].registeredOn": {
+      "doc": "zus-insurance-memo",
+      "page": 8,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].sickness.periods[0].from": {
+      "doc": "zus-insurance-memo",
+      "page": 6,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].scheme": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[1].months": {
+      "doc": "zus-insurance-memo",
+      "page": 6,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[1].months[0].fullMonthInsured": {
+      "doc": "zus-insurance-memo",
+      "page": 6,
+      "evidence": "inferred"
+    },
+    "facts.claimant.arrears[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 7,
+      "evidence": "printed"
+    },
+    "facts.otherParent.used": {
+      "doc": "ZUR",
+      "page": 3,
+      "evidence": "inferred"
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "page": 9,
+      "evidence": "printed"
+    },
+    "plan.applicationDate": {
+      "doc": "ZUR",
+      "page": 3,
+      "evidence": "handwritten"
+    },
+    "plan.singleTitleStatement": {
+      "doc": "zus-notice",
+      "page": 12,
+      "evidence": "inferred"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZUR",
+      "page": 2,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[0].pool": {
+      "doc": "ZUR",
+      "page": 3,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Self-employed father on the preferential base. The business title started 2025-02-01 after a health-only 'ulga na start' period; ZUS moved the start of voluntary sickness insurance to the date the registration form reached it (2025-03-27) and corrected the February 2025 declaration to exclude sickness cover. Declared bases 1399.80 for 2025-03..2025-12 (30% of the 2025 minimum wage); March 2025 only partly covered. Memo: no contribution debt on the examination date 2026-01-05; base below 60% of the forecast wage. Claim filed on ZUR on 2025-12-30 for parental leave 2026-01-05..2026-03-02 (57 days, i.e. 8 weeks and 1 day), concurrent with the mother, who declared maternity and parental benefit 2025-10-29..2026-10-27 (364 days = 140 + 224; the split is inferred). Because the mother uses 364 days, the father's days are taken from his own reserved weeks (pool inferred); rate not printed, 70% inferred; the full-leave box on the ZUR is unticked. ZUS letter (2026-01-30) states the right was established as requested and paid, and that the net monthly benefit for January 2026 was below the 1000 zl parental benefit, so it is raised to that level; ZUS found no other title in its own data, which stands in for the single-title statement (inferred). The ZUR answers no to the question whether the other parent had drawn maternity benefit before the period, which contradicts section 3; not modelled."
+}

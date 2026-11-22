@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-06",
+  "outcome": {
+    "value": "refused",
+    "reasonCodes": [
+      "TITLE_INVALIDATED"
+    ],
+    "evidence": "decision"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 140,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-06-12",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2025-10-29",
+        "evidence": "claimed"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "refused",
+      "days": {
+        "value": 224,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2025-10-30",
+        "evidence": "claimed"
+      },
+      "to": {
+        "value": "2026-06-10",
+        "evidence": "printed"
+      }
+    }
+  ],
+  "legalBasisCited": [
+    "UZ art. 29 ust. 1 pkt 1"
+  ],
+  "expectedAlerts": [
+    "TITLE_LIKELY_VERIFIED"
+  ],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  },
+  "variants": [
+    {
+      "name": "title-recognised",
+      "factsPatch": [
+        {
+          "op": "remove",
+          "path": "/claimant/insuranceDecisions/0"
+        }
+      ],
+      "expected": {
+        "outcome": {
+          "value": "granted",
+          "reasonCodes": [],
+          "evidence": "decision"
+        },
+        "expectedAlerts": [
+          "TITLE_LIKELY_VERIFIED"
+        ]
+      }
+    }
+  ]
+}

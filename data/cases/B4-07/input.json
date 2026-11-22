@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-07",
+  "title": "Prowadząca działalność: zasiłek macierzyński 20 + 32 tygodnie w stawce 81,5%, podstawa przeniesiona z zasiłku chorobowego",
+  "scenario": "1.3",
+  "tags": [
+    "self-employed",
+    "mother",
+    "single-child",
+    "averaged-81.5",
+    "printed-amounts",
+    "base-carried-over",
+    "short-insurance",
+    "no-arrears"
+  ],
+  "source": {
+    "pdfSha256": [
+      "8cd3fab8924095fd3d6b6572b499c2101d0aeabd08668014e21cba22e7e96e27"
+    ],
+    "fileNameSha256": [
+      "37b73df2c018785ec723675f07fdd878b3cc0125fa245f13ad5d069057e5a963"
+    ],
+    "pages": 20
+  },
+  "facts": {
+    "asOf": "2026-10-09",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0510",
+          "from": "2026-03-23",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2026-03-23"
+              }
+            ]
+          },
+          "scheme": "standard",
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": [
+            {
+              "month": "2026-04",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-05",
+              "contributionBase": 565200
+            },
+            {
+              "month": "2026-06",
+              "contributionBase": 565200
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2026-07-06",
+          "to": "2026-09-24"
+        }
+      ],
+      "arrears": [
+        {
+          "account": "own",
+          "onDate": "2026-09-20",
+          "aboveThreshold": false
+        }
+      ],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2027-02-07",
+        "to": "2027-09-18"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-09-20",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2026-10-09",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-09-20",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2027-02-07",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "Z-3b",
+      "page": 8,
+      "evidence": "handwritten"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 2,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].sickness.periods[0].from": {
+      "doc": "zus-titles-screen",
+      "page": 2,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].scheme": {
+      "doc": "zus-titles-screen",
+      "page": 2,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "zus-payment-screen",
+      "page": 1,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 3,
+      "evidence": "printed"
+    },
+    "facts.claimant.paidBenefits[0].type": {
+      "doc": "zus-insurance-memo",
+      "page": 3,
+      "evidence": "inferred"
+    },
+    "facts.claimant.arrears[0]": {
+      "doc": "zus-insurance-memo",
+      "page": 4,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "zus-insurance-memo",
+      "page": 3,
+      "evidence": "inferred"
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "ZAM",
+      "page": 13,
+      "evidence": "handwritten"
+    },
+    "plan.rateOption": {
+      "doc": "ZAM",
+      "page": 10,
+      "evidence": "handwritten"
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3b",
+      "page": 8,
+      "evidence": "handwritten"
+    },
+    "plan.blocks[0]": {
+      "doc": "ZAM",
+      "page": 10,
+      "evidence": "printed"
+    },
+    "plan.blocks[1]": {
+      "doc": "ZAM",
+      "page": 10,
+      "evidence": "printed"
+    }
+  },
+  "extractionNotes": "Birth date: the ZUS memo examines the right on 2026-09-20 and both ZAMs start maternity on that day; a handwritten date one week earlier on the ZAM child field conflicts (likely an unshifted original). 2026-09-20 used. Base window printed as April-June 2026 (first full months of the title, before sickness from 2026-07-06; no recalculation for maternity). Monthly declared bases are on a missing memo page; 5652.00 (2026 minimum declared base) is inferred because 5652.00 x 0.8629 = 4877.11 exactly. The sickness benefit period printed in the memo overlaps the first 5 maternity days; ZUS offset it in the first payment (lump sum lower than the two rows). Benefit type is redacted on the memo. Second ZAM lists the whole 52 weeks under maternity; the first ZAM split is used as the plan. Payments printed only for Sep-Oct 2026, so durations are inferred."
+}

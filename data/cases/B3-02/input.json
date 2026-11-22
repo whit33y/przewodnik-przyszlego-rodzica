@@ -1,0 +1,289 @@
+{
+  "schemaVersion": 1,
+  "id": "B3-02",
+  "title": "Likwidacja pracodawcy w ciąży: zasiłek w wysokości zasiłku macierzyńskiego od dnia po ustaniu zatrudnienia do porodu (art. 30), wniosek złożony przed końcem umowy",
+  "scenario": "1.13",
+  "tags": [
+    "employee",
+    "mother",
+    "art30",
+    "employer-liquidation",
+    "after-title",
+    "sickness-before-art30",
+    "high-earner",
+    "form-confusion-z10"
+  ],
+  "source": {
+    "pdfSha256": [
+      "11304abb82ecbdf9a62742c6605878278e18115776c61b9e9d6e2f8ec97ddeae"
+    ],
+    "fileNameSha256": [
+      "c6e395e049a9f91cc7fcca1b31f1e8fb3e3e0eb9bc56cbfc00e59313bb3e40bd"
+    ],
+    "pages": 34
+  },
+  "facts": {
+    "asOf": "2025-11-03",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2013-08-01",
+          "to": "2025-07-31",
+          "endReason": "employerLiquidation",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2013-08-01",
+                "to": "2025-07-31"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2013-08-01",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "status": "liquidation",
+            "over20Insured": true
+          },
+          "months": [
+            {
+              "month": "2024-01",
+              "contributionBase": 1342576,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 1342576
+            },
+            {
+              "month": "2024-02",
+              "contributionBase": 1342576,
+              "daysWorked": 20,
+              "daysDue": 21,
+              "fixedPay": 1342576
+            },
+            {
+              "month": "2024-03",
+              "contributionBase": 2188399,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 1342576,
+              "variablePay": 845823
+            },
+            {
+              "month": "2024-04",
+              "contributionBase": 1409706,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 1409706
+            },
+            {
+              "month": "2024-05",
+              "contributionBase": 1409706,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 1409706
+            },
+            {
+              "month": "2024-06",
+              "contributionBase": 1409706,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 1409706
+            },
+            {
+              "month": "2024-07",
+              "contributionBase": 1409706,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 1409706
+            },
+            {
+              "month": "2024-08",
+              "contributionBase": 1409706,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 1409706
+            },
+            {
+              "month": "2024-09",
+              "contributionBase": 1409706,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 1409706
+            },
+            {
+              "month": "2024-10",
+              "contributionBase": 1409706,
+              "daysWorked": 20,
+              "daysDue": 23,
+              "fixedPay": 1409706
+            },
+            {
+              "month": "2024-11",
+              "contributionBase": 1409706,
+              "daysWorked": 19,
+              "daysDue": 19,
+              "fixedPay": 1409706
+            },
+            {
+              "month": "2024-12",
+              "contributionBase": 1479706,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 1409706,
+              "variablePay": 70000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2025-01-02",
+          "to": "2025-01-03"
+        },
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2025-02-04",
+          "to": "2025-02-04"
+        },
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2025-03-03",
+          "to": "2025-04-01"
+        },
+        {
+          "type": "sickness",
+          "titleId": "t1",
+          "from": "2025-04-02",
+          "to": "2025-07-31"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-10-15",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "pregnancyDuringEmploymentCertified": true,
+      "documents": [
+        "pregnancyCert"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2025-07-28",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "art30PreBirth",
+        "titleId": "t1",
+        "from": "2025-08-01",
+        "days": 75
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "zus-titles-screen",
+      "page": 31,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].to": {
+      "doc": "Z-3",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].endReason": {
+      "doc": "work-certificate",
+      "page": 21,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.status": {
+      "doc": "work-certificate",
+      "page": 21,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "page": 13,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "page": 14,
+      "evidence": "inferred"
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "page": 15,
+      "evidence": "printed"
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "page": 15,
+      "evidence": "inferred"
+    },
+    "facts.claimant.paidBenefits": {
+      "doc": "Z-3",
+      "page": 14,
+      "evidence": "printed"
+    },
+    "facts.event.date": {
+      "doc": "zus-titles-screen",
+      "page": 31,
+      "evidence": "inferred"
+    },
+    "facts.event.pregnancyDuringEmploymentCertified": {
+      "doc": "doctor-certificate",
+      "page": 7,
+      "evidence": "inferred"
+    },
+    "plan.applicationDate": {
+      "doc": "claimant-statement",
+      "page": 25,
+      "evidence": "printed"
+    },
+    "plan.blocks[0].from": {
+      "doc": "zus-benefit-screen",
+      "page": 33,
+      "evidence": "printed"
+    },
+    "plan.blocks[0].days": {
+      "doc": "zus-titles-screen",
+      "page": 31,
+      "evidence": "inferred"
+    }
+  },
+  "extractionNotes": "Employment ended 2025-07-31 by agreement under the collective-redundancy act because the employer was liquidated; ZAS-55 filed online on 2025-07-28 (before the end of employment) with the declaration that no other employment was offered. ZUS asked for a Z-10 (sickness after employment) as well; the claimant explained twice that she claims only the art. 30 benefit. Handwritten ZUS note: right granted from 2025-08-01 until the day of birth. Benefit screen: row from 2025-08-01 at 100%, its end equal to the screen query date 2025-11-03 (95 days), i.e. open until the birth. Birth date not in the file: the register shows a first 1240 row from 2025-08-01 (end truncated) and a new 1240 row from 2025-10-15, read as the switch to maternity benefit at the birth; event.date and the benefit end are inferred from it. Pregnancy certificate is mostly illegible (pregnancy during employment inferred). Title start 2013-08-01 on the Z-3, 2017-10-01 in the register (anonymisation inconsistency); Z-3 used. Salary table 2024-01..2024-12 (12 months before the first incapacity in 2025-01): fixed 13425.76 then 14097.06 from 2024-04, variable 8458.23 (2024-03) and 700.00 (2024-12); 2024-02 and 2024-10 have sickness days. Employer reported more than 20 insured and paid the sickness benefit itself. asOf = query date of the ZUS screens carrying the grant note."
+}

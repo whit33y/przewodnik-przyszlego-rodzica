@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-13",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "internalNote"
+  },
+  "benefits": [
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 103,
+        "evidence": "printed"
+      },
+      "from": {
+        "value": "2026-09-20",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2026-12-31",
+        "evidence": "printed"
+      },
+      "rateBps": {
+        "value": 7000,
+        "evidence": "inferred"
+      },
+      "paidBy": {
+        "value": "zus",
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [
+    "RD § 22 ust. 1"
+  ],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": true,
+    "amount": false
+  }
+}

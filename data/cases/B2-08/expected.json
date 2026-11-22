@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "id": "B2-08",
+  "outcome": {
+    "value": "granted",
+    "reasonCodes": [],
+    "evidence": "fileLabel"
+  },
+  "benefits": [
+    {
+      "type": "maternity",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 217,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2024-05-13",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2024-12-15",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 10000,
+        "evidence": "inferred"
+      }
+    },
+    {
+      "type": "parental",
+      "parent": "claimant",
+      "status": "granted",
+      "days": {
+        "value": 784,
+        "evidence": "claimed"
+      },
+      "from": {
+        "value": "2024-12-16",
+        "evidence": "printed"
+      },
+      "to": {
+        "value": "2027-02-07",
+        "evidence": "claimed"
+      },
+      "rateBps": {
+        "value": 7000,
+        "evidence": "inferred"
+      }
+    }
+  ],
+  "legalBasisCited": [],
+  "expectedAlerts": [],
+  "tiers": {
+    "outcome": true,
+    "duration": false,
+    "amount": false
+  },
+  "knownDivergence": {
+    "fields": [
+      "benefits[1].days",
+      "benefits[1].to"
+    ],
+    "explanation": "Two points do not reproduce. (1) Parental length: 56 weeks were used (65 − 9, the single-child Za życiem length) although two children were born alive, for which 67 − 9 = 58 weeks would apply. (2) Work extension: at 1/2 time the 392 days were doubled to 784 because the extended part was itself combined with work (392 × (1 + 1/2 + 1/4 + …)); a one-step extension of days × f gives 588. The file does not say how ZUS or the employer counted either point."
+  }
+}

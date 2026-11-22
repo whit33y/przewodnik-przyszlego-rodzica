@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "id": "B5-08",
+  "title": "Prowadząca działalność: odmowa zasiłku za urlop rodzicielski zgłoszony osobno po przerwie, bez ponownego zgłoszenia do ubezpieczenia chorobowego",
+  "scenario": "1.17",
+  "tags": [
+    "self-employed",
+    "mother",
+    "parental",
+    "refusal",
+    "not-insured-at-part-start",
+    "deregistered-benefit-concurrence",
+    "separate-parental-claim"
+  ],
+  "source": {
+    "pdfSha256": [
+      "30acf542066494cb53f233d3943c99097c1b82d1db24b4bd80436fd22a15f88b"
+    ],
+    "fileNameSha256": [
+      "6513e85177332ef8a17b86dee36fb0098a6ba634f521d16be5d1bb6d665912ba"
+    ],
+    "pages": 8
+  },
+  "facts": {
+    "asOf": "2026-02-11",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "selfEmployed",
+          "zusCode": "0570",
+          "from": "2024-11-01",
+          "to": "2025-09-05",
+          "endReason": "deregisteredBenefitConcurrence",
+          "sickness": {
+            "mode": "voluntary",
+            "periods": [
+              {
+                "from": "2024-11-01",
+                "to": "2025-09-05"
+              }
+            ]
+          },
+          "payer": {
+            "ref": "payer-self",
+            "kind": "self"
+          },
+          "months": []
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "maternity",
+          "titleId": "t1",
+          "from": "2025-09-06",
+          "to": "2026-01-23"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2025-09-06",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-02-06",
+        "days": 224,
+        "pool": "shared",
+        "claimedSeparatelyOn": "2026-02-06"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 5
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 8
+    },
+    "facts.claimant.titles[0].to": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 8
+    },
+    "facts.claimant.titles[0].endReason": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 8
+    },
+    "facts.claimant.titles[0].sickness.periods[0]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 8
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "zus-insurance-memo",
+      "evidence": "printed",
+      "page": 8
+    },
+    "facts.event.date": {
+      "doc": "birth-extract",
+      "evidence": "printed",
+      "page": 7
+    },
+    "plan.blocks[0].from": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 5
+    },
+    "plan.blocks[0].days": {
+      "doc": "decision",
+      "evidence": "printed",
+      "page": 5
+    },
+    "plan.blocks[0].claimedSeparatelyOn": {
+      "doc": "zus-insurance-memo",
+      "evidence": "inferred",
+      "page": 8
+    }
+  },
+  "extractionNotes": "Formal refusal decision (UZ art. 1 ust. 1 and art. 29 ust. 1) for the parental period 2026-02-06..2026-09-17. The self-employed title (0570, voluntary sickness from 2024-11-01) ended on 2025-09-05 with the reason benefit concurrence (deregistration from social insurance while maternity benefit is paid). Maternity benefit was paid 2025-09-06..2026-01-23 (140 days; the decision text gives the same start). She did not re-register from 2026-01-24, so on 2026-02-06 she had no sickness insurance; the parental claim (first part, ZUR) was filed separately after a 13-day gap. The ZUR end date is illegible; days taken from the decision period. The filing date is not legible: claimedSeparatelyOn set to the examination date in the ZUS memo (inferred). No declared bases in the file (contributions on sickness insurance not analysed). Payer debt not applicable. Scheme not stated (0570 is a preferential-scheme code; scheme left unset)."
+}

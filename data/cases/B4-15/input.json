@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-15",
+  "title": "Pracownica: zasiłek macierzyński 20 tygodni (81,5%) + 1 tydzień uzupełniającego urlopu macierzyńskiego (100%, pobyt dziecka urodzonego o czasie w szpitalu) + 32 tygodnie rodzicielskiego",
+  "scenario": "1.10",
+  "tags": [
+    "employee",
+    "mother",
+    "single-child",
+    "supplementary-maternity",
+    "term-birth",
+    "hospital-stay",
+    "averaged-81.5",
+    "fixed-term",
+    "small-employer"
+  ],
+  "source": {
+    "pdfSha256": [
+      "4cadaad1fb25513744b0b671488ab20e1a577095cdbb1f5e2009133010025eab"
+    ],
+    "fileNameSha256": [
+      "36bdadf6b55a62b2a172c0c80b536515ee22832d266a30a86860d340dd3bfc9e"
+    ],
+    "pages": 16
+  },
+  "facts": {
+    "asOf": "2026-05-12",
+    "claimant": {
+      "sex": "F",
+      "role": "mother",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2025-05-19",
+          "plannedEnd": {
+            "date": "2027-04-30",
+            "reason": "fixedTermExpired"
+          },
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2025-05-19"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2025-05-19",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-05",
+              "contributionBase": 342500,
+              "daysWorked": 10,
+              "daysDue": 10,
+              "fixedPay": 342500,
+              "fullMonthInsured": false
+            },
+            {
+              "month": "2025-06",
+              "contributionBase": 685000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 685000
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 685000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 685000
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 685000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 685000
+            },
+            {
+              "month": "2025-09",
+              "contributionBase": 685000,
+              "daysWorked": 16,
+              "daysDue": 22,
+              "fixedPay": 685000
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 685000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 685000
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 685000,
+              "daysWorked": 18,
+              "daysDue": 18,
+              "fixedPay": 685000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [
+        {
+          "type": "sickPay",
+          "titleId": "t1",
+          "from": "2026-01-01",
+          "to": "2026-02-02"
+        }
+      ],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "father",
+      "insured": "unknown",
+      "used": [],
+      "declaresNonUse": {
+        "from": "2026-09-19",
+        "to": "2027-05-07"
+      }
+    },
+    "event": {
+      "kind": "birth",
+      "date": "2026-05-02",
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true,
+          "gestationalWeek": 41,
+          "birthWeightG": 3625,
+          "hospitalStays": [
+            {
+              "from": "2026-05-02",
+              "to": "2026-05-07"
+            }
+          ]
+        }
+      ],
+      "documents": [
+        "birthAct",
+        "hospitalStayCert"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "averaged81_5",
+    "applicationDate": "2026-05-12",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "maternity",
+        "titleId": "t1",
+        "from": "2026-05-02",
+        "days": 140
+      },
+      {
+        "id": "b2",
+        "parent": "claimant",
+        "type": "supplementary",
+        "titleId": "t1",
+        "from": "2026-09-19",
+        "days": 7
+      },
+      {
+        "id": "b3",
+        "parent": "claimant",
+        "type": "parental",
+        "titleId": "t1",
+        "from": "2026-09-26",
+        "days": 224,
+        "pool": "shared"
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "leave-application",
+      "evidence": "printed",
+      "page": 3
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 11
+    },
+    "facts.claimant.titles[0].plannedEnd": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 11
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 11
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 12
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 13
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 13
+    },
+    "facts.claimant.paidBenefits[0]": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 12
+    },
+    "facts.otherParent.declaresNonUse": {
+      "doc": "other-parent-statement",
+      "evidence": "inferred",
+      "page": 4
+    },
+    "facts.event.date": {
+      "doc": "leave-application",
+      "evidence": "inferred",
+      "page": 3
+    },
+    "facts.event.children[0].gestationalWeek": {
+      "doc": "hospital-certificate",
+      "evidence": "handwritten",
+      "page": 5
+    },
+    "facts.event.children[0].birthWeightG": {
+      "doc": "hospital-certificate",
+      "evidence": "handwritten",
+      "page": 5
+    },
+    "facts.event.children[0].hospitalStays": {
+      "doc": "hospital-certificate",
+      "evidence": "handwritten",
+      "page": 5
+    },
+    "plan.rateOption": {
+      "doc": "leave-application",
+      "evidence": "printed",
+      "page": 3
+    },
+    "plan.applicationDate": {
+      "doc": "leave-application",
+      "evidence": "printed",
+      "page": 3
+    },
+    "plan.blocks[0]": {
+      "doc": "leave-application",
+      "evidence": "printed",
+      "page": 3
+    },
+    "plan.blocks[1]": {
+      "doc": "leave-application",
+      "evidence": "printed",
+      "page": 3
+    },
+    "plan.blocks[2]": {
+      "doc": "leave-application",
+      "evidence": "printed",
+      "page": 3
+    }
+  },
+  "extractionNotes": "Closing note: payment made (rest of the note cut off). Leave application of 2026-05-12 (10 days after the birth): maternity 2026-05-02..2026-09-18 at 81.5%, supplementary maternity leave 1 week 2026-09-19..2026-09-25 at 100% (hospitalisation after birth, KP art. 180^2), parental 32 weeks 2026-09-26..2027-05-07 at 81.5%, 53 weeks in total; the other parent declares non-use of supplementary and parental leave. The Z-3 benefit period is 2026-05-02..2027-05-07. Hospital certificate on the 2024-act template: born at 41 completed weeks, 3625 g, in hospital 2026-05-02..2026-05-07 (end handwritten, read as 07), hospitalisation completed. Whether this stay meets the day-5-to-28 condition for term babies is for the engine; ZUS paid the week. Fixed-term employment 2025-05-19..2027-04-30 (the ZUS register shows a start of 2025-05-13); salary 6850.00 (May 2025 partial: 3425.00 for 10 days; the OCR 8850 for June is 6850 on the image); the table stops at 2025-11. Pregnancy sick pay 2026-01-01..2026-02-02 (code B); any later sickness benefit is not detailed. Rates are the claim; the birth date is the first maternity day (birth extract illegible)."
+}

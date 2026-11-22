@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "id": "B4-05",
+  "title": "Ojciec, pracownik małego pracodawcy: zasiłek macierzyński za 7-dniowy urlop ojcowski wypłacany przez ZUS",
+  "scenario": "1.5",
+  "tags": [
+    "employee",
+    "father",
+    "paternity",
+    "paternity-one-week",
+    "small-employer"
+  ],
+  "source": {
+    "pdfSha256": [
+      "28d15681986c0ca355c187e0883a510e5479385d8aededbeba272c9eda6ef2b2"
+    ],
+    "fileNameSha256": [
+      "822c9ae2c7db97917cd04427618e5fee1a7ceebd4e4324175b888d56380d5609",
+      "e3950291afbe7d5b319d88fb8567e8f9dfdbf65ca1e556b26849b402ce66511d"
+    ],
+    "pages": 12
+  },
+  "facts": {
+    "asOf": "2026-04-13",
+    "claimant": {
+      "sex": "M",
+      "role": "father",
+      "titles": [
+        {
+          "id": "t1",
+          "kind": "employment",
+          "zusCode": "0110",
+          "from": "2022-10-04",
+          "sickness": {
+            "mode": "mandatory",
+            "periods": [
+              {
+                "from": "2022-10-04"
+              }
+            ]
+          },
+          "workTime": [
+            {
+              "from": "2022-10-04",
+              "fraction": {
+                "num": 1,
+                "den": 1
+              }
+            }
+          ],
+          "payer": {
+            "ref": "payer-1",
+            "kind": "employer",
+            "over20Insured": false
+          },
+          "months": [
+            {
+              "month": "2025-06",
+              "contributionBase": 640000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 640000
+            },
+            {
+              "month": "2025-07",
+              "contributionBase": 640000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 640000
+            },
+            {
+              "month": "2025-08",
+              "contributionBase": 640000,
+              "daysWorked": 10,
+              "daysDue": 20,
+              "fixedPay": 640000
+            },
+            {
+              "month": "2025-09",
+              "contributionBase": 640000,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 640000
+            },
+            {
+              "month": "2025-10",
+              "contributionBase": 640000,
+              "daysWorked": 23,
+              "daysDue": 23,
+              "fixedPay": 640000
+            },
+            {
+              "month": "2025-11",
+              "contributionBase": 640000,
+              "daysWorked": 18,
+              "daysDue": 18,
+              "fixedPay": 640000
+            },
+            {
+              "month": "2025-12",
+              "contributionBase": 640000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 640000
+            },
+            {
+              "month": "2026-01",
+              "contributionBase": 640000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 640000
+            },
+            {
+              "month": "2026-02",
+              "contributionBase": 640000,
+              "daysWorked": 20,
+              "daysDue": 20,
+              "fixedPay": 640000
+            },
+            {
+              "month": "2026-03",
+              "contributionBase": 640000,
+              "daysWorked": 22,
+              "daysDue": 22,
+              "fixedPay": 640000
+            },
+            {
+              "month": "2026-04",
+              "contributionBase": 640000,
+              "daysWorked": 21,
+              "daysDue": 21,
+              "fixedPay": 640000
+            }
+          ]
+        }
+      ],
+      "sickNotes": [],
+      "paidBenefits": [],
+      "arrears": [],
+      "insuranceDecisions": []
+    },
+    "otherParent": {
+      "role": "mother",
+      "insured": "unknown",
+      "used": []
+    },
+    "event": {
+      "kind": "birth",
+      "occurred": true,
+      "children": [
+        {
+          "ref": "child-1",
+          "bornAlive": true
+        }
+      ],
+      "documents": [
+        "birthAct"
+      ]
+    }
+  },
+  "plan": {
+    "rateOption": "split100_70",
+    "applicationDate": "2026-04-13",
+    "blocks": [
+      {
+        "id": "b1",
+        "parent": "claimant",
+        "type": "paternity",
+        "titleId": "t1",
+        "from": "2026-05-11",
+        "days": 7
+      }
+    ]
+  },
+  "provenance": {
+    "facts.asOf": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 4
+    },
+    "facts.claimant.titles[0].from": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 4
+    },
+    "facts.claimant.titles[0].workTime": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 4
+    },
+    "facts.claimant.titles[0].payer.over20Insured": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 5
+    },
+    "facts.claimant.titles[0].months": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 5
+    },
+    "facts.claimant.titles[0].months[*].contributionBase": {
+      "doc": "Z-3",
+      "evidence": "inferred",
+      "page": 5
+    },
+    "plan.applicationDate": {
+      "doc": "Z-3",
+      "evidence": "printed",
+      "page": 4
+    },
+    "plan.blocks[0]": {
+      "doc": "zus-note",
+      "evidence": "printed",
+      "page": 1
+    }
+  },
+  "extractionNotes": "ZUS note: maternity benefit for paternity leave 2026-05-11..2026-05-17 established and paid. Child's birth date illegible on the leave application and redacted on the birth extract, so event.date is absent (occurred). The Z-3 salary table runs 2025-05..2026-04; the 2025-05 amount is not legible (6000 or 6070) and is omitted; the other months show 6400.00 contractual pay. The 2025-08 row shows 10 of 20 days not worked with the reason 'paternity leave', which suggests an earlier paternity part; its dates are not in the file, so it is not recorded as a paid benefit. Rate not printed (100% by law). asOf = leave-application date stated on the Z-3 (the closing note is undated)."
+}
