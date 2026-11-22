@@ -140,7 +140,7 @@ describe("demo personas (data/personas): evaluate with plan = null never throws"
   };
   it.each(files)("%s", (f) => {
     const p = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));
-    const { facts } = assemble({ payloads: p.systems ?? {}, meta: {}, answers: p.presetAnswers ?? {}, overrides: [], asOf: p.asOf, mode: "mobywatel" });
+    const { facts } = assemble({ payloads: p.systems ?? {}, meta: {}, answers: p.presetAnswers ?? {}, overrides: [], asOf: p.asOf, mode: "mobywatel", deductionBps: 1371 });
     const r = evaluate(facts, null, sets);
     expect(r.defaultPlan).toBeDefined();
     for (const code of designed[f] ?? []) expect(r.alerts.map((a) => a.code)).toContain(code);
