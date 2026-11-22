@@ -286,3 +286,14 @@ export const endReasonText: Record<string, string> = {
 export const submissionKindLabel: Record<string, string> = {
   "pue-query": "Pytanie do ZUS (PUE/eZUS)",
 };
+
+/** Every slug /wnioski/[kind] can serve (numbered parts for repeated blocks) — for generateStaticParams. */
+export function allFormSlugs(): string[] {
+  const parts = (base: string, max: number) => [base, ...Array.from({ length: max - 1 }, (_, i) => `${base}-${i + 2}`)];
+  return [
+    ...Object.values(leaveCopy).flatMap((c) => (["urlop-rodzicielski", "laczenie-z-praca"].includes(c.slug) ? parts(c.slug, 5) : c.slug === "urlop-ojcowski" ? parts(c.slug, 2) : [c.slug])),
+    ...Object.values(sheetCopy).map((c) => c.slug),
+    uscCopy.slug,
+    pueCopy.slug,
+  ];
+}
