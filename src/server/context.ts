@@ -31,7 +31,8 @@ export interface AppContext {
   deductionBps: Bps;
 }
 
-const latencyFactor = () => (process.env.SIM_LATENCY === "0" ? 0 : 1);
+/** Registries answer instantly unless SIM_LATENCY=1 (useful to show a slow registry in a demo). */
+const latencyFactor = () => (process.env.SIM_LATENCY === "1" ? 1 : 0);
 
 export function sourceStatuses(state: SessionStateData, persona: ResolvedPersona | null, now = Date.now()): SourceStatus[] {
   return SOURCES.map((meta) => {

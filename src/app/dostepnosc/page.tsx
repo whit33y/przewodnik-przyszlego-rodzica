@@ -68,7 +68,7 @@ export default function Page() {
           <li>Interaktywna oś czasu w planie urlopów może być trudniejsza w obsłudze przy dużym powiększeniu; zmiany w planie można wprowadzać także w formularzu pod osią.</li>
           <li>Serwis nie ma jeszcze informacji w polskim języku migowym (PJM) ani wersji tekstu łatwego do czytania (ETR).</li>
           <li>Linki do serwisów zewnętrznych (np. zus.pl, gov.pl, pip.gov.pl, strony organizacji pomocowych) prowadzą do treści, za których dostępność nie odpowiadamy.</li>
-          <li>Ekrany symulacji (logowanie, pobieranie danych) są oznaczone żółtym paskiem „SYMULACJA” — to informacja, nie element do obsługi.</li>
+          <li>Ekrany symulacji (logowanie) są oznaczone żółtym paskiem „SYMULACJA” — to informacja, nie element do obsługi.</li>
         </ul>
       </section>
 

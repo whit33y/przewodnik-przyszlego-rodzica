@@ -132,7 +132,11 @@
       "otherParentKnown": false
     },
     "ezdrowie": {
-      "expectedDate": "2027-01-08"
+      "expectedDate": "2027-01-08",
+      "pregnancy": {
+        "expectedChildren": 1,
+        "zaZyciem": false
+      }
     }
   }
 }

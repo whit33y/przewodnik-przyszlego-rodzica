@@ -135,6 +135,7 @@ export function LoginFlow({ personas }: { personas: PersonaListItem[] }) {
               onChange={(v) => setPersona(v)}
               options={personas.map((p) => ({ value: p.id, label: `${p.label} · ${journeyLabel[p.journey] ?? p.journey}`, hint: p.oneLiner }))}
             />
+            <p className={s.note}>Po zalogowaniu pobierzemy dane o Tobie z ZUS, CEIDG, KRS, rejestru stanu cywilnego i e-zdrowia. Użyjemy ich tylko do tego obliczenia.</p>
             <div className={s.actions}>
               <Button type="submit" iconAfter="chevron-right">
                 Zaloguj

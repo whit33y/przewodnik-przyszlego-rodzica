@@ -140,7 +140,10 @@ describe("assembler on personas (no case extras)", () => {
   });
 
   it("question list: one at a time per card, nothing a consented registry already provides", () => {
-    expect(run("magdalena").missing.map((q) => q.id)).toEqual(["childrenCount", "zaZyciem", "plannedEnd", "otherParent"]);
+    // number of babies and "Za życiem" come from the e-zdrowie pregnancy card
+    expect(run("magdalena").missing.map((q) => q.id)).toEqual(["plannedEnd", "otherParent"]);
+    // never asked about "Za życiem" after a stillbirth
+    expect(run("patrycja").missing.map((q) => q.id)).not.toContain("zaZyciem");
     expect(run("monika").missing.map((q) => q.id)).toEqual(["otherParent"]);
     expect(run("oliwia").missing.find((q) => q.id === "expectedDate")?.required).toBe(true);
   });
@@ -162,6 +165,8 @@ describe("provenance lookup resolves every displayed path to its source", () => 
     ["monika", "facts.event.expectedDate", "ezdrowie"],
     ["monika", "facts.claimant.paidBenefits", "zus-swiadczenia"],
     ["magdalena", "facts.claimant.sickNotes", "zus-ezla"],
+    ["magdalena", "facts.event.children", "ezdrowie"],
+    ["magdalena", "facts.event.children[0].zaZyciem", "ezdrowie"],
     ["weronika", "facts.claimant.arrears", "zus-saldo"],
     ["lucja", "facts.claimant.titles[0].suspensions", "ceidg"],
     ["hanna", "facts.claimant.titles[0].payer.status", "krs"],

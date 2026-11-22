@@ -23,54 +23,21 @@ test("manual mode end to end: questions → situation → entitlements (with an 
   await axe(page);
 });
 
-test("“Wpiszę dane samodzielnie” switches to manual entry instead of an empty situation", async ({ page }) => {
-  await page.goto("/logowanie");
-  await page.getByRole("button", { name: /Aplikacja mObywatel/ }).click();
-  await page.getByRole("button", { name: "Potwierdzam (symulacja)" }).click();
-  await page.locator('input[name="personaId"][value="magdalena"]').check();
-  await page.getByRole("button", { name: "Zaloguj" }).click();
-  await page.getByRole("button", { name: "Wpiszę dane samodzielnie" }).click();
-  await expect(page).toHaveURL(/\/sytuacja/);
-  await expect(page.getByRole("heading", { name: "Powiedz nam o swojej sytuacji" })).toBeVisible();
-  await expect(page.getByText(/Nie znaleźliśmy żadnego tytułu/)).toHaveCount(0);
-});
-
-test("partial consent without ZUS – konto: the missing facts become questions, nothing is assumed", async ({ page }) => {
-  await loginAs(page, "magdalena", { consents: ["mobywatel", "zus-ezla"] });
-  await page.getByRole("link", { name: "Dalej" }).click();
-  await expect(page).toHaveURL(/\/sytuacja/);
-  const insurance = page.locator("section", { has: page.getByRole("heading", { name: "Ubezpieczenie" }) });
-  await expect(insurance.getByText("Nie pobraliśmy tych danych")).toBeVisible();
-  await expect(insurance.getByRole("group", { name: "Jak pracujesz?" })).toBeVisible();
-  await expect(page.getByText("Kiedy spodziewasz się porodu?")).toBeVisible();
+test("a registry that does not answer: honest notice, the missing fact is asked, retry brings the data", async ({ page }) => {
+  await loginAs(page, "lucja");
+  const notice = page.getByText("Nie udało się pobrać danych z rejestru „ZUS — rozliczenia składek”");
+  await expect(notice).toBeVisible();
+  await expect(page.getByText("Czy masz zaległości w składkach ZUS?")).toBeVisible();
   await expect(page.getByText(/Brak zaległości/)).toHaveCount(0);
   await axe(page);
   await page.goto("/uprawnienia");
-  await expect(page.getByText("Brakuje kilku informacji")).toBeVisible();
-});
-
-test("declined ZUS – saldo for a business: arrears asked, /uprawnienia never claims nothing blocks payment", async ({ page }) => {
-  await loginAs(page, "weronika", { consents: ["mobywatel", "zus-konto", "zus-platnik", "zus-ezla", "zus-swiadczenia", "zus-postepowania", "ceidg", "krs", "rsc", "ezdrowie"] });
-  await page.goto("/sytuacja");
-  await expect(page.getByText("Czy masz zaległości w składkach ZUS?")).toBeVisible();
-  await page.goto("/uprawnienia");
   await expect(page.getByRole("heading", { name: /Nie sprawdziliśmy wszystkich rejestrów/ })).toBeVisible();
-  await expect(page.getByText("ZUS — rozliczenia składek", { exact: true })).toBeVisible();
   await expect(page.getByText(/nic w pobranych danych nie blokuje/)).toHaveCount(0);
-  await axe(page);
-});
-
-test("scripted outage: retry the unavailable registry, then its data arrives", async ({ page }) => {
-  await loginAs(page, "magdalena");
-  const notice = page.getByText(/e-zdrowie \(P1\)” nie odpowiada/);
-  await expect(notice).toBeVisible();
-  await page.waitForLoadState("networkidle"); // the retry button needs hydration
-  await page.getByRole("button", { name: "Spróbuj ponownie" }).click();
-  await expect(notice).toHaveCount(0, { timeout: 10000 });
-  await expect(page.getByRole("status").filter({ hasText: /Gotowe\. Pobrano dane z 11 z 11/ })).toBeVisible({ timeout: 10000 });
-  await page.getByRole("link", { name: "Dalej" }).click();
-  await expect(page.getByText("12 marca 2027")).toBeVisible();
-  await expect(page.getByText("Kiedy spodziewasz się porodu?")).toHaveCount(0);
+  await page.goto("/sytuacja");
+  await page.getByRole("button", { name: "Spróbuj ponownie" }).first().click();
+  await expect(page).toHaveURL(/\/sytuacja/);
+  await expect(notice).toHaveCount(0);
+  await expect(page.getByText("Czy masz zaległości w składkach ZUS?")).toHaveCount(0);
 });
 
 test("father: verdict about paternity and his own 9 weeks, readable “Dlaczego?”", async ({ page }) => {
@@ -99,7 +66,7 @@ test("case login: situation and entitlements from a sample case; pre-event alert
   await axe(page);
 });
 
-test("keyboard-only login: provider → confirm → profile → consent", async ({ page }) => {
+test("keyboard-only login: provider → confirm → profile → situation", async ({ page }) => {
   await page.goto("/logowanie");
   await page.waitForLoadState("networkidle");
   await tabTo(page, /Aplikacja mObywatel/);
@@ -112,13 +79,7 @@ test("keyboard-only login: provider → confirm → profile → consent", async 
   await page.keyboard.press("ArrowDown");
   await tabTo(page, /^\s*Zaloguj\s*$/);
   await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/\/zgoda/);
-  await page.waitForLoadState("networkidle");
-  await tabTo(page, /Zaznacz wszystkie/);
-  await page.keyboard.press("Enter");
-  await tabTo(page, /Pobierz dane/);
-  await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/\/pobieranie/);
+  await expect(page).toHaveURL(/\/sytuacja/);
 });
 
 test("login methods unavailable in the simulation are listed, not offered as buttons", async ({ page }) => {

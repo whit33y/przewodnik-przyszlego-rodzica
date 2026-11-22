@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { safeNext } from "@/lib/safe-next";
 import { seeOther } from "@/server/api";
+import { SOURCES } from "@/integrations/sources";
 import { resolvePersona } from "@/server/persona-store";
 import { getMutableSession } from "@/server/session";
 import { createState } from "@/server/session-state";
@@ -18,7 +19,10 @@ export async function POST(req: Request) {
 
   const sid = randomUUID();
   const resolvedMode = mode === "manual" ? "manual" : caseId ? "case" : "mobywatel";
-  createState({ sid, personaId, mode: resolvedMode, consents: [], fetchStartedAt: null, answers: {} });
+  // Signing in with mObywatel is the consent: every registry is read at once, there is no separate consent
+  // or progress screen. Manual mode reads nothing.
+  const reads = resolvedMode === "manual" ? [] : SOURCES.map((s) => s.id);
+  createState({ sid, personaId, mode: resolvedMode, consents: reads, fetchStartedAt: reads.length ? new Date().toISOString() : null, answers: {} });
   const session = await getMutableSession();
   session.sid = sid;
   session.personaId = personaId;
@@ -27,6 +31,6 @@ export async function POST(req: Request) {
   await session.save();
   const next = safeNext(form.get("next"));
   if (next) return seeOther(next);
-  return seeOther(resolvedMode === "mobywatel" ? "/zgoda" : "/sytuacja");
+  return seeOther("/sytuacja");
 }
 

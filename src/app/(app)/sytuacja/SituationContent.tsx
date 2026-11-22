@@ -1,4 +1,5 @@
 import type { Facts, InsuranceTitle, Result } from "@/engine/types";
+import { SOURCES } from "@/integrations/sources";
 import type { SystemId } from "@/integrations/types";
 import { titleKindLabel, roleLabel, leaveShort, ratePct } from "@/content/pl";
 import { formatDateLong, formatDateShort, formatMoney } from "@/lib/format";
@@ -14,6 +15,7 @@ import { SourceBadge, sourceLabel, type SourceId } from "@/ui/components/SourceB
 import { StatusBadge } from "@/ui/components/StatusBadge/StatusBadge";
 import { TextLink } from "@/ui/components/TextLink/TextLink";
 import { NeedsSession } from "../../_shell/NeedsSession";
+import { RetryButton } from "../../_shell/RetryButton";
 import { NotFetched } from "../../_shell/Unverified";
 import { ArrearsQuestion, ChildrenCountQuestion, CorrectButton, ExpectedDateQuestion, ManualForm, OtherParentQuestion, PlannedEndQuestion, ProgressLine, ZaZyciemQuestion, type OverrideSpec } from "./client";
 import s from "./Situation.module.css";
@@ -66,11 +68,7 @@ export async function SituationContent() {
   const otherRole = c.role === "father" ? "mother" : "father";
   const selfEmployed = c.titles.some((t) => t.kind === "selfEmployed" || t.kind === "collaborator");
   const employed = c.titles.some((t) => t.kind === "employment" || t.kind === "mandate");
-  const changeConsent = manualMode ? null : (
-    <Button href="/zgoda" size="sm" variant="secondary">
-      Zmień zgody
-    </Button>
-  );
+  const retry = (id: SystemId) => (unavailable.some((u) => u.source === id) ? <RetryButton source={id} next="/sytuacja" /> : null);
   const kontoMissing = ask("manual");
 
   return (
@@ -94,16 +92,25 @@ export async function SituationContent() {
           Dziś w symulacji: <strong>{formatDateLong(ctx.persona.asOf)}</strong> — terminy liczymy od tej daty.
         </p>
       ) : null}
+      {ctx.state.mode === "mobywatel" ? (
+        <details className={s.details}>
+          <summary>Skąd mamy te dane?</summary>
+          <p className={s.muted}>Po zalogowaniu pobraliśmy je z rejestrów, w których już są. Używamy ich tylko do tego obliczenia.</p>
+          <ul className={s.list}>
+            {SOURCES.map((x) => (
+              <li key={x.id}>
+                <strong>{x.label}</strong> — {x.reads}
+              </li>
+            ))}
+          </ul>
+        </details>
+      ) : null}
       {unavailable.map((u) => (
         <Notice
           key={u.source}
           tone="caution"
           title={`Nie udało się pobrać danych z rejestru „${u.label}”`}
-          actions={
-            <Button href="/pobieranie" size="sm" variant="secondary" icon="refresh">
-              Spróbuj ponownie
-            </Button>
-          }
+          actions={<RetryButton source={u.source} next="/sytuacja" />}
         >
           <p>Możesz spróbować ponownie albo uzupełnić brakujące informacje poniżej.</p>
         </Notice>
@@ -121,7 +128,7 @@ export async function SituationContent() {
       <Card heading="Ubezpieczenie" headingLevel={2}>
         {kontoMissing ? (
           <div className={s.unverified}>
-            <NotFetched sources={["zus-konto"]} action={changeConsent}>
+            <NotFetched sources={["zus-konto"]} action={retry("zus-konto")}>
               <p>Bez konta ubezpieczonego nie wiemy, jak pracujesz i czy masz ubezpieczenie chorobowe. Opowiedz nam o tym poniżej albo wróć i zaznacz zgodę na pobranie danych z ZUS.</p>
             </NotFetched>
             <ManualForm defaults={{ sex: ctx.persona?.systems.mobywatel && !unv("mobywatel") ? c.sex : undefined, expectedDate: ev.kind === "birth" ? ev.expectedDate : undefined }} />
@@ -190,7 +197,7 @@ export async function SituationContent() {
 
       <Card heading="Zwolnienia lekarskie (e-ZLA)" headingLevel={2} aside={unv("zus-ezla") ? null : src(prov, "facts.claimant.sickNotes")}>
         {unv("zus-ezla") ? (
-          <NotFetched sources={["zus-ezla"]} action={changeConsent}>
+          <NotFetched sources={["zus-ezla"]} action={retry("zus-ezla")}>
             <p>{manualMode ? "W trybie bez logowania nie znamy Twoich zwolnień lekarskich, więc nie liczymy zasiłku chorobowego w ciąży." : "Jeśli w ciąży jesteś na zwolnieniu lekarskim, zaznacz zgodę na e-ZLA — policzymy zasiłek chorobowy."}</p>
           </NotFetched>
         ) : c.sickNotes.length === 0 ? (
@@ -211,7 +218,7 @@ export async function SituationContent() {
       <Card heading="Składki" headingLevel={2} aside={selfEmployed && unv("zus-saldo") ? null : src(prov, "facts.claimant.arrears")}>
         {selfEmployed && unv("zus-saldo") ? (
           <div className={s.unverified}>
-            <NotFetched sources={["zus-saldo"]} action={changeConsent}>
+            <NotFetched sources={["zus-saldo"]} action={retry("zus-saldo")}>
               <p>Przy działalności zaległość w składkach może wstrzymać wypłatę zasiłku. Odpowiedz na pytanie poniżej albo zaznacz zgodę na pobranie rozliczeń z ZUS.</p>
             </NotFetched>
             {ask("arrears") ? <ArrearsQuestion /> : null}
@@ -283,7 +290,7 @@ export async function SituationContent() {
         </Card>
       ) : unv("zus-swiadczenia") && !manualMode ? (
         <Card heading="Wypłacone już świadczenia" headingLevel={2}>
-          <NotFetched sources={["zus-swiadczenia"]} action={changeConsent}>
+          <NotFetched sources={["zus-swiadczenia"]} action={retry("zus-swiadczenia")}>
             <p>Nie wiemy, czy ZUS wypłacił Ci już zasiłek (np. część urlopu). Przy liczeniu urlopu przyjmujemy, że nie.</p>
           </NotFetched>
         </Card>
