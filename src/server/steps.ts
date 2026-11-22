@@ -254,6 +254,15 @@ export function buildSteps(input: GuidanceInput & { forms: FormSpec[] }): Step[]
     steps.push({ id: "usc:register", group: "atBirth", date, dateKind: date ? "by" : undefined, hard: false, title: c.title, body: c.body, who: "you", to: "usc", state: input.registered ? "notNeeded" : "todo", registrySource: input.registered ? "rsc" : undefined, citations: [], refs: { documents: [], deadlines: [], alerts: [] } });
   }
 
+  // ── what the other parent does himself or herself (own employer, own applications) ──
+  if (!loss && facts.otherParent && facts.otherParent.insured !== "no") {
+    for (const b of (plan?.blocks ?? []).filter((x) => x.parent === "other" && (x.type === "paternity" || x.type === "parental"))) {
+      const c = b.type === "paternity" ? syntheticStep.otherParentPaternity : syntheticStep.otherParentParental;
+      const date = addDays(b.from, b.type === "paternity" ? -7 : -21);
+      steps.push({ id: `other:${b.id}`, group: groupByDate(date, "duringLeave"), date, dateKind: "by", hard: false, title: c.title, body: fill(c.body, { from: formatDateLong(b.from) }), who: "otherParent", to: "employer", state: "todo", citations: [], refs: { documents: [], deadlines: [], alerts: [] } });
+    }
+  }
+
   // ── return to work (employees) ──
   if (!loss && forms.some((f) => f.category === "leave")) {
     const ends = blocks.filter((b) => ["maternity", "maternityOnAdoption", "supplementary", "parental", "paternity"].includes(b.type)).map((b) => blockPeriod(b, result).to).sort();

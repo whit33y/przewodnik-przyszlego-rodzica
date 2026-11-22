@@ -127,16 +127,10 @@
     },
     "rsc": {
       "otherParentKnown": false
-    },
-    "ezdrowie": {
-      "expectedDate": "2027-01-20",
-      "pregnancy": {
-        "expectedChildren": 1,
-        "zaZyciem": false
-      }
     }
   },
   "presetAnswers": {
+    "expectedDate": "2027-01-20",
     "otherParent": {
       "mode": "consent",
       "insured": "yes",

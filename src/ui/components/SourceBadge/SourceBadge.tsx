@@ -27,7 +27,7 @@ export const sourceLabel: Record<SourceId, string> = {
   ceidg: "z CEIDG",
   krs: "z KRS",
   rsc: "z rejestru stanu cywilnego",
-  ezdrowie: "z e-zdrowia (P1)",
+  ezdrowie: "z dokumentacji medycznej",
   mobywatel: "z mObywatela",
   user: "podane przez Ciebie",
   sprawa: "z akt sprawy",

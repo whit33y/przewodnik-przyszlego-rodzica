@@ -106,13 +106,13 @@ export function LeaveForm({ doc }: { doc: LeaveDoc }) {
           <span className={s.note}>{formsText.signature}</span>
         </div>
       </article>
+      <p className={`${s.small} ${s.noPrint}`}>{formsText.employerNote}</p>
       <div className={`${s.actions} ${s.noPrint}`}>
-        <Button type="submit" icon="mail" uppercase={false}>
+        <PrintButton label={formsText.print} primary />
+        <Button type="submit" variant="secondary" icon="check" uppercase={false}>
           {formsText.sendEmployer}
         </Button>
-        <PrintButton label={formsText.print} />
       </div>
-      <p className={`${s.small} ${s.noPrint}`}>{formsText.simNote}</p>
     </form>
   );
 }

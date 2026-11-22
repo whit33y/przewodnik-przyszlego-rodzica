@@ -1,8 +1,9 @@
 import { expect, test } from "@playwright/test";
-import { axe, loginAs } from "./helpers";
+import { answerPregnancy, axe, loginAs } from "./helpers";
 
 test("employee with due date: entitled, employer pays", async ({ page }) => {
   await loginAs(page, "magdalena");
+  await answerPregnancy(page);
   await expect(page.getByText("12 marca 2027").first()).toBeVisible();
   await page.goto("/uprawnienia");
   await expect(page.getByRole("heading", { level: 2, name: /masz prawo do zasiłku macierzyńskiego/ })).toBeVisible();

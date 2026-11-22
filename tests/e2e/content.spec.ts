@@ -84,7 +84,7 @@ test.describe("/o-serwisie", () => {
 
   test("shows the ten simulated registries and the golden-test totals", async ({ page }) => {
     await page.goto("/o-serwisie");
-    await expect(page.getByRole("heading", { level: 2, name: /10 symulowanych rejestrów/ })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: /9 symulowanych rejestrów/ })).toBeVisible();
     await expect(page.getByTestId("case-totals")).toContainText("86 z 86");
     await expect(page.getByRole("link", { name: "deklaracji dostępności" })).toHaveAttribute("href", "/dostepnosc");
   });

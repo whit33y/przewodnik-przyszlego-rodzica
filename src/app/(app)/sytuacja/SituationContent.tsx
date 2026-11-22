@@ -17,7 +17,7 @@ import { TextLink } from "@/ui/components/TextLink/TextLink";
 import { NeedsSession } from "../../_shell/NeedsSession";
 import { RetryButton } from "../../_shell/RetryButton";
 import { NotFetched } from "../../_shell/Unverified";
-import { ArrearsQuestion, ChildrenCountQuestion, CorrectButton, ExpectedDateQuestion, ManualForm, OtherParentQuestion, PlannedEndQuestion, ProgressLine, ZaZyciemQuestion, type OverrideSpec } from "./client";
+import { ArrearsQuestion, CareQuestion, CorrectButton, HospitalQuestion, InvitePending, ManualForm, OtherParentQuestion, PlannedEndQuestion, PregnancyQuestion, ProgressLine, type OverrideSpec } from "./client";
 import s from "./Situation.module.css";
 
 function src(prov: Provenance, path: string) {
@@ -242,21 +242,21 @@ export async function SituationContent() {
           {ev.kind === "birth" && (ev.date || ev.occurred || ev.children.length > 1) ? (
             <DataRow label="Dzieci" value={ev.children.map((ch, i) => childText(ch, i)).join("; ")} source={src(prov, "facts.event.children")} />
           ) : null}
-          {ev.kind !== "birth" ? (
+          {ev.kind !== "birth" && !ask("careDetails") ? (
             <>
               <DataRow label="Data przyjęcia dziecka" value={<DateText value={ev.takenIntoCareOn} />} source={src(prov, "facts.event.takenIntoCareOn")} />
               {ev.children[0]?.birthDate ? <DataRow label="Data urodzenia dziecka" value={<DateText value={ev.children[0].birthDate} />} source={src(prov, "facts.event.children[0].birthDate")} /> : null}
             </>
           ) : null}
         </DataList>
-        {ev.kind === "birth" && !ev.date && !manualMode && (unv("ezdrowie") || unv("rsc")) ? (
-          <p className={s.muted}>
-            Nie pobraliśmy danych z {[unv("ezdrowie") ? "e-zdrowia (termin porodu, pobyt dziecka w szpitalu)" : "", unv("rsc") ? "rejestru stanu cywilnego (akt urodzenia)" : ""].filter(Boolean).join(" ani z ")}. O to, czego potrzebujemy, zapytamy wprost.
-          </p>
+        {ev.kind === "birth" && !ev.date && !manualMode && unv("rsc") ? (
+          <p className={s.muted}>Nie pobraliśmy danych z rejestru stanu cywilnego (akt urodzenia). O to, czego potrzebujemy, zapytamy wprost.</p>
         ) : null}
-        {ask("expectedDate") ? <ExpectedDateQuestion /> : null}
-        {ask("childrenCount") ? <ChildrenCountQuestion /> : null}
-        {ask("zaZyciem") ? <ZaZyciemQuestion /> : null}
+        {ask("expectedDate") || ask("childrenCount") || ask("zaZyciem") ? <PregnancyQuestion askDate={ask("expectedDate")} askCount={ask("childrenCount")} askZaZyciem={ask("zaZyciem")} /> : null}
+        {ask("hospital") ? <HospitalQuestion /> : null}
+        {ask("careDetails") && ev.kind !== "birth" ? (
+          <CareQuestion kind={ev.kind} existing={{ petitionFiledOn: ctx.answers.care?.petitionFiledOn, fosterType: ctx.answers.care?.fosterType }} />
+        ) : null}
       </Card>
 
       <Card heading="Drugi rodzic" headingLevel={2} aside={facts.otherParent ? src(prov, "facts.otherParent") : null}>
@@ -270,8 +270,10 @@ export async function SituationContent() {
               <DataRow label="Wykorzystane urlopy" value="nie sprawdziliśmy w ZUS" />
             ) : null}
           </DataList>
+        ) : ctx.answers.otherParent?.mode === "invited" && ctx.answers.otherParent.invite ? (
+          <InvitePending path={`/dolacz/${encodeURIComponent(ctx.answers.otherParent.invite)}`} />
         ) : ask("otherParent") ? (
-          <OtherParentQuestion canConsent={Boolean(ctx.persona?.otherParent?.consented)} otherRole={otherRole} />
+          <OtherParentQuestion otherRole={otherRole} />
         ) : (
           <p className={s.muted}>Planujesz urlop samodzielnie.</p>
         )}

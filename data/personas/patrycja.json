@@ -145,16 +145,6 @@
         ]
       },
       "otherParentKnown": false
-    },
-    "ezdrowie": {
-      "expectedDate": "2027-02-16",
-      "children": [
-        {
-          "ref": "child-1",
-          "gestationalWeek": 26,
-          "birthWeightG": 820
-        }
-      ]
     }
   }
 }

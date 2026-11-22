@@ -3,6 +3,7 @@
  * through the assembler *without* case extras, so consent subsets, outages, overrides and the question list are
  * exercised for real; provenance resolves each displayed path to the registry that supplied it.
  */
+import { typedAnswers } from "./persona-answers";
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
@@ -24,14 +25,14 @@ const caseIds = fs
 
 const persona = (id: string): PersonaFile => JSON.parse(fs.readFileSync(path.join(root, "personas", `${id}.json`), "utf8"));
 
-function run(id: string, opts: { drop?: SystemId[]; answers?: Answers; overrides?: AssembleInput["overrides"]; mode?: AssembleInput["mode"] } = {}) {
+function run(id: string, opts: { drop?: SystemId[]; answers?: Answers; overrides?: AssembleInput["overrides"]; mode?: AssembleInput["mode"]; typed?: boolean } = {}) {
   const p = persona(id);
   const payloads: Partial<SystemPayloads> = { ...p.systems };
   for (const s of opts.drop ?? []) delete (payloads as Record<string, unknown>)[s];
   return assemble({
     payloads,
     meta: {},
-    answers: { ...(p.presetAnswers ?? {}), ...(opts.answers ?? {}) },
+    answers: { ...(p.presetAnswers ?? {}), ...(opts.typed === false ? {} : typedAnswers(id)), ...(opts.answers ?? {}) },
     overrides: opts.overrides ?? [],
     asOf: p.asOf,
     mode: opts.mode ?? "mobywatel",
@@ -65,11 +66,11 @@ describe("assembler on personas (no case extras)", () => {
     expect(a.facts.event.kind === "birth" && a.facts.event.expectedDate).toBe("2027-02-05");
   });
 
-  it("outage of e-zdrowie: due date becomes a required question, the source is unverified", () => {
-    const a = run("magdalena", { drop: ["ezdrowie"] });
-    expect(a.unverified).toEqual(["ezdrowie"]);
+  it("no registry holds the due date: it is a required question, answered by the user", () => {
+    const a = run("magdalena", { typed: false });
+    expect(a.unverified).toEqual([]);
     expect(a.missing.find((q) => q.id === "expectedDate")).toMatchObject({ required: true });
-    const answered = run("magdalena", { drop: ["ezdrowie"], answers: { expectedDate: "2027-03-12" } });
+    const answered = run("magdalena", { typed: false, answers: { expectedDate: "2027-03-12" } });
     expect(answered.missing.map((q) => q.id)).not.toContain("expectedDate");
     expect(lookupProvenance(answered.provenance, "facts.event.expectedDate")?.source).toBe("user");
   });
@@ -140,11 +141,14 @@ describe("assembler on personas (no case extras)", () => {
   });
 
   it("question list: one at a time per card, nothing a consented registry already provides", () => {
-    // number of babies and "Za życiem" come from the e-zdrowie pregnancy card
-    expect(run("magdalena").missing.map((q) => q.id)).toEqual(["plannedEnd", "otherParent"]);
+    expect(run("magdalena").missing.map((q) => q.id)).toEqual(["childrenCount", "zaZyciem", "plannedEnd", "otherParent"]);
+    // after a live birth with no details: the hospital question; answered → gone
+    expect(run("monika", { typed: false }).missing.map((q) => q.id)).toContain("hospital");
     // never asked about "Za życiem" after a stillbirth
     expect(run("patrycja").missing.map((q) => q.id)).not.toContain("zaZyciem");
-    expect(run("monika").missing.map((q) => q.id)).toEqual(["otherParent"]);
+    expect(run("monika").missing.map((q) => q.id)).toEqual(["zaZyciem", "otherParent"]);
+    // adoption: dates from the court order are asked, never read from a registry
+    expect(run("aleksandra").missing.map((q) => q.id)).toContain("careDetails");
     expect(run("oliwia").missing.find((q) => q.id === "expectedDate")?.required).toBe(true);
   });
 });
@@ -160,13 +164,11 @@ describe("provenance lookup resolves every displayed path to its source", () => 
     ["monika", "facts.event.date", "rsc"],
     ["monika", "facts.event.children", "rsc"],
     ["monika", "facts.event.children[0].bornAlive", "rsc"],
-    ["monika", "facts.event.children[0].gestationalWeek", "ezdrowie"],
-    ["monika", "facts.event.children[1].hospitalStays", "ezdrowie"],
-    ["monika", "facts.event.expectedDate", "ezdrowie"],
+    ["monika", "facts.event.children[0].gestationalWeek", "user"],
+    ["monika", "facts.event.children[1].hospitalStays", "user"],
     ["monika", "facts.claimant.paidBenefits", "zus-swiadczenia"],
     ["magdalena", "facts.claimant.sickNotes", "zus-ezla"],
-    ["magdalena", "facts.event.children", "ezdrowie"],
-    ["magdalena", "facts.event.children[0].zaZyciem", "ezdrowie"],
+    ["magdalena", "facts.event.expectedDate", "user"],
     ["weronika", "facts.claimant.arrears", "zus-saldo"],
     ["lucja", "facts.claimant.titles[0].suspensions", "ceidg"],
     ["hanna", "facts.claimant.titles[0].payer.status", "krs"],

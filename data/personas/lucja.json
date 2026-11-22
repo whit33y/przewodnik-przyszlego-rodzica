@@ -132,16 +132,12 @@
     },
     "rsc": {
       "otherParentKnown": false
-    },
-    "ezdrowie": {
-      "expectedDate": "2027-04-10",
-      "pregnancy": {
-        "expectedChildren": 1,
-        "zaZyciem": false
-      }
     }
   },
   "unavailable": [
     "zus-saldo"
-  ]
+  ],
+  "sampleAnswers": {
+    "expectedDate": "2027-04-10"
+  }
 }

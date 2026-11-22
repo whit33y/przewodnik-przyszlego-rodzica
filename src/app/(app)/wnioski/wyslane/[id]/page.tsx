@@ -33,11 +33,12 @@ async function Confirmation({ params }: { params: Promise<{ id: string }> }) {
     );
   }
   const g = await loadGuidance(ctx);
+  const handed = sub.payload.recipient === "employer";
   return (
     <div className={s.layout}>
-      <Notice tone="positive" role="status" headingLevel={2} hideToneWord title={formsText.confirmTitle}>
+      <Notice tone="positive" role="status" headingLevel={2} hideToneWord title={handed ? formsText.confirmHandedTitle : formsText.confirmTitle}>
         <p>
-          <strong>{formsText.simNote}</strong>
+          <strong>{handed ? formsText.confirmHandedNote : formsText.simNote}</strong>
         </p>
         {sub.kind === "pue-query" ? <p>{pueCopy.answer}</p> : null}
       </Notice>

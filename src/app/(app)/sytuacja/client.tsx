@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState, useTransition, type ReactNode } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, useTransition, type ReactNode } from "react";
 import { cx } from "@/lib/cx";
 import { Button } from "@/ui/components/Button/Button";
 import { ChoiceGroup, DateInput, Field, Select, TextArea, TextInput } from "@/ui/components/Form/Form";
@@ -75,16 +75,92 @@ export function QuestionShell({ title, hint, children }: { title: string; hint?:
   );
 }
 
-export function ExpectedDateQuestion({ initial }: { initial?: string }) {
-  const [date, setDate] = useState<string | null>(initial ?? null);
+/**
+ * Everything about the pregnancy no registry holds (the e-pregnancy card is only announced), asked once and saved with
+ * one button: due date, number of babies, "Za życiem". Shows only the parts still missing.
+ */
+export function PregnancyQuestion({ askDate, askCount, askZaZyciem }: { askDate: boolean; askCount: boolean; askZaZyciem: boolean }) {
+  const [date, setDate] = useState<string | null>(null);
+  const [count, setCount] = useState<"1" | "2" | "3">("1");
+  const [zz, setZz] = useState<"no" | "yes">("no");
+  const [touched, setTouched] = useState(false);
+  const { pending, error, save } = useSave();
+  const parts = [askDate, askCount, askZaZyciem].filter(Boolean).length;
+  const title = parts > 1 ? "Powiedz nam o ciąży" : askDate ? "Kiedy spodziewasz się porodu?" : askCount ? "Ile dzieci się spodziewasz?" : "Czy lekarz wydał zaświadczenie „Za życiem”?";
+  const submit = () => {
+    setTouched(true);
+    if (askDate && !date) return;
+    save(
+      () =>
+        send("/api/v1/answers", "PUT", {
+          ...(askDate ? { expectedDate: date } : {}),
+          ...(askCount ? { childrenCount: Number(count) } : {}),
+          ...(askZaZyciem ? { zaZyciem: zz === "yes" } : {}),
+        }),
+      { focusProgress: true },
+    );
+  };
+  return (
+    <QuestionShell title={title} hint="Tych informacji nie ma w żadnym rejestrze — są w karcie ciąży i u lekarza. Możesz je później zmienić.">
+      {askDate ? (
+        <DateInput legend="Przewidywana data porodu" name="expectedDate" onChange={setDate} error={touched && !date ? "Wpisz pełną, poprawną datę, np. 12 3 2027." : undefined} />
+      ) : null}
+      {askCount ? (
+        <ChoiceGroup
+          legend="Ile dzieci się spodziewasz?"
+          hint="Przy ciąży mnogiej urlop macierzyński jest dłuższy (31 tygodni przy bliźniętach)."
+          name="childrenCount"
+          row
+          value={count}
+          onChange={(x) => setCount(x)}
+          options={[{ value: "1", label: "Jedno" }, { value: "2", label: "Bliźnięta" }, { value: "3", label: "Troje lub więcej" }]}
+        />
+      ) : null}
+      {askZaZyciem ? (
+        <ChoiceGroup
+          legend="Czy lekarz wydał zaświadczenie „Za życiem”?"
+          hint="Wydaje je lekarz przy ciężkim i nieodwracalnym upośledzeniu albo nieuleczalnej chorobie dziecka. Urlop rodzicielski wydłuża się wtedy do 65 tygodni."
+          name="zaZyciem"
+          row
+          value={zz}
+          onChange={(x) => setZz(x)}
+          options={[{ value: "no", label: "Nie" }, { value: "yes", label: "Tak" }]}
+        />
+      ) : null}
+      {error ? <ErrorText>{error}</ErrorText> : null}
+      <div>
+        <Button size="sm" loading={pending} onClick={submit}>
+          Zapisz
+        </Button>
+      </div>
+    </QuestionShell>
+  );
+}
+
+/** Adoption or foster care: the dates come from the court order or the PCPR agreement, not from a registry. */
+export function CareQuestion({ kind, existing }: { kind: "adoption" | "foster"; existing?: { petitionFiledOn?: string; fosterType?: "nonProfessional" | "professional" } }) {
+  const [taken, setTaken] = useState<string | null>(null);
+  const [born, setBorn] = useState<string | null>(null);
   const [touched, setTouched] = useState(false);
   const { pending, error, save } = useSave();
   return (
-    <QuestionShell title="Kiedy spodziewasz się porodu?" hint="Termin znajdziesz w karcie ciąży. Możesz go później zmienić.">
-      <DateInput legend="Przewidywana data porodu" name="expectedDate" value={initial} onChange={setDate} error={touched && !date ? "Wpisz pełną, poprawną datę, np. 12 3 2027." : undefined} />
+    <QuestionShell
+      title={kind === "adoption" ? "Kiedy przyjęłaś lub przyjąłeś dziecko na wychowanie?" : "Kiedy dziecko trafiło do Twojej rodziny zastępczej?"}
+      hint={kind === "adoption" ? "Datę znajdziesz w postanowieniu sądu o powierzeniu opieki. ZUS poprosi o jego kopię." : "Datę znajdziesz w umowie z powiatem (PCPR) albo w postanowieniu sądu. ZUS poprosi o kopię."}
+    >
+      <DateInput legend="Data przyjęcia dziecka" name="takenIntoCareOn" onChange={setTaken} error={touched && !taken ? "Wpisz pełną, poprawną datę." : undefined} />
+      <DateInput legend="Data urodzenia dziecka" name="childBirthDate" onChange={setBorn} error={touched && !born ? "Wpisz pełną, poprawną datę." : undefined} />
       {error ? <ErrorText>{error}</ErrorText> : null}
       <div>
-        <Button size="sm" loading={pending} onClick={() => (setTouched(true), date ? save(() => send("/api/v1/answers", "PUT", { expectedDate: date }), { focusProgress: true }) : undefined)}>
+        <Button
+          size="sm"
+          loading={pending}
+          onClick={() => {
+            setTouched(true);
+            if (!taken || !born) return;
+            save(() => send("/api/v1/answers", "PUT", { care: { ...existing, takenIntoCareOn: taken, childBirthDate: born } }), { focusProgress: true });
+          }}
+        >
           Zapisz
         </Button>
       </div>
@@ -92,31 +168,45 @@ export function ExpectedDateQuestion({ initial }: { initial?: string }) {
   );
 }
 
-export function ChildrenCountQuestion() {
+/** After a live birth: prematurity or a hospital stay lengthens maternity leave. ZUS asks for the hospital's certificate. */
+export function HospitalQuestion() {
   const { pending, error, save } = useSave();
-  const [v, setV] = useState<"1" | "2" | "3">("1");
+  const [category, setCategory] = useState<"none" | "preterm" | "extreme" | "term">("none");
+  const [days, setDays] = useState("");
+  const needsDays = category !== "none";
+  const n = Number(days);
+  const [touched, setTouched] = useState(false);
+  const daysError = touched && needsDays && !(Number.isInteger(n) && n > 0 && n <= 400) ? "Wpisz liczbę dni pobytu w szpitalu, np. 25." : undefined;
   return (
-    <QuestionShell title="Ile dzieci się spodziewasz?" hint="Przy ciąży mnogiej urlop macierzyński jest dłuższy (31 tygodni przy bliźniętach).">
-      <ChoiceGroup legend="Liczba dzieci" name="childrenCount" row value={v} onChange={(x) => setV(x)} options={[{ value: "1", label: "Jedno" }, { value: "2", label: "Bliźnięta" }, { value: "3", label: "Troje lub więcej" }]} />
+    <QuestionShell title="Czy dziecko urodziło się przedwcześnie albo leżało w szpitalu?" hint="Wtedy urlop macierzyński może być dłuższy. ZUS poprosi o zaświadczenie ze szpitala.">
+      <ChoiceGroup
+        legend="Dziecko po porodzie"
+        name="hospital"
+        value={category}
+        onChange={(x) => setCategory(x)}
+        options={[
+          { value: "none", label: "Nie, wszystko w normie" },
+          { value: "preterm", label: "Urodziło się przed 37. tygodniem i leżało w szpitalu" },
+          { value: "extreme", label: "Urodziło się przed 28. tygodniem albo ważyło do 1000 g" },
+          { value: "term", label: "Urodziło się w terminie, ale leżało w szpitalu" },
+        ]}
+      />
+      {needsDays ? (
+        <Field label="Ile dni dziecko było w szpitalu?" error={daysError}>
+          {({ id, describedBy, invalid }) => <TextInput id={id} aria-describedby={describedBy} aria-invalid={invalid || undefined} inputMode="numeric" value={days} onChange={(e) => setDays(e.target.value)} />}
+        </Field>
+      ) : null}
       {error ? <ErrorText>{error}</ErrorText> : null}
       <div>
-        <Button size="sm" loading={pending} onClick={() => save(() => send("/api/v1/answers", "PUT", { childrenCount: Number(v) }), { focusProgress: true })}>
-          Zapisz
-        </Button>
-      </div>
-    </QuestionShell>
-  );
-}
-
-export function ZaZyciemQuestion() {
-  const { pending, error, save } = useSave();
-  const [v, setV] = useState<"no" | "yes">("no");
-  return (
-    <QuestionShell title="Czy lekarz wydał zaświadczenie „Za życiem”?" hint="Wydaje je lekarz, gdy u dziecka stwierdzono ciężkie i nieodwracalne upośledzenie albo nieuleczalną chorobę. Urlop rodzicielski wydłuża się wtedy do 65 tygodni.">
-      <ChoiceGroup legend="Zaświadczenie „Za życiem”" name="zaZyciem" row value={v} onChange={(x) => setV(x)} options={[{ value: "no", label: "Nie" }, { value: "yes", label: "Tak" }]} />
-      {error ? <ErrorText>{error}</ErrorText> : null}
-      <div>
-        <Button size="sm" loading={pending} onClick={() => save(() => send("/api/v1/answers", "PUT", { zaZyciem: v === "yes" }), { focusProgress: true })}>
+        <Button
+          size="sm"
+          loading={pending}
+          onClick={() => {
+            setTouched(true);
+            if (needsDays && !(Number.isInteger(n) && n > 0 && n <= 400)) return;
+            save(() => send("/api/v1/answers", "PUT", { whatIf: { hospital: { category, days: needsDays ? n : 0 } } }), { focusProgress: true });
+          }}
+        >
           Zapisz
         </Button>
       </div>
@@ -192,9 +282,9 @@ const toGrosze = (text: string) => {
   return Number.isFinite(n) && n >= 0 ? Math.round(n * 100) : null;
 };
 
-export function OtherParentQuestion({ canConsent, otherRole }: { canConsent: boolean; otherRole: "mother" | "father" }) {
+export function OtherParentQuestion({ otherRole }: { otherRole: "mother" | "father" }) {
   const { pending, error, save } = useSave();
-  const [mode, setMode] = useState<"consent" | "estimate" | "none">(canConsent ? "consent" : "estimate");
+  const [mode, setMode] = useState<"invite" | "estimate" | "none">("invite");
   const [insured, setInsured] = useState<"yes" | "no" | "krus" | "abroad" | "unknown">("yes");
   const [gross, setGross] = useState("");
   const grossValue = gross ? toGrosze(gross) : undefined;
@@ -206,7 +296,7 @@ export function OtherParentQuestion({ canConsent, otherRole }: { canConsent: boo
         value={mode}
         onChange={(x) => setMode(x)}
         options={[
-          ...(canConsent ? [{ value: "consent" as const, label: "Poproś o zgodę na pobranie danych (symulacja)", hint: "Drugi rodzic potwierdza w swojej aplikacji mObywatel." }] : []),
+          { value: "invite", label: "Zaproszę drugiego rodzica", hint: "Dostaniesz link. Drugi rodzic zaloguje się swoim mObywatelem i razem ułożycie urlopy." },
           { value: "estimate", label: "Podam szacunkowo" },
           { value: "none", label: "Nie dotyczy / tylko ja" },
         ]}
@@ -240,18 +330,57 @@ export function OtherParentQuestion({ canConsent, otherRole }: { canConsent: boo
           onClick={() =>
             save(
               () =>
-                send("/api/v1/answers", "PUT", {
-                  // Gross pay is sent as typed; the server applies the parameter set's deduction.
-                  otherParent: { mode, role: otherRole, ...(mode === "estimate" ? { insured, ...(grossValue ? { estimatedGross: grossValue } : {}) } : {}) },
-                }),
+                mode === "invite"
+                  ? send("/api/v1/invites", "POST")
+                  : send("/api/v1/answers", "PUT", {
+                      // Gross pay is sent as typed; the server applies the parameter set's deduction.
+                      otherParent: { mode, role: otherRole, ...(mode === "estimate" ? { insured, ...(grossValue ? { estimatedGross: grossValue } : {}) } : {}) },
+                    }),
               { focusProgress: true },
             )
           }
         >
-          Zapisz
+          {mode === "invite" ? "Utwórz link z zaproszeniem" : "Zapisz"}
         </Button>
       </div>
     </QuestionShell>
+  );
+}
+
+const noSubscribe = () => () => {};
+
+/** Waiting for the other parent: the link to send, and (demo only) a way to open it as the other parent. */
+export function InvitePending({ path }: { path: string }) {
+  // Server render has no origin; the browser fills it in after hydration without a mismatch.
+  const origin = useSyncExternalStore(noSubscribe, () => window.location.origin, () => "");
+  const [copied, setCopied] = useState(false);
+  const url = `${origin}${path}`;
+  return (
+    <div className={s.unverified}>
+      <p>
+        <strong>Zaproszenie czeka na drugiego rodzica.</strong> Wyślij mu ten link — SMS-em, e-mailem albo komunikatorem. Jest ważny 14 dni.
+      </p>
+      <Field label="Link z zaproszeniem">{({ id }) => <TextInput id={id} readOnly value={url} onFocus={(e) => e.currentTarget.select()} />}</Field>
+      <div className={s.actions}>
+        <Button
+          size="sm"
+          variant="secondary"
+          icon="document"
+          uppercase={false}
+          onClick={() => {
+            void navigator.clipboard?.writeText(url).then(() => setCopied(true));
+          }}
+        >
+          {copied ? "Skopiowano" : "Kopiuj link"}
+        </Button>
+        <Button size="sm" variant="text" href={path} uppercase={false}>
+          Otwórz jako drugi rodzic (symulacja)
+        </Button>
+      </div>
+      <p aria-live="polite" className={s.muted}>
+        {copied ? "Link jest w schowku." : ""}
+      </p>
+    </div>
   );
 }
 
