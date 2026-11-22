@@ -89,7 +89,7 @@ The container runs as root because Railway mounts volumes root-owned.
 
 The ZUS sample case files are provided **for HackNation use only and must not be copied or distributed**.
 
-- The PDFs under `docs/` are **never served by the app**: `docs/`, `*.pdf` and the working folder `.work/` are excluded from the Docker image by `.dockerignore`.
+- The ZUS PDFs (case files, brief, rules, participant materials) are **not in this repository**: they are kept locally only, ignored by `.gitignore` and `.dockerignore`, and were removed from the git history. The app never serves them.
 - `data/cases/*` contains only **anonymised structured fixtures**: no names (not even abbreviated), PESEL, addresses, employer names or document numbers. `npm run fixtures:validate` enforces a PII scan.
 - The case list in the app shows scenario titles and internal IDs only.
 - "Upload a case" hashes the PDF **in the browser**. Only the SHA-256 is sent to the server, and the file never leaves the juror's computer.

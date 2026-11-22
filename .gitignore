@@ -18,6 +18,12 @@ data/runtime/
 # working material derived from restricted ZUS case files (contains personal data) — never commit
 .work/
 
+# restricted ZUS source material (HackNation use only, must not be distributed) — never commit
+*.pdf
+*.docx
+docs/Sprawy */
+docs/Materiały*/
+
 # env & os
 .env
 .env.*
