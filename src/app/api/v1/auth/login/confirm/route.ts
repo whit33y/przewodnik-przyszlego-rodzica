@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
-import { safeNext, seeOther } from "@/server/api";
+import { safeNext } from "@/lib/safe-next";
+import { seeOther } from "@/server/api";
 import { resolvePersona } from "@/server/persona-store";
 import { getMutableSession } from "@/server/session";
 import { createState } from "@/server/session-state";
