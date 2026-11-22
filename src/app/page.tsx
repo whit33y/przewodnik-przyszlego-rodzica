@@ -34,44 +34,37 @@ const entries: { href: string; icon: IconName; title: string; body: string }[] =
 export default function Home() {
   return (
     <>
-      <section className={`${s.hero} on-dark`} aria-labelledby="hero-title">
+      <section className={s.hero} aria-labelledby="hero-title">
         <div className={s.heroText}>
           <p className={s.eyebrow}>Zasiłki z ZUS w ciąży i po porodzie</p>
           <h1 id="hero-title" className={s.title}>
-            Sprawdź, co Ci przysługuje z ZUS, zanim urodzi się dziecko
+            Sprawdź, co Ci przysługuje, zanim urodzi się dziecko
           </h1>
-          <p className={s.lead}>
-            Zaloguj się przez mObywatela. Pobierzemy Twoje dane z ZUS i rejestrów państwowych, sprawdzimy prawo do zasiłku, policzymy jego wysokość i podpowiemy, co, komu i do
-            kiedy złożyć.
-          </p>
+          <p className={s.lead}>Zaloguj się przez mObywatela. Dane o ubezpieczeniu i zarobkach weźmiemy z ZUS — Ty powiesz tylko, jakie masz plany.</p>
           <div className={s.heroActions}>
-            <Button href="/logowanie" size="lg" icon="lock" variant="onDark" uppercase={false}>
+            <Button href="/logowanie" size="lg" icon="lock" uppercase={false}>
               Zaloguj się przez mObywatel
             </Button>
-            <Button href="/bez-logowania" variant="onDarkOutline" size="lg">
+            <Button href="/bez-logowania" variant="secondary" size="lg" uppercase={false}>
               Policz bez logowania
             </Button>
           </div>
-          <p className={s.heroNote}>
-            <Icon name="info" size={18} /> Logowanie i rejestry są symulowane na potrzeby demonstracji.
-          </p>
-        </div>
-        <div className={s.panel}>
-          <p className={s.panelTitle}>Po zalogowaniu nie wpisujesz</p>
-          <ul className={s.panelList}>
-            {[
-              "historii ubezpieczenia i zarobków — mamy je z ZUS",
-              "danych pracodawcy i tego, kto wypłaci zasiłek",
-              "zwolnień lekarskich (e-ZLA) i stanu składek",
-              "danych dziecka po rejestracji urodzenia",
-            ].map((t) => (
+          <ul className={s.checks}>
+            {["Czy masz prawo do zasiłku i ile wyniesie — miesiąc po miesiącu", "Urlopy obojga rodziców na jednej osi czasu", "Co, komu i do kiedy złożyć"].map((t) => (
               <li key={t}>
                 <Icon name="check" size={20} />
                 <span>{t}</span>
               </li>
             ))}
           </ul>
-          <p className={s.panelNote}>Zapytamy tylko o plany: termin porodu, podział urlopu i to, czy chcesz łączyć urlop z pracą.</p>
+        </div>
+        <div className={s.photo}>
+          {/* Pre-sized files in /public/img (no image optimiser in the standalone image); decorative, so alt is empty. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/img/rodzina-1400.jpg" srcSet="/img/rodzina-800.jpg 800w, /img/rodzina-1400.jpg 1400w, /img/rodzina-2000.jpg 2000w" sizes="(min-width: 960px) 50vw, 100vw" width={2000} height={1335} alt="" fetchPriority="high" />
+          <p className={s.photoNote}>
+            <Icon name="info" size={16} /> Logowanie i rejestry są symulowane
+          </p>
         </div>
       </section>
 

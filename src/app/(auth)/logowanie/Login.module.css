@@ -1,7 +1,20 @@
+/* Login A: the family photo on the left, the steps on the right; on a phone the photo is a band on top. */
+.split { display: grid; gap: 1.5rem; width: 100%; }
+.aside { position: relative; min-height: 180px; margin: calc(-1 * clamp(1.5rem, 5vw, 3.5rem)) -20px 0; overflow: hidden; background: var(--primary-soft); }
+.aside img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 30%; display: block; }
+.asideCard { display: none; }
 .layout {
   display: grid;
   gap: 1.5rem;
   width: 100%;
+  min-width: 0;
+}
+@media (min-width: 960px) {
+  .split { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  .aside { margin: 0; min-height: 640px; border-radius: 8px; position: sticky; top: 1.5rem; }
+  .aside img { object-position: 58% 40%; }
+  .asideCard { position: absolute; left: 1.25rem; right: 1.25rem; bottom: 1.25rem; display: grid; gap: .35rem; padding: 1rem 1.15rem; border-radius: 6px; background: rgb(0 59 34 / 0.9); color: var(--on-primary); }
+  .asideCard span { color: var(--on-dark-soft); font-size: .9375rem; line-height: 1.45; }
 }
 .intro, .panel, .personaGroup { display: grid; gap: 1rem; min-width: 0; }
 .step { display: flex; gap: .75rem; align-items: center; color: var(--ink-muted); font-size: .875rem; }

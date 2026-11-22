@@ -105,7 +105,7 @@ Logging in with mObywatel / login.gov.pl and every registry query are **simulate
 
 ## Third-party components
 
-Next.js, React (MIT) · Radix UI primitives (MIT) · Drizzle ORM (Apache-2.0) · better-sqlite3 (MIT) · zod (MIT) · iron-session (MIT) · Open Sans font (OFL-1.1, self-hosted via `next/font`) · Vitest, Playwright, axe-core (MIT / Apache-2.0 / MPL-2.0, dev only).
+Photo on the home and login pages: Kateryna Hliznitsova, [Unsplash](https://unsplash.com/photos/a-person-standing-in-a-field-N_6OpdOXcxo) (Unsplash License) · Next.js, React (MIT) · Radix UI primitives (MIT) · Drizzle ORM (Apache-2.0) · better-sqlite3 (MIT) · zod (MIT) · iron-session (MIT) · Open Sans font (OFL-1.1, self-hosted via `next/font`) · Vitest, Playwright, axe-core (MIT / Apache-2.0 / MPL-2.0, dev only).
 
 ## Documentation
 
