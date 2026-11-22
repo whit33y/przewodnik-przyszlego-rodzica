@@ -49,3 +49,4 @@
 .phoneCode strong { font-size: 2rem; line-height: 1.4; font-variant-numeric: tabular-nums; letter-spacing: .12em; }
 .actions { flex-wrap: wrap; }
 .cases { display: grid; gap: .5rem; padding: 1rem; background: var(--surface-alt); }
+.note { font-size: .875rem; color: var(--ink-muted); }

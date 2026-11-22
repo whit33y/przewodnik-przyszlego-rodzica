@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { axe, loginAs } from "./helpers";
 
-/** Magdalena's e-zdrowie is "down": she types the due date (12 March 2027) on /sytuacja. */
+/** Magdalena: due date 12 March 2027 from the e-zdrowie pregnancy card (typed in only if it were missing). */
 async function magdalena(page: Page) {
   await loginAs(page, "magdalena");
   await page.goto("/sytuacja");

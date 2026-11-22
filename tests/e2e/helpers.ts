@@ -8,21 +8,14 @@ export async function axe(page: Page) {
   expect(r.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`)).toEqual([]);
 }
 
-/** Login through the simulated node. `consents`: undefined → "Zaznacz wszystkie"; a list → only those sources. */
-export async function loginAs(page: Page, persona: string, opts: { allConsents?: boolean; consents?: string[] } = {}) {
+/** Login through the simulated node. Signing in reads every registry at once and lands on /sytuacja. */
+export async function loginAs(page: Page, persona: string) {
   await page.goto("/logowanie");
   await page.getByRole("button", { name: /Aplikacja mObywatel/ }).click();
   await page.getByRole("button", { name: "Potwierdzam (symulacja)" }).click();
   await page.locator(`input[name="personaId"][value="${persona}"]`).check();
   await page.getByRole("button", { name: "Zaloguj" }).click();
-  await expect(page).toHaveURL(/\/zgoda/);
-  await page.waitForLoadState("networkidle"); // consent boxes are controlled: wait for hydration
-  if (opts.consents) {
-    for (const s of opts.consents) await page.locator(`input[name="sources"][value="${s}"]`).check();
-  } else if (opts.allConsents !== false) await page.getByRole("button", { name: "Zaznacz wszystkie" }).click();
-  await page.getByRole("button", { name: "Pobierz dane" }).click();
-  await expect(page).toHaveURL(/\/pobieranie/);
-  await expect(page.getByRole("status").filter({ hasText: "Gotowe" })).toBeVisible({ timeout: 15000 });
+  await expect(page).toHaveURL(/\/sytuacja/);
 }
 
 /** Fills a gov.pl three-field date (DateInput) found by its legend. */

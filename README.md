@@ -13,8 +13,8 @@ Entry for **HackNation 2026**, ZUS challenge *„Zasiłkowy Przewodnik Przyszłe
 
 | Screen | What it does | Brief item |
 |---|---|---|
-| `/logowanie` → `/zgoda` → `/pobieranie` | Simulated login.gov.pl / mObywatel, consent per registry, fetch from 10 simulated registries with one scripted outage | mObywatel, ZUS data |
-| `/sytuacja` | Every value with its source ("z ZUS", "z CEIDG", "z e-ZLA"…); asks only what no registry knows; corrections never delete the original and can be reported to PUE/eZUS | individual situation |
+| `/logowanie` → `/sytuacja` | Simulated login.gov.pl / mObywatel. Signing in reads all 11 simulated registries at once: no consent screen, no progress screen | mObywatel, ZUS data |
+| `/sytuacja` | Every value with its source ("z ZUS", "z CEIDG", "z e-ZLA"…) and "Skąd mamy te dane?"; asks only plans no registry knows (contract end, other parent); a registry that does not answer becomes a question with "Spróbuj ponownie"; corrections never delete the original and can be reported to PUE/eZUS | individual situation |
 | `/uprawnienia` | Verdict on the day of birth, pregnancy benefits (incl. "nie przysługuje"), who pays (employer vs ZUS), alerts with deadlines and fixes, "Dlaczego?" trace with legal basis | a, g, h |
 | `/plan` | One integrated calculator: both parents on a timeline, presets, part-time work, 81,5% vs 100/70% comparison, cash-flow per month, what-if (children, „Za życiem", hospital stay, adoption) | b, c, d, e, j |
 | `/planuje-dziecko` | Readiness check-up months ahead: what to secure so the benefit is not refused | h |
@@ -36,8 +36,8 @@ The engine re-adjudicates all 86 sample cases (`npm run test:golden`):
 
 ## Demo script (3 minutes)
 
-1. **Start → "Zaloguj się przez mObywatel"** → confirm → profile *Magdalena* → "Zaznacz wszystkie" → "Pobierz dane". One registry (e-zdrowie) is down on purpose: the app degrades to a question.
-2. **Twoja sytuacja:** source badges everywhere; enter the due date (12.03.2027); correct a value → "poprawione przez Ciebie — ZUS zweryfikuje".
+1. **Start → "Zaloguj się"** → mObywatel → confirm → profile *Magdalena* → "Zaloguj". The data is already there: due date, number of babies and "Za życiem" come from the e-zdrowie pregnancy card.
+2. **Twoja sytuacja:** source badges everywhere, "Skąd mamy te dane?"; two questions left (contract end, other parent); correct a value → "poprawione przez Ciebie — ZUS zweryfikuje". *Łucja* shows a registry that does not answer: the missing fact becomes a question until "Spróbuj ponownie".
 3. **Uprawnienia:** "masz prawo do zasiłku macierzyńskiego", employer pays, "Dlaczego?" shows each step with the article of law.
 4. **Plan:** preset "Łączę urlop z pracą na pół etatu" → leave doubles, monthly amount halves; switch 81,5% ↔ 100/70%; set parental leave to 60 weeks → violation with a one-click fix.
 5. **Log out → profile *Weronika*** (self-employed): arrears of 312,40 zł block the payment, with the repayment deadline. *Oliwia* / **Planuję dziecko**: no voluntary sickness insurance — fix it months before.

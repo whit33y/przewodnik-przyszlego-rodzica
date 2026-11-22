@@ -11,6 +11,7 @@ import { Card } from "@/ui/components/Card/Card";
 import { Notice, type Tone } from "@/ui/components/Notice/Notice";
 import { StatusBadge } from "@/ui/components/StatusBadge/StatusBadge";
 import { TextLink } from "@/ui/components/TextLink/TextLink";
+import { RetryButton } from "../../_shell/RetryButton";
 import { AlertList } from "../../_shell/AlertList";
 import { NeedsSession } from "../../_shell/NeedsSession";
 import { stepsForBenefit, TraceList } from "../../_shell/Trace";
@@ -111,7 +112,7 @@ function Verdict({ result, facts, unverified }: { result: Result; facts: Facts; 
 }
 
 /** Honest about what we did not read: lists the registries and what they would have told us. */
-function UnverifiedNotice({ unverified, manual, unavailable }: { unverified: SystemId[]; manual: boolean; unavailable: boolean }) {
+function UnverifiedNotice({ unverified, manual, unavailable }: { unverified: SystemId[]; manual: boolean; unavailable?: SystemId }) {
   const shown = unverified.filter((id) => id !== "mobywatel");
   if (!shown.length) return null;
   return (
@@ -125,16 +126,9 @@ function UnverifiedNotice({ unverified, manual, unavailable }: { unverified: Sys
             Zaloguj się (symulacja)
           </Button>
         ) : (
-          <>
-            {unavailable ? (
-              <Button href="/pobieranie" size="sm" variant="secondary" icon="refresh">
-                Spróbuj ponownie
-              </Button>
-            ) : null}
-            <Button href="/zgoda" size="sm" variant="secondary">
-              Zmień zgody
-            </Button>
-          </>
+          unavailable ? (
+            <RetryButton source={unavailable} next="/uprawnienia" />
+          ) : null
         )
       }
     >
@@ -287,7 +281,7 @@ export async function EntitlementsContent() {
       Dziś w symulacji: <strong>{formatDateLong(ctx.persona.asOf)}</strong> — terminy liczymy od tej daty.
     </p>
   ) : null;
-  const unverifiedNotice = <UnverifiedNotice unverified={unverified} manual={ctx.state.mode === "manual"} unavailable={ctx.statuses.some((x) => x.state === "unavailable")} />;
+  const unverifiedNotice = <UnverifiedNotice unverified={unverified} manual={ctx.state.mode === "manual"} unavailable={ctx.statuses.find((x) => x.state === "unavailable")?.source} />;
 
   if (loss) {
     return (

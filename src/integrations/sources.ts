@@ -13,7 +13,7 @@ export interface SourceMeta {
   latencyMs: number;
 }
 
-/** Order = order on the consent and fetch screens. */
+/** Order = order in "Skąd mamy te dane?" on the situation page. */
 export const SOURCES: SourceMeta[] = [
   { id: "mobywatel", label: "mObywatel", reads: "imię, płeć i rok urodzenia", purpose: "Żeby wiedzieć, kim jesteś — bez wpisywania danych.", required: true, latencyMs: 300 },
   { id: "zus-konto", label: "ZUS — konto ubezpieczonego", reads: "tytuły ubezpieczenia, okresy ubezpieczenia chorobowego, podstawy składek z 12 miesięcy", purpose: "Sprawdzamy, czy masz prawo do zasiłku, i liczymy jego wysokość.", required: true, latencyMs: 900 },
@@ -25,7 +25,7 @@ export const SOURCES: SourceMeta[] = [
   { id: "ceidg", label: "CEIDG", reads: "status działalności gospodarczej i okresy zawieszenia", purpose: "Zawieszenie firmy przed porodem odbiera prawo do zasiłku.", required: false, latencyMs: 1300 },
   { id: "krs", label: "KRS", reads: "czy pracodawca jest w likwidacji lub upadłości", purpose: "Przy likwidacji pracodawcy przysługuje zasiłek w wysokości macierzyńskiego.", required: false, latencyMs: 1200 },
   { id: "rsc", label: "Rejestr stanu cywilnego", reads: "akt urodzenia dziecka, drugi rodzic", purpose: "Nie poprosimy Cię o odpis aktu urodzenia.", required: false, latencyMs: 1500 },
-  { id: "ezdrowie", label: "e-zdrowie (P1)", reads: "przewidywana data porodu, pobyt dziecka w szpitalu", purpose: "Wyliczamy urlop przed porodem i urlop uzupełniający.", required: false, latencyMs: 1800 },
+  { id: "ezdrowie", label: "e-zdrowie (P1)", reads: "karta ciąży: przewidywana data porodu, liczba dzieci, zaświadczenie „Za życiem”; pobyt dziecka w szpitalu", purpose: "Wyliczamy urlop przed porodem i urlop uzupełniający.", required: false, latencyMs: 1800 },
 ];
 
 export const sourceById = Object.fromEntries(SOURCES.map((s) => [s.id, s])) as Record<SystemId, SourceMeta>;

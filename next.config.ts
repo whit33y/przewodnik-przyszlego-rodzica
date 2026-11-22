@@ -31,6 +31,13 @@ const nextConfig: NextConfig = {
   output: "standalone",
   poweredByHeader: false,
   serverExternalPackages: ["better-sqlite3"],
+  // The consent and progress screens were removed: signing in reads every registry at once.
+  async redirects() {
+    return [
+      { source: "/zgoda", destination: "/sytuacja", permanent: false },
+      { source: "/pobieranie", destination: "/sytuacja", permanent: false },
+    ];
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

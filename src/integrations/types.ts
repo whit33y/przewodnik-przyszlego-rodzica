@@ -60,7 +60,8 @@ export interface SystemPayloads {
     event?: { kind: "birth"; date?: ISODate; occurred?: boolean; children: Pick<Child, "ref" | "bornAlive" | "deathDate">[] } | ({ kind: "adoption" | "foster" } & Pick<CareEvent, "takenIntoCareOn" | "finalOrderOn" | "interimOrderOn"> & { children: Pick<Child, "ref" | "birthDate">[] });
     otherParentKnown: boolean;
   };
-  ezdrowie: { expectedDate?: ISODate; children?: Pick<Child, "ref" | "gestationalWeek" | "birthWeightG" | "hospitalStays" | "zaZyciem">[] };
+  /** e-zdrowie (P1). `pregnancy` = the pregnancy card before the birth: number of babies expected, "Za życiem" certificate. */
+  ezdrowie: { expectedDate?: ISODate; pregnancy?: { expectedChildren: number; zaZyciem: boolean }; children?: Pick<Child, "ref" | "gestationalWeek" | "birthWeightG" | "hospitalStays" | "zaZyciem">[] };
 }
 
 export type Answers = {

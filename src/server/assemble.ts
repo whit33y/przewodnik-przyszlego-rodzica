@@ -147,13 +147,14 @@ export function assemble(input: AssembleInput): Assembled {
   if (eventKind === "birth") {
     const rsc = p.rsc?.event?.kind === "birth" ? p.rsc.event : undefined;
     const ez = p.ezdrowie;
-    const count = Math.max(1, answers.childrenCount ?? rsc?.children.length ?? ez?.children?.length ?? 1);
+    const count = Math.max(1, answers.childrenCount ?? rsc?.children.length ?? ez?.children?.length ?? ez?.pregnancy?.expectedChildren ?? 1);
+    const cardZaZyciem = ez?.pregnancy ? { zaZyciem: ez.pregnancy.zaZyciem } : {};
     const children: Child[] = Array.from({ length: count }, (_, i) => {
       const ref = rsc?.children[i]?.ref ?? ez?.children?.[i]?.ref ?? `child-${i + 1}`;
       const fromRsc = rsc?.children.find((c) => c.ref === ref) ?? {};
       const fromEz = ez?.children?.find((c) => c.ref === ref) ?? {};
       const known = "gestationalWeek" in fromEz || "hospitalStays" in fromEz;
-      return stripUndef({ ref, ...(known ? {} : whatIfChild(answers, rsc?.date ?? answers.expectedDate ?? ez?.expectedDate)), ...fromEz, ...fromRsc, ...(answers.zaZyciem !== undefined ? { zaZyciem: answers.zaZyciem } : {}) }) as Child;
+      return stripUndef({ ref, ...(known ? {} : whatIfChild(answers, rsc?.date ?? answers.expectedDate ?? ez?.expectedDate)), ...cardZaZyciem, ...fromEz, ...fromRsc, ...(answers.zaZyciem !== undefined ? { zaZyciem: answers.zaZyciem } : {}) }) as Child;
     });
     event = stripUndef({
       kind: "birth",
@@ -166,7 +167,7 @@ export function assemble(input: AssembleInput): Assembled {
     // Coarse first, then per child field: the longest-prefix lookup picks the most specific source.
     if (answers.childrenCount !== undefined) mark("facts.event.children", "user");
     else if (rsc) mark("facts.event.children", "rsc");
-    else if (ez?.children?.length) mark("facts.event.children", "ezdrowie");
+    else if (ez?.children?.length || ez?.pregnancy) mark("facts.event.children", "ezdrowie");
     children.forEach((ch, i) => {
       const fields = (o: object | undefined) => Object.entries(o ?? {}).filter(([k, v]) => k !== "ref" && v !== undefined).map(([k]) => k);
       for (const k of fields(ez?.children?.find((c) => c.ref === ch.ref))) mark(`facts.event.children[${i}].${k}`, "ezdrowie");
@@ -174,6 +175,7 @@ export function assemble(input: AssembleInput): Assembled {
       const ezChild = ez?.children?.find((c) => c.ref === ch.ref) ?? {};
       if (!("gestationalWeek" in ezChild || "hospitalStays" in ezChild)) for (const k of Object.keys(whatIfChild(answers, rsc?.date ?? answers.expectedDate ?? ez?.expectedDate))) mark(`facts.event.children[${i}].${k}`, "user");
       if (answers.zaZyciem !== undefined) mark(`facts.event.children[${i}].zaZyciem`, "user");
+      else if (ez?.pregnancy && !("zaZyciem" in (ezChild as object))) mark(`facts.event.children[${i}].zaZyciem`, "ezdrowie");
     });
     if (answers.expectedDate) mark("facts.event.expectedDate", "user");
     else if (ez?.expectedDate) mark("facts.event.expectedDate", "ezdrowie");
@@ -254,9 +256,11 @@ function questions(facts: Facts, answers: Answers, input: AssembleInput, unverif
   const ev = facts.event;
   if (ev.kind === "birth" && !ev.date && !ev.occurred) {
     if (!ev.expectedDate) q.push({ id: "expectedDate", group: "event", required: true });
-    if (answers.childrenCount === undefined && !input.payloads.ezdrowie?.children?.length) q.push({ id: "childrenCount", group: "event", required: false });
+    if (answers.childrenCount === undefined && !input.payloads.ezdrowie?.children?.length && !input.payloads.ezdrowie?.pregnancy) q.push({ id: "childrenCount", group: "event", required: false });
   }
-  if (ev.kind === "birth" && answers.zaZyciem === undefined && !ev.children.some((c) => c.zaZyciem !== undefined)) q.push({ id: "zaZyciem", group: "event", required: false });
+  // Never asked after a loss: the "Za życiem" certificate concerns a living child.
+  const loss = ev.kind === "birth" && ev.children.some((c) => c.bornAlive === false);
+  if (ev.kind === "birth" && !loss && answers.zaZyciem === undefined && !ev.children.some((c) => c.zaZyciem !== undefined)) q.push({ id: "zaZyciem", group: "event", required: false });
   const ongoing = facts.claimant.titles.some((t) => !t.to && t.kind !== "maternityBenefit");
   if (ongoing && answers.plannedEnd === undefined && !(ev.kind === "birth" && ev.date)) q.push({ id: "plannedEnd", group: "insurance", required: false });
   if (!facts.otherParent && answers.otherParent === undefined) q.push({ id: "otherParent", group: "otherParent", required: false });

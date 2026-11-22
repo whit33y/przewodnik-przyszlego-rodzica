@@ -3,12 +3,7 @@ import { axe, loginAs } from "./helpers";
 
 test("employee with due date: entitled, employer pays", async ({ page }) => {
   await loginAs(page, "magdalena");
-  await page.goto("/sytuacja");
-  await page.getByLabel("Dzień").fill("12");
-  await page.getByLabel("Miesiąc").fill("3");
-  await page.getByLabel("Rok").fill("2027");
-  await page.locator(".question", { hasText: "Kiedy spodziewasz się porodu?" }).getByRole("button", { name: "Zapisz" }).click();
-  await expect(page.getByText("12 marca 2027")).toBeVisible();
+  await expect(page.getByText("12 marca 2027").first()).toBeVisible();
   await page.goto("/uprawnienia");
   await expect(page.getByRole("heading", { level: 2, name: /masz prawo do zasiłku macierzyńskiego/ })).toBeVisible();
   await expect(page.getByText(/Twój pracodawca/)).toBeVisible();
