@@ -27,6 +27,8 @@ const pairs = [
   ["ink-muted", "surface", TEXT, "captions"],
   ["ink-muted", "surface-alt", TEXT, "captions on grey"],
   ["ink-muted", "primary-soft", TEXT, "captions on selection"],
+  ["primary-strong", "primary-soft-hover", TEXT, "login provider label on hover"],
+  ["ink-muted", "primary-soft-hover", TEXT, "login provider caption on hover"],
   ["line-strong", "surface", UI, "field border"],
   ["line-strong", "surface-alt", UI, "field border on grey"],
   ["focus", "surface", UI, "focus ring"],

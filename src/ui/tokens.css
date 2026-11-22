@@ -22,6 +22,8 @@
   --primary-hover: #00522f;
   --primary-strong: #003b22;
   --primary-soft: #e6f1eb;
+  --primary-soft-hover: #dcece3;
+  --primary-line: #a7cbbb; /* decorative border on primary-soft */
   --on-primary: #ffffff;
   --accent-red: #d4213d; /* AppBar vertical rule only */
   --focus: #003b22;
