@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { axe, loginAs } from "./helpers";
+import { answerPregnancy, axe, loginAs } from "./helpers";
 
 test("mObywatel login → situation, data already fetched", async ({ page }) => {
   await page.goto("/logowanie");
@@ -15,12 +15,15 @@ test("mObywatel login → situation, data already fetched", async ({ page }) => 
   await page.getByRole("button", { name: "Zaloguj" }).click();
   await expect(page).toHaveURL(/\/sytuacja/);
   await expect(page.getByRole("heading", { name: "Ubezpieczenie" })).toBeVisible();
-  // due date, number of babies and "Za życiem" come from the e-zdrowie pregnancy card — not asked
-  await expect(page.getByText("12 marca 2027").first()).toBeVisible();
-  for (const q of ["Kiedy spodziewasz się porodu?", "Ile dzieci się spodziewasz?", "Czy lekarz wydał zaświadczenie „Za życiem”?"]) await expect(page.getByText(q)).toHaveCount(0);
+  // what no registry holds is asked once, in one group with one button
+  const q = page.locator(".question", { hasText: "Powiedz nam o ciąży" });
+  await expect(q.getByRole("group", { name: "Ile dzieci się spodziewasz?" })).toBeVisible();
+  await expect(q.getByRole("group", { name: "Czy lekarz wydał zaświadczenie „Za życiem”?" })).toBeVisible();
   await page.getByText("Skąd mamy te dane?").click();
-  await expect(page.getByText(/karta ciąży: przewidywana data porodu/)).toBeVisible();
+  await expect(page.getByText(/e-zdrow/)).toHaveCount(0);
   await axe(page);
+  await answerPregnancy(page);
+  await expect(page.getByText("12 marca 2027").first()).toBeVisible();
   await expect(page.getByText("Symulacja").first()).toBeVisible();
 });
 
@@ -33,13 +36,9 @@ test("old consent and progress URLs land on the situation", async ({ page }) => 
 });
 
 test("answering the due date removes the question", async ({ page }) => {
-  await loginAs(page, "oliwia");
-  const q = page.locator(".question", { hasText: "Kiedy spodziewasz się porodu?" });
-  await q.getByLabel("Dzień").fill("12");
-  await q.getByLabel("Miesiąc").fill("3");
-  await q.getByLabel("Rok").fill("2027");
-  await q.getByRole("button", { name: "Zapisz" }).click();
-  await expect(page.getByText("Kiedy spodziewasz się porodu?")).toHaveCount(0);
+  await loginAs(page, "oliwia", { pregnancy: false });
+  await answerPregnancy(page);
+  await expect(page.getByRole("group", { name: "Przewidywana data porodu" })).toHaveCount(0);
   await expect(page.getByText("12 marca 2027").first()).toBeVisible();
 });
 

@@ -163,7 +163,7 @@ function regressionInputs(published: ParameterSet[]): { cases: RegressionCase[];
   const personas = listPersonaFiles().flatMap((p) => {
     try {
       const deductionBps = selectParameterSet(published, p.asOf).deductions.employeeSocialBps;
-      const a = assemble({ payloads: p.systems, meta: {}, answers: p.presetAnswers ?? {}, overrides: [], asOf: p.asOf, mode: "mobywatel", deductionBps });
+      const a = assemble({ payloads: p.systems, meta: {}, answers: { ...(p.presetAnswers ?? {}), ...(p.sampleAnswers ?? {}) }, overrides: [], asOf: p.asOf, mode: "mobywatel", deductionBps });
       return [{ id: p.id, label: p.label, facts: a.facts }];
     } catch {
       return [];

@@ -34,10 +34,10 @@ export function SheetView({ sheet }: { sheet: DataSheet }) {
       </p>
       <form method="post" action="/api/v1/submissions" className={s.actions}>
         <input type="hidden" name="kind" value={sheet.slug} />
-        <Button type="submit" icon="mail" uppercase={false}>
+        <Button type="submit" icon={sheet.recipient === "employer" ? "check" : "mail"} variant={sheet.recipient === "employer" ? "secondary" : undefined} uppercase={false}>
           {sheet.recipient === "employer" ? formsText.sendEmployer : formsText.sendZus}
         </Button>
-        <span className={s.small}>{formsText.simNote}</span>
+        <span className={s.small}>{sheet.recipient === "employer" ? formsText.employerNote : formsText.simNote}</span>
       </form>
     </div>
   );

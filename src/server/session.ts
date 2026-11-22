@@ -19,7 +19,8 @@ export function sessionConfigured(): boolean {
   return Boolean(p && p.length >= 32) || process.env.NODE_ENV !== "production";
 }
 
-function password(): string {
+/** Also seals invitation links (src/server/invites.ts). */
+export function password(): string {
   const p = process.env.SESSION_PASSWORD;
   if (p && p.length >= 32) return p;
   if (process.env.NODE_ENV === "production" && process.env.NEXT_PHASE !== "phase-production-build") {

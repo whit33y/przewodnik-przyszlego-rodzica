@@ -81,7 +81,7 @@ function stepItem(step: Step, today: string): StepItem {
           {notYours ? <StatusBadge tone="neutral" label={stepsText.notYours} /> : null}
           {step.state === "done" && step.submissionId ? (
             <>
-              <StatusBadge tone="positive" label={stepsText.sent} />
+              <StatusBadge tone="positive" label={step.to === "employer" ? stepsText.handed : stepsText.sent} />
               <TextLink href={`/wnioski/wyslane/${step.submissionId}`}>nr {step.submissionId}</TextLink>
             </>
           ) : null}

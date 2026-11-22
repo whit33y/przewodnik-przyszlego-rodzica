@@ -1,3 +1,4 @@
+import { typedAnswers } from "./persona-answers";
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
@@ -22,8 +23,7 @@ const personas = fs
   .map((f) => JSON.parse(fs.readFileSync(path.join(root, "personas", f), "utf8")) as PersonaFile);
 
 function inputFor(p: PersonaFile, submissions: GuidanceInput["submissions"] = []): GuidanceInput {
-  const answers: Answers = { ...(p.presetAnswers ?? {}) };
-  if (p.id === "magdalena") answers.expectedDate = "2027-03-12"; // e-zdrowie is "down" for her — the user types it
+  const answers: Answers = { ...(p.presetAnswers ?? {}), ...typedAnswers(p.id) };
   let otherParentPerson;
   if (p.otherParent?.consented) {
     answers.otherParent = { mode: "consent" };

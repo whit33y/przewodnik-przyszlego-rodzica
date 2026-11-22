@@ -42,7 +42,7 @@ function answersSchema(asOf: ISODate) {
       arrears: z.boolean().optional(),
       whatIf: z.object({ hospital: z.object({ category: z.enum(["none", "preterm", "extreme", "term"]), days: z.number().int().min(0).max(400) }).strict().optional() }).strict().optional(),
       otherParent: z
-        .object({ mode: z.enum(["consent", "estimate", "none"]), insured: z.enum(["yes", "no", "krus", "abroad", "unknown"]).optional(), estimatedGross: grosze.optional(), role: roles.optional() })
+        .object({ mode: z.enum(["estimate", "none"]), insured: z.enum(["yes", "no", "krus", "abroad", "unknown"]).optional(), estimatedGross: grosze.optional(), role: roles.optional() })
         .strict()
         .optional(),
       manual: z

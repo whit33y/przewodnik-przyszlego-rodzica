@@ -150,35 +150,6 @@
         ]
       },
       "otherParentKnown": true
-    },
-    "ezdrowie": {
-      "expectedDate": "2027-01-08",
-      "children": [
-        {
-          "ref": "child-1",
-          "gestationalWeek": 30,
-          "birthWeightG": 1400,
-          "zaZyciem": false,
-          "hospitalStays": [
-            {
-              "from": "2026-10-30",
-              "to": "2026-11-23"
-            }
-          ]
-        },
-        {
-          "ref": "child-2",
-          "gestationalWeek": 30,
-          "birthWeightG": 1250,
-          "zaZyciem": false,
-          "hospitalStays": [
-            {
-              "from": "2026-10-30",
-              "to": "2026-12-02"
-            }
-          ]
-        }
-      ]
     }
   },
   "otherParent": {
@@ -285,6 +256,14 @@
       },
       "zus-swiadczenia": {
         "paidBenefits": []
+      }
+    }
+  },
+  "sampleAnswers": {
+    "whatIf": {
+      "hospital": {
+        "category": "preterm",
+        "days": 25
       }
     }
   }

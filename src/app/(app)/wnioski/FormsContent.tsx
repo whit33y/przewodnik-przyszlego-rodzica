@@ -11,13 +11,13 @@ import { formatDateTime, formsText, submissionRecipient, submissionTitle } from 
 import s from "./Wnioski.module.css";
 
 function FormCard({ f }: { f: FormSpec }) {
-  const badge = f.disabledReason ? <StatusBadge tone="neutral" label="Jeszcze niedostępny" /> : f.status === "sent" ? <StatusBadge tone="positive" label={formsText.statusSent} /> : <StatusBadge tone="info" label={formsText.statusTodo} />;
+  const badge = f.disabledReason ? <StatusBadge tone="neutral" label="Jeszcze niedostępny" /> : f.status === "sent" ? <StatusBadge tone="positive" label={f.recipient === "employer" ? formsText.statusHanded : formsText.statusSent} /> : <StatusBadge tone="info" label={formsText.statusTodo} />;
   return (
     <Card as="li" compact linkCard heading={<TextLink href={`/wnioski/${f.slug}`}>{f.short}</TextLink>} headingLevel={3} aside={badge}>
       <p className={s.muted}>{f.disabledReason ?? f.about}</p>
       <p className={s.small}>
         Odbiorca: {recipientLabel[f.recipient]}
-        {f.lastSubmission ? ` · wysłano ${formatDateTime(f.lastSubmission.createdAt)}` : ""}
+        {f.lastSubmission ? ` · ${f.recipient === "employer" ? "przekazano" : "wysłano"} ${formatDateTime(f.lastSubmission.createdAt)}` : ""}
       </p>
     </Card>
   );

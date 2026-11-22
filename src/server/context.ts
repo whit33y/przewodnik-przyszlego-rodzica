@@ -65,7 +65,7 @@ export function availablePayloads(statuses: SourceStatus[], persona: ResolvedPer
 
 export function buildAssembled(state: SessionStateData, persona: ResolvedPersona | null, statuses: SourceStatus[], deductionBps: Bps): { assembled: Assembled; answers: Answers } {
   const answers: Answers = { ...(persona?.presetAnswers ?? {}), ...state.answers };
-  const payloads = availablePayloads(statuses, persona);
+  const payloads = state.mode === "case" && persona ? { ...persona.systems } : availablePayloads(statuses, persona);
   const meta = Object.fromEntries(statuses.filter((s) => s.asOf).map((s) => [s.source, { asOf: s.asOf! }])) as Partial<Record<SourceId, { asOf: string }>>;
   const asOf = persona?.asOf ?? new Date().toISOString().slice(0, 10);
   let otherParentPerson;

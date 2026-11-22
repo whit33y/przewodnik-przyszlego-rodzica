@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { Button } from "@/ui/components/Button/Button";
 
-export function PrintButton({ label }: { label: string }) {
+export function PrintButton({ label, primary }: { label: string; primary?: boolean }) {
   return (
-    <Button type="button" variant="secondary" icon="printer" uppercase={false} onClick={() => window.print()}>
+    <Button type="button" variant={primary ? "primary" : "secondary"} icon="printer" uppercase={false} onClick={() => window.print()}>
       {label}
     </Button>
   );

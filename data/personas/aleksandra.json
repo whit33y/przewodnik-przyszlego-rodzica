@@ -126,20 +126,8 @@
       ]
     },
     "rsc": {
-      "event": {
-        "kind": "adoption",
-        "takenIntoCareOn": "2026-11-02",
-        "interimOrderOn": "2026-10-29",
-        "children": [
-          {
-            "ref": "child-1",
-            "birthDate": "2023-05-14"
-          }
-        ]
-      },
       "otherParentKnown": false
-    },
-    "ezdrowie": {}
+    }
   },
   "presetAnswers": {
     "eventKind": "adoption",

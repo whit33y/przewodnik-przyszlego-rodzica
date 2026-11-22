@@ -162,7 +162,7 @@ export const pueCopy = {
 } as const;
 
 export const formsText = {
-  lead: "Wnioski wypełnione danymi z rejestrów i Twojego planu. Sprawdź je, wydrukuj albo wyślij (symulacja).",
+  lead: "Wnioski wypełnione danymi z rejestrów i Twojego planu. Wnioski do pracodawcy wydrukuj lub zapisz jako PDF i przekaż mu; do ZUS złożysz je przez PUE/eZUS (symulacja).",
   leaveHeading: "Wnioski o urlop — do pracodawcy",
   benefitHeading: "Wnioski o zasiłek",
   otherHeading: "Inne sprawy",
@@ -173,7 +173,12 @@ export const formsText = {
   statusSent: "Wysłano",
   open: "Otwórz",
   print: "Drukuj / zapisz PDF",
-  sendEmployer: "Wyślij do pracodawcy (symulacja)",
+  // No state channel reaches an employer: the parent hands the printout over and marks it here.
+  sendEmployer: "Oznacz jako przekazany pracodawcy",
+  employerNote: "Nie mamy połączenia z Twoim pracodawcą. Wydrukuj wniosek lub zapisz go jako PDF, podpisz i przekaż pracodawcy (osobiście lub e-mailem). Potem oznacz go tutaj — lista „Co i kiedy” odhaczy ten krok.",
+  statusHanded: "Przekazano",
+  confirmHandedTitle: "Zapisaliśmy, że przekazujesz wniosek pracodawcy",
+  confirmHandedNote: "Zachowaj kopię podpisanego wniosku. Pracodawca może poprosić o dokumenty, których nie ma w Twoich aktach osobowych.",
   sendZus: "Wyślij do ZUS przez PUE/eZUS (symulacja)",
   sendUsc: "Wyślij do urzędu stanu cywilnego (symulacja)",
   sendPue: "Wyślij pytanie (symulacja)",

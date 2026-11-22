@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { axe, fillDate, loginAs } from "./helpers";
+import { answerPregnancy, axe, fillDate, loginAs } from "./helpers";
 
 test("planning check-up logged out: four questions → blocking alert with a fix", async ({ page }) => {
   await page.goto("/planuje-dziecko");
@@ -24,7 +24,7 @@ test("planning check-up logged out: employee with nothing to fix", async ({ page
 });
 
 test("planning check-up as oliwia (zlecenie without sickness insurance)", async ({ page }) => {
-  await loginAs(page, "oliwia");
+  await loginAs(page, "oliwia", { pregnancy: false });
   await page.goto("/planuje-dziecko");
   await expect(page.getByRole("heading", { level: 2, name: /by nie przysługiwał/ })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Nie masz dobrowolnego ubezpieczenia chorobowego/ })).toBeVisible();
@@ -35,11 +35,12 @@ test("planning check-up as oliwia (zlecenie without sickness insurance)", async 
   await page.getByRole("button", { name: "Przelicz" }).click();
   await expect(page.getByRole("heading", { level: 2, name: /Gdyby poród był 1 czerwca 2027/ })).toBeVisible();
   await page.goto("/sytuacja");
-  await expect(page.getByText("Kiedy spodziewasz się porodu?")).toBeVisible();
+  await expect(page.getByRole("group", { name: "Przewidywana data porodu" })).toBeVisible();
 });
 
 test("planning check-up as lucja (business suspended around the due date)", async ({ page }) => {
-  await loginAs(page, "lucja");
+  await loginAs(page, "lucja", { pregnancy: false });
+  await answerPregnancy(page, "10", "4", "2027");
   await page.goto("/planuje-dziecko");
   await expect(page.getByRole("heading", { level: 2, name: /Gdyby poród był 10 kwietnia 2027/ })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Zawieszenie działalności w okolicy porodu/ })).toBeVisible();

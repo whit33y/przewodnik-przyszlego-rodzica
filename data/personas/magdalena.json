@@ -134,13 +134,9 @@
     },
     "rsc": {
       "otherParentKnown": false
-    },
-    "ezdrowie": {
-      "expectedDate": "2027-03-12",
-      "pregnancy": {
-        "expectedChildren": 1,
-        "zaZyciem": false
-      }
     }
+  },
+  "sampleAnswers": {
+    "expectedDate": "2027-03-12"
   }
 }

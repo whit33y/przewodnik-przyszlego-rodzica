@@ -1,17 +1,10 @@
 import { expect, test, type Page } from "@playwright/test";
-import { axe, loginAs } from "./helpers";
+import { answerPregnancy, axe, loginAs } from "./helpers";
 
 async function withDueDate(page: Page, persona: string) {
   await loginAs(page, persona);
   await page.goto("/sytuacja");
-  const q = page.locator(".question", { hasText: "Kiedy spodziewasz się porodu?" });
-  if (await q.count()) {
-    await q.getByLabel("Dzień").fill("12");
-    await q.getByLabel("Miesiąc").fill("3");
-    await q.getByLabel("Rok").fill("2027");
-    await q.getByRole("button", { name: "Zapisz" }).click();
-    await expect(q).toHaveCount(0);
-  }
+  await answerPregnancy(page);
   await page.goto("/plan");
   await expect(page.getByRole("heading", { name: "Podsumowanie" })).toBeVisible();
 }

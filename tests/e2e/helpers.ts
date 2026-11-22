@@ -8,14 +8,33 @@ export async function axe(page: Page) {
   expect(r.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`)).toEqual([]);
 }
 
-/** Login through the simulated node. Signing in reads every registry at once and lands on /sytuacja. */
-export async function loginAs(page: Page, persona: string) {
+/**
+ * Login through the simulated node. Signing in reads every registry at once and lands on /sytuacja. By default it then
+ * answers the grouped pregnancy question (due date 12.03.2027) when it is shown — pass `{ pregnancy: false }` to keep it.
+ */
+export async function loginAs(page: Page, persona: string, opts: { pregnancy?: boolean } = {}) {
   await page.goto("/logowanie");
   await page.getByRole("button", { name: /Aplikacja mObywatel/ }).click();
   await page.getByRole("button", { name: "Potwierdzam (symulacja)" }).click();
   await page.locator(`input[name="personaId"][value="${persona}"]`).check();
   await page.getByRole("button", { name: "Zaloguj" }).click();
   await expect(page).toHaveURL(/\/sytuacja/);
+  if (opts.pregnancy !== false) await answerPregnancy(page);
+}
+
+/** Answers the grouped "about the pregnancy" question on /sytuacja when it is shown (no registry holds these facts). */
+export async function answerPregnancy(page: Page, d = "12", m = "3", y = "2027") {
+  await expect(page.locator("#postep")).toBeVisible(); // the situation has streamed in
+  const q = page.locator(".question", { has: page.getByRole("group", { name: "Przewidywana data porodu" }) });
+  if (!(await q.count())) return;
+  // React has hydrated the question once its button carries a fiber key (networkidle never settles with prefetching).
+  await page.waitForFunction(() => {
+    const b = [...document.querySelectorAll(".question button")].at(-1);
+    return Boolean(b && Object.keys(b).some((k) => k.startsWith("__react")));
+  });
+  await fillDate(page, "Przewidywana data porodu", d, m, y);
+  await q.getByRole("button", { name: "Zapisz" }).click();
+  await expect(q).toHaveCount(0);
 }
 
 /** Fills a gov.pl three-field date (DateInput) found by its legend. */

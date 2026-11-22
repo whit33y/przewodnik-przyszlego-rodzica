@@ -70,7 +70,9 @@ export const deadlineStep: Record<string, StepCopy> = {
 
 /** Steps the engine does not list as documents but every parent goes through. */
 export const syntheticStep = {
-  registerBirth: { title: "Zgłoś urodzenie dziecka w urzędzie stanu cywilnego", body: "Masz na to 21 dni od porodu. Dziecko dostanie numer PESEL, a ZUS pobierze dane z rejestru." },
+  registerBirth: { title: "Zgłoś urodzenie dziecka w urzędzie stanu cywilnego", body: "Masz na to 21 dni od porodu. Może to zrobić każde z rodziców — na przykład tata, gdy mama jest jeszcze w szpitalu. Dziecko dostanie numer PESEL, a ZUS pobierze dane z rejestru." },
+  otherParentPaternity: { title: "Drugi rodzic: wniosek o urlop ojcowski u swojego pracodawcy", body: "Składa go sam, najpóźniej 7 dni przed urlopem, który zaplanowaliście od {from}. Urlop ojcowski trzeba wykorzystać w ciągu 12 miesięcy od porodu." },
+  otherParentParental: { title: "Drugi rodzic: wniosek o swoją część urlopu rodzicielskiego", body: "Składa go u swojego pracodawcy najpóźniej 21 dni przed urlopem, który zaplanowaliście od {from}. Jego 9 tygodni przepada, jeśli z nich nie skorzysta." },
   registerBirthDone: { title: "Urodzenie dziecka jest zarejestrowane", body: "Nie musisz — mamy to z rejestru stanu cywilnego. Dziecko ma już numer PESEL." },
   registerBirthLoss: { title: "Zgłoszenie urodzenia w urzędzie stanu cywilnego", body: "Urząd sporządza akt urodzenia z adnotacją. Jeśli aktu nie sporządzono, wystarczy zaświadczenie od lekarza albo położnej." },
   registerBirthLossDone: { title: "Akt urodzenia jest w rejestrze", body: "Nie musisz niczego donosić — mamy to z rejestru stanu cywilnego." },
@@ -138,6 +140,7 @@ export const stepsText = {
   openSheet: "Zobacz dane do wniosku",
   notYours: "Nie musisz nic robić",
   sent: "Wysłano (symulacja)",
+  handed: "Przekazano pracodawcy",
   counterLeft: "Zostało {n} dni — do {date}.",
   counterFromBirth: "Liczone od dnia porodu.",
   counterFromCare: "Liczone od dnia przyjęcia dziecka.",

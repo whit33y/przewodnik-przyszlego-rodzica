@@ -13,7 +13,7 @@ Entry for **HackNation 2026**, ZUS challenge *„Zasiłkowy Przewodnik Przyszłe
 
 | Screen | What it does | Brief item |
 |---|---|---|
-| `/logowanie` → `/sytuacja` | Simulated login.gov.pl / mObywatel. Signing in reads all 11 simulated registries at once: no consent screen, no progress screen | mObywatel, ZUS data |
+| `/logowanie` → `/sytuacja` | Simulated login.gov.pl / mObywatel. Signing in reads all 10 simulated registries at once: no consent screen, no progress screen | mObywatel, ZUS data |
 | `/sytuacja` | Every value with its source ("z ZUS", "z CEIDG", "z e-ZLA"…) and "Skąd mamy te dane?"; asks only plans no registry knows (contract end, other parent); a registry that does not answer becomes a question with "Spróbuj ponownie"; corrections never delete the original and can be reported to PUE/eZUS | individual situation |
 | `/uprawnienia` | Verdict on the day of birth, pregnancy benefits (incl. "nie przysługuje"), who pays (employer vs ZUS), alerts with deadlines and fixes, "Dlaczego?" trace with legal basis | a, g, h |
 | `/plan` | One integrated calculator: both parents on a timeline, presets, part-time work, 81,5% vs 100/70% comparison, cash-flow per month, what-if (children, „Za życiem", hospital stay, adoption) | b, c, d, e, j |
@@ -36,7 +36,7 @@ The engine re-adjudicates all 86 sample cases (`npm run test:golden`):
 
 ## Demo script (3 minutes)
 
-1. **Start → "Zaloguj się"** → mObywatel → confirm → profile *Magdalena* → "Zaloguj". The data is already there: due date, number of babies and "Za życiem" come from the e-zdrowie pregnancy card.
+1. **Start → "Zaloguj się"** → mObywatel → confirm → profile *Magdalena* → "Zaloguj". Insurance, pay, sick notes and the employer are already there (from ZUS); one grouped question asks what no registry holds: due date (12.03.2027), number of babies, "Za życiem".
 2. **Twoja sytuacja:** source badges everywhere, "Skąd mamy te dane?"; two questions left (contract end, other parent); correct a value → "poprawione przez Ciebie — ZUS zweryfikuje". *Łucja* shows a registry that does not answer: the missing fact becomes a question until "Spróbuj ponownie".
 3. **Uprawnienia:** "masz prawo do zasiłku macierzyńskiego", employer pays, "Dlaczego?" shows each step with the article of law.
 4. **Plan:** preset "Łączę urlop z pracą na pół etatu" → leave doubles, monthly amount halves; switch 81,5% ↔ 100/70%; set parental leave to 60 weeks → violation with a one-click fix.
@@ -67,7 +67,7 @@ Requires Node ≥ 22.
 3. **Rules engine** in `src/engine`: pure TypeScript with no framework, I/O or clock (lint-enforced), so it is deterministic.
 4. **Explainable output**: `evaluate(facts, plan, params)` returns entitlements, periods, amounts, payer, documents, deadlines, risks and a reasoning trace, with a legal citation on every step.
 5. **Effective-dated parameter sets** (`data/params/*.json`): the engine picks the set in force on the day the right arises. The admin panel publishes new versions.
-6. **Simulated integrations** (`src/integrations/*`): login.gov.pl/mObywatel, ZUS account, payer, contribution balance, e-ZLA, benefits paid, CEIDG, KRS, civil registry and e-health. Each sits behind an interface, ready to be replaced by a real adapter.
+6. **Simulated integrations** (`src/integrations/*`): login.gov.pl/mObywatel, ZUS account, payer, contribution balance, e-ZLA, benefits paid, CEIDG, KRS and the civil registry. Medical facts (due date, prematurity, "Za życiem") are asked, because no registry holds them yet. Each sits behind an interface, ready to be replaced by a real adapter.
 7. **Sourced data**: each value carries its source ("z ZUS", "z CEIDG"…). A user correction is stored as an override and never deletes the original.
 8. **Sample cases** (`data/cases/*`): anonymised fixtures extracted from the 86 ZUS case files, plus golden tests and a public scoreboard.
 9. **Own design system** (`src/ui`): the gov.pl visual language in a green theme. CSS tokens and CSS Modules, with Radix used only for dialog, tabs and accordion. WCAG 2.1 AA contrast is checked by `npm run tokens:check`.

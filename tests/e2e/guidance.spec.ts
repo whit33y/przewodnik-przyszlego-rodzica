@@ -1,18 +1,11 @@
 import { expect, test, type Page } from "@playwright/test";
-import { axe, loginAs } from "./helpers";
+import { answerPregnancy, axe, loginAs } from "./helpers";
 
 /** Magdalena: due date 12 March 2027 from the e-zdrowie pregnancy card (typed in only if it were missing). */
 async function magdalena(page: Page) {
   await loginAs(page, "magdalena");
   await page.goto("/sytuacja");
-  const q = page.locator(".question", { hasText: "Kiedy spodziewasz się porodu?" });
-  if (await q.count()) {
-    await q.getByLabel("Dzień").fill("12");
-    await q.getByLabel("Miesiąc").fill("3");
-    await q.getByLabel("Rok").fill("2027");
-    await q.getByRole("button", { name: "Zapisz" }).click();
-    await expect(q).toHaveCount(0);
-  }
+  await answerPregnancy(page);
 }
 
 const main = (page: Page) => page.locator("main#tresc");
@@ -91,7 +84,7 @@ test.describe("/kroki — Co i kiedy", () => {
 });
 
 test.describe("/wnioski", () => {
-  test("maternity application: pre-filled, one A4 page in print, sent and marked done", async ({ page, browserName }) => {
+  test("maternity application: pre-filled, one A4 page in print, handed to the employer and marked done", async ({ page, browserName }) => {
     await magdalena(page);
     await page.goto("/wnioski/urlop-macierzynski");
     await expect(page.getByRole("heading", { level: 1, name: "Wniosek o urlop macierzyński" })).toBeVisible();
@@ -105,7 +98,7 @@ test.describe("/wnioski", () => {
 
     await page.emulateMedia({ media: "print" });
     await expect(page.locator("header").first()).toBeHidden();
-    await expect(page.getByRole("button", { name: "Wyślij do pracodawcy (symulacja)" })).toBeHidden();
+    await expect(page.getByRole("button", { name: "Oznacz jako przekazany pracodawcy" })).toBeHidden();
     await axe(page);
     if (browserName === "chromium") {
       const pdf = await page.pdf({ preferCSSPageSize: true, printBackground: false });
@@ -115,22 +108,23 @@ test.describe("/wnioski", () => {
     await page.emulateMedia({ media: "screen" });
 
     await doc.getByLabel("Pracodawca (nazwa i adres)").fill("Przykładowa firma");
-    await page.getByRole("button", { name: "Wyślij do pracodawcy (symulacja)" }).click();
+    await expect(page.getByText(/Nie mamy połączenia z Twoim pracodawcą/)).toBeVisible();
+    await page.getByRole("button", { name: "Oznacz jako przekazany pracodawcy" }).click();
     await expect(page).toHaveURL(/\/wnioski\/wyslane\/PRAC-\d{4}-[0-9A-F]{6}$/);
-    await expect(page.getByText("To jest symulacja — nic nie zostało wysłane.")).toBeVisible();
+    await expect(page.getByText("Zapisaliśmy, że przekazujesz wniosek pracodawcy")).toBeVisible();
     const number = page.url().split("/").pop()!;
     await expect(main(page)).toContainText("Pracodawca");
 
     await page.goto("/kroki");
     const step = page.locator("li", { hasText: "Wniosek o urlop macierzyński" }).first();
-    await expect(step).toContainText("Wysłano (symulacja)");
+    await expect(step).toContainText("Przekazano pracodawcy");
     await expect(step).toContainText(number);
     await page.reload();
     await expect(page.locator("li", { hasText: "Wniosek o urlop macierzyński" }).first()).toContainText(number);
 
     await page.goto("/wnioski");
     await expect(page.locator("#wyslane-lista")).toContainText(number);
-    await expect(page.locator("li", { hasText: "Urlop macierzyński" }).first()).toContainText("Wysłano");
+    await expect(page.locator("li", { hasText: "Urlop macierzyński" }).first()).toContainText("Przekazano");
   });
 
   test("parental application is pre-filled from the plan", async ({ page }) => {
