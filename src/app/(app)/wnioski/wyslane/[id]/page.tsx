@@ -15,6 +15,11 @@ import s from "../../Wnioski.module.css";
 
 export const metadata: Metadata = { title: "Potwierdzenie wysłania" };
 
+/** Confirmation numbers are random; one placeholder lets the build validate the static shell. */
+export async function generateStaticParams() {
+  return [{ id: "ZUS-0000-000000" }];
+}
+
 async function Confirmation({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const ctx = await loadContext();
