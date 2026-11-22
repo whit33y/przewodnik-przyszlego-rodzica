@@ -78,3 +78,13 @@
   .header, .tabbar, .footer, .skip { display: none !important; }
   .main { padding: 0 !important; }
 }
+
+/* The sign-in journey keeps the shared home link and skip link. */
+body:has([data-login-flow]) :is(.nav, .tabbar, .user, .menuBtn) { display: none; }
+body:has([data-login-flow]) .header { position: static; box-shadow: none; border-bottom: 1px solid var(--line-soft); }
+body:has([data-login-flow]) .main {
+  max-width: 648px;
+  padding: clamp(1.5rem, 5vw, 3.5rem) 20px 3rem;
+  gap: 1.5rem;
+}
+body:has([data-login-flow]) .footer { padding-bottom: 0; }

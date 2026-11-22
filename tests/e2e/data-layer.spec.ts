@@ -104,7 +104,7 @@ test("keyboard-only login: provider → confirm → profile → consent", async 
   await page.waitForLoadState("networkidle");
   await tabTo(page, /Aplikacja mObywatel/);
   await page.keyboard.press("Enter");
-  await expect(page.getByRole("heading", { name: "Potwierdź logowanie w aplikacji mObywatel" })).toBeFocused();
+  await expect(page.getByRole("heading", { name: "Potwierdź logowanie" })).toBeFocused();
   await tabTo(page, /Potwierdzam \(symulacja\)/);
   await page.keyboard.press("Enter");
   await expect(page.getByRole("heading", { name: "Wybierz profil testowy" })).toBeFocused();
@@ -121,11 +121,12 @@ test("keyboard-only login: provider → confirm → profile → consent", async 
   await expect(page).toHaveURL(/\/pobieranie/);
 });
 
-test("disabled login providers stay focusable and explain why", async ({ page }) => {
+test("login methods unavailable in the simulation are listed, not offered as buttons", async ({ page }) => {
   await page.goto("/logowanie");
   await page.waitForLoadState("networkidle");
-  await tabTo(page, /Profil zaufany/);
-  await expect(page.getByRole("button", { name: /Profil zaufany/ })).toHaveAttribute("aria-disabled", "true");
+  await expect(page.getByRole("button", { name: /Profil zaufany/ })).toHaveCount(0);
+  await tabTo(page, /Metody niedostępne w symulacji/);
   await page.keyboard.press("Enter");
-  await expect(page.getByRole("heading", { name: "Wybierz sposób logowania" })).toBeVisible();
+  await expect(page.getByRole("listitem").filter({ hasText: "Profil zaufany" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Zaloguj się do Przewodnika Rodzica" })).toBeVisible();
 });
